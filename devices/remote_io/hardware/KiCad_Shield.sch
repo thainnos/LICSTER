@@ -1,0 +1,1891 @@
+EESchema Schematic File Version 4
+LIBS:KiCad_Shield-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date "lun. 30 mars 2015"
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L KiCad_Shield-rescue:CONN_8 P1
+U 1 1 5517C2C1
+P 9725 1875
+F 0 "P1" V 9675 1875 60  0000 C CNN
+F 1 "Power" V 9775 1875 60  0000 C CNN
+F 2 "Socket_Arduino_Uno:Socket_Strip_Arduino_1x08" H 9725 1875 60  0001 C CNN
+F 3 "" H 9725 1875 60  0000 C CNN
+	1    9725 1875
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:CONN_6 P2
+U 1 1 5517C323
+P 9725 2675
+F 0 "P2" V 9675 2675 60  0000 C CNN
+F 1 "Analog" V 9775 2675 60  0000 C CNN
+F 2 "Socket_Arduino_Uno:Socket_Strip_Arduino_1x06" H 9725 2675 60  0001 C CNN
+F 3 "" H 9725 2675 60  0000 C CNN
+	1    9725 2675
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:CONN_8 P4
+U 1 1 5517C366
+P 10050 2575
+F 0 "P4" V 10000 2575 60  0000 C CNN
+F 1 "Digital" V 10100 2575 60  0000 C CNN
+F 2 "Socket_Arduino_Uno:Socket_Strip_Arduino_1x08" H 10050 2575 60  0001 C CNN
+F 3 "" H 10050 2575 60  0000 C CNN
+	1    10050 2575
+	-1   0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:CONN_10 P3
+U 1 1 5517C46C
+P 10050 1575
+F 0 "P3" V 10000 1575 60  0000 C CNN
+F 1 "Digital" V 10100 1575 60  0000 C CNN
+F 2 "Socket_Arduino_Uno:Socket_Strip_Arduino_1x10" H 10050 1575 60  0001 C CNN
+F 3 "" H 10050 1575 60  0000 C CNN
+	1    10050 1575
+	-1   0    0    -1  
+$EndComp
+Text Label 8625 1725 0    60   ~ 0
+Reset
+Text Label 8925 1350 1    60   ~ 0
+Vin
+Text Label 9300 1350 1    60   ~ 0
+IOREF
+Text Label 8625 2425 0    60   ~ 0
+A0
+Text Label 8625 2525 0    60   ~ 0
+A1
+Text Label 8625 2625 0    60   ~ 0
+A2
+Text Label 8625 2725 0    60   ~ 0
+A3
+Text Label 8625 2825 0    60   ~ 0
+A4(SDA2)
+Text Label 8625 2925 0    60   ~ 0
+A5(SCL2)
+Text Label 10550 2925 0    60   ~ 0
+0(Rx)
+Text Label 10550 2725 0    60   ~ 0
+2
+Text Label 10550 2825 0    60   ~ 0
+1(Tx)
+Text Label 10550 2625 0    60   ~ 0
+3(**)
+Text Label 10550 2525 0    60   ~ 0
+4
+Text Label 10550 2425 0    60   ~ 0
+5(**)
+Text Label 10550 2325 0    60   ~ 0
+6(**)
+Text Label 10550 2225 0    60   ~ 0
+7
+Text Label 10550 2025 0    60   ~ 0
+8
+Text Label 10550 1925 0    60   ~ 0
+9(**)
+Text Label 10550 1825 0    60   ~ 0
+10(**/SS)
+Text Label 10550 1725 0    60   ~ 0
+11(**/MOSI)
+Text Label 10550 1625 0    60   ~ 0
+12(MISO)
+Text Label 10550 1525 0    60   ~ 0
+13(SCK)
+Text Label 10625 1325 0    60   ~ 0
+AREF
+$Comp
+L power:GND #PWR01
+U 1 1 5517CC27
+P 10475 3100
+F 0 "#PWR01" H 10475 3100 30  0001 C CNN
+F 1 "GND" H 10475 3030 30  0001 C CNN
+F 2 "" H 10475 3100 60  0000 C CNN
+F 3 "" H 10475 3100 60  0000 C CNN
+	1    10475 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR02
+U 1 1 5517CC7B
+P 9300 3100
+F 0 "#PWR02" H 9300 3100 30  0001 C CNN
+F 1 "GND" H 9300 3030 30  0001 C CNN
+F 2 "" H 9300 3100 60  0000 C CNN
+F 3 "" H 9300 3100 60  0000 C CNN
+	1    9300 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR03
+U 1 1 5517CCC2
+P 9050 1350
+F 0 "#PWR03" H 9050 1440 20  0001 C CNN
+F 1 "+5V" H 9050 1440 30  0000 C CNN
+F 2 "" H 9050 1350 60  0000 C CNN
+F 3 "" H 9050 1350 60  0000 C CNN
+	1    9050 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR04
+U 1 1 5517CCDA
+P 9175 1350
+F 0 "#PWR04" H 9175 1310 30  0001 C CNN
+F 1 "+3.3V" H 9175 1460 30  0000 C CNN
+F 2 "" H 9175 1350 60  0000 C CNN
+F 3 "" H 9175 1350 60  0000 C CNN
+	1    9175 1350
+	1    0    0    -1  
+$EndComp
+NoConn ~ 9375 1525
+Text Label 10550 1225 0    60   ~ 0
+A4(SDA)
+Text Label 10550 1125 0    60   ~ 0
+A5(SCL)
+$Comp
+L KiCad_Shield-rescue:CONN_1 P5
+U 1 1 551BBC06
+P 10875 650
+F 0 "P5" H 10955 650 40  0000 L CNN
+F 1 "CONN_1" H 10875 705 30  0001 C CNN
+F 2 "Socket_Arduino_Uno:Arduino_1pin" H 10875 650 60  0001 C CNN
+F 3 "" H 10875 650 60  0000 C CNN
+	1    10875 650 
+	0    -1   -1   0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:CONN_1 P6
+U 1 1 551BBD10
+P 10950 650
+F 0 "P6" H 11030 650 40  0000 L CNN
+F 1 "CONN_1" H 10950 705 30  0001 C CNN
+F 2 "Socket_Arduino_Uno:Arduino_1pin" H 10950 650 60  0001 C CNN
+F 3 "" H 10950 650 60  0000 C CNN
+	1    10950 650 
+	0    -1   -1   0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:CONN_1 P7
+U 1 1 551BBD30
+P 11025 650
+F 0 "P7" H 11105 650 40  0000 L CNN
+F 1 "CONN_1" H 11025 705 30  0001 C CNN
+F 2 "Socket_Arduino_Uno:Arduino_1pin" H 11025 650 60  0001 C CNN
+F 3 "" H 11025 650 60  0000 C CNN
+	1    11025 650 
+	0    -1   -1   0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:CONN_1 P8
+U 1 1 551BBD52
+P 11100 650
+F 0 "P8" H 11180 650 40  0000 L CNN
+F 1 "CONN_1" H 11100 705 30  0001 C CNN
+F 2 "Socket_Arduino_Uno:Arduino_1pin" H 11100 650 60  0001 C CNN
+F 3 "" H 11100 650 60  0000 C CNN
+	1    11100 650 
+	0    -1   -1   0   
+$EndComp
+Text Notes 10875 925  0    60   ~ 0
+Holes
+NoConn ~ 10875 800 
+NoConn ~ 10950 800 
+NoConn ~ 11025 800 
+NoConn ~ 11100 800 
+Text Notes 8550 750  0    60   ~ 0
+Shield for Arduino that uses\nthe same pin disposition\nlike "Uno" board Rev 3.
+$Comp
+L power:GND #PWR05
+U 1 1 5B297AC1
+P 6200 1000
+F 0 "#PWR05" H 6200 1000 30  0001 C CNN
+F 1 "GND" H 6200 930 30  0001 C CNN
+F 2 "" H 6200 1000 60  0000 C CNN
+F 3 "" H 6200 1000 60  0000 C CNN
+	1    6200 1000
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R27
+U 1 1 5B297B56
+P 6500 750
+F 0 "R27" V 6580 750 50  0000 C CNN
+F 1 "R" V 6500 750 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 750 50  0001 C CNN
+F 3 "" H 6500 750 50  0000 C CNN
+	1    6500 750 
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R28
+U 1 1 5B297CBA
+P 6500 950
+F 0 "R28" V 6580 950 50  0000 C CNN
+F 1 "R" V 6500 950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 950 50  0001 C CNN
+F 3 "" H 6500 950 50  0000 C CNN
+	1    6500 950 
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR06
+U 1 1 5B29809D
+P 6200 700
+F 0 "#PWR06" H 6200 790 20  0001 C CNN
+F 1 "+5V" H 6200 790 30  0000 C CNN
+F 2 "" H 6200 700 60  0000 C CNN
+F 3 "" H 6200 700 60  0000 C CNN
+	1    6200 700 
+	1    0    0    -1  
+$EndComp
+Text Label 6800 950  0    60   ~ 0
+A5(SCL)
+$Comp
+L power:GND #PWR07
+U 1 1 5B29837B
+P 6200 1600
+F 0 "#PWR07" H 6200 1600 30  0001 C CNN
+F 1 "GND" H 6200 1530 30  0001 C CNN
+F 2 "" H 6200 1600 60  0000 C CNN
+F 3 "" H 6200 1600 60  0000 C CNN
+	1    6200 1600
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R29
+U 1 1 5B298381
+P 6500 1350
+F 0 "R29" V 6580 1350 50  0000 C CNN
+F 1 "R" V 6500 1350 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 1350 50  0001 C CNN
+F 3 "" H 6500 1350 50  0000 C CNN
+	1    6500 1350
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R30
+U 1 1 5B298387
+P 6500 1550
+F 0 "R30" V 6580 1550 50  0000 C CNN
+F 1 "R" V 6500 1550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 1550 50  0001 C CNN
+F 3 "" H 6500 1550 50  0000 C CNN
+	1    6500 1550
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR08
+U 1 1 5B29838D
+P 6200 1300
+F 0 "#PWR08" H 6200 1390 20  0001 C CNN
+F 1 "+5V" H 6200 1390 30  0000 C CNN
+F 2 "" H 6200 1300 60  0000 C CNN
+F 3 "" H 6200 1300 60  0000 C CNN
+	1    6200 1300
+	1    0    0    -1  
+$EndComp
+Text Label 6800 1550 0    60   ~ 0
+A4(SDA)
+$Comp
+L power:GND #PWR09
+U 1 1 5B298488
+P 6200 2200
+F 0 "#PWR09" H 6200 2200 30  0001 C CNN
+F 1 "GND" H 6200 2130 30  0001 C CNN
+F 2 "" H 6200 2200 60  0000 C CNN
+F 3 "" H 6200 2200 60  0000 C CNN
+	1    6200 2200
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R31
+U 1 1 5B29848E
+P 6500 1950
+F 0 "R31" V 6580 1950 50  0000 C CNN
+F 1 "R" V 6500 1950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 1950 50  0001 C CNN
+F 3 "" H 6500 1950 50  0000 C CNN
+	1    6500 1950
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R32
+U 1 1 5B298494
+P 6500 2150
+F 0 "R32" V 6580 2150 50  0000 C CNN
+F 1 "R" V 6500 2150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 2150 50  0001 C CNN
+F 3 "" H 6500 2150 50  0000 C CNN
+	1    6500 2150
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR010
+U 1 1 5B29849A
+P 6200 1900
+F 0 "#PWR010" H 6200 1990 20  0001 C CNN
+F 1 "+5V" H 6200 1990 30  0000 C CNN
+F 2 "" H 6200 1900 60  0000 C CNN
+F 3 "" H 6200 1900 60  0000 C CNN
+	1    6200 1900
+	1    0    0    -1  
+$EndComp
+Text Label 6800 2150 0    60   ~ 0
+13(SCK)
+$Comp
+L power:GND #PWR011
+U 1 1 5B29880F
+P 6200 2850
+F 0 "#PWR011" H 6200 2850 30  0001 C CNN
+F 1 "GND" H 6200 2780 30  0001 C CNN
+F 2 "" H 6200 2850 60  0000 C CNN
+F 3 "" H 6200 2850 60  0000 C CNN
+	1    6200 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R33
+U 1 1 5B298815
+P 6500 2600
+F 0 "R33" V 6580 2600 50  0000 C CNN
+F 1 "R" V 6500 2600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 2600 50  0001 C CNN
+F 3 "" H 6500 2600 50  0000 C CNN
+	1    6500 2600
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R34
+U 1 1 5B29881B
+P 6500 2800
+F 0 "R34" V 6580 2800 50  0000 C CNN
+F 1 "R" V 6500 2800 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 2800 50  0001 C CNN
+F 3 "" H 6500 2800 50  0000 C CNN
+	1    6500 2800
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR012
+U 1 1 5B298821
+P 6200 2550
+F 0 "#PWR012" H 6200 2640 20  0001 C CNN
+F 1 "+5V" H 6200 2640 30  0000 C CNN
+F 2 "" H 6200 2550 60  0000 C CNN
+F 3 "" H 6200 2550 60  0000 C CNN
+	1    6200 2550
+	1    0    0    -1  
+$EndComp
+Text Label 6800 2800 0    60   ~ 0
+12(MISO)
+$Comp
+L power:GND #PWR013
+U 1 1 5B29882E
+P 6200 3450
+F 0 "#PWR013" H 6200 3450 30  0001 C CNN
+F 1 "GND" H 6200 3380 30  0001 C CNN
+F 2 "" H 6200 3450 60  0000 C CNN
+F 3 "" H 6200 3450 60  0000 C CNN
+	1    6200 3450
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R35
+U 1 1 5B298834
+P 6500 3200
+F 0 "R35" V 6580 3200 50  0000 C CNN
+F 1 "R" V 6500 3200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 3200 50  0001 C CNN
+F 3 "" H 6500 3200 50  0000 C CNN
+	1    6500 3200
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R36
+U 1 1 5B29883A
+P 6500 3400
+F 0 "R36" V 6580 3400 50  0000 C CNN
+F 1 "R" V 6500 3400 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 3400 50  0001 C CNN
+F 3 "" H 6500 3400 50  0000 C CNN
+	1    6500 3400
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR014
+U 1 1 5B298840
+P 6200 3150
+F 0 "#PWR014" H 6200 3240 20  0001 C CNN
+F 1 "+5V" H 6200 3240 30  0000 C CNN
+F 2 "" H 6200 3150 60  0000 C CNN
+F 3 "" H 6200 3150 60  0000 C CNN
+	1    6200 3150
+	1    0    0    -1  
+$EndComp
+Text Label 6800 3400 0    60   ~ 0
+11(**/MOSI)
+$Comp
+L power:GND #PWR015
+U 1 1 5B29884D
+P 6200 4050
+F 0 "#PWR015" H 6200 4050 30  0001 C CNN
+F 1 "GND" H 6200 3980 30  0001 C CNN
+F 2 "" H 6200 4050 60  0000 C CNN
+F 3 "" H 6200 4050 60  0000 C CNN
+	1    6200 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R37
+U 1 1 5B298853
+P 6500 3800
+F 0 "R37" V 6580 3800 50  0000 C CNN
+F 1 "R" V 6500 3800 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 3800 50  0001 C CNN
+F 3 "" H 6500 3800 50  0000 C CNN
+	1    6500 3800
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R38
+U 1 1 5B298859
+P 6500 4000
+F 0 "R38" V 6580 4000 50  0000 C CNN
+F 1 "R" V 6500 4000 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 4000 50  0001 C CNN
+F 3 "" H 6500 4000 50  0000 C CNN
+	1    6500 4000
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR016
+U 1 1 5B29885F
+P 6200 3750
+F 0 "#PWR016" H 6200 3840 20  0001 C CNN
+F 1 "+5V" H 6200 3840 30  0000 C CNN
+F 2 "" H 6200 3750 60  0000 C CNN
+F 3 "" H 6200 3750 60  0000 C CNN
+	1    6200 3750
+	1    0    0    -1  
+$EndComp
+Text Label 6800 4000 0    60   ~ 0
+10(**/SS)
+$Comp
+L power:GND #PWR017
+U 1 1 5B298A78
+P 6200 4700
+F 0 "#PWR017" H 6200 4700 30  0001 C CNN
+F 1 "GND" H 6200 4630 30  0001 C CNN
+F 2 "" H 6200 4700 60  0000 C CNN
+F 3 "" H 6200 4700 60  0000 C CNN
+	1    6200 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R39
+U 1 1 5B298A7E
+P 6500 4450
+F 0 "R39" V 6580 4450 50  0000 C CNN
+F 1 "R" V 6500 4450 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 4450 50  0001 C CNN
+F 3 "" H 6500 4450 50  0000 C CNN
+	1    6500 4450
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R40
+U 1 1 5B298A84
+P 6500 4650
+F 0 "R40" V 6580 4650 50  0000 C CNN
+F 1 "R" V 6500 4650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 4650 50  0001 C CNN
+F 3 "" H 6500 4650 50  0000 C CNN
+	1    6500 4650
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR018
+U 1 1 5B298A8A
+P 6200 4400
+F 0 "#PWR018" H 6200 4490 20  0001 C CNN
+F 1 "+5V" H 6200 4490 30  0000 C CNN
+F 2 "" H 6200 4400 60  0000 C CNN
+F 3 "" H 6200 4400 60  0000 C CNN
+	1    6200 4400
+	1    0    0    -1  
+$EndComp
+Text Label 6800 4650 0    60   ~ 0
+9(**)
+$Comp
+L power:GND #PWR019
+U 1 1 5B298A97
+P 6200 5300
+F 0 "#PWR019" H 6200 5300 30  0001 C CNN
+F 1 "GND" H 6200 5230 30  0001 C CNN
+F 2 "" H 6200 5300 60  0000 C CNN
+F 3 "" H 6200 5300 60  0000 C CNN
+	1    6200 5300
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R41
+U 1 1 5B298A9D
+P 6500 5050
+F 0 "R41" V 6580 5050 50  0000 C CNN
+F 1 "R" V 6500 5050 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 5050 50  0001 C CNN
+F 3 "" H 6500 5050 50  0000 C CNN
+	1    6500 5050
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R42
+U 1 1 5B298AA3
+P 6500 5250
+F 0 "R42" V 6580 5250 50  0000 C CNN
+F 1 "R" V 6500 5250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 6430 5250 50  0001 C CNN
+F 3 "" H 6500 5250 50  0000 C CNN
+	1    6500 5250
+	0    1    1    0   
+$EndComp
+$Comp
+L power:+5V #PWR020
+U 1 1 5B298AA9
+P 6200 5000
+F 0 "#PWR020" H 6200 5090 20  0001 C CNN
+F 1 "+5V" H 6200 5090 30  0000 C CNN
+F 2 "" H 6200 5000 60  0000 C CNN
+F 3 "" H 6200 5000 60  0000 C CNN
+	1    6200 5000
+	1    0    0    -1  
+$EndComp
+Text Label 6800 5250 0    60   ~ 0
+8
+$Comp
+L KiCad_Shield-rescue:CONN_01X10-conn P9
+U 1 1 5B299704
+P 2150 2400
+F 0 "P9" H 2150 2950 50  0000 C CNN
+F 1 "CONN_01X10" V 2250 2400 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x10" H 2150 2400 50  0001 C CNN
+F 3 "" H 2150 2400 50  0000 C CNN
+	1    2150 2400
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R10
+U 1 1 5B2999A6
+P 2650 2850
+F 0 "R10" V 2600 3050 50  0000 C CNN
+F 1 "R" V 2650 2850 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2580 2850 50  0001 C CNN
+F 3 "" H 2650 2850 50  0000 C CNN
+	1    2650 2850
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R9
+U 1 1 5B299C54
+P 2650 2750
+F 0 "R9" V 2600 2950 50  0000 C CNN
+F 1 "R" V 2650 2750 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2580 2750 50  0001 C CNN
+F 3 "" H 2650 2750 50  0000 C CNN
+	1    2650 2750
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R8
+U 1 1 5B299CCB
+P 2650 2650
+F 0 "R8" V 2600 2850 50  0000 C CNN
+F 1 "R" V 2650 2650 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2580 2650 50  0001 C CNN
+F 3 "" H 2650 2650 50  0000 C CNN
+	1    2650 2650
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R7
+U 1 1 5B299D5B
+P 2650 2550
+F 0 "R7" V 2600 2750 50  0000 C CNN
+F 1 "R" V 2650 2550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2580 2550 50  0001 C CNN
+F 3 "" H 2650 2550 50  0000 C CNN
+	1    2650 2550
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R6
+U 1 1 5B299DC8
+P 2650 2450
+F 0 "R6" V 2600 2650 50  0000 C CNN
+F 1 "R" V 2650 2450 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2580 2450 50  0001 C CNN
+F 3 "" H 2650 2450 50  0000 C CNN
+	1    2650 2450
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R5
+U 1 1 5B299E36
+P 2650 2350
+F 0 "R5" V 2600 2550 50  0000 C CNN
+F 1 "R" V 2650 2350 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2580 2350 50  0001 C CNN
+F 3 "" H 2650 2350 50  0000 C CNN
+	1    2650 2350
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R4
+U 1 1 5B299EA5
+P 2650 2250
+F 0 "R4" V 2600 2450 50  0000 C CNN
+F 1 "R" V 2650 2250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2580 2250 50  0001 C CNN
+F 3 "" H 2650 2250 50  0000 C CNN
+	1    2650 2250
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R3
+U 1 1 5B299F39
+P 2650 2150
+F 0 "R3" V 2600 2350 50  0000 C CNN
+F 1 "R" V 2650 2150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2580 2150 50  0001 C CNN
+F 3 "" H 2650 2150 50  0000 C CNN
+	1    2650 2150
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R2
+U 1 1 5B299FAE
+P 2650 2050
+F 0 "R2" V 2600 2250 50  0000 C CNN
+F 1 "R" V 2650 2050 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2580 2050 50  0001 C CNN
+F 3 "" H 2650 2050 50  0000 C CNN
+	1    2650 2050
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R1
+U 1 1 5B29A028
+P 2650 1950
+F 0 "R1" V 2600 2150 50  0000 C CNN
+F 1 "R" V 2650 1950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2580 1950 50  0001 C CNN
+F 3 "" H 2650 1950 50  0000 C CNN
+	1    2650 1950
+	0    1    1    0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R16
+U 1 1 5B29A3EF
+P 3250 3150
+F 0 "R16" V 3200 3350 50  0000 C CNN
+F 1 "R" V 3250 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3180 3150 50  0001 C CNN
+F 3 "" H 3250 3150 50  0000 C CNN
+	1    3250 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R18
+U 1 1 5B29A3F5
+P 3350 3150
+F 0 "R18" V 3300 3350 50  0000 C CNN
+F 1 "R" V 3350 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3280 3150 50  0001 C CNN
+F 3 "" H 3350 3150 50  0000 C CNN
+	1    3350 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R15
+U 1 1 5B29ADB9
+P 3250 1450
+F 0 "R15" V 3200 1650 50  0000 C CNN
+F 1 "R" V 3250 1450 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3180 1450 50  0001 C CNN
+F 3 "" H 3250 1450 50  0000 C CNN
+	1    3250 1450
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R17
+U 1 1 5B29ADBF
+P 3350 1450
+F 0 "R17" V 3300 1650 50  0000 C CNN
+F 1 "R" V 3350 1450 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3280 1450 50  0001 C CNN
+F 3 "" H 3350 1450 50  0000 C CNN
+	1    3350 1450
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	8600 2425 9375 2425
+Wire Wire Line
+	8600 2525 9375 2525
+Wire Wire Line
+	8600 2625 9375 2625
+Wire Wire Line
+	8600 2725 9375 2725
+Wire Wire Line
+	8600 2825 9375 2825
+Wire Wire Line
+	8600 2925 9375 2925
+Wire Wire Line
+	10400 2025 11125 2025
+Wire Wire Line
+	10400 1925 11125 1925
+Wire Wire Line
+	10400 1825 11125 1825
+Wire Wire Line
+	10400 1725 11125 1725
+Wire Wire Line
+	10400 1625 11125 1625
+Wire Wire Line
+	10400 1525 11125 1525
+Wire Wire Line
+	10400 1325 11125 1325
+Wire Wire Line
+	10400 1225 11125 1225
+Wire Wire Line
+	10400 1125 11125 1125
+Wire Wire Line
+	9175 1825 9375 1825
+Wire Wire Line
+	9050 1925 9375 1925
+Wire Wire Line
+	9300 2025 9300 2125
+Wire Wire Line
+	8600 1725 9375 1725
+Wire Wire Line
+	10475 1425 10475 3100
+Wire Wire Line
+	10475 1425 10400 1425
+Wire Wire Line
+	10400 2425 11125 2425
+Wire Wire Line
+	10400 2325 11125 2325
+Wire Wire Line
+	10400 2225 11125 2225
+Wire Wire Line
+	10400 2725 11125 2725
+Wire Wire Line
+	10400 2625 11125 2625
+Wire Wire Line
+	10400 2525 11125 2525
+Wire Wire Line
+	10400 2925 11125 2925
+Wire Wire Line
+	10400 2825 11125 2825
+Wire Wire Line
+	9175 1825 9175 1350
+Wire Wire Line
+	9300 1350 9300 1625
+Wire Wire Line
+	9300 1625 9375 1625
+Wire Wire Line
+	9050 1350 9050 1925
+Wire Wire Line
+	8925 1350 8925 2225
+Wire Wire Line
+	8925 2225 9375 2225
+Wire Wire Line
+	9300 2025 9375 2025
+Wire Wire Line
+	9375 2125 9300 2125
+Connection ~ 9300 2125
+Wire Notes Line
+	11225 975  10775 975 
+Wire Notes Line
+	10775 975  10775 475 
+Wire Notes Line
+	11225 3225 8525 3225
+Wire Notes Line
+	8525 3225 8525 475 
+Wire Notes Line
+	8525 825  9925 825 
+Wire Notes Line
+	9925 825  9925 475 
+Wire Wire Line
+	6200 700  6200 750 
+Wire Wire Line
+	6200 750  6350 750 
+Wire Wire Line
+	6350 950  6200 950 
+Wire Wire Line
+	6200 950  6200 1000
+Wire Wire Line
+	6650 750  6650 950 
+Wire Wire Line
+	6650 950  7100 950 
+Wire Wire Line
+	6200 1300 6200 1350
+Wire Wire Line
+	6200 1350 6350 1350
+Wire Wire Line
+	6350 1550 6200 1550
+Wire Wire Line
+	6200 1550 6200 1600
+Wire Wire Line
+	6650 1350 6650 1550
+Wire Wire Line
+	6650 1550 7100 1550
+Wire Wire Line
+	6200 1900 6200 1950
+Wire Wire Line
+	6200 1950 6350 1950
+Wire Wire Line
+	6350 2150 6200 2150
+Wire Wire Line
+	6200 2150 6200 2200
+Wire Wire Line
+	6650 1950 6650 2150
+Wire Wire Line
+	6650 2150 7100 2150
+Wire Wire Line
+	6200 2550 6200 2600
+Wire Wire Line
+	6200 2600 6350 2600
+Wire Wire Line
+	6350 2800 6200 2800
+Wire Wire Line
+	6200 2800 6200 2850
+Wire Wire Line
+	6650 2600 6650 2800
+Wire Wire Line
+	6650 2800 7100 2800
+Wire Wire Line
+	6200 3150 6200 3200
+Wire Wire Line
+	6200 3200 6350 3200
+Wire Wire Line
+	6350 3400 6200 3400
+Wire Wire Line
+	6200 3400 6200 3450
+Wire Wire Line
+	6650 3200 6650 3400
+Wire Wire Line
+	6650 3400 7100 3400
+Wire Wire Line
+	6200 3750 6200 3800
+Wire Wire Line
+	6200 3800 6350 3800
+Wire Wire Line
+	6350 4000 6200 4000
+Wire Wire Line
+	6200 4000 6200 4050
+Wire Wire Line
+	6650 3800 6650 4000
+Wire Wire Line
+	6650 4000 7100 4000
+Wire Wire Line
+	6200 4400 6200 4450
+Wire Wire Line
+	6200 4450 6350 4450
+Wire Wire Line
+	6350 4650 6200 4650
+Wire Wire Line
+	6200 4650 6200 4700
+Wire Wire Line
+	6650 4450 6650 4650
+Wire Wire Line
+	6650 4650 7100 4650
+Wire Wire Line
+	6200 5000 6200 5050
+Wire Wire Line
+	6200 5050 6350 5050
+Wire Wire Line
+	6350 5250 6200 5250
+Wire Wire Line
+	6200 5250 6200 5300
+Wire Wire Line
+	6650 5050 6650 5250
+Wire Wire Line
+	6650 5250 7100 5250
+Wire Wire Line
+	3250 3600 3250 3300
+Wire Wire Line
+	2500 2850 2350 2850
+Wire Wire Line
+	2350 2750 2500 2750
+Wire Wire Line
+	2500 2650 2350 2650
+Wire Wire Line
+	2350 2550 2500 2550
+Wire Wire Line
+	2350 2350 2500 2350
+Wire Wire Line
+	2500 2250 2350 2250
+Wire Wire Line
+	2350 2150 2500 2150
+Wire Wire Line
+	2500 2050 2350 2050
+Wire Wire Line
+	2350 1950 2500 1950
+Wire Wire Line
+	2800 2550 3350 2550
+Wire Wire Line
+	2800 2650 3250 2650
+Wire Wire Line
+	3250 1600 3250 2650
+Connection ~ 3250 2650
+Wire Wire Line
+	3350 1600 3350 2550
+Connection ~ 3350 2550
+Text Label 550  7000 0    60   ~ 0
+0(Rx)
+Text Label 3500 6950 0    60   ~ 0
+1(Tx)
+Text Label 4900 2650 0    60   ~ 0
+2
+Text Label 4900 2550 0    60   ~ 0
+3(**)
+Text Label 4900 2450 0    60   ~ 0
+4
+Text Label 4900 2350 0    60   ~ 0
+5(**)
+Text Label 4900 2250 0    60   ~ 0
+6(**)
+Text Label 4900 2150 0    60   ~ 0
+7
+$Comp
+L power:+5V #PWR021
+U 1 1 5B29D2CF
+P 3200 1300
+F 0 "#PWR021" H 3200 1390 20  0001 C CNN
+F 1 "+5V" H 3200 1390 30  0000 C CNN
+F 2 "" H 3200 1300 60  0000 C CNN
+F 3 "" H 3200 1300 60  0000 C CNN
+	1    3200 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR023
+U 1 1 5B29DC29
+P 5250 2050
+F 0 "#PWR023" H 5250 2050 30  0001 C CNN
+F 1 "GND" H 5250 1980 30  0001 C CNN
+F 2 "" H 5250 2050 60  0000 C CNN
+F 3 "" H 5250 2050 60  0000 C CNN
+	1    5250 2050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2500 2450 2350 2450
+Wire Wire Line
+	3350 3600 3350 3300
+Wire Wire Line
+	3350 1300 3250 1300
+Connection ~ 3250 1300
+$Comp
+L KiCad_Shield-rescue:AT24CS01-MAHM-memory IC1
+U 1 1 5B3BB81A
+P 4150 4700
+F 0 "IC1" H 3950 4950 50  0000 C CNN
+F 1 "ATECC508A" H 4450 4400 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 4150 4700 50  0001 C CIN
+F 3 "" H 4150 4700 50  0000 C CNN
+	1    4150 4700
+	1    0    0    -1  
+$EndComp
+Text Label 4700 4750 0    60   ~ 0
+A5(SCL)
+Text Label 4700 4600 0    60   ~ 0
+A4(SDA)
+$Comp
+L power:GND #PWR026
+U 1 1 5B3BCA10
+P 4150 5200
+F 0 "#PWR026" H 4150 5200 30  0001 C CNN
+F 1 "GND" H 4150 5130 30  0001 C CNN
+F 2 "" H 4150 5200 60  0000 C CNN
+F 3 "" H 4150 5200 60  0000 C CNN
+	1    4150 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR025
+U 1 1 5B3BCBA7
+P 4150 3900
+F 0 "#PWR025" H 4150 3990 20  0001 C CNN
+F 1 "+5V" H 4150 3990 30  0000 C CNN
+F 2 "" H 4150 3900 60  0000 C CNN
+F 3 "" H 4150 3900 60  0000 C CNN
+	1    4150 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:C-device C1
+U 1 1 5B3BCECC
+P 4400 4100
+F 0 "C1" H 4425 4200 50  0000 L CNN
+F 1 "C" H 4425 4000 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4438 3950 50  0001 C CNN
+F 3 "" H 4400 4100 50  0000 C CNN
+	1    4400 4100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4150 3900 4150 3950
+Wire Wire Line
+	4150 5200 4150 5100
+Wire Wire Line
+	4550 4600 5550 4600
+Wire Wire Line
+	4550 4750 5700 4750
+$Comp
+L power:GND #PWR027
+U 1 1 5B3BD850
+P 4400 4300
+F 0 "#PWR027" H 4400 4300 30  0001 C CNN
+F 1 "GND" H 4400 4230 30  0001 C CNN
+F 2 "" H 4400 4300 60  0000 C CNN
+F 3 "" H 4400 4300 60  0000 C CNN
+	1    4400 4300
+	1    0    0    -1  
+$EndComp
+NoConn ~ 3750 4900
+NoConn ~ 3750 4750
+NoConn ~ 3750 4650
+NoConn ~ 3750 4550
+$Comp
+L KiCad_Shield-rescue:R-device R19
+U 1 1 5B3BE0EC
+P 5550 4350
+F 0 "R19" V 5500 4550 50  0000 C CNN
+F 1 "R" V 5550 4350 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 5480 4350 50  0001 C CNN
+F 3 "" H 5550 4350 50  0000 C CNN
+	1    5550 4350
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R20
+U 1 1 5B3BE20A
+P 5700 4350
+F 0 "R20" V 5650 4550 50  0000 C CNN
+F 1 "R" V 5700 4350 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 5630 4350 50  0001 C CNN
+F 3 "" H 5700 4350 50  0000 C CNN
+	1    5700 4350
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4400 3950 4150 3950
+Connection ~ 4150 3950
+Wire Wire Line
+	4400 4250 4400 4300
+Wire Wire Line
+	5550 4600 5550 4500
+Wire Wire Line
+	5700 4750 5700 4500
+$Comp
+L power:+5V #PWR028
+U 1 1 5B3BEBBA
+P 5550 3900
+F 0 "#PWR028" H 5550 3990 20  0001 C CNN
+F 1 "+5V" H 5550 3990 30  0000 C CNN
+F 2 "" H 5550 3900 60  0000 C CNN
+F 3 "" H 5550 3900 60  0000 C CNN
+	1    5550 3900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR029
+U 1 1 5B3BEC52
+P 5700 3900
+F 0 "#PWR029" H 5700 3990 20  0001 C CNN
+F 1 "+5V" H 5700 3990 30  0000 C CNN
+F 2 "" H 5700 3900 60  0000 C CNN
+F 3 "" H 5700 3900 60  0000 C CNN
+	1    5700 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5550 4200 5550 3900
+Wire Wire Line
+	5700 3900 5700 4200
+Wire Wire Line
+	9300 2125 9300 3100
+Wire Wire Line
+	3250 3600 3300 3600
+Wire Wire Line
+	3250 2650 3250 3000
+Wire Wire Line
+	3350 2550 3350 3000
+Wire Wire Line
+	3250 1300 3200 1300
+Wire Wire Line
+	4150 3950 4150 4350
+Text Notes 6900 5200 0    50   ~ 0
+PF12/device4
+Text Notes 6850 4500 0    50   ~ 0
+PD15/device3
+Text Notes 6950 3850 0    50   ~ 0
+PD14/device2
+Text Notes 7000 3250 0    50   ~ 0
+PA7/RMII
+Text Notes 6950 2650 0    50   ~ 0
+PA6/device1
+Text Notes 7000 2000 0    50   ~ 0
+PA5/device0
+Text Notes 7000 1350 0    50   ~ 0
+PB9
+Text Notes 7000 800  0    50   ~ 0
+PB8
+Text Notes 4300 2150 0    50   ~ 0
+PF13
+Text Notes 4300 2250 0    50   ~ 0
+PE9
+Text Notes 4300 2350 0    50   ~ 0
+PE11
+Text Notes 4300 2450 0    50   ~ 0
+PF14
+Text Notes 4300 1950 0    50   ~ 0
+24V
+Text Notes 4300 2050 0    50   ~ 0
+GND
+Text Notes 4300 2550 0    50   ~ 0
+PE13
+Text Notes 4300 2650 0    50   ~ 0
+PF15
+Text Notes 4300 2750 0    50   ~ 0
+PG14
+Text Notes 4300 2850 0    50   ~ 0
+PG9
+$Comp
+L Connector:Conn_01x04_Male J1
+U 1 1 5C58CFD0
+P 9400 4200
+F 0 "J1" H 9506 4478 50  0000 C CNN
+F 1 "Conn_01x04_Male" H 9506 4387 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal" H 9400 4200 50  0001 C CNN
+F 3 "~" H 9400 4200 50  0001 C CNN
+	1    9400 4200
+	1    0    0    -1  
+$EndComp
+Text Label 10000 4400 0    60   ~ 0
+A4(SDA)
+Text Label 10000 4300 0    60   ~ 0
+A5(SCL)
+$Comp
+L power:+3.3V #PWR0101
+U 1 1 5C5ABC7D
+P 10500 4100
+F 0 "#PWR0101" H 10500 4060 30  0001 C CNN
+F 1 "+3.3V" H 10500 4210 30  0000 C CNN
+F 2 "" H 10500 4100 60  0000 C CNN
+F 3 "" H 10500 4100 60  0000 C CNN
+	1    10500 4100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 5C5ABD78
+P 10500 4200
+F 0 "#PWR0102" H 10500 4200 30  0001 C CNN
+F 1 "GND" H 10500 4130 30  0001 C CNN
+F 2 "" H 10500 4200 60  0000 C CNN
+F 3 "" H 10500 4200 60  0000 C CNN
+	1    10500 4200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED D1
+U 1 1 5C5BD235
+P 8300 5700
+F 0 "D1" V 8338 5583 50  0000 R CNN
+F 1 "LED" V 8247 5583 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric" H 8300 5700 50  0001 C CNN
+F 3 "~" H 8300 5700 50  0001 C CNN
+	1    8300 5700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R21
+U 1 1 5C5BD798
+P 8300 5300
+F 0 "R21" V 8380 5300 50  0000 C CNN
+F 1 "R" V 8300 5300 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8230 5300 50  0001 C CNN
+F 3 "" H 8300 5300 50  0000 C CNN
+	1    8300 5300
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:LED D2
+U 1 1 5C5C4B0C
+P 8700 5700
+F 0 "D2" V 8738 5583 50  0000 R CNN
+F 1 "LED" V 8647 5583 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric" H 8700 5700 50  0001 C CNN
+F 3 "~" H 8700 5700 50  0001 C CNN
+	1    8700 5700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R22
+U 1 1 5C5C4B12
+P 8700 5300
+F 0 "R22" V 8780 5300 50  0000 C CNN
+F 1 "R" V 8700 5300 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8630 5300 50  0001 C CNN
+F 3 "" H 8700 5300 50  0000 C CNN
+	1    8700 5300
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:LED D3
+U 1 1 5C5CBE4C
+P 9050 5700
+F 0 "D3" V 9088 5583 50  0000 R CNN
+F 1 "LED" V 8997 5583 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric" H 9050 5700 50  0001 C CNN
+F 3 "~" H 9050 5700 50  0001 C CNN
+	1    9050 5700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R23
+U 1 1 5C5CBE52
+P 9050 5300
+F 0 "R23" V 9130 5300 50  0000 C CNN
+F 1 "R" V 9050 5300 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 8980 5300 50  0001 C CNN
+F 3 "" H 9050 5300 50  0000 C CNN
+	1    9050 5300
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:LED D4
+U 1 1 5C5CBE58
+P 9450 5700
+F 0 "D4" V 9488 5583 50  0000 R CNN
+F 1 "LED" V 9397 5583 50  0000 R CNN
+F 2 "LED_SMD:LED_0603_1608Metric" H 9450 5700 50  0001 C CNN
+F 3 "~" H 9450 5700 50  0001 C CNN
+	1    9450 5700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R24
+U 1 1 5C5CBE5E
+P 9450 5300
+F 0 "R24" V 9530 5300 50  0000 C CNN
+F 1 "R" V 9450 5300 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 9380 5300 50  0001 C CNN
+F 3 "" H 9450 5300 50  0000 C CNN
+	1    9450 5300
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR030
+U 1 1 5C5D3448
+P 8300 6000
+F 0 "#PWR030" H 8300 6000 30  0001 C CNN
+F 1 "GND" H 8300 5930 30  0001 C CNN
+F 2 "" H 8300 6000 60  0000 C CNN
+F 3 "" H 8300 6000 60  0000 C CNN
+	1    8300 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR031
+U 1 1 5C5D34FB
+P 8700 6000
+F 0 "#PWR031" H 8700 6000 30  0001 C CNN
+F 1 "GND" H 8700 5930 30  0001 C CNN
+F 2 "" H 8700 6000 60  0000 C CNN
+F 3 "" H 8700 6000 60  0000 C CNN
+	1    8700 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR032
+U 1 1 5C5D35AE
+P 9050 6000
+F 0 "#PWR032" H 9050 6000 30  0001 C CNN
+F 1 "GND" H 9050 5930 30  0001 C CNN
+F 2 "" H 9050 6000 60  0000 C CNN
+F 3 "" H 9050 6000 60  0000 C CNN
+	1    9050 6000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR033
+U 1 1 5C5D3661
+P 9450 6000
+F 0 "#PWR033" H 9450 6000 30  0001 C CNN
+F 1 "GND" H 9450 5930 30  0001 C CNN
+F 2 "" H 9450 6000 60  0000 C CNN
+F 3 "" H 9450 6000 60  0000 C CNN
+	1    9450 6000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8300 6000 8300 5850
+Wire Wire Line
+	8300 5550 8300 5450
+Wire Wire Line
+	8700 6000 8700 5850
+Wire Wire Line
+	8700 5550 8700 5450
+Wire Wire Line
+	9050 6000 9050 5850
+Wire Wire Line
+	9050 5550 9050 5450
+Wire Wire Line
+	9450 6000 9450 5850
+Wire Wire Line
+	9450 5550 9450 5450
+Wire Wire Line
+	8300 5150 8300 4900
+Wire Wire Line
+	8300 4900 8450 4900
+Wire Wire Line
+	8700 5150 8700 4900
+Wire Wire Line
+	8700 4900 8900 4900
+Wire Wire Line
+	9050 5150 9050 4900
+Wire Wire Line
+	9050 4900 9200 4900
+Wire Wire Line
+	9450 5150 9450 4900
+Wire Wire Line
+	9450 4900 9650 4900
+Text Label 9450 4900 0    60   ~ 0
+0(Rx)
+Text Label 9050 4900 0    60   ~ 0
+1(Tx)
+Text Label 8700 4900 0    60   ~ 0
+2
+Text Label 8300 4900 0    60   ~ 0
+3(**)
+Wire Wire Line
+	9600 4100 10500 4100
+Wire Wire Line
+	9600 4200 10500 4200
+Wire Wire Line
+	9600 4300 10350 4300
+Wire Wire Line
+	9600 4400 10350 4400
+Wire Wire Line
+	2800 2050 5250 2050
+Wire Wire Line
+	2800 2150 3750 2150
+Wire Wire Line
+	2800 2250 3650 2250
+Wire Wire Line
+	2800 2350 3550 2350
+Wire Wire Line
+	2800 2450 3450 2450
+Wire Wire Line
+	3350 2550 5100 2550
+Wire Wire Line
+	3250 2650 5100 2650
+$Comp
+L KiCad_Shield-rescue:R-device R25
+U 1 1 5C67E2DE
+P 3450 3150
+F 0 "R25" V 3400 3350 50  0000 C CNN
+F 1 "R" V 3450 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3380 3150 50  0001 C CNN
+F 3 "" H 3450 3150 50  0000 C CNN
+	1    3450 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R26
+U 1 1 5C67E2E4
+P 3550 3150
+F 0 "R26" V 3500 3350 50  0000 C CNN
+F 1 "R" V 3550 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3480 3150 50  0001 C CNN
+F 3 "" H 3550 3150 50  0000 C CNN
+	1    3550 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R43
+U 1 1 5C67E2EA
+P 3650 3150
+F 0 "R43" V 3600 3350 50  0000 C CNN
+F 1 "R" V 3650 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3580 3150 50  0001 C CNN
+F 3 "" H 3650 3150 50  0000 C CNN
+	1    3650 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R44
+U 1 1 5C67E2F0
+P 3750 3150
+F 0 "R44" V 3700 3350 50  0000 C CNN
+F 1 "R" V 3750 3150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3680 3150 50  0001 C CNN
+F 3 "" H 3750 3150 50  0000 C CNN
+	1    3750 3150
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3450 3600 3550 3600
+Wire Wire Line
+	3450 3600 3450 3300
+Wire Wire Line
+	3550 3300 3550 3600
+Connection ~ 3550 3600
+Wire Wire Line
+	3650 3600 3650 3300
+Connection ~ 3650 3600
+Wire Wire Line
+	3750 3600 3750 3300
+$Comp
+L power:GND #PWR0103
+U 1 1 5C67E2FD
+P 3600 3600
+F 0 "#PWR0103" H 3600 3600 30  0001 C CNN
+F 1 "GND" H 3600 3530 30  0001 C CNN
+F 2 "" H 3600 3600 60  0000 C CNN
+F 3 "" H 3600 3600 60  0000 C CNN
+	1    3600 3600
+	1    0    0    -1  
+$EndComp
+Connection ~ 3600 3600
+Wire Wire Line
+	3550 3600 3600 3600
+Wire Wire Line
+	3650 3600 3750 3600
+Wire Wire Line
+	3600 3600 3650 3600
+Wire Wire Line
+	3450 3000 3450 2450
+Connection ~ 3450 2450
+Wire Wire Line
+	3450 2450 5100 2450
+Wire Wire Line
+	3550 3000 3550 2350
+Connection ~ 3550 2350
+Wire Wire Line
+	3550 2350 5100 2350
+Wire Wire Line
+	3650 3000 3650 2250
+Connection ~ 3650 2250
+Wire Wire Line
+	3650 2250 5100 2250
+Wire Wire Line
+	3750 3000 3750 2150
+Connection ~ 3750 2150
+Wire Wire Line
+	3750 2150 5100 2150
+$Comp
+L KiCad_Shield-rescue:R-device R45
+U 1 1 5C6AFACC
+P 1050 7000
+F 0 "R45" V 1000 7200 50  0000 C CNN
+F 1 "10k" V 1050 7000 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 980 7000 50  0001 C CNN
+F 3 "" H 1050 7000 50  0000 C CNN
+	1    1050 7000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R47
+U 1 1 5C6B09CB
+P 1900 6250
+F 0 "R47" V 1850 6450 50  0000 C CNN
+F 1 "2k2" V 1900 6250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1830 6250 50  0001 C CNN
+F 3 "" H 1900 6250 50  0000 C CNN
+	1    1900 6250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R46
+U 1 1 5C6B0C43
+P 1600 6450
+F 0 "R46" V 1550 6650 50  0000 C CNN
+F 1 "10k" V 1600 6450 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1530 6450 50  0001 C CNN
+F 3 "" H 1600 6450 50  0000 C CNN
+	1    1600 6450
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R48
+U 1 1 5C6B10E1
+P 2400 7150
+F 0 "R48" V 2350 7350 50  0000 C CNN
+F 1 "10k" V 2400 7150 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 2330 7150 50  0001 C CNN
+F 3 "" H 2400 7150 50  0000 C CNN
+	1    2400 7150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2400 5450 1600 5450
+Wire Wire Line
+	1600 5450 1600 5800
+Wire Wire Line
+	1600 7200 1600 7550
+Wire Wire Line
+	2400 7300 2400 7550
+Wire Wire Line
+	1300 7000 1200 7000
+Wire Wire Line
+	900  7000 700  7000
+Wire Wire Line
+	2400 7000 2400 6950
+Wire Wire Line
+	2400 6950 3150 6950
+Connection ~ 2400 6950
+$Comp
+L power:GND #PWR0104
+U 1 1 5C714E98
+P 2400 7550
+F 0 "#PWR0104" H 2400 7550 30  0001 C CNN
+F 1 "GND" H 2400 7480 30  0001 C CNN
+F 2 "" H 2400 7550 60  0000 C CNN
+F 3 "" H 2400 7550 60  0000 C CNN
+	1    2400 7550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0105
+U 1 1 5C714F69
+P 1600 7550
+F 0 "#PWR0105" H 1600 7550 30  0001 C CNN
+F 1 "GND" H 1600 7480 30  0001 C CNN
+F 2 "" H 1600 7550 60  0000 C CNN
+F 3 "" H 1600 7550 60  0000 C CNN
+	1    1600 7550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 1950 5100 1950
+Text Notes 2850 6950 0    50   ~ 0
+PG9
+Wire Wire Line
+	2100 6250 2050 6250
+$Comp
+L KiCad_Shield-rescue:R-device R49
+U 1 1 5C751D3E
+P 4000 6950
+F 0 "R49" V 3950 7150 50  0000 C CNN
+F 1 "10k" V 4000 6950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3930 6950 50  0001 C CNN
+F 3 "" H 4000 6950 50  0000 C CNN
+	1    4000 6950
+	0    -1   -1   0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R51
+U 1 1 5C751D50
+P 4850 6200
+F 0 "R51" V 4800 6400 50  0000 C CNN
+F 1 "2k2" V 4850 6200 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 4780 6200 50  0001 C CNN
+F 3 "" H 4850 6200 50  0000 C CNN
+	1    4850 6200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R50
+U 1 1 5C751D56
+P 4550 6400
+F 0 "R50" V 4500 6600 50  0000 C CNN
+F 1 "10k" V 4550 6400 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 4480 6400 50  0001 C CNN
+F 3 "" H 4550 6400 50  0000 C CNN
+	1    4550 6400
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R52
+U 1 1 5C751D5C
+P 5350 7100
+F 0 "R52" V 5300 7300 50  0000 C CNN
+F 1 "10k" V 5350 7100 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 5280 7100 50  0001 C CNN
+F 3 "" H 5350 7100 50  0000 C CNN
+	1    5350 7100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5350 5400 4550 5400
+Wire Wire Line
+	4550 5400 4550 5750
+Wire Wire Line
+	4550 7150 4550 7500
+Wire Wire Line
+	5350 7250 5350 7500
+Wire Wire Line
+	4250 6950 4150 6950
+Wire Wire Line
+	3850 6950 3650 6950
+Wire Wire Line
+	5350 6950 5350 6900
+Wire Wire Line
+	5350 6900 6100 6900
+Connection ~ 5350 6900
+$Comp
+L power:GND #PWR0106
+U 1 1 5C751D71
+P 5350 7500
+F 0 "#PWR0106" H 5350 7500 30  0001 C CNN
+F 1 "GND" H 5350 7430 30  0001 C CNN
+F 2 "" H 5350 7500 60  0000 C CNN
+F 3 "" H 5350 7500 60  0000 C CNN
+	1    5350 7500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0107
+U 1 1 5C751D77
+P 4550 7500
+F 0 "#PWR0107" H 4550 7500 30  0001 C CNN
+F 1 "GND" H 4550 7430 30  0001 C CNN
+F 2 "" H 4550 7500 60  0000 C CNN
+F 3 "" H 4550 7500 60  0000 C CNN
+	1    4550 7500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5050 6200 5000 6200
+Text Notes 5750 6900 0    50   ~ 0
+PG14
+Wire Wire Line
+	2800 2850 5100 2850
+Wire Wire Line
+	2800 2750 5100 2750
+$Comp
+L power:GND #PWR022
+U 1 1 5C7DE25E
+P 3300 3600
+F 0 "#PWR022" H 3300 3600 30  0001 C CNN
+F 1 "GND" H 3300 3530 30  0001 C CNN
+F 2 "" H 3300 3600 60  0000 C CNN
+F 3 "" H 3300 3600 60  0000 C CNN
+	1    3300 3600
+	1    0    0    -1  
+$EndComp
+Connection ~ 3300 3600
+Wire Wire Line
+	3300 3600 3350 3600
+Text Label 4950 2850 0    50   ~ 0
+out1
+Text Label 4950 2750 0    50   ~ 0
+out2
+Text Label 2550 6950 0    50   ~ 0
+out1
+Text Label 5500 6900 0    50   ~ 0
+out2
+Text Label 4950 1950 0    50   ~ 0
+24V
+Text Label 1800 5450 0    50   ~ 0
+24V
+Text Label 4850 5400 0    50   ~ 0
+24V
+Text Notes 1650 2850 0    50   ~ 0
+out1/10
+Text Notes 1650 2750 0    50   ~ 0
+out2/09
+Text Notes 1650 2650 0    50   ~ 0
+out3/08
+Text Notes 1650 2550 0    50   ~ 0
+out4/07
+Text Notes 1650 1950 0    50   ~ 0
+VCC/01
+Text Notes 1650 2050 0    50   ~ 0
+GND/02
+Text Notes 1650 2150 0    50   ~ 0
+in1/03
+Text Notes 1650 2250 0    50   ~ 0
+in2/04
+Text Notes 1650 2350 0    50   ~ 0
+in3/05
+Text Notes 1650 2450 0    50   ~ 0
+in4/06
+$Comp
+L Transistor_FET:BSS83P Q2
+U 1 1 5CB44ADE
+P 2300 6250
+F 0 "Q2" H 2505 6204 50  0000 L CNN
+F 1 "BSS83P" H 2505 6295 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 2500 6175 50  0001 L CIN
+F 3 "http://www.farnell.com/datasheets/1835997.pdf" H 2300 6250 50  0001 L CNN
+	1    2300 6250
+	1    0    0    1   
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q1
+U 1 1 5CB45453
+P 1500 7000
+F 0 "Q1" H 1705 7046 50  0000 L CNN
+F 1 "BSS138" H 1705 6955 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 1700 6925 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 1500 7000 50  0001 L CNN
+	1    1500 7000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:BSS138 Q3
+U 1 1 5CB5DC5B
+P 4450 6950
+F 0 "Q3" H 4655 6996 50  0000 L CNN
+F 1 "BSS138" H 4655 6905 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 4650 6875 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/BS/BSS138.pdf" H 4450 6950 50  0001 L CNN
+	1    4450 6950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:BSS83P Q4
+U 1 1 5CB5DDA2
+P 5250 6200
+F 0 "Q4" H 5455 6154 50  0000 L CNN
+F 1 "BSS83P" H 5455 6245 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 5450 6125 50  0001 L CIN
+F 3 "http://www.farnell.com/datasheets/1835997.pdf" H 5250 6200 50  0001 L CNN
+	1    5250 6200
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	4550 6550 4550 6750
+Wire Wire Line
+	1600 6600 1600 6800
+$Comp
+L KiCad_Shield-rescue:R-device R12
+U 1 1 5CBB0B9A
+P 1600 5950
+F 0 "R12" V 1550 6150 50  0000 C CNN
+F 1 "10k" V 1600 5950 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1530 5950 50  0001 C CNN
+F 3 "" H 1600 5950 50  0000 C CNN
+	1    1600 5950
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R14
+U 1 1 5CBB0D43
+P 4550 5900
+F 0 "R14" V 4500 6100 50  0000 C CNN
+F 1 "10k" V 4550 5900 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 4480 5900 50  0001 C CNN
+F 3 "" H 4550 5900 50  0000 C CNN
+	1    4550 5900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1750 6250 1600 6250
+Wire Wire Line
+	1600 6100 1600 6250
+Connection ~ 1600 6250
+Wire Wire Line
+	1600 6250 1600 6300
+Wire Wire Line
+	4550 6050 4550 6200
+Wire Wire Line
+	4700 6200 4550 6200
+Connection ~ 4550 6200
+Wire Wire Line
+	4550 6200 4550 6250
+Wire Wire Line
+	5350 6400 5350 6900
+Wire Wire Line
+	5350 5400 5350 6000
+Wire Wire Line
+	2400 5450 2400 6050
+Wire Wire Line
+	2400 6450 2400 6950
+$Comp
+L KiCad_Shield-rescue:R-device R11
+U 1 1 5CC1CF33
+P 700 7300
+F 0 "R11" V 650 7500 50  0000 C CNN
+F 1 "10k" V 700 7300 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 630 7300 50  0001 C CNN
+F 3 "" H 700 7300 50  0000 C CNN
+	1    700  7300
+	1    0    0    -1  
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R13
+U 1 1 5CC1D106
+P 3650 7250
+F 0 "R13" V 3600 7450 50  0000 C CNN
+F 1 "10k" V 3650 7250 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3580 7250 50  0001 C CNN
+F 3 "" H 3650 7250 50  0000 C CNN
+	1    3650 7250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR024
+U 1 1 5CC1D5FE
+P 700 7550
+F 0 "#PWR024" H 700 7550 30  0001 C CNN
+F 1 "GND" H 700 7480 30  0001 C CNN
+F 2 "" H 700 7550 60  0000 C CNN
+F 3 "" H 700 7550 60  0000 C CNN
+	1    700  7550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR034
+U 1 1 5CC1D6E1
+P 3650 7500
+F 0 "#PWR034" H 3650 7500 30  0001 C CNN
+F 1 "GND" H 3650 7430 30  0001 C CNN
+F 2 "" H 3650 7500 60  0000 C CNN
+F 3 "" H 3650 7500 60  0000 C CNN
+	1    3650 7500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3650 7100 3650 6950
+Connection ~ 3650 6950
+Wire Wire Line
+	3650 6950 3500 6950
+Wire Wire Line
+	3650 7500 3650 7400
+Wire Wire Line
+	700  7150 700  7000
+Connection ~ 700  7000
+Wire Wire Line
+	700  7000 550  7000
+Wire Wire Line
+	700  7550 700  7450
+$Comp
+L Graphic:Logo_Open_Hardware_Large #LOGO1
+U 1 1 5CC6F9EE
+P 1050 1000
+F 0 "#LOGO1" H 1050 1500 50  0001 C CNN
+F 1 "Logo_Open_Hardware_Large" H 1050 600 50  0001 C CNN
+F 2 "Symbol:OSHW-Logo_38.1x40mm_SilkScreen" H 1050 1000 50  0001 C CNN
+F 3 "~" H 1050 1000 50  0001 C CNN
+	1    1050 1000
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC

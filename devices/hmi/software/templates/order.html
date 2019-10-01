@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="btn btn-lg btn-block input-group-text">Current Order</div>
+    </div>
+    <div class="col-md-6">
+        <div id="order-value" class="btn btn-lg btn-block input-group-text">0</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="btn btn-lg btn-block input-group-text">Place Order:</div>
+    </div>
+    <div class="col-md-2">
+        <input type="number" id="place-order-value" class="form-control disable-while-running"
+               value="1"
+               min="1" max="1024">
+    </div>
+    <div class="col-md-2">
+        <button type="button" id="decrease-order-value"
+                class="btn btn-secondary btn-lg btn-block disable-while-running">
+            -
+        </button>
+    </div>
+    <div class="col-md-2">
+        <button type="button" id="increase-order-value"
+                class="btn btn-secondary btn-lg btn-block disable-while-running">
+            +
+        </button>
+    </div>
+</div>
+<div class="row">
+    <button type="button" id="place-order-button" class="btn btn-secondary btn-lg btn-block disable-while-running">
+        Send
+    </button>
+</div>
+{% endblock %}

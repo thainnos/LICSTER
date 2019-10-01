@@ -1,0 +1,7 @@
+
+@xset s off
+@xset -dpms
+@xset s noblank
+@unclutter -idle 0
+@/usr/bin/python3 $HOME/gits/lowcostICStestbed/devices/hmi/software/app.py
+@chromium-browser --incognito --kiosk http://localhost:8080

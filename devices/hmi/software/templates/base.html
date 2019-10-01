@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-A">
+    <title>Low Cost Testbed HMI</title>
+    <link rel="stylesheet" type="text/css" href="/static/node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    {% if view %}
+    <link rel="stylesheet" type="text/css" href="/static/css/view.css">
+    {% endif %}
+    {% if order %}
+    <link rel="stylesheet" type="text/css" href="/static/css/order.css">
+    {% endif %}
+    {% if manual %}
+    <link rel="stylesheet" type="text/css" href="/static/css/manual.css">
+    {% endif %}
+</head>
+
+<body>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <span class="navbar-brand">LIST</span>
+    <div class="mr-auto">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link {% if view %}active{% endif %}" href="/view">View</a>
+            <a class="nav-item nav-link {% if order %}active{% endif %}" href="/order">Orders</a>
+            <a class="nav-item nav-link {% if manual %}active{% endif %}" href="/manual">Manual</a>
+        </div>
+    </div>
+    <div class="{{ application_state.classes|join(' ') }}" id="application-state"> {{ application_state.text }} </div>
+    <div class="{{ process_state.classes|join(' ') }}" id="process-state"> {{ process_state.text }} </div>
+    <div class="btn btn-danger" id="stop-button"> STOP </div>
+</nav>
+
+<div id="content" class="container-fluid text-center">
+    {% block body %}{% endblock %}
+</div>
+<script type="text/javascript" src="/static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/node_modules/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/static/js/base.js"></script>
+{% if view %}
+<script type="text/javascript" src="/static/js/view.js"></script>
+{% endif %}
+{% if order %}
+<script type="text/javascript" src="/static/js/order.js"></script>
+{% endif %}
+{% if manual %}
+<script type="text/javascript" src="/static/js/manual.js"></script>
+{% endif %}
+</body>
+
+</html>

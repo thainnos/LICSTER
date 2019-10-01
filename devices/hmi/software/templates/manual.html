@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block body %}
+<table id="control-table" class="table">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col">Motor:</th>
+        <th scope="col">Left</th>
+        <th scope="col">Right</th>
+        <th scope="col">Up</th>
+        <th scope="col">Down</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th class="table-default"></th>
+        <td id="control-motor-left" class="table-danger"></td>
+        <td id="control-motor-right" class="table-danger"></td>
+        <td id="control-motor-up" class="table-danger"></td>
+        <td id="control-motor-down" class="table-danger"></td>
+    </tr>
+    </tbody>
+</table>
+{% endblock %}
