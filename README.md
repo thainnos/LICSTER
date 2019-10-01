@@ -64,5 +64,5 @@ We try to keep the prerequisites as little as possible to reduce the hurdle for 
 # Licenses
 * OpenPLC is licensed under GPL-3.0
 * CubeMX generated code for STM32 is copyrighted by STMicroelectronics
-* MIT License is licensed under MIT License 
+* ScadaLTS is licensed under MIT License 
 
