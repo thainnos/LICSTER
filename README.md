@@ -66,3 +66,18 @@ We try to keep the prerequisites as little as possible to reduce the hurdle for 
 * CubeMX generated code for STM32 is copyrighted by STMicroelectronics
 * ScadaLTS is licensed under MIT License 
 
+# Paper
+You find the research paper [here](https://www.scienceopen.com/document?vid=4fa78131-80f5-4fca-b45a-bfd6a04ae2cc). To
+cite the work you can use the official bibtex entry:
+
+@article{ScienceOpenVid:4fa78131-80f5-4fca-b45a-bfd6a04ae2cc,
+    author = {Sauer, Felix and Niedermaier, Matthias and Kießling, Susanne and Merli, Dominik},
+    title = {LICSTER – A Low-cost ICS Security Testbed for Education and Research},
+    journal = {},
+    year = 2019,
+    volume = {},
+    number = {},
+    pages = {1-10},
+    doi = {10.14236/ewic/icscsr19.1}
+}
+
