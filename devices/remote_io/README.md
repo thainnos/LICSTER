@@ -8,7 +8,7 @@ Setting up the PCBs for the two remote IOs is an easy two step process. First yo
 described below, and then it takes some basic soldering skills to put it together. This is the most basic, cheap and fun
 way to do it. Yet there [alternatives][0.0], should that not appeal to you.
 
-[0.0]: ##alternatives
+[0.0]: #alternatives
 
 # List of PCB Components
 
@@ -41,7 +41,7 @@ set. Please note, that at JLCPCB the minimum amount of PCBs you can order is fiv
 
 [1.0]: https://jlcpcb.com/
 [1.1]: hardware/Fabrication
-[1.2]: https://jlcpcb.com/quote#/?orderType=1&stencilWidth=100&stencilLength=100&stencilCounts=5&stencilLayer=2&stencilPly=1.6&steelmeshSellingPriceRecordNum=A8256537-5522-491C-965C-646F5842AEC9&purchaseNumber=)
+[1.2]: https://jlcpcb.com/quote#/?orderType=1&stencilWidth=100&stencilLength=100&stencilCounts=5&stencilLayer=2&stencilPly=1.6&steelmeshSellingPriceRecordNum=A8256537-5522-491C-965C-646F5842AEC9&purchaseNumber=
 
 ## Placing Components
 
