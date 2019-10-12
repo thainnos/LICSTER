@@ -4,7 +4,13 @@
 
 ## PCB Components
 
-Following comes a list with all the components on the PCB. Detailed instructions will come soon.
+Setting up the PCBs for the two remote IOs is an easy two step process. First you order the PCB and the components, as
+described below, and then it takes some basic soldering skills to put it together. This is the most basic, cheap and fun
+way to do it. Yet there [alternatives][0.0], should that not appeal to you.
+
+[0.0]: (##alternatives)
+
+# List of PCB Components
 
 | Label        | Name                                         | Amount | Description           |
 |--------------|----------------------------------------------|--------|-----------------------|
@@ -27,16 +33,26 @@ R47, R51       | 2k2 Resistor_SMD:R_0603_1608Metric           | 2      |        
 
 ## PCB Ordering
 
-We order our PCBs at [JLCPCB](https://jlcpcb.com/), because they are mostly fast in production and also very cheap, but any PCB producer will be fine.
-The LICSTER Github contains a folder called ["Fabrication"](hardware/Fabrication), where all necessary files are located for the PCB producer.
-So basically, you just create a zip file from this folder and [upload](https://jlcpcb.com/quote#/?orderType=1&stencilWidth=100&stencilLength=100&stencilCounts=5&stencilLayer=2&stencilPly=1.6&steelmeshSellingPriceRecordNum=A8256537-5522-491C-965C-646F5842AEC9&purchaseNumber=) it.
-You can choose a color of the PCB and all other settings are already fine and you can proceed with the checkout (At JLPCP you will get a minimum of 5pcs).
+For our LICSTER prototypes we ordered the PCB at [JLCPCB][1.0]. They are fast and cheap, though any
+other PCB producer will do just as well. In the folder [Fabrication][1.1] you find all the files
+needed to order the PCB. In the case of JLCPCB, you need only zip them together and upload them to [upload][1.2].
+After you uploaded the files, you can choose the color of the PCB, while all other functional requirements are already
+set. Please note, that at JLCPCB the minimum amount of PCBs you can order is five.
 
-## PCB Manufacturing
+[1.0]: (https://jlcpcb.com/)
+[1.1]: (hardware/Fabrication)
+[1.2]: (https://jlcpcb.com/quote#/?orderType=1&stencilWidth=100&stencilLength=100&stencilCounts=5&stencilLayer=2&stencilPly=1.6&steelmeshSellingPriceRecordNum=A8256537-5522-491C-965C-646F5842AEC9&purchaseNumber=)
 
-In the [schematics folder](hardware/Schematic) of the LICSTER Git, you will find a plan, at which location each component must be placed on the PCB.
-The Soldering requires basic skills and a solderin iron.
+## Placing Components
 
-## Other Possible Solutions
+The folder [schematics][2.0] contains a schema for the PCB which tells you where the components need to
+be placed. Soldering the components onto the PCB requires basic soldering skills and an off-the-shelf soldering iron.
 
-In case, the usage of open remote IO solution is not possible any other Modbus/TCP Remote IO can be used, like these [Remote IO](https://amzn.to/2B4KCLH).
+[2.0]: (hardware/Schematic)
+
+## Alternatives
+
+Should you, for any reason whatsoever, do not want to use the open remote IO solution provided here, you can easily exchange
+it with most any other remote IO component on the market that is able to communicate via Modbus/TCP, such as [Remote IO][3.0].
+
+[3.0]: (https://amzn.to/2B4KCLH)
