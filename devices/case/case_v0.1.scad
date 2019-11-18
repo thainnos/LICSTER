@@ -76,7 +76,7 @@ translate([-5,-5,0])
         cube(size = [15,40,165], center = false);
         // Display (RPI Touch Screen)
         translate([7,5,55])
-            rotate([-7,0,0])
+            rotate([-15,0,0])
                 cube(size = [8,2,120], center = false);
     }
 union() difference() {  //hole
@@ -92,7 +92,7 @@ union() difference() {
     cube(size = [15,40,165], center = false);
         // Display  (RPI Touch Screen)
         translate([0,5,55])
-            rotate([-7,0,0])
+            rotate([-15,0,0])
                 cube(size = [8,2,120], center = false);
     }
 union() difference() {  // hole
