@@ -11,58 +11,58 @@ union() difference() {
     translate([117,129,0])
         cylinder( d = 4.00, h = 20); 
     // Raspberry Pi Text
-    translate ([65,100,3]) {
+    translate ([120,95,3]) {
         rotate([0,0,0])
         linear_extrude(height = 3) {
-           text("RASPBERRY PI", font = "Liberation Sans", size = 12);
+           text("RPI", font = "Liberation Sans", size = 20);
         }
     }
     
     // STM32
-    translate([15,150,0])
+    translate([23,140,0])
         cylinder( d = 4.00, h = 20);  
-    translate([60,150,0])
+    translate([68,140,0])
         cylinder( d = 4.00, h = 20); 
-    translate([14,75,0])
+    translate([22,65,0])
         cylinder( d = 4.00, h = 20); 
-    translate([61,74,0])
+    translate([69,64,0])
         cylinder( d = 4.00, h = 20); 
      // STM32 Text
-    translate ([40,90,3]) {
+    translate ([55,70,3]) {
         rotate([0,0,90])
         linear_extrude(height = 3) {
-           text("STM 32", font = "Liberation Sans", size = 12);
+           text("STM 32", font = "Liberation Sans", size = 20);
         }
     }    
      // Switch Text
-    translate ([90,165,3]) {
+    translate ([86,150,3]) {
         rotate([0,0,0])
         linear_extrude(height = 3) {
-           text("NW Switch", font = "Liberation Sans", size = 12);
+           text("SWITCH", font = "Liberation Sans", size = 20);
         }
     }
      // LICSTER Text
-    translate ([30,30,3]) {
+    translate ([13,20,3]) {
         rotate([0,0,0])
         linear_extrude(height = 3) {
-           text("LICSTER", font = "Liberation Sans", size = 25);
+           text("LICSTER", font = "Liberation Sans", size = 30);
         }
     }
 } 
-// left
-translate([0,0,0])
+// front support
+translate([0,-5,0])
     cube(size = [200,10,10], center = false);
-// left
+// left support
 translate([0,0,0])
     cube(size = [10,190,10], center = false);
-//right
+//right support
 union() difference() { 
    translate([190,0,0])
       cube(size = [10,190,10], center = false);
-    translate([190,155,0]) // for NW switch
+    translate([190,145,0]) // for NW switch
       cube(size = [30,30,10], center = false);
 }
-//back
+//back support
 union() difference() { 
   translate([0,180,0])
       cube(size = [190,10,10], center = false);
@@ -81,7 +81,7 @@ translate([-5,-5,0])
     }
 union() difference() {  //hole
     translate([-5,-5,165])
-        cube(size = [15,5,10], center = false);
+        cube(size = [15,10,10], center = false);
     translate([5,-5,170])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
@@ -97,7 +97,7 @@ union() difference() {
     }
 union() difference() {  // hole
     translate([190,-5,165])
-        cube(size = [15,5,10], center = false);
+        cube(size = [15,10,10], center = false);
     translate([195,-5,170])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
@@ -113,8 +113,8 @@ union() difference() {
             cylinder( d = 4.00, h = 50);
 }
 // Back Center
-translate([90,185,0])
-    cube(size = [20,10,165], center = false);
+translate([90,175,0])
+    cube(size = [20,20,165], center = false);
 union() difference() { 
     translate([90,190,0])
         cube(size = [20,5,175], center = false);
@@ -123,8 +123,8 @@ union() difference() {
             cylinder( d = 4.00, h = 50);
 }
 // Back Right
-translate([180,185,0])
-    cube(size = [20,10,165], center = false);
+translate([180,175,0])
+    cube(size = [20,20,165], center = false);
 union() difference() { 
     translate([190,190,0])
         cube(size = [10,5,175], center = false);
@@ -134,20 +134,23 @@ union() difference() {
 }
 
 // Switch
-translate([80,150,0])
+translate([80,140,0])
     cube(size = [120,5,50], center = false);
-translate([80,190,0])
-    cube(size = [120,5,20], center = false);
-translate([80,155,0])
-    cube(size = [5,35,20], center = false);
-translate([195,155,0])
-    cube(size = [5,35,15], center = false);
+translate([80,175,0])
+    cube(size = [120,20,20], center = false);
+translate([80,140,0])
+    cube(size = [5,50,20], center = false);
+translate([195,140,0])
+    cube(size = [5,50,15], center = false);
 
 // Front Pate
 union() difference() { 
     translate([0,-5,0])
         cube(size = [200,5,65], center = false);
     // Oled left
+    translate([50,-3,30])        
+        rotate([270,0,0])
+            cylinder( d = 60.00, h = 3);
     translate([32,-5,20])
         cube(size = [36,5,23], center = false);
     translate([35,-5,17])        
@@ -163,6 +166,9 @@ union() difference() {
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
     // Oled right
+    translate([150,-3,30])        
+        rotate([270,0,0])
+            cylinder( d = 60.00, h = 3);
     translate([132,-5,20])
         cube(size = [36,5,23], center = false);
     translate([135,-5,17])        
