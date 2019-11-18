@@ -11,10 +11,10 @@ union() difference() {
     translate([117,129,0])
         cylinder( d = 4.00, h = 20); 
     // Raspberry Pi Text
-    translate ([90,100,3]) {
+    translate ([65,100,3]) {
         rotate([0,0,0])
         linear_extrude(height = 3) {
-           text("Raspberry Pi", font = "Liberation Sans", size = 12);
+           text("RASPBERRY PI", font = "Liberation Sans", size = 12);
         }
     }
     
@@ -33,13 +33,19 @@ union() difference() {
         linear_extrude(height = 3) {
            text("STM 32", font = "Liberation Sans", size = 12);
         }
-    }
-    
+    }    
      // Switch Text
     translate ([90,165,3]) {
         rotate([0,0,0])
         linear_extrude(height = 3) {
            text("NW Switch", font = "Liberation Sans", size = 12);
+        }
+    }
+     // LICSTER Text
+    translate ([30,30,3]) {
+        rotate([0,0,0])
+        linear_extrude(height = 3) {
+           text("LICSTER", font = "Liberation Sans", size = 25);
         }
     }
 } 
@@ -50,24 +56,32 @@ translate([0,0,0])
 translate([0,0,0])
     cube(size = [10,190,10], center = false);
 //right
-translate([190,0,0])
-    cube(size = [10,190,10], center = false);
+union() difference() { 
+   translate([190,0,0])
+      cube(size = [10,190,10], center = false);
+    translate([190,155,0]) // for NW switch
+      cube(size = [30,30,10], center = false);
+}
 //back
-translate([0,180,0])
-    cube(size = [190,10,10], center = false);
+union() difference() { 
+  translate([0,180,0])
+      cube(size = [190,10,10], center = false);
+  translate([85,175,0]) // for NW switch
+      cube(size = [190,10,10], center = false);
+}
 
 // Front Left
-translate([-0,-5,0])
+translate([-5,-5,0])
     union() difference() { 
-        cube(size = [10,40,165], center = false);
-        // Display
-        translate([5,5,55])
+        cube(size = [15,40,165], center = false);
+        // Display (RPI Touch Screen)
+        translate([7,5,55])
             rotate([-7,0,0])
-                cube(size = [5,2,120], center = false);
+                cube(size = [8,2,120], center = false);
     }
-union() difference() { 
-    translate([-0,-5,165])
-        cube(size = [10,5,10], center = false);
+union() difference() {  //hole
+    translate([-5,-5,165])
+        cube(size = [15,5,10], center = false);
     translate([5,-5,170])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
@@ -75,15 +89,15 @@ union() difference() {
 // Front Right
 translate([190,-5,0])
 union() difference() { 
-    cube(size = [10,40,165], center = false);
-        // Display
+    cube(size = [15,40,165], center = false);
+        // Display  (RPI Touch Screen)
         translate([0,5,55])
             rotate([-7,0,0])
-                cube(size = [5,2,120], center = false);
+                cube(size = [8,2,120], center = false);
     }
-union() difference() { 
+union() difference() {  // hole
     translate([190,-5,165])
-        cube(size = [10,5,10], center = false);
+        cube(size = [15,5,10], center = false);
     translate([195,-5,170])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
@@ -120,7 +134,7 @@ union() difference() {
 }
 
 // Switch
-translate([80,155,0])
+translate([80,150,0])
     cube(size = [120,5,50], center = false);
 translate([80,190,0])
     cube(size = [120,5,20], center = false);
@@ -135,33 +149,32 @@ union() difference() {
         cube(size = [200,5,65], center = false);
     // Oled left
     translate([32,-5,20])
-        cube(size = [36,5,25], center = false);
+        cube(size = [36,5,23], center = false);
     translate([35,-5,17])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
     translate([65,-5,17])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
-    translate([35,-5,48])        
+    translate([35,-5,46])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
-    translate([65,-5,48])        
+    translate([65,-5,46])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
     // Oled right
     translate([132,-5,20])
-        cube(size = [36,5,25], center = false);
+        cube(size = [36,5,23], center = false);
     translate([135,-5,17])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
     translate([165,-5,17])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
-    translate([135,-5,48])        
+    translate([135,-5,46])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
-    translate([165,-5,48])        
+    translate([165,-5,46])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
-    
 }
