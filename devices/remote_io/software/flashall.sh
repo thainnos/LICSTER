@@ -28,7 +28,6 @@ echo "${SERIALSLINE}"
 
 # Split line into array to for loop
 SERIALS=($SERIALSLINE)
-#SERIALS+=("303637304646353734393533383637")
 # Check for duplicate SN?
 echo "++++++++++++++++++++++++++++++++++++++++++++++++"
 echo "Check for duplicate serial numbers?"
