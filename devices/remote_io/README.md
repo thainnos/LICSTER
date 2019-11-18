@@ -45,7 +45,7 @@ Important: The amount is only for one PCB.
 | 855-M20-7910642R       | M20-7910642R        | 6 WAY SIL HORIZ SMT SKT T&R                                                         | 1      | 0,891 €     | 0,89 €             |
 | 855-M20-7911042R       | M20-7911042R        | 0 WAY SIL HORIZ SMT SKT T&R                                                         | 1      | 1,26 €      | 1,26 €             |
 | 651-1725737            | 1725737             | 10P 2.54mm 90DE                                                                     | 1      | 7,11 €      | 7,11 €             | 
-| 863-BSS138LT7G         | BSS138LT7G          | MOSFET NFET SOT23 50V 200MA 3.5O                                                    | 4      | 0,225 €     | 0,90 €             |
+| 863-BSS138LT7G         | BSS138LT7G          | MOSFET NFET SOT23 50V 200MA 3.5O                                                    | 2      | 0,225 €     | 0,45 €             |
 | 726-BSS83PH6327        | BSS83P H6327        | MOSFET P-Ch SOT-23-3                                                                | 2      | 0,378 €     | 0,76 €             |
 | 71-CRCW06030000Z0EAC   | CRCW06030000Z0EAC   | Thick Film Resistors - SMD 1/10Watt 0ohms Commercial Use                            | 10     | 0,025 €     | 0,25 €             |
 | 71-CRCW06031K00FKEAC   | CRCW06031K00FKEAC   | Thick Film Resistors - SMD 1/10Watt 1Kohms 1% Commercial Use                        | 4      | 0,09 €      | 0,36 €             |
