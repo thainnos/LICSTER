@@ -30,9 +30,6 @@ R21-R24        | 1k Resistor_SMD:R_0603_1608Metric            | 4      |        
 R11-R14, R19, R20, R27-R42, R45, R46, R48-R50, R52 | 10 Resistor_SMD:R_0603_1608Metric | 28  | |
 R47, R51       | 2k2 Resistor_SMD:R_0603_1608Metric           | 2      |                       |
 
-<a name="myfootnote1">1</a> Optional a secure element (ATECC508A) can be used on the remote IOs.
-Currently this feature is not implemented in software.
-
 ## Component Ordering
 
 A possible distributor for the PCB components is [mouser](https://mouser.com/).
@@ -81,3 +78,11 @@ Should you, for any reason whatsoever, do not want to use the open remote IO sol
 it with most any other remote IO component on the market that is able to communicate via Modbus/TCP, such as [Remote IO][3.0].
 
 [3.0]: https://amzn.to/2B4KCLH
+
+## Remote IO Software
+* [Software](software/README.md)
+
+_________________
+** Footnotes: **
+<a name="myfootnote1">1</a> Optional a secure element (ATECC508A) can be used on the remote IOs.
+Currently this feature is not implemented in software.
