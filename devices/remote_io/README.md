@@ -43,7 +43,7 @@ Important: The amount is only for one PCB.
 | 571-825433-4           | 825433-4            | MOD 2 PINHDR 1X4 P.	                                                             | 1      | 0,729 €     | 0,73 €             |
 | 855-M20-7910842R       | M20-7910842R        | 8 WAY SIL HORIZ SMT SKT T&R                                                         | 2      | 1,06 €      | 2,12 €             |
 | 855-M20-7910642R       | M20-7910642R        | 6 WAY SIL HORIZ SMT SKT T&R                                                         | 1      | 0,891 €     | 0,89 €             |
-| 855-M20-7911042R       | M20-7911042R        | 0 WAY SIL HORIZ SMT SKT T&R                                                         | 1      | 1,26 €      | 1,26 €             |
+| 855-M20-7911042R       | M20-7911042R        | 10 WAY SIL HORIZ SMT SKT T&R                                                         | 1      | 1,26 €      | 1,26 €             |
 | 651-1725737            | 1725737             | 10P 2.54mm 90DE                                                                     | 1      | 7,11 €      | 7,11 €             | 
 | 863-BSS138LT7G         | BSS138LT7G          | MOSFET NFET SOT23 50V 200MA 3.5O                                                    | 2      | 0,225 €     | 0,45 €             |
 | 726-BSS83PH6327        | BSS83P H6327        | MOSFET P-Ch SOT-23-3                                                                | 2      | 0,378 €     | 0,76 €             |
