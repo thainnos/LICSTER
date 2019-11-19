@@ -14,9 +14,9 @@ way to do it. Yet there [alternatives][0.0], should that not appeal to you.
 
 | Label        | Name                                         | Amount | Description           |
 |--------------|----------------------------------------------|--------|-----------------------|
-C1             | 0603 100nF Capacitor                         | 1      | Optional              |
+C1             | 0603 100nF Capacitor                         | 1      | Optional<sup>[1](#myfootnote1)</sup>              |
 D1-D4          | 0603 LED                                     | 4      |                       |
-C1             | ATECC508A OIC-8_3.9x4.9mm_P1.27mm	      | 1      | Optional              |
+C1             | ATECC508A OIC-8_3.9x4.9mm_P1.27mm	          | 1      | Optional<sup>[1](#myfootnote1)</sup>              |
 J1             | PinHeader_1x04_P2.54mm_Horizontal            | 1      |                       |
 P1             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x08 | 1      |                       |
 P2             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x06 | 1      |                       |
@@ -29,6 +29,9 @@ R1-R10         | 0R Resistor_SMD:R_0603_1608Metric            | 10     |        
 R21-R24        | 1k Resistor_SMD:R_0603_1608Metric            | 4      |                       |
 R11-R14, R19, R20, R27-R42, R45, R46, R48-R50, R52 | 10 Resistor_SMD:R_0603_1608Metric | 28  | |
 R47, R51       | 2k2 Resistor_SMD:R_0603_1608Metric           | 2      |                       |
+
+<a name="myfootnote1">1</a> Optional a secure element (ATECC508A) can be used on the remote IOs.
+Currently this feature is not implemented in software.
 
 ## Component Ordering
 
