@@ -3,7 +3,7 @@
 The 3d printed housing for the LICSTER testbed is currently only for **testing** purposes.
 
 <table align="center"><tr><td align="center" width="9999">
-<img src="case_v0.1.png" width=70%></img>
+<img src="images/case_v0.1.png" width=70%></img>
 </td></tr></table>
 
 ## Current Printer Settings for Draft Purposes
