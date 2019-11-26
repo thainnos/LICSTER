@@ -3,5 +3,9 @@
 @xset -dpms
 @xset s noblank
 @unclutter -idle 0
+<<<<<<< HEAD
 @/usr/bin/python3 /home/pi/gits/LICSTER/devices/hmi/software/app.py
+=======
+@/usr/bin/python3 $HOME/gits/LICSTER/devices/hmi/software/app.py
+>>>>>>> 7524a0f4f8d652dc365486f5def51b65d21adc4f
 @chromium-browser --incognito --kiosk http://localhost:8080
