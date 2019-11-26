@@ -19,7 +19,7 @@ class ModbusTCPPlcConnector:
         self.modbus_client.connect()
         if not self.modbus_client.is_socket_open():
             print("Cannot connect plc connector to {0}".format(plc_ip_address))
-            sys.exit(2)
+            raise ValueError('No connection to OpenPLC.')
 
         # Map of motor controls to modbus/TCP bits.
         self.motor_controls = {

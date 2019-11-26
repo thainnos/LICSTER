@@ -1,0 +1,82 @@
+#ignore the folder called build anywhere, but not files called build
+build/
+__pycache__/
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+*.out
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+*.~lock*
+
+# LaTeX              #
+######################
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.ps
+*.bib
+*.fdb_latexmk
+*.fls
+*.log
+*.nav
+*.out
+*.synctex.gz
+*.toc
+*.idx
+*.ilg
+*.ind
+*.snm
+*.vrb
+*.lof
+*.lot
+paper/paper.pdf
+paper/paper_gray.pdf
+paper/paper_blinded.pdf
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+thumbs.db
+
+# Python language    #
+######################
+*.pyc
+*.swp
+*.pyo
+
+# Ingore build #
+################
+*.bin
+*.hex
+*.elf
+

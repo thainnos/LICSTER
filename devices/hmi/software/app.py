@@ -7,6 +7,8 @@ from flask import Flask, jsonify, render_template, redirect, json
 from plcconnectors.plc import Plc
 from plcconnectors.modbusTCP.connector import ModbusTCPPlcConnector
 
+import time
+
 # The flask application instance.
 app = Flask(__name__)
 
@@ -147,7 +149,17 @@ def index():
 
 # Starting point.
 if __name__ == '__main__':
-    plc = Plc(ModbusTCPPlcConnector, '192.168.0.30')
+    while True:
+        try:
+            time.sleep(5)
+            plc = Plc(ModbusTCPPlcConnector, '192.168.0.30')
 
-    # Run the webserver.
-    app.run(host="0.0.0.0", port=8080)
+            # Run the webserver.
+            app.run(host="0.0.0.0", port=8080)
+            time.sleep(1)
+        except KeyboardInterrupt:
+            time.sleep(1)
+            sys.exit()
+        except Exception as e:
+            print("Error: " + str(e))
+            time.sleep(1)

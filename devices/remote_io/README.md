@@ -14,9 +14,9 @@ way to do it. Yet there [alternatives][0.0], should that not appeal to you.
 
 | Label        | Name                                         | Amount | Description           |
 |--------------|----------------------------------------------|--------|-----------------------|
-C1             | 0603 100nF Capacitor                         | 1      | Optional              |
+C1             | 0603 100nF Capacitor                         | 1      | Optional<sup>[1](#myfootnote1)</sup>              |
 D1-D4          | 0603 LED                                     | 4      |                       |
-C1             | ATECC508A OIC-8_3.9x4.9mm_P1.27mm	      | 1      | Optional              |
+C1             | ATECC508A OIC-8_3.9x4.9mm_P1.27mm	          | 1      | Optional<sup>[1](#myfootnote1)</sup>              |
 J1             | PinHeader_1x04_P2.54mm_Horizontal            | 1      |                       |
 P1             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x08 | 1      |                       |
 P2             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x06 | 1      |                       |
@@ -43,7 +43,7 @@ Important: The amount is only for one PCB.
 | 571-825433-4           | 825433-4            | MOD 2 PINHDR 1X4 P.	                                                             | 1      | 0,729 €     | 0,73 €             |
 | 855-M20-7910842R       | M20-7910842R        | 8 WAY SIL HORIZ SMT SKT T&R                                                         | 2      | 1,06 €      | 2,12 €             |
 | 855-M20-7910642R       | M20-7910642R        | 6 WAY SIL HORIZ SMT SKT T&R                                                         | 1      | 0,891 €     | 0,89 €             |
-| 855-M20-7911042R       | M20-7911042R        | 0 WAY SIL HORIZ SMT SKT T&R                                                         | 1      | 1,26 €      | 1,26 €             |
+| 855-M20-7911042R       | M20-7911042R        | 10 WAY SIL HORIZ SMT SKT T&R                                                         | 1      | 1,26 €      | 1,26 €             |
 | 651-1725737            | 1725737             | 10P 2.54mm 90DE                                                                     | 1      | 7,11 €      | 7,11 €             | 
 | 863-BSS138LT7G         | BSS138LT7G          | MOSFET NFET SOT23 50V 200MA 3.5O                                                    | 2      | 0,225 €     | 0,45 €             |
 | 726-BSS83PH6327        | BSS83P H6327        | MOSFET P-Ch SOT-23-3                                                                | 2      | 0,378 €     | 0,76 €             |
@@ -78,3 +78,11 @@ Should you, for any reason whatsoever, do not want to use the open remote IO sol
 it with most any other remote IO component on the market that is able to communicate via Modbus/TCP, such as [Remote IO][3.0].
 
 [3.0]: https://amzn.to/2B4KCLH
+
+## Remote IO Software
+* [Software](software/README.md)
+
+_________________
+** Footnotes: **
+<a name="myfootnote1">1</a> Optional a secure element (ATECC508A) can be used on the remote IOs.
+Currently this feature is not implemented in software.

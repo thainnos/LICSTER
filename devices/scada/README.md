@@ -1,5 +1,32 @@
 # Low-cost ICS Testbed - ScadaLTS
 
+Configure IP Adress of the Scada Raspberry Pi.
+```zsh
+sudo nano /etc/network/interfaces
+```
+
+The file should look like this at the end.
+With this, you will have a static IP and if possible also one from DHCP. 
+```
+# interfaces(5) file used by ifup(8) and ifdown(8)
+
+# Please note that this file is written to be used with dhcpcd
+# For static IP, consult /etc/dhcpcd.conf and 'man dhcpcd.conf'
+
+# Include files from /etc/network/interfaces.d:
+source-directory /etc/network/interfaces.d
+
+auto lo eth0 eth0:0
+iface lo inet loopback
+
+iface eth0 inet dhcp
+
+iface eth0:0 inet static
+    address 192.168.0.10
+    netmask 255.255.255.0
+
+```
+
 
 ## Install mysql-server
 ```zsh
