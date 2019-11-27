@@ -3,7 +3,7 @@ For the LICSTER testbed, we provide some basic attack examples,
 to understand the impacts of ICS attacks.
 
 ## Flooding
-(hping3)[https://linux.die.net/man/8/hping3] is common tool to send custom TCP/IP packets.
+[hping3](https://linux.die.net/man/8/hping3) is common tool to send custom TCP/IP packets.
 In this scenario, it is used for DoS/flooding attacks.
 
 Flooding of the Remote IOs:
@@ -33,7 +33,7 @@ For this, start a regular order on the HMI.
 After this, the attack can be started:
 
 ```zsh
-https://linux.die.net/man/8/hping3
+sudo ./conveyer_belt.py 
 ```
 
 The convey belt should stop, after the punching process.
@@ -51,7 +51,7 @@ setOrder(1)
 ```
 
 ## Using the mirror port
-The default IP of the TP-Link switch is (http://192.168.0.1/)[http://192.168.0.1/].
+The default IP of the TP-Link switch is [http://192.168.0.1/](http://192.168.0.1/).
 Set the mirror port on PORT 8 and activate mirroring from PORT 1-7.
 After this, you can connect to PORT 8 and will see all network traffic of the testbed.
 
