@@ -1,4 +1,23 @@
 # Low-cost ICS Testbed - Devices
+The devices used in the testbed are:
+* as far as possible open source
+* the software can be changed
+* cheap
+
+# Ordering the necessary components
+The ordering and also the assembly is structured in three parts.
+
+## Ordering the standard components
+The regular components can be ordered from e.g. Amazon and Fischertechnik.
+The shopping card can be found on the bottom of this README.
+
+## Ordering the components for the remote IO
+For the remote IOs STM32F767 development boards with a custom shield is used.
+The necessary components and instructions can be found [here]{remote_io/README.md}.
+
+## Ordering/Printing the 3d Case (Optional)
+Optionally, if you do not want to mount the devices on e.g. a wooden plate,
+you can print a 3d case like introduced [here]{remote_io/README.md}.
 
 # Shopping cart
 
@@ -16,4 +35,5 @@
 | Wiring cable             |   7 Euro             |  1        |   7 Euro | [Amazon](https://amzn.to/2ULWk5d) |
 | PCBs (5 Pack)            |   7 Euro             |  1        |   7 Euro | [JLCPCB](https://jlcpcb.com/)     |
 | PCB components           |  10 Euro             |  1        |  10 Euro |                                   |
+| 3d case                  |   ~                  |  1        |   ~      |                                   |
 |                          |                      | 21        | 577 Euro |                                   |

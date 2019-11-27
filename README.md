@@ -66,10 +66,21 @@ We try to keep the prerequisites as little as possible to reduce the hurdle for 
 * CubeMX generated code for STM32 is copyrighted by STMicroelectronics
 * ScadaLTS is licensed under MIT License 
 
+# Getting started
+At the beginning you may be a bit confused by the many different components.
+However, the assembly is not as difficult as expected.
+
+1. Ordering the necessary components ([click](devices/README.md))
+2. Assembly and wiring (to-do)
+3. Programming the devices ([stm32](devices/remote_io/software/README.md)[RPI](https://github.com/hsainnos/LICSTER/releases))
+4. Testing LICSTER
+5. Have fun and make the world more secure 
+
 # Paper
 You find the research paper [here](https://www.scienceopen.com/document?vid=4fa78131-80f5-4fca-b45a-bfd6a04ae2cc). To
 cite the work you can use the official bibtex entry:
 
+<pre>
 @article{ScienceOpenVid:4fa78131-80f5-4fca-b45a-bfd6a04ae2cc,\
     author = {Sauer, Felix and Niedermaier, Matthias and Kießling, Susanne and Merli, Dominik},\
     title = {LICSTER – A Low-cost ICS Security Testbed for Education and Research},\
@@ -80,4 +91,4 @@ cite the work you can use the official bibtex entry:
     pages = {1-10},\
     doi = {10.14236/ewic/icscsr19.1}\
 }
-
+</pre>

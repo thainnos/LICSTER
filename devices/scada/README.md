@@ -27,10 +27,47 @@ iface eth0:0 inet static
 
 ```
 
+## Install tomcat7 (SCADA-LTS)
+
+Create tomcat directory:
+```zsh
+sudo mkdir /opt/tomcat
+cd /opt/tomcat
+```
+
+Download tomcat7 with wget:
+```zsh
+sudo wget http://apache.lauf-forum.at/tomcat/tomcat-7/v7.0.96/bin/apache-tomcat-7.0.96.tar.gz
+```
+
+Extract tomcat7:
+```zsh
+sudo tar xvzf apache-tomcat-7.0.96.tar.gz
+```
+
+Install Java:
+```zsh
+sudo apt install default-jdk
+```
+
+Set environment variables:
+```zsh
+vim ~/.bashrc
+```
+
+```zsh
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-armhf
+export CATALINA_HOME=/opt/tomcat/apache-tomcat-7.0.96
+```
+
+```zsh
+. ~/.bashrc
+```
+
 
 ## Install mysql-server
 ```zsh
-sudo apt install mysql-server
+sudo apt install mariadb-server-10.0
 ```
 
 ```zsh
@@ -57,11 +94,6 @@ Exit sql.
 ```sql
 quit; 
 ```
-
-```zsh
-sudo apt install openjdk-8-jre openjdk-8-jdk
-```
-
 
 ```zsh
 sudo vim /opt/scadalts/apache-tomcat-7.0.81/webapps/ScadaBR/WEB-INF/classes/env.properties
