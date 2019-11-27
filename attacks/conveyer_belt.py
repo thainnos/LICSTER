@@ -16,7 +16,7 @@ try:
     while True:
         try:
             client = ModbusTcpClient('192.168.0.52')
-            client.write_coil(0, False)
+            client.write_coil(1, False)
             client.close() 
 
         except KeyboardInterrupt:
@@ -24,7 +24,7 @@ try:
             sys.exit();
         except Exception as e:
             logging.error('Exception: ' + str(e))
-            client1.close();
+            client.close();
 
 except KeyboardInterrupt:
         logging.error('interrupted!')

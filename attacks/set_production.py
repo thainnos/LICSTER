@@ -18,7 +18,7 @@ try:
         try:
             client.write_register(1024, 2, unit=1)
             response = client.read_holding_registers(1024,1,unit=1).registers[0]
-            logging.info("Register: " + str(response.registers))
+            #logging.info("Register: " + str(response.registers))
 
         except KeyboardInterrupt:
             client.close() 

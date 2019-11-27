@@ -72,7 +72,7 @@ However, the assembly is not as difficult as expected.
 
 1. Ordering the necessary components ([click](devices/README.md))
 2. Assembly and wiring (to-do)
-3. Programming the devices ([stm32](devices/remote_io/software/README.md)[RPI](https://github.com/hsainnos/LICSTER/releases))
+3. Programming the devices ([stm32](devices/remote_io/software/README.md)/[RPI](https://github.com/hsainnos/LICSTER/releases))
 4. Testing LICSTER
 5. Have fun and make the world more secure 
 
