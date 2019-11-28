@@ -76,6 +76,14 @@ However, the assembly is not as difficult as expected.
 4. Testing LICSTER
 5. Have fun and make the world more secure 
 
+# LICSTER in the 3d printed case
+Information about the 3d printed case can be found [here](devices/case/README.md).
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/licster.png" width=70%></img>
+</td></tr></table>
+
+
 # Paper
 You find the research paper [here](https://www.scienceopen.com/document?vid=4fa78131-80f5-4fca-b45a-bfd6a04ae2cc). To
 cite the work you can use the official bibtex entry:
