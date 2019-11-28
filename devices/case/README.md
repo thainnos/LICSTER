@@ -21,7 +21,16 @@ In the meantime, we also have a 3d printed housing, which saves space, but of co
 
 Print time for this is about 30 hours.
 
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/3dprint.gif" width=70%></img>
+</td></tr></table>
+
 ## Ordering the 3d case online
 Nowadays, it is possible to order 3d prints online. 
 Our case costs about 35 Euro, e.g. [all3dp](https://print.all3dp.com/).
+A way to compare 3d print prices in your country is
+[treatstock](https://www.treatstock.com/my/print-model3d).
+
+
+
 

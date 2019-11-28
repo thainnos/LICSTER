@@ -65,12 +65,53 @@ set. Please note, that at JLCPCB the minimum amount of PCBs you can order is fiv
 [1.0]: https://jlcpcb.com/
 [1.1]: hardware/Fabrication
 [1.2]: https://jlcpcb.com/quote#/?orderType=1&stencilWidth=100&stencilLength=100&stencilCounts=5&stencilLayer=2&stencilPly=1.6&steelmeshSellingPriceRecordNum=A8256537-5522-491C-965C-646F5842AEC9&purchaseNumber=
+
 ## Placing Components
 
 The folder [schematics][2.0] contains a schema for the PCB which tells you where the components need to
 be placed. Soldering the components onto the PCB requires basic soldering skills and an off-the-shelf soldering iron.
 
 [2.0]: ./hardware/Schematic
+
+### Soldering
+
+The best way is, to start with the flat parts (SMD) and then continue with the THT connectors.
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/01pcb.png" width=70%></img>
+</td></tr></table>
+
+E.g. start with the 0 &#8486; resistors on the input/output side.
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/02pcb.png" width=70%></img>
+</td></tr></table>
+
+Continue with the 10k &#8486; resistors for device ID selection.
+For remote IO1 (R31, R34, R38, R40, R42) and for remote IO2 (R32, R33, R38, R40, R42).
+And also the LEDs on the PCB.
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/03pcb.png" width=70%></img>
+</td></tr></table>
+
+After this, the output driver can be soldered:
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/04pcb.png" width=70%></img>
+</td></tr></table>
+
+For straight soldering of the connectors/pins to the STM32 just connect everything and then solder the pins:
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/05pcb.png" width=70%></img>
+</td></tr></table>
+
+At the end, the remote IO shield is finished.
+Now  you can connect it to the Fischertechnik setup and the small I2C displays.
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/06pcb.png" width=70%></img>
+</td></tr></table>
+
+### Wiring
+On the output side you can also solder the wires directly on the PCB.
+This depends on how you want to place the remote IOs in the LICSER testbed.
+If you use the 3d printed case, we suggest to directly solder wires to the remote IO shield.
 
 ## Alternatives
 
