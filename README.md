@@ -80,7 +80,7 @@ However, the assembly is not as difficult as expected.
 Information about the 3d printed case can be found [here](devices/case/README.md).
 
 <table align="center"><tr><td align="center" width="9999">
-<img src="images/licster.png" width=70%></img>
+<img src="images/licster.png" width=30%></img>
 </td></tr></table>
 
 
