@@ -1,6 +1,13 @@
 union() difference() { 
     cube(size = [200,190,5], center = false);
     
+    // Version
+    version = 2;
+    for (i = [0, version]){
+      translate([180-(i*2.5), 65, 3])
+        cylinder( d = 4.00, h = 3);
+    }
+    
     // Raspberry Pi
     translate([175,80,0])
         cylinder( d = 4.00, h = 20);
@@ -73,62 +80,62 @@ union() difference() {
 // Front Left
 translate([-5,-5,0])
     union() difference() { 
-        cube(size = [15,40,165], center = false);
+        cube(size = [15,40,170], center = false);
         // Display (RPI Touch Screen)
         translate([7,5,55])
             rotate([-15,0,0])
                 cube(size = [8,2,120], center = false);
     }
 union() difference() {  //hole
-    translate([-5,-5,165])
-        cube(size = [15,10,10], center = false);
-    translate([5,-5,170])        
+    translate([-5,-5,170])
+        cube(size = [15,10,15], center = false);
+    translate([2.5,-5,180])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
 }
 // Front Right
 translate([190,-5,0])
 union() difference() { 
-    cube(size = [15,40,165], center = false);
+    cube(size = [15,40,170], center = false);
         // Display  (RPI Touch Screen)
         translate([0,5,55])
             rotate([-15,0,0])
                 cube(size = [8,2,120], center = false);
     }
 union() difference() {  // hole
-    translate([190,-5,165])
-        cube(size = [15,10,10], center = false);
-    translate([195,-5,170])        
+    translate([190,-5,170])
+        cube(size = [15,10,15], center = false);
+    translate([197.5,-5,180])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
 }
 // Back Left
-translate([-0,175,0])
-    cube(size = [10,20,165], center = false);
+translate([-5,170,0])
+    cube(size = [15,25,170], center = false);
 union() difference() { 
-    translate([-0,190,0])
-        cube(size = [10,5,175], center = false);
-    translate([5,190,170])        
+    translate([-5,190,0])
+        cube(size = [15,5,185], center = false);
+    translate([2.5,190,180])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
 }
 // Back Center
 translate([90,175,0])
-    cube(size = [20,20,165], center = false);
+    cube(size = [20,20,170], center = false);
 union() difference() { 
     translate([90,190,0])
-        cube(size = [20,5,175], center = false);
-    translate([100,190,170])        
+        cube(size = [20,5,185], center = false);
+    translate([100,190,180])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
 }
 // Back Right
-translate([180,175,0])
-    cube(size = [20,20,165], center = false);
+translate([175,175,0])
+    cube(size = [25,20,170], center = false);
 union() difference() { 
-    translate([190,190,0])
-        cube(size = [10,5,175], center = false);
-    translate([195,190,170])        
+    translate([180,190,0])
+        cube(size = [20,5,185], center = false);
+    translate([190,190,180])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
 }
@@ -151,8 +158,8 @@ union() difference() {
     translate([50,-3,30])        
         rotate([270,0,0])
             cylinder( d = 60.00, h = 3);
-    translate([32,-5,20])
-        cube(size = [36,5,23], center = false);
+    translate([32,-5,19])
+        cube(size = [36,5,25], center = false);
     translate([35,-5,17])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
@@ -169,8 +176,8 @@ union() difference() {
     translate([150,-3,30])        
         rotate([270,0,0])
             cylinder( d = 60.00, h = 3);
-    translate([132,-5,20])
-        cube(size = [36,5,23], center = false);
+    translate([132,-5,19])
+        cube(size = [36,5,25], center = false);
     translate([135,-5,17])        
         rotate([270,0,0])
             cylinder( d = 4.00, h = 50);
