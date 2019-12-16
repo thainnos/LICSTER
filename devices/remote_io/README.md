@@ -43,7 +43,7 @@ Important: The amount is only for one PCB.
 | 571-825433-4           | 825433-4            | MOD 2 PINHDR 1X4 P.	                                                             | 1      | 0,729 €     | 0,73 €             |
 | 855-M20-7910842R       | M20-7910842R        | 8 WAY SIL HORIZ SMT SKT T&R                                                         | 2      | 1,06 €      | 2,12 €             |
 | 855-M20-7910642R       | M20-7910642R        | 6 WAY SIL HORIZ SMT SKT T&R                                                         | 1      | 0,891 €     | 0,89 €             |
-| 855-M20-7911042R       | M20-7911042R        | 10 WAY SIL HORIZ SMT SKT T&R                                                         | 1      | 1,26 €      | 1,26 €             |
+| 855-M20-7911042R       | M20-7911042R        | 10 WAY SIL HORIZ SMT SKT T&R                                                        | 1      | 1,26 €      | 1,26 €             |
 | 651-1725737            | 1725737             | 10P 2.54mm 90DE                                                                     | 1      | 7,11 €      | 7,11 €             | 
 | 863-BSS138LT7G         | BSS138LT7G          | MOSFET NFET SOT23 50V 200MA 3.5O                                                    | 2      | 0,225 €     | 0,45 €             |
 | 726-BSS83PH6327        | BSS83P H6327        | MOSFET P-Ch SOT-23-3                                                                | 2      | 0,378 €     | 0,76 €             |
@@ -112,6 +112,22 @@ Now  you can connect it to the Fischertechnik setup and the small I2C displays.
 On the output side you can also solder the wires directly on the PCB.
 This depends on how you want to place the remote IOs in the LICSER testbed.
 If you use the 3d printed case, we suggest to directly solder wires to the remote IO shield.
+
+| Fischertechnik | Remote IO 1 | Remote IO 2 | Power |
+|----------------|-------------|-------------|-------|
+| 1              | VCC         | VCC         | 24V   |
+| 2              | nc          | nc          | 24V   |
+| 3              | GND         | GND         | GND   |
+| 4              | nc          | nc          | GND   |
+| 5              | nc          | 8           | nc    |
+| 6              | nc          | 7           | nc    |
+| 7              | 8           | nc          | nc    |
+| 8              | 7           | nc          | nc    |
+| 15             | nc          | 1           | nc    |
+| 16             | nc          | 2           | nc    |
+| 17             | 1           | nc          | nc    |
+| 18             | 2           | nc          | nc    |
+
 
 ## Alternatives
 

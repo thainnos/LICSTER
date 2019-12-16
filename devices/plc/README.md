@@ -86,8 +86,61 @@ Install OpenPLCv3 for Linux.
 ```zsh
 ./install.sh linux
 ```
-
 ### Program
+Open your browser and go to ![http://192.168.0.30:8080/](http://192.168.0.30:8080/).
+The username and password is openplc:openplc.
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/login.png" width=70%></img>
+</td></tr></table>
+
+After this, configure the two slave devices as following:
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/slave_device01.png" width=70%></img>
+</td></tr></table>
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/slave_device02.png" width=70%></img>
+</td></tr></table>
+
+Then, the ST user program can be uploaded and compiled:
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/upload.png" width=70%></img>
+</td></tr></table>
+
+Select the user program:
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/upload.png" width=70%></img>
+</td></tr></table>
+
+Select the user program:
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/upload2.png" width=70%></img>
+</td></tr></table>
+
+Give the user program a name:
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/name.png" width=70%></img>
+</td></tr></table>
+
+Select "Upload program" and the ST program is compiled by OpenPLC:
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/compile.png" width=70%></img>
+</td></tr></table>
+
+Now make the settings of the OpenPLC:
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/settings.png" width=70%></img>
+</td></tr></table>
+
+Press "Start PLC":
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/start.png" width=70%></img>
+</td></tr></table>
+
+### Structure
 <table align="center"><tr><td align="center" width="9999">
 <img src="images/list-network.png" width=70%></img>
 </td></tr></table>
