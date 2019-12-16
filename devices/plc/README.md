@@ -87,7 +87,7 @@ Install OpenPLCv3 for Linux.
 ./install.sh linux
 ```
 ### Program
-Open your browser and go to ![http://192.168.0.30:8080/](http://192.168.0.30:8080/).
+Open your browser and go to http://192.168.0.30:8080/.
 The username and password is openplc:openplc.
 
 <table align="center"><tr><td align="center" width="9999">
