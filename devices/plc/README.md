@@ -112,7 +112,7 @@ Then, the ST user program can be uploaded and compiled:
 
 Select the user program:
 <table align="center"><tr><td align="center" width="9999">
-<img src="images/upload.png" width=70%></img>
+<img src="images/select.png" width=70%></img>
 </td></tr></table>
 
 Select the user program:
