@@ -646,7 +646,7 @@ L KiCad_Shield-rescue:R-device R6
 U 1 1 5B299DC8
 P 2900 1900
 F 0 "R6" V 2850 2100 50  0000 C CNN
-F 1 "0R" V 2900 1900 50  0000 C CNN
+F 1 "10kR" V 2900 1900 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 2830 1900 50  0001 C CNN
 F 3 "" H 2900 1900 50  0000 C CNN
 F 4 "C21189" V 2900 1900 50  0001 C CNN "LCSC"
@@ -658,7 +658,7 @@ L KiCad_Shield-rescue:R-device R5
 U 1 1 5B299E36
 P 2900 1800
 F 0 "R5" V 2850 2000 50  0000 C CNN
-F 1 "0R" V 2900 1800 50  0000 C CNN
+F 1 "10kR" V 2900 1800 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 2830 1800 50  0001 C CNN
 F 3 "" H 2900 1800 50  0000 C CNN
 F 4 "C21189" V 2900 1800 50  0001 C CNN "LCSC"
@@ -670,7 +670,7 @@ L KiCad_Shield-rescue:R-device R4
 U 1 1 5B299EA5
 P 2900 1700
 F 0 "R4" V 2850 1900 50  0000 C CNN
-F 1 "0R" V 2900 1700 50  0000 C CNN
+F 1 "10kR" V 2900 1700 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 2830 1700 50  0001 C CNN
 F 3 "" H 2900 1700 50  0000 C CNN
 F 4 "C21189" V 2900 1700 50  0001 C CNN "LCSC"
@@ -682,7 +682,7 @@ L KiCad_Shield-rescue:R-device R3
 U 1 1 5B299F39
 P 2900 1600
 F 0 "R3" V 2850 1800 50  0000 C CNN
-F 1 "0R" V 2900 1600 50  0000 C CNN
+F 1 "10kR" V 2900 1600 50  0000 C CNN
 F 2 "Resistor_SMD:R_0603_1608Metric" V 2830 1600 50  0001 C CNN
 F 3 "" H 2900 1600 50  0000 C CNN
 F 4 "C21189" V 2900 1600 50  0001 C CNN "LCSC"
@@ -712,28 +712,6 @@ F 3 "" H 2900 1400 50  0000 C CNN
 F 4 "C21189" V 2900 1400 50  0001 C CNN "LCSC"
 	1    2900 1400
 	0    1    1    0   
-$EndComp
-$Comp
-L KiCad_Shield-rescue:R-device R16
-U 1 1 5B29A3EF
-P 3500 2600
-F 0 "R16" V 3450 2800 50  0000 C CNN
-F 1 "R" V 3500 2600 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 3430 2600 50  0001 C CNN
-F 3 "" H 3500 2600 50  0000 C CNN
-	1    3500 2600
-	-1   0    0    1   
-$EndComp
-$Comp
-L KiCad_Shield-rescue:R-device R18
-U 1 1 5B29A3F5
-P 3600 2600
-F 0 "R18" V 3550 2800 50  0000 C CNN
-F 1 "R" V 3600 2600 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 3530 2600 50  0001 C CNN
-F 3 "" H 3600 2600 50  0000 C CNN
-	1    3600 2600
-	-1   0    0    1   
 $EndComp
 $Comp
 L KiCad_Shield-rescue:R-device R15
@@ -941,8 +919,6 @@ Wire Wire Line
 Wire Wire Line
 	7050 6200 7500 6200
 Wire Wire Line
-	3500 3050 3500 2750
-Wire Wire Line
 	2750 2300 2600 2300
 Wire Wire Line
 	2600 2200 2750 2200
@@ -1010,8 +986,6 @@ F 3 "" H 5500 1500 60  0000 C CNN
 $EndComp
 Wire Wire Line
 	2750 1900 2600 1900
-Wire Wire Line
-	3600 3050 3600 2750
 Wire Wire Line
 	3600 750  3500 750 
 Connection ~ 3500 750 
@@ -1431,62 +1405,6 @@ Wire Wire Line
 Wire Wire Line
 	3500 2100 5350 2100
 $Comp
-L KiCad_Shield-rescue:R-device R25
-U 1 1 5C67E2DE
-P 3700 2600
-F 0 "R25" V 3650 2800 50  0000 C CNN
-F 1 "R" V 3700 2600 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 3630 2600 50  0001 C CNN
-F 3 "" H 3700 2600 50  0000 C CNN
-	1    3700 2600
-	-1   0    0    1   
-$EndComp
-$Comp
-L KiCad_Shield-rescue:R-device R26
-U 1 1 5C67E2E4
-P 3800 2600
-F 0 "R26" V 3750 2800 50  0000 C CNN
-F 1 "R" V 3800 2600 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 3730 2600 50  0001 C CNN
-F 3 "" H 3800 2600 50  0000 C CNN
-	1    3800 2600
-	-1   0    0    1   
-$EndComp
-$Comp
-L KiCad_Shield-rescue:R-device R43
-U 1 1 5C67E2EA
-P 3900 2600
-F 0 "R43" V 3850 2800 50  0000 C CNN
-F 1 "R" V 3900 2600 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 3830 2600 50  0001 C CNN
-F 3 "" H 3900 2600 50  0000 C CNN
-	1    3900 2600
-	-1   0    0    1   
-$EndComp
-$Comp
-L KiCad_Shield-rescue:R-device R44
-U 1 1 5C67E2F0
-P 4000 2600
-F 0 "R44" V 3950 2800 50  0000 C CNN
-F 1 "R" V 4000 2600 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric" V 3930 2600 50  0001 C CNN
-F 3 "" H 4000 2600 50  0000 C CNN
-	1    4000 2600
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	3700 3050 3800 3050
-Wire Wire Line
-	3700 3050 3700 2750
-Wire Wire Line
-	3800 2750 3800 3050
-Connection ~ 3800 3050
-Wire Wire Line
-	3900 3050 3900 2750
-Connection ~ 3900 3050
-Wire Wire Line
-	4000 3050 4000 2750
-$Comp
 L KiCad_Shield-rescue:GND-power #PWR0103
 U 1 1 5C67E2FD
 P 3850 3050
@@ -1498,12 +1416,6 @@ F 3 "" H 3850 3050 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Connection ~ 3850 3050
-Wire Wire Line
-	3800 3050 3850 3050
-Wire Wire Line
-	3900 3050 4000 3050
-Wire Wire Line
-	3850 3050 3900 3050
 Wire Wire Line
 	3700 2450 3700 1900
 Connection ~ 3700 1900
@@ -1929,8 +1841,6 @@ F 3 "~" H 1050 1000 50  0001 C CNN
 	1    1050 1000
 	1    0    0    -1  
 $EndComp
-Text Notes 2350 2550 0    50   ~ 0
-Solder 0 Ohm for R1-R10 
 Wire Notes Line
 	11200 4450 8500 4450
 Text Notes 8550 3350 0    50   ~ 0
@@ -1941,8 +1851,6 @@ Text Notes 8550 4550 0    50   ~ 0
 LEDs for current output status
 Text Notes 3700 900  0    50   ~ 0
 Optional pull-up Resistors - Do not solder 
-Text Notes 4100 2650 0    50   ~ 0
-Optional pull-down Resistors - Do not solder
 Connection ~ 7050 1900
 Connection ~ 7050 2500
 Connection ~ 7050 3100
@@ -1967,4 +1875,94 @@ Text Notes 6250 1000 0    50   ~ 0
 For 1. Board populate only:\n- R31\n- R34\n- R38\n- R40\n- R42
 Text Notes 7400 1000 0    50   ~ 0
 For 2. Board populate only:\n- R32\n- R33\n- R38\n- R40\n- R42
+Wire Wire Line
+	3850 3050 3900 3050
+Wire Wire Line
+	3900 3050 4000 3050
+Connection ~ 3900 3050
+Connection ~ 3800 3050
+Wire Wire Line
+	3800 3050 3850 3050
+Wire Wire Line
+	3700 3050 3800 3050
+Text Notes 2200 2800 0    50   ~ 0
+Optional pull-down Resistors\nDo not solder R16,R18
+Wire Wire Line
+	4000 3050 4000 2750
+Wire Wire Line
+	3900 3050 3900 2750
+Wire Wire Line
+	3800 2750 3800 3050
+Wire Wire Line
+	3700 3050 3700 2750
+$Comp
+L KiCad_Shield-rescue:R-device R44
+U 1 1 5C67E2F0
+P 4000 2600
+F 0 "R44" V 3950 2800 50  0000 C CNN
+F 1 "1.5kR" V 4000 2600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3930 2600 50  0001 C CNN
+F 3 "" H 4000 2600 50  0000 C CNN
+	1    4000 2600
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R43
+U 1 1 5C67E2EA
+P 3900 2600
+F 0 "R43" V 3850 2800 50  0000 C CNN
+F 1 "1.5kR" V 3900 2600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3830 2600 50  0001 C CNN
+F 3 "" H 3900 2600 50  0000 C CNN
+	1    3900 2600
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R26
+U 1 1 5C67E2E4
+P 3800 2600
+F 0 "R26" V 3750 2800 50  0000 C CNN
+F 1 "1.5kR" V 3800 2600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3730 2600 50  0001 C CNN
+F 3 "" H 3800 2600 50  0000 C CNN
+	1    3800 2600
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R25
+U 1 1 5C67E2DE
+P 3700 2600
+F 0 "R25" V 3650 2800 50  0000 C CNN
+F 1 "1.5kR" V 3700 2600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3630 2600 50  0001 C CNN
+F 3 "" H 3700 2600 50  0000 C CNN
+	1    3700 2600
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3600 3050 3600 2750
+Wire Wire Line
+	3500 3050 3500 2750
+$Comp
+L KiCad_Shield-rescue:R-device R18
+U 1 1 5B29A3F5
+P 3600 2600
+F 0 "R18" V 3550 2800 50  0000 C CNN
+F 1 "R" V 3600 2600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3530 2600 50  0001 C CNN
+F 3 "" H 3600 2600 50  0000 C CNN
+	1    3600 2600
+	-1   0    0    1   
+$EndComp
+$Comp
+L KiCad_Shield-rescue:R-device R16
+U 1 1 5B29A3EF
+P 3500 2600
+F 0 "R16" V 3450 2800 50  0000 C CNN
+F 1 "R" V 3500 2600 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 3430 2600 50  0001 C CNN
+F 3 "" H 3500 2600 50  0000 C CNN
+	1    3500 2600
+	-1   0    0    1   
+$EndComp
 $EndSCHEMATC
