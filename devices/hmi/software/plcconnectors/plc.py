@@ -12,12 +12,19 @@ class Plc:
     Representation of the PLC. Its state represents the state of actual PLC.
     """
 
-    def __init__(self, plc_connector_class, plc_ip_address):
+    def __init__(self, plc_connector_class, plc_ip_address, timeout=0):
         """
         :param plc_connector_class: A concrete PLC connector.
         :param plc_ip_address: The IP address of the PLC.
         """
-        self.plc_connector = plc_connector_class(plc_ip_address)
+        self.plc_connector = plc_connector_class(plc_ip_address, timeout=timeout)
+
+    def is_connected(self):
+        """
+        Is the plc connected with the actual plc?
+        :return: True if the underlying plc connector claims that it is connected
+        """
+        return self.plc_connector.is_connected()
 
     def set_state(self, state):
         """

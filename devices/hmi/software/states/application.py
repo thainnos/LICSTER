@@ -40,6 +40,18 @@ class StopState(metaclass=Singleton):
         self.classes = ["btn btn-danger mr-auto"]
 
 
+class Disconnected(metaclass=Singleton):
+    """
+    The stop state is an emergency state which can only be reverted by the reset trigger.
+    """
+
+    def __init__(self):
+        self.modbus_value = 3
+        self.text = "DISCONNECTED"
+        self.name = "disconnected"
+        self.classes = ["btn btn-info mr-auto"]
+
+
 class ApplicationStateMap(metaclass=Singleton):
     """
     A simple helper class to navigate the states.
@@ -52,4 +64,6 @@ class ApplicationStateMap(metaclass=Singleton):
             ManualState().modbus_value: ManualState(),
             StopState().name: StopState(),
             StopState().modbus_value: StopState(),
+            Disconnected().name: Disconnected(),
+            Disconnected().modbus_value: Disconnected(),
         }

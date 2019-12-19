@@ -8,12 +8,12 @@
     <link rel="stylesheet" type="text/css" href="/static/css/base.css">
     {% if view %}
     <link rel="stylesheet" type="text/css" href="/static/css/view.css">
-    {% endif %}
-    {% if order %}
+    {% elif order %}
     <link rel="stylesheet" type="text/css" href="/static/css/order.css">
-    {% endif %}
-    {% if manual %}
+    {% elif manual %}
     <link rel="stylesheet" type="text/css" href="/static/css/manual.css">
+    {% elif disconnected %}
+    <link rel="stylesheet" type="text/css" href="/static/css/disconnected.css">
     {% endif %}
 </head>
 
@@ -25,16 +25,20 @@
             <a class="nav-item nav-link {% if view %}active{% endif %}" href="/view">View</a>
             <a class="nav-item nav-link {% if order %}active{% endif %}" href="/order">Orders</a>
             <a class="nav-item nav-link {% if manual %}active{% endif %}" href="/manual">Manual</a>
+            <a class="nav-item nav-link {% if disconnected %}active{% endif %}" href="/view">Refresh</a>
         </div>
     </div>
-    <div class="{{ application_state.classes|join(' ') }}" id="application-state"> {{ application_state.text }} </div>
-    <div class="{{ process_state.classes|join(' ') }}" id="process-state"> {{ process_state.text }} </div>
-    <div class="btn btn-danger" id="stop-button"> STOP </div>
+    <div class="{{ application_state.classes|join(' ') }}" id="application-state"> {{ application_state.text }}</div>
+    <div class="{{ process_state.classes|join(' ') }}" id="process-state"> {{ process_state.text }}</div>
+    <div class="btn btn-danger" id="stop-button"> STOP</div>
 </nav>
 
+{% if not disconnected %}
 <div id="content" class="container-fluid text-center">
     {% block body %}{% endblock %}
 </div>
+{% endif %}
+
 <script type="text/javascript" src="/static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/static/node_modules/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="/static/js/base.js"></script>
