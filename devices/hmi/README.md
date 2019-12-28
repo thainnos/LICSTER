@@ -34,7 +34,7 @@ cp autostart ~/.config/lxsession/lxde-pi/autostart
 
 Install bootstrap and jQuerry.
 ```zsh
-cd ~/gits/LICSTER/devices/hmi/software/static/node_modules
+cd ~/gits/LICSTER/devices/hmi/software/static
 npm install package.json
 ```
 
