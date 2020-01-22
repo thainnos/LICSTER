@@ -150,6 +150,10 @@ def index():
 
 # Starting point.
 if __name__ == '__main__':
-    plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=10)
+    while True:
+        plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=10)
+        if plc.is_connected():
+            break
+
     # Run the webserver.
     app.run(host="0.0.0.0", port=8080)
