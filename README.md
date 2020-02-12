@@ -23,7 +23,7 @@ importantly, the attack scenarios are mostly the same.
 ## Setup with simple Fischertechnik model
 The picture shows the setup of the testbed with the HMI and the physical process.
 <table align="center"><tr><td align="center" width="9999">
-<img src="images/setup_lowres.png" width=70%></img>
+<img src="images/licster.png" width=30%></img>
 </td></tr></table>
 
 ## Testbed parameters
@@ -57,6 +57,7 @@ This project was set up with the following requirements in mind:
 * [PLC](devices/plc/README.md)
 * [scada](devices/scada/README.md)
 * [Remote IO](devices/remote_io/README.md)
+* [3d-printed Case](devices/case/README.md).
 
 ## Prerequisites
 We try to keep the prerequisites as little as possible to reduce the hurdle for beginners.
@@ -75,14 +76,6 @@ However, the assembly is not as difficult as expected.
 3. Programming the devices ([stm32](devices/remote_io/software/README.md)/[RPI](https://github.com/hsainnos/LICSTER/releases))
 4. Testing LICSTER
 5. Have fun and make the world more secure 
-
-# LICSTER in the 3d printed case
-Information about the 3d printed case can be found [here](devices/case/README.md).
-
-<table align="center"><tr><td align="center" width="9999">
-<img src="images/licster.png" width=30%></img>
-</td></tr></table>
-
 
 # Paper
 You find the research paper [here](https://www.scienceopen.com/document?vid=4fa78131-80f5-4fca-b45a-bfd6a04ae2cc). To

@@ -13,11 +13,11 @@ The shopping card can be found on the bottom of this README.
 
 ## Ordering the components for the remote IO
 For the remote IOs STM32F767 development boards with a custom shield is used.
-The necessary components and instructions can be found [here]{remote_io/README.md}.
+The necessary components and instructions can be found [here](remote_io/README.md).
 
 ## Ordering/Printing the 3d Case (Optional)
 Optionally, if you do not want to mount the devices on e.g. a wooden plate,
-you can print a 3d case like introduced [here]{remote_io/README.md}.
+you can print a 3d case like introduced [here](remote_io/README.md).
 
 # Shopping cart
 
