@@ -25,7 +25,9 @@ P4             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x08 | 1      |        
 P9	       | Pin_Headers:Pin_Header_Straight_1x10 2.54mm  | 1      |                       |
 Q1, Q3         | BSS138 Package_TO_SOT_SMD:SOT-23             | 2      |                       |
 Q2, Q4         | BSS83P Package_TO_SOT_SMD:SOT-23             | 2      |                       |
-R1-R10         | 0R Resistor_SMD:R_0603_1608Metric            | 10     |                       |
+R1,R2,R7-R10   | 0R Resistor_SMD:R_0603_1608Metric            | 6      |                       |
+R3-R6          | 10k Resistor_SMD:R_0603_1608Metric           | 6      |                       |
+R25,R26,R43,R44| 1.5k Resistor_SMD:R_0603_1608Metric          | 4      |                       |
 R21-R24        | 1k Resistor_SMD:R_0603_1608Metric            | 4      |                       |
 R11-R14, R19, R20, R27-R42, R45, R46, R48-R50, R52 | 10 Resistor_SMD:R_0603_1608Metric | 28  | |
 R47, R51       | 2k2 Resistor_SMD:R_0603_1608Metric           | 2      |                       |
@@ -41,15 +43,16 @@ Important: The amount is only for one PCB.
 | 710-150060BS55040      | 150060BS55040       | Standard LEDs - SMD WL-SMCD SMD Mono SMD 0603 Blue 465nm                            | 4      | 0,153 €     | 0,61 €             |
 | 556-ATECC508A-SSHCZT	 | ATECC508A-SSHCZ-T   | Security ICs / Authentication ICs ECDH/ECC 10Kb 8ld SOIC SWI, T&R                   | 1      | 0,675 €     | 0,68 €             |
 | 571-825433-4           | 825433-4            | MOD 2 PINHDR 1X4 P.	                                                             | 1      | 0,729 €     | 0,73 €             |
-| 855-M20-7910842R       | M20-7910842R        | 8 WAY SIL HORIZ SMT SKT T&R                                                         | 2      | 1,06 €      | 2,12 €             |
-| 855-M20-7910642R       | M20-7910642R        | 6 WAY SIL HORIZ SMT SKT T&R                                                         | 1      | 0,891 €     | 0,89 €             |
-| 855-M20-7911042R       | M20-7911042R        | 10 WAY SIL HORIZ SMT SKT T&R                                                        | 1      | 1,26 €      | 1,26 €             |
+| 571-825433-8           | 825433-8            | MOD 2 PINHDR 1X8 P.	                                                             | 2      | 2,06 €      | 4,12 €             |
+| 571-825433-6           | 825433-6            | MOD 2 PINHDR 1X6 P.                                                                 | 1      | 1,69 €     | 1,69 €             |
+| 571-1-825433-0         | 1-825433-0          | MOD 2 PINHDR 1X10 P.                                                                | 1      | 1,21 €      | 1,21 €             |
 | 651-1725737            | 1725737             | 10P 2.54mm 90DE                                                                     | 1      | 7,11 €      | 7,11 €             | 
 | 863-BSS138LT7G         | BSS138LT7G          | MOSFET NFET SOT23 50V 200MA 3.5O                                                    | 2      | 0,225 €     | 0,45 €             |
 | 726-BSS83PH6327        | BSS83P H6327        | MOSFET P-Ch SOT-23-3                                                                | 2      | 0,378 €     | 0,76 €             |
 | 71-CRCW06030000Z0EAC   | CRCW06030000Z0EAC   | Thick Film Resistors - SMD 1/10Watt 0ohms Commercial Use                            | 10     | 0,025 €     | 0,25 €             |
 | 71-CRCW06031K00FKEAC   | CRCW06031K00FKEAC   | Thick Film Resistors - SMD 1/10Watt 1Kohms 1% Commercial Use                        | 4      | 0,09 €      | 0,36 €             |
 | 71-CRCW060310K0FKEAC   | CRCW060310K0FKEAC   | Thick Film Resistors - SMD 1/10Watt 10Kohms 1% Commercial Use                       | 28     | 0,054 €     | 1,51 €             |
+| 71-CRCW06031K50FKEAC   | CRCW06031K50FKEAC   | Thick Film Resistors - SMD 1/10Watt 1.5Kohms 1% Commercial Use                      | 4      | 0,09 €      | 0,36 €             |
 | 71-CRCW06032K20FKEAC   | CRCW06032K20FKEAC   | Thick Film Resistors - SMD 1/10Watt 2.2Kohms 1% Commercial Use                      | 2      | 0,09 €      | 0,18 €             |
 
 
