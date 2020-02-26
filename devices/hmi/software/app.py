@@ -2,13 +2,10 @@
 This is the starting point of the flask web application. It defines the routes that available to the HMI.
 """
 
-from flask import Flask, jsonify, render_template, redirect, json
+from flask import Flask, jsonify, render_template, redirect, json, request
 
 from plcconnectors.plc import Plc
 from plcconnectors.modbusTCP.connector import ModbusTCPPlcConnector
-
-import time
-import sys
 
 # The flask application instance.
 app = Flask(__name__)
@@ -148,12 +145,17 @@ def index():
     return redirect('/view')
 
 
+@app.before_request
+def is_plc_connected():
+    if request.endpoint and request.endpoint != "static" and not plc.is_connected():
+        endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
+        plc.plc_connector.modbus_client.connect()
+        application_state = plc.get_application_state()
+        return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
+
+
 # Starting point.
 if __name__ == '__main__':
-    while True:
-        plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=10)
-        if plc.is_connected():
-            break
-
+    plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
     # Run the webserver.
     app.run(host="0.0.0.0", port=8080)
