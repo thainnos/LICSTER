@@ -147,10 +147,11 @@ def index():
 
 @app.before_request
 def is_plc_connected():
-    if not plc.is_connected():
+    if request.endpoint and request.endpoint != "static" and not plc.is_connected():
+        endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
         plc.plc_connector.modbus_client.connect()
         application_state = plc.get_application_state()
-        return render_template('base.html', application_state=application_state, endpoint="/" + request.endpoint, disconnected=True)
+        return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
 
 
 # Starting point.
