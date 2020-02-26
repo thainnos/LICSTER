@@ -155,10 +155,6 @@ def is_plc_connected():
 
 # Starting point.
 if __name__ == '__main__':
-    while True:
-        plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
-        if plc.is_connected():
-            break
-
+    plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
     # Run the webserver.
     app.run(host="0.0.0.0", port=8080)
