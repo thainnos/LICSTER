@@ -14,7 +14,7 @@ Industrial hardware is usually quite expensive as well as mostly proprietary, bo
 With the upcoming of Industry 4.0, however,
 it has become imperative that the security of industrial networks and components is up to par with the modern cyber
 risks of the connected world.
-Practice and knowledge has to accessible and affordable to empower engineers and
+Practice and knowledge has to be accessible and affordable to empower engineers and
 developers to master the challenges of the fourth industrial revolution.
 
 Although the testbed only comprises of the bare minimum components necessary for an ICS, the concepts and more
