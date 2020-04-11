@@ -145,7 +145,7 @@ def index():
     return redirect('/view')
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     """
     Login view.
