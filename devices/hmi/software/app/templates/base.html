@@ -4,16 +4,16 @@
 <head>
     <meta charset="utf-A">
     <title>Low Cost Testbed HMI</title>
-    <link rel="stylesheet" type="text/css" href="/static/node_modules/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/base.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
     {% if view %}
-    <link rel="stylesheet" type="text/css" href="/static/css/view.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/view.css') }}">
     {% elif order %}
-    <link rel="stylesheet" type="text/css" href="/static/css/order.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/order.css') }}">
     {% elif manual %}
-    <link rel="stylesheet" type="text/css" href="/static/css/manual.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/order.css') }}">
     {% elif disconnected %}
-    <link rel="stylesheet" type="text/css" href="/static/css/disconnected.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/disconnected.css') }}">
     {% endif %}
 </head>
 
@@ -25,9 +25,9 @@
             {% if disconnected %}
             <a class="nav-item nav-link active" href="{{ endpoint }}">Refresh</a>
             {% else %}
-            <a class="nav-item nav-link {% if view %}active{% endif %}" href="/view">View</a>
-            <a class="nav-item nav-link {% if order %}active{% endif %}" href="/order">Orders</a>
-            <a class="nav-item nav-link {% if manual %}active{% endif %}" href="/manual">Manual</a>
+            <a class="nav-item nav-link {% if view %}active{% endif %}" href="{{ url_for('views.view') }}">View</a>
+            <a class="nav-item nav-link {% if order %}active{% endif %}" href="{{ url_for('views.order') }}">Orders</a>
+            <a class="nav-item nav-link {% if manual %}active{% endif %}" href="{{ url_for('views.manual') }}">Manual</a>
             {% endif %}
         </div>
     </div>
@@ -44,17 +44,17 @@
 </div>
 {% endif %}
 
-<script type="text/javascript" src="/static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/static/node_modules/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="/static/js/base.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
 {% if view %}
-<script type="text/javascript" src="/static/js/view.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/view.js') }}"></script>
 {% endif %}
 {% if order %}
-<script type="text/javascript" src="/static/js/order.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/order.js') }}"></script>
 {% endif %}
 {% if manual %}
-<script type="text/javascript" src="/static/js/manual.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/manual.js') }}"></script>
 {% endif %}
 </body>
 

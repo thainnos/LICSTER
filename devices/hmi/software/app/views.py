@@ -10,13 +10,13 @@ from app.db import get_db
 from plcconnectors.plc import Plc
 from plcconnectors.modbusTCP.connector import ModbusTCPPlcConnector
 
-bp = Blueprint('views', __name__, template_folder='templates')
+bp = Blueprint('views', __name__, template_folder='templates', static_folder='static')
 
 plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
 
 @bp.before_request
 def is_plc_connected():
-    if request.endpoint in ["views.login", "views.reset_password", "views.add_user", "views.admin"]:
+    if request.endpoint in ["views.login", "views.reset_password", "views.add_user", "views.admin", "views.logout"]:
         pass
     else:
         if request.endpoint and request.endpoint != "static" and not plc.is_connected():
@@ -28,6 +28,9 @@ def is_plc_connected():
 
 @bp.before_app_request
 def load_logged_in_user():
+    """
+    Checks if client was logged in with every request
+    """
     user_id = session.get('user_id')
 
     if user_id is None:
@@ -36,6 +39,22 @@ def load_logged_in_user():
         g.user = get_db().execute(
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
+
+def login_required(view):
+    """
+    Decorator. Checks if user is logged is. If not, the user gets 
+    redirected to the login page. After logging in, the user gets redirected
+    to the view he wanted to visit.
+    :return: new view wrapped around original view
+    """
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for('views.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
 
 
 @bp.route('/orders/<count>', methods=['GET'])
@@ -167,14 +186,33 @@ def login():
     :return: The login.html view
     Note: Has no functionality yet
     """
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        error = None
+        user = db.execute(
+            'SELECT * FROM user WHERE username = ?', (username,)
+        ).fetchone()
 
+        if user is None:
+            error = 'Incorrect username.'
+        elif not check_password_hash(user['password'], password):
+            error = 'Incorrect password.'
+
+        if error is None:
+            session.clear()
+            session['user_id'] = user['id']
+            return redirect(url_for('views.index'))
+
+        flash(error)
     return render_template('login.html')
 
 
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('index'))
+    return redirect(url_for('views.index'))
 
 
 @bp.route('/reset_password')
@@ -221,7 +259,7 @@ def add_user():
                 (username, generate_password_hash(password))
             )
             db.commit()
-            return redirect(url_for('login'))
+            return redirect(url_for('views.login'))
 
         flash(error)
 
