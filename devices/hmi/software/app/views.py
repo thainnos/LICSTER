@@ -1,29 +1,44 @@
-"""
-This is the starting point of the flask web application. It defines the routes that available to the HMI.
-"""
+import functools
 
-from flask import Flask, jsonify, render_template, redirect, json, request
+from flask import (
+    Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify, json
+)
+from werkzeug.security import check_password_hash, generate_password_hash
+
+from app.db import get_db
 
 from plcconnectors.plc import Plc
 from plcconnectors.modbusTCP.connector import ModbusTCPPlcConnector
 
-# The flask application instance.
-app = Flask(__name__)
+bp = Blueprint('views', __name__, template_folder='templates')
 
-plc = {}
+plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
+
+@bp.before_request
+def is_plc_connected():
+    if request.endpoint in ["views.login", "views.reset_password", "views.add_user", "views.admin"]:
+        pass
+    else:
+        if request.endpoint and request.endpoint != "static" and not plc.is_connected():
+            endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
+            plc.plc_connector.modbus_client.connect()
+            application_state = plc.get_application_state()
+            return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
 
 
-@app.errorhandler(404)
-def page_not_found(e):
-    """
-    # The default error handler route for when a site is called that has no route provided for.
-    :param e: The error message
-    :return: The text that will be displayed in the browser on an error.
-    """
-    return jsonify(error=404, text=str(e)), 404
+@bp.before_app_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = get_db().execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+        ).fetchone()
 
 
-@app.route('/orders/<count>', methods=['GET'])
+@bp.route('/orders/<count>', methods=['GET'])
 def set_order(count):
     """
     Initiate an order.
@@ -34,7 +49,7 @@ def set_order(count):
     return "", 200
 
 
-@app.route('/orders', methods=['GET'])
+@bp.route('/orders', methods=['GET'])
 def get_order():
     """
 
@@ -43,7 +58,7 @@ def get_order():
     return json.dumps(plc.get_orders())
 
 
-@app.route('/set-motor/<motor>/<motor_state>', methods=['GET'])
+@bp.route('/set-motor/<motor>/<motor_state>', methods=['GET'])
 def set_motor_manual(motor, motor_state):
     """
     Turn a motor, defined by <motor>, on or off, according to <motor_state>.
@@ -55,7 +70,7 @@ def set_motor_manual(motor, motor_state):
     return "", 200
 
 
-@app.route('/process/values', methods=['GET'])
+@bp.route('/process/values', methods=['GET'])
 def get_values():
     """
     Query the current state of the motor controls and the sensors.
@@ -64,7 +79,7 @@ def get_values():
     return jsonify(plc.get_process_values())
 
 
-@app.route('/application/state', methods=['GET'])
+@bp.route('/application/state', methods=['GET'])
 def get_application_state():
     """
     Get the current application state.
@@ -73,7 +88,7 @@ def get_application_state():
     return json.dumps(plc.get_application_state())
 
 
-@app.route("/process/state", methods=['GET'])
+@bp.route("/process/state", methods=['GET'])
 def get_process_state():
     """
     Retrieve the current state of the running process.
@@ -82,7 +97,7 @@ def get_process_state():
     return json.dumps(plc.get_process_state())
 
 
-@app.route('/application/state/<new_state>', methods=['GET'])
+@bp.route('/application/state/<new_state>', methods=['GET'])
 def set_application_state(new_state):
     """
 
@@ -93,7 +108,7 @@ def set_application_state(new_state):
     return json.dumps(plc.get_application_state())
 
 
-@app.route('/application/reset', methods=['GET'])
+@bp.route('/application/reset', methods=['GET'])
 def set_reset():
     """
     Initiate a reset to get the PLC out of the emergency stop state.
@@ -103,7 +118,7 @@ def set_reset():
     return json.dumps(plc.get_application_state())
 
 
-@app.route('/order')
+@bp.route('/order')
 def order():
     """
     Here, process execution can be ordered.
@@ -114,7 +129,7 @@ def order():
     return render_template('order.html', process_state=process_state, application_state=application_state, order=True)
 
 
-@app.route('/manual')
+@bp.route('/manual')
 def manual():
     """
     Manual view. Here, manual controls can be triggered.
@@ -125,7 +140,7 @@ def manual():
     return render_template('manual.html', process_state=process_state, application_state=application_state, manual=True)
 
 
-@app.route('/view')
+@bp.route('/view')
 def view():
     """
     Default view. Monitoring the process.
@@ -136,7 +151,7 @@ def view():
     return render_template('view.html', process_state=process_state, application_state=application_state, view=True)
 
 
-@app.route('/')
+@bp.route('/')
 def index():
     """
     Default view.
@@ -145,17 +160,44 @@ def index():
     return redirect('/view')
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
     """
     Login view.
     :return: The login.html view
     Note: Has no functionality yet
     """
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        error = None
+        user = db.execute(
+            'SELECT * FROM user WHERE username = ?', (username,)
+        ).fetchone()
+
+        if user is None:
+            error = 'Incorrect username.'
+        elif not check_password_hash(user['password'], password):
+            error = 'Incorrect password.'
+
+        if error is None:
+            session.clear()
+            session['user_id'] = user['id']
+            return redirect(url_for('index'))
+
+        flash(error)
+
     return render_template('login.html')
 
 
-@app.route('/reset_password')
+@bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
+
+@bp.route('/reset_password')
 def reset_password():
     """
     Password reset view.
@@ -165,7 +207,7 @@ def reset_password():
     return render_template('reset_password.html')
 
 
-@app.route('/admin')
+@bp.route('/admin')
 def admin():
     """
     Admin view.
@@ -175,20 +217,33 @@ def admin():
     return render_template('admin.html')
 
 
-@app.before_request
-def is_plc_connected():
-    if request.endpoint in ["login", "reset_password", "admin"]:
-        pass
-    else:
-        if request.endpoint and request.endpoint != "static" and not plc.is_connected():
-            endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
-            plc.plc_connector.modbus_client.connect()
-            application_state = plc.get_application_state()
-            return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
+# add role check
+@bp.route('/admin/add_user', methods=('GET', 'POST'))
+def add_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        error = None
 
+        if not username:
+            error = 'Username is required.'
+        elif not password:
+            error = 'Password is required.'
+        elif db.execute(
+            'SELECT id FROM user WHERE username = ?', (username,)
+        ).fetchone() is not None:
+            error = 'User {} is already registered.'.format(username)
 
-# Starting point.
-if __name__ == '__main__':
-    plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
-    # Run the webserver.
-    app.run(host="0.0.0.0", port=8080)
+        if error is None:
+            db.execute(
+                'INSERT INTO user (username, password) VALUES (?, ?)',
+                (username, generate_password_hash(password))
+            )
+            db.commit()
+            return redirect(url_for('login'))
+
+        flash(error)
+
+    return render_template('add_user.html')
+        
