@@ -4,21 +4,7 @@ This is the starting point of the flask web application. It defines the routes t
 import os
 from flask import Flask, jsonify, render_template, redirect, json, request, render_template
 
-#
-#
-## The flask application instance.
-#app = Flask(__name__)
-#
-#plc = {}
-#
-#from app import views
-#
-## Starting point.
-#if __name__ == '__main__':
-#    plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
-#    # Run the webserver.
-#    app.run(host="0.0.0.0", port=8080)
-#
+
 def page_not_found(e):
     """
     # The default error handler route for when a site is called that has no route provided for.

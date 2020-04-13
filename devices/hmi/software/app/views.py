@@ -14,7 +14,7 @@ bp = Blueprint('views', __name__, template_folder='templates', static_folder='st
 
 plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
 
-@bp.before_request
+@bp.before_app_request
 def is_plc_connected():
     if request.endpoint in ["views.login", "views.reset_password", "views.add_user", "views.admin", "views.logout"]:
         pass
@@ -41,12 +41,6 @@ def load_logged_in_user():
         ).fetchone()
 
 def login_required(view):
-    """
-    Decorator. Checks if user is logged is. If not, the user gets 
-    redirected to the login page. After logging in, the user gets redirected
-    to the view he wanted to visit.
-    :return: new view wrapped around original view
-    """
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
@@ -176,7 +170,7 @@ def index():
     Default view.
     :return: Redirect to the default view.
     """
-    return redirect('/view')
+    return redirect(url_for('views.view'))
 
 
 @bp.route('/login', methods=['GET', 'POST'])
@@ -184,7 +178,7 @@ def login():
     """
     Login view.
     :return: The login.html view
-    Note: Has no functionality yet
+    :return after form validation: the index.html
     """
     if request.method == 'POST':
         username = request.form['username']
@@ -210,12 +204,14 @@ def login():
 
 
 @bp.route('/logout')
+@login_required
 def logout():
     session.clear()
     return redirect(url_for('views.index'))
 
 
 @bp.route('/reset_password')
+@login_required
 def reset_password():
     """
     Password reset view.
@@ -226,6 +222,7 @@ def reset_password():
 
 
 @bp.route('/admin')
+@login_required
 def admin():
     """
     Admin view.
@@ -237,6 +234,7 @@ def admin():
 
 # add role check
 @bp.route('/admin/add_user', methods=('GET', 'POST'))
+@login_required
 def add_user():
     if request.method == 'POST':
         username = request.form['username']
