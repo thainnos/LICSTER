@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.db import get_db
 
-auth = Blueprint('auths', __name__, template_folder='templates', static_folder='static')
+auth = Blueprint('auths', __name__, template_folder='templates/auths', static_folder='static')
 
 def login_required(view):
     @functools.wraps(view)
@@ -19,7 +19,18 @@ def login_required(view):
 
     return wrapped_view
 
+def logout_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user:
+            return redirect(url_for('auths.logout'))
+
+        return view(**kwargs)
+
+    return wrapped_view
+
 @auth.route('/login', methods=['GET', 'POST'])
+@logout_required
 def login():
     """
     Login view.

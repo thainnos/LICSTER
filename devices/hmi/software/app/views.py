@@ -10,7 +10,7 @@ from app.db import get_db
 from plcconnectors.plc import Plc
 from plcconnectors.modbusTCP.connector import ModbusTCPPlcConnector
 
-bp = Blueprint('views', __name__, template_folder='templates', static_folder='static')
+bp = Blueprint('views', __name__, template_folder='templates/views', static_folder='static')
 
 plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
 
