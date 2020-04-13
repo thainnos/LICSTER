@@ -9,6 +9,17 @@ from app.db import get_db
 
 auth = Blueprint('auths', __name__, template_folder='templates/auths', static_folder='static')
 
+"""
+ This file handles user authentification.
+ Methods
+    login_required: Decorator to check if user is logged in
+    logout_required: Decorator to check if user is logged out
+    load_logged_in_user: Loads the current user if he exists
+ Routes
+    login: login for user
+    logout: Logout for user
+"""
+
 def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
@@ -28,6 +39,20 @@ def logout_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+@auth.before_app_request
+def load_logged_in_user():
+    """
+    Checks if client was logged in with every request
+    """
+    user_id = session.get('user_id')
+
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = get_db().execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+        ).fetchone()
 
 @auth.route('/login', methods=['GET', 'POST'])
 @logout_required
@@ -67,54 +92,3 @@ def logout():
     return redirect(url_for('views.index'))
 
 
-@auth.route('/reset_password')
-@login_required
-def reset_password():
-    """
-    Password reset view.
-    :return: The password_reset.html view
-    Note: Has no functionality yet
-    """
-    return render_template('reset_password.html')
-
-
-@auth.route('/admin')
-@login_required
-def admin():
-    """
-    Admin view.
-    :return: The admin.html view
-    Note: Has no functionality yet
-    """
-    return render_template('admin.html')
-
-
-@auth.route('/admin/add_user', methods=('GET', 'POST'))
-@login_required
-def add_user():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        db = get_db()
-        error = None
-
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-        elif db.execute(
-            'SELECT id FROM user WHERE username = ?', (username,)
-        ).fetchone() is not None:
-            error = 'User {} is already registered.'.format(username)
-
-        if error is None:
-            db.execute(
-                'INSERT INTO user (username, password) VALUES (?, ?)',
-                (username, generate_password_hash(password))
-            )
-            db.commit()
-            return redirect(url_for('auths.login'))
-
-        flash(error)
-
-    return render_template('add_user.html')

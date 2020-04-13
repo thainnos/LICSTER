@@ -14,31 +14,14 @@ bp = Blueprint('views', __name__, template_folder='templates/views', static_fold
 
 plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
 
-@bp.before_app_request
+@bp.before_request
 def is_plc_connected():
-    if request.endpoint in ["auths.login", "auths.reset_password", "auths.add_user", "auths.admin", "auths.logout"]:
-        pass
-    else:
-        if request.endpoint and request.endpoint != "static" and not plc.is_connected():
-            endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
-            plc.plc_connector.modbus_client.connect()
-            application_state = plc.get_application_state()
-            return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
+    if request.endpoint and request.endpoint != "static" and not plc.is_connected():
+        endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
+        plc.plc_connector.modbus_client.connect()
+        application_state = plc.get_application_state()
+        return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
 
-
-@bp.before_app_request
-def load_logged_in_user():
-    """
-    Checks if client was logged in with every request
-    """
-    user_id = session.get('user_id')
-
-    if user_id is None:
-        g.user = None
-    else:
-        g.user = get_db().execute(
-            'SELECT * FROM user WHERE id = ?', (user_id,)
-        ).fetchone()
 
 def login_required(view):
     @functools.wraps(view)
