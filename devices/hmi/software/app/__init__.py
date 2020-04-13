@@ -45,5 +45,9 @@ def create_app(test_config=None):
     from . import views
     app.register_blueprint(views.bp)
     app.add_url_rule('/', endpoint='')
+
+    from . import auths
+    app.register_blueprint(auths.auth)
+    app.add_url_rule('/', endpoint='')
     
     return app

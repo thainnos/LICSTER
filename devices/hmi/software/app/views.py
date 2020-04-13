@@ -16,7 +16,7 @@ plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
 
 @bp.before_app_request
 def is_plc_connected():
-    if request.endpoint in ["views.login", "views.reset_password", "views.add_user", "views.admin", "views.logout"]:
+    if request.endpoint in ["auths.login", "auths.reset_password", "auths.add_user", "auths.admin", "auths.logout"]:
         pass
     else:
         if request.endpoint and request.endpoint != "static" and not plc.is_connected():
@@ -44,7 +44,7 @@ def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
-            return redirect(url_for('views.login'))
+            return redirect(url_for('auths.login'))
 
         return view(**kwargs)
 
@@ -172,94 +172,3 @@ def index():
     """
     return redirect(url_for('views.view'))
 
-
-@bp.route('/login', methods=['GET', 'POST'])
-def login():
-    """
-    Login view.
-    :return: The login.html view
-    :return after form validation: the index.html
-    """
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        db = get_db()
-        error = None
-        user = db.execute(
-            'SELECT * FROM user WHERE username = ?', (username,)
-        ).fetchone()
-
-        if user is None:
-            error = 'Incorrect username.'
-        elif not check_password_hash(user['password'], password):
-            error = 'Incorrect password.'
-
-        if error is None:
-            session.clear()
-            session['user_id'] = user['id']
-            return redirect(url_for('views.index'))
-
-        flash(error)
-    return render_template('login.html')
-
-
-@bp.route('/logout')
-@login_required
-def logout():
-    session.clear()
-    return redirect(url_for('views.index'))
-
-
-@bp.route('/reset_password')
-@login_required
-def reset_password():
-    """
-    Password reset view.
-    :return: The password_reset.html view
-    Note: Has no functionality yet
-    """
-    return render_template('reset_password.html')
-
-
-@bp.route('/admin')
-@login_required
-def admin():
-    """
-    Admin view.
-    :return: The admin.html view
-    Note: Has no functionality yet
-    """
-    return render_template('admin.html')
-
-
-# add role check
-@bp.route('/admin/add_user', methods=('GET', 'POST'))
-@login_required
-def add_user():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        db = get_db()
-        error = None
-
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-        elif db.execute(
-            'SELECT id FROM user WHERE username = ?', (username,)
-        ).fetchone() is not None:
-            error = 'User {} is already registered.'.format(username)
-
-        if error is None:
-            db.execute(
-                'INSERT INTO user (username, password) VALUES (?, ?)',
-                (username, generate_password_hash(password))
-            )
-            db.commit()
-            return redirect(url_for('views.login'))
-
-        flash(error)
-
-    return render_template('add_user.html')
-        
