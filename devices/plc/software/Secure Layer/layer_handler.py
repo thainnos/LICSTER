@@ -21,10 +21,10 @@ class LayerHandler:
                 msg_type = message[0]
                 if msg_type == 'Error':
                     ctx = layer.ctx
-                    print('Handler reporting error of layer with external port', ctx.port_io)
-                    print('Restarting layer...')
+                    name = ctx.name
+                    print(f'Error in {name}, restarting...', )
                     layer = Layer(layer.ctx)
-                    print('Restarted layer!')
+                    print(f'Restarted {name}!')
             except Empty:
                 pass
 
@@ -41,19 +41,14 @@ class LayerHandler:
         self.layers.append(Layer(context))
         self.layer_lock.release()
 
+    def add_layers(self, contexts: list):
+        for context in contexts:
+            self.add_layer(context)
+
 def main():
-    context = Context()
-    context.host_io = '127.0.0.1'
-    context.port_io = 200
-    context.port_plc = 502
-    # Layer(context)
     layer_handler = LayerHandler()
-    layer_handler.add_layer(context)
-    print('cool from main')
-    # Layer()
-    # layer = LayerHandler()
-    # layer.create_connection(context)
-    # layer.send_message(b'Test '*100, context, 'remoteIO')
+    contexts = Context.load_from_config('config.ini')
+    layer_handler.add_layers(contexts)
 
 if __name__ == "__main__":
     main()
