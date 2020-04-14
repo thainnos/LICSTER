@@ -1,1 +1,31 @@
 {% extends "base_admin.html" %}
+
+{% block header %}
+  <h1>{% block title %}Show users{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form action="" method="POST" novalidate>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Username</th>
+                    <th>User role</th>
+                    <th>Ip adress</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in rows %}
+                <tr>
+                    <th><input type="checkbox" value="{{ row.id }}" name="users"></th>
+                    <th>{{ row.username }}</th>
+                    <th>{{ row.user_role }}</th>
+                    <th></th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <input id="submit" name="submit" type="submit" value="Delete">
+    </form>
+{% endblock %}

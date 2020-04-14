@@ -29,7 +29,7 @@ def admin_required(view):
 
     return wrapped_view
 
-@admin.route('/dashboard')
+@admin.route('/dashboard', methods=('GET', 'POST'))
 @admin_required
 def dashboard():
     """
@@ -37,7 +37,17 @@ def dashboard():
     :return: The admin.html view
     Note: Has no functionality yet
     """
-    return render_template('admin.html')
+    db = get_db()
+    if request.method == 'POST':
+        selected_users = request.form.getlist("users")
+        for user in selected_users:
+            db.execute(
+                'DELETE FROM user WHERE id = ?', (user,)
+            )
+        db.commit()
+        return redirect(url_for('admins.dashboard'))
+    rows = db.execute('SELECT * FROM user').fetchall()
+    return render_template('admin.html', rows=rows)
 
 
 @admin.route('/dashboard/add_user', methods=('GET', 'POST'))
