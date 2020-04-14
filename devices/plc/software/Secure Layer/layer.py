@@ -55,6 +55,7 @@ class Layer(Thread):
         
     def start_connection_handler(self):
         # TODO: still awaits one connection after error?
+        # TODO: this is still wrong, need send_plc_message!
         def handle_io_incoming():
             while True:
                 try:
@@ -135,16 +136,17 @@ class Layer(Thread):
         self.ctx.conn_plc = conn
         print(f'connected {addr[0]}:{addr[1]} to localhost:{self.ctx.port_plc}')
 
+    # TODO: accept a parameter
     def _hash_cipher(self):
         cipher = hashlib.sha256(self.ctx.shared_key).digest()[:16]
-        self.ctx.cipher_io = cipher
+        self.ctx.cipher = cipher
         # print(f'cipher: {cipher.hex()}')
 
     def _encrypt_message(self, msg: bytes):
         # if message length is not multiple of 16 pad it with b'\0's
         content_len = pack('!H', len(msg))  
         if (len(msg) % 16) > 0:
-            msg += (16 - (len(msg) % 16)) * b'\0' 
+            msg += (16 - (len(msg) % 16)) * b'\0'
 
         cipher_key = self.ctx.cipher_io
         algorithm = algorithms.AES(cipher_key)
@@ -153,6 +155,7 @@ class Layer(Thread):
         cipher = Cipher(algorithm, mode, backend=self.ctx.backend)
         encryptor = cipher.encryptor()
         encrypted_message = encryptor.update(msg) + encryptor.finalize()
+        # TODO: maybe turn this into a remove n bytes message > only 4 bits in size
         payload = content_len + init_vector + encrypted_message
         return payload
 
@@ -194,6 +197,7 @@ class Layer(Thread):
 
     def recv_plc_message(self):
         sock = self.ctx.conn_plc
+        # TODO: figure out packet size
         msg = sock.recv(1024)
         print('plc msg:', msg)
         return msg
