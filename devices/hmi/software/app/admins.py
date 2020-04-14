@@ -64,7 +64,7 @@ def add_user():
                 (username, generate_password_hash(password), "user")
             )
             db.commit()
-            return redirect(url_for('auths.login'))
+            return redirect(url_for('admins.dashboard'))
 
         flash(error)
 
@@ -94,11 +94,42 @@ def add_admin():
                 (username, generate_password_hash(password), "admin")
             )
             db.commit()
-            return redirect(url_for('auths.login'))
+            return redirect(url_for('admins.dashboard'))
 
         flash(error)
 
     return render_template('add_user.html')
+
+@admin.route('/dashboard/delete_user', methods=('GET', 'POST'))
+@admin_required
+def delete_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        db = get_db()
+        error = None
+
+        if not username:
+            error = "Username is required."
+        elif db.execute(
+            'SELECT id FROM user WHERE username = ?', (username,)
+        ).fetchone() is None:
+            error = "The user {} doesn't exist.".format(username)
+        
+        if error is None:
+            db.execute(
+                'DELETE FROM user WHERE username = ?', (username,)
+            )
+            db.commit()
+            return redirect(url_for('admins.dashboard'))
+    return render_template('delete_user.html')
+
+@admin.route('/dashboard/show_users', methods=('GET', 'POST'))
+@admin_required
+def show_users():
+    db = get_db()
+    rows = db.execute('SELECT * FROM user').fetchall()
+    return render_template('show_users.html', rows=rows)
+
 
 @admin.route('/dashboard/reset_password')
 @admin_required
