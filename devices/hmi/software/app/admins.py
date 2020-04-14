@@ -12,11 +12,13 @@ admin = Blueprint('admins', __name__, template_folder='templates/admins', static
 """
  This file handles user authentification.
  Methods
-    login_required: Decorator to check if user is logged in
+    admin_required: Decorator to check if user is logged in and admin
  Routes
-    admin: no functionality yet
-    admin/add_user: Inserts a new user in the database
-    reset_password: Will get deleted.
+    dashboard: Shows all users and allows to delete users
+    dashboard/add_user: Inserts a new user in the database
+    dashboard/add_admin: Inserts a new admin in the database
+    dashboard/delete_user: Deletes a user/admin
+    dashboard/reset_password: Will get moved to auth blueprint.
 """
 
 def admin_required(view):
@@ -33,9 +35,9 @@ def admin_required(view):
 @admin_required
 def dashboard():
     """
-    Admin view.
+    Dashboard. Shows all users and allows to delete users.
+    Will get more functionality soon.
     :return: The admin.html view
-    Note: Has no functionality yet
     """
     db = get_db()
     if request.method == 'POST':
@@ -53,6 +55,10 @@ def dashboard():
 @admin.route('/dashboard/add_user', methods=('GET', 'POST'))
 @admin_required
 def add_user():
+    """
+    Add user. Allows the admin to create a new user
+    :return: The add_user.html view
+    """
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -83,6 +89,10 @@ def add_user():
 @admin.route('/dashboard/add_admin', methods=('GET', 'POST'))
 @admin_required
 def add_admin():
+    """
+    Add admin. Allows the admin to create a new admin
+    :return: The add_user.html view
+    """
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -113,6 +123,10 @@ def add_admin():
 @admin.route('/dashboard/delete_user', methods=('GET', 'POST'))
 @admin_required
 def delete_user():
+    """
+    Delete user. Allows the admin to delete a user
+    :return: The delete_user.html view
+    """
     if request.method == 'POST':
         username = request.form['username']
         db = get_db()
@@ -136,6 +150,10 @@ def delete_user():
 @admin.route('/dashboard/show_users', methods=('GET', 'POST'))
 @admin_required
 def show_users():
+    """
+    Admin view. Shows all users.
+    :return: The show_users.html view
+    """
     db = get_db()
     rows = db.execute('SELECT * FROM user').fetchall()
     return render_template('show_users.html', rows=rows)

@@ -61,6 +61,7 @@ def login():
     Login view.
     :return: The login.html view
     :return after form validation: the index.html
+    :return after form validation and if user role is admin: the admin dashboard
     """
     if request.method == 'POST':
         username = request.form['username']
@@ -80,6 +81,8 @@ def login():
             session.clear()
             session['user_id'] = user['id']
             session['user_role'] = user['user_role']
+            if session['user_role'] == 'admin':
+                return redirect(url_for('admins.dashboard'))
             return redirect(url_for('views.index'))
 
         flash(error)
@@ -89,6 +92,10 @@ def login():
 @auth.route('/logout')
 @login_required
 def logout():
+    """
+    Logout view.
+    :return: The index.html
+    """
     session.clear()
     return redirect(url_for('views.index'))
 
