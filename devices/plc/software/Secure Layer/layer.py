@@ -19,9 +19,12 @@ class Layer(Thread):
     
     def __init__(self, ctx: Context):
         super(Layer, self).__init__()
-        self.name = 'Layer-Thread'
+        self.name = 'Layer-' + ctx.name
         self.ctx = ctx
+
+        # start own Thread
         self.start()
+
         self.io_thread = None
         self.plc_thread = None
 
@@ -51,6 +54,7 @@ class Layer(Thread):
         self._handshake_plc()
         
     def start_connection_handler(self):
+        # TODO: still awaits one connection after error?
         def handle_io_incoming():
             while True:
                 try:
@@ -193,3 +197,7 @@ class Layer(Thread):
         msg = sock.recv(1024)
         print('plc msg:', msg)
         return msg
+
+    # TODO: Implement this!
+    def send_plc_message(self, msg: bytes):
+        pass
