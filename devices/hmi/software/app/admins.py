@@ -15,8 +15,7 @@ admin = Blueprint('admins', __name__, template_folder='templates/admins', static
     admin_required: Decorator to check if user is logged in and admin
  Routes
     dashboard: Shows all users and allows to delete users
-    dashboard/add_user: Inserts a new user in the database
-    dashboard/add_admin: Inserts a new admin in the database
+    dashboard/add_user: Inserts a new user/admin in the database
     dashboard/delete_user: Deletes a user/admin
     dashboard/reset_password: Will get moved to auth blueprint.
 """
@@ -113,17 +112,6 @@ def delete_user():
             db.commit()
             return redirect(url_for('admins.dashboard'))
     return render_template('delete_user.html')
-
-@admin.route('/dashboard/show_users', methods=('GET', 'POST'))
-@admin_required
-def show_users():
-    """
-    Admin view. Shows all users.
-    :return: The show_users.html view
-    """
-    db = get_db()
-    rows = db.execute('SELECT * FROM user').fetchall()
-    return render_template('show_users.html', rows=rows)
 
 
 @admin.route('/dashboard/reset_password')
