@@ -52,16 +52,17 @@ def dashboard():
     return render_template('admin.html', rows=rows)
 
 
-@admin.route('/dashboard/add_user', methods=('GET', 'POST'))
+@admin.route('/dashboard/add', methods=('GET', 'POST'))
 @admin_required
 def add_user():
     """
-    Add user. Allows the admin to create a new user
+    Add user or admin. Allows the admin to create a new user or admin
     :return: The add_user.html view
     """
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        role = request.form.get('role')
         db = get_db()
         error = None
 
@@ -77,41 +78,7 @@ def add_user():
         if error is None:
             db.execute(
                 'INSERT INTO user (username, password, user_role) VALUES (?, ?, ?)',
-                (username, generate_password_hash(password), "user")
-            )
-            db.commit()
-            return redirect(url_for('admins.dashboard'))
-
-        flash(error)
-
-    return render_template('add_user.html')
-
-@admin.route('/dashboard/add_admin', methods=('GET', 'POST'))
-@admin_required
-def add_admin():
-    """
-    Add admin. Allows the admin to create a new admin
-    :return: The add_user.html view
-    """
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        db = get_db()
-        error = None
-
-        if not username:
-            error = 'Username is required.'
-        elif not password:
-            error = 'Password is required.'
-        elif db.execute(
-            'SELECT id FROM user WHERE username = ?', (username,)
-        ).fetchone() is not None:
-            error = 'User {} is already registered.'.format(username)
-
-        if error is None:
-            db.execute(
-                'INSERT INTO user (username, password, user_role) VALUES (?, ?, ?)',
-                (username, generate_password_hash(password), "admin")
+                (username, generate_password_hash(password), role)
             )
             db.commit()
             return redirect(url_for('admins.dashboard'))
