@@ -28,4 +28,16 @@
         </table>
         <input id="submit" name="submit" type="submit" value="Delete">
     </form>
+
+    <form action="/dashboard/add" method="post">
+        <label for="username">Username</label>
+        <input name="username" id="username" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+        <select name="role">
+          <option value="user" selected>User</option>
+          <option value="admin">Admin</option>
+        </select>
+        <input type="submit" value="Register">
+      </form>
 {% endblock %}

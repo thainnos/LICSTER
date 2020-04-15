@@ -84,7 +84,7 @@ def add_user():
 
         flash(error)
 
-    return render_template('add_user.html')
+    return redirect(url_for('admins.dashboard'))
 
 @admin.route('/dashboard/delete_user', methods=('GET', 'POST'))
 @admin_required
