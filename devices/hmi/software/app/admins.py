@@ -31,7 +31,7 @@ def admin_required(view):
     return wrapped_view
 
 @admin.route('/dashboard', methods=('GET', 'POST'))
-@admin_required
+#@admin_required
 def dashboard():
     """
     Dashboard. Shows all users and allows to delete users.
@@ -52,7 +52,7 @@ def dashboard():
 
 
 @admin.route('/dashboard/add', methods=('GET', 'POST'))
-@admin_required
+#@admin_required
 def add_user():
     """
     Add user or admin. Allows the admin to create a new user or admin
@@ -76,8 +76,8 @@ def add_user():
 
         if error is None:
             db.execute(
-                'INSERT INTO user (username, password, user_role) VALUES (?, ?, ?)',
-                (username, generate_password_hash(password), role)
+                'INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)',
+                (username, generate_password_hash(password), role, 1)
             )
             db.commit()
             return redirect(url_for('admins.dashboard'))
@@ -113,13 +113,3 @@ def delete_user():
             return redirect(url_for('admins.dashboard'))
     return render_template('delete_user.html')
 
-
-@admin.route('/dashboard/reset_password')
-@admin_required
-def reset_password():
-    """
-    Password reset view.
-    :return: The password_reset.html view
-    Note: Has no functionality yet
-    """
-    return render_template('reset_password.html')

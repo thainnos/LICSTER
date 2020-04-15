@@ -80,6 +80,8 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
+            if user['first_login'] == 1:
+                return redirect(url_for('auths.set_password'))
             session['user_role'] = user['user_role']
             if session['user_role'] == 'admin':
                 return redirect(url_for('admins.dashboard'))
@@ -100,3 +102,30 @@ def logout():
     return redirect(url_for('views.index'))
 
 
+@auth.route('/dashboard/set_password', methods=('GET', 'POST'))
+@login_required
+def set_password():
+    """
+    Password set view.
+    :return: The set_password.html view
+    :return: The views.index view
+    A user accesses this route at his first login.
+    He is prompted to set a password.
+    """
+    if request.method == 'POST':
+        password = request.form['password']
+        error = None
+        if not password:
+            error = "A password is required"
+        if error is None:
+            db = get_db()
+            user_id = int(session['user_id'])
+            db.execute(
+                'UPDATE user SET password = ? , first_login = ? WHERE id = ?',
+                (generate_password_hash(password), 0, user_id)
+            )
+            db.commit()
+            return redirect(url_for('views.index'))
+        flash(error)
+        
+    return render_template('set_password.html')
