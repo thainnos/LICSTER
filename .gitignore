@@ -80,3 +80,7 @@ thumbs.db
 *.hex
 *.elf
 
+# Certificates #
+################
+*.key
+*.crt
