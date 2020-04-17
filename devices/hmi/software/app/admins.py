@@ -31,7 +31,7 @@ def admin_required(view):
     return wrapped_view
 
 @admin.route('/dashboard', methods=('GET', 'POST'))
-#@admin_required
+@admin_required
 def dashboard():
     """
     Dashboard. Shows all users and allows to delete users.
@@ -52,7 +52,7 @@ def dashboard():
 
 
 @admin.route('/dashboard/add', methods=('GET', 'POST'))
-#@admin_required
+@admin_required
 def add_user():
     """
     Add user or admin. Allows the admin to create a new user or admin

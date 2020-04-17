@@ -6,16 +6,10 @@
 
 {% block content %}
     <form action="" method="POST" novalidate>
-        <input id="csrf_token" name="csrf_token" type="hidden" value="IjY3MmRlMzExZTBjNWU0MjhhMWM5NThhZWYwOWNjMzIwODIwMjY1ZTYi.XpI6Tw.sFduweiZPE1T-SxaltpnMTzk7DU">
-        <p>
-            <label for="username">Username</label> <br>
-            <input id="username" name="username" required size="32" type="text" value=""> <br>
-        </p>
-        <p>
-            <label for="password">Password</label> <br>
-            <input id="password" name="password" required size="32" type="password" value=""> <br>
-        </p>
-        <p><input id="remember_me" name="remember_me" type="checkbox" value="y"> <label for="remember_me">Remember me</label></p>
-        <p><input id="submit" name="submit" type="submit" value="Log in"></p>
+      {{ form.csrf_token }}
+      {{ form.username() }}
+      {{ form.password() }}
+      {{ form.remember_me() }}
+      {{ form.submit() }}
     </form>
 {% endblock %}

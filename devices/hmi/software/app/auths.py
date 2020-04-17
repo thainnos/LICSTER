@@ -6,6 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.db import get_db
+from app.forms import LoginForm
 
 auth = Blueprint('auths', __name__, template_folder='templates/auths', static_folder='static')
 
@@ -63,9 +64,10 @@ def login():
     :return after form validation: the index.html
     :return after form validation and if user role is admin: the admin dashboard
     """
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+    form = LoginForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
         db = get_db()
         error = None
         user = db.execute(
@@ -88,7 +90,8 @@ def login():
             return redirect(url_for('views.index'))
 
         flash(error)
-    return render_template('login.html')
+    
+    return render_template('login.html', form=form)
 
 
 @auth.route('/logout')
