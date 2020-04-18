@@ -3,7 +3,6 @@ This is the starting point of the flask web application. It defines the routes t
 """
 import os
 from flask import Flask, jsonify, render_template, redirect, json, request, render_template
-from flask_wtf.csrf import CSRFProtect
 
 def page_not_found(e):
     """
@@ -45,9 +44,5 @@ def create_app(test_config=None):
     
     from . import admins
     app.register_blueprint(admins.admin)
-
-    # csrf protection
-    csrf = CSRFProtect()
-    csrf.init_app(app)
 
     return app
