@@ -1,45 +1,45 @@
 {% extends "base_admin.html" %}
 
 {% block header %}
-  <h1>{% block title %}Show users{% endblock %}</h1>
+  <h1>{% block title %}Admin Dashboard{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-    <form action="" method="POST" novalidate>
-        <table>
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Username</th>
-                    <th>User role</th>
-                    <th>Ip adress</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for row in rows %}
-                <tr>
-                    <th><input type="checkbox" value="{{ row.id }}" name="users"></th>
-                    <th>{{ row.username }}</th>
-                    <th>{{ row.user_role }}</th>
-                    <th></th>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <input id="submit" name="submit" type="submit" value="Delete">
-    </form>
-
+    <h2>Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>User role</th>
+                <th>Ip adress</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in rows %}
+            <tr>
+                <th>{{ row.username }}</th>
+                <th>{{ row.user_role }}</th>
+                <th></th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     <br>
 
+    <h2>Add User</h2>
     <form action="/dashboard/add" method="post">
-        <label for="username">Username</label>
-        <input name="username" id="username" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required>
-        <select name="role">
-          <option value="user" selected>User</option>
-          <option value="admin">Admin</option>
-        </select>
-        <input type="submit" value="Register">
-      </form>
+        {{ add_form.csrf_token }}
+        {{ add_form.username() }}
+        {{ add_form.password() }}
+        {{ add_form.role() }}
+        {{ add_form.submit() }}
+    </form>
+    <br>
+
+    <h2>Delete User</h2>
+    <form action="/dashboard/delete" method="post">
+        {{ delete_form.csrf_token }}
+        {{ delete_form.username() }}
+        {{ delete_form.submit() }}
+    </form>
 {% endblock %}

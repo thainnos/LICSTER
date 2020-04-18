@@ -6,7 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.db import get_db
-from app.forms import LoginForm
+from app.forms import LoginForm, SetPasswordForm
 
 auth = Blueprint('auths', __name__, template_folder='templates/auths', static_folder='static')
 
@@ -105,7 +105,7 @@ def logout():
     return redirect(url_for('views.index'))
 
 
-@auth.route('/dashboard/set_password', methods=('GET', 'POST'))
+@auth.route('/set_password', methods=('GET', 'POST'))
 @login_required
 def set_password():
     """
@@ -115,8 +115,9 @@ def set_password():
     A user accesses this route at his first login.
     He is prompted to set a password.
     """
-    if request.method == 'POST':
-        password = request.form['password']
+    form = SetPasswordForm()
+    if form.validate_on_submit():
+        password = form.password.data
         error = None
         if not password:
             error = "A password is required"
@@ -131,4 +132,4 @@ def set_password():
             return redirect(url_for('views.index'))
         flash(error)
         
-    return render_template('set_password.html')
+    return render_template('set_password.html', form=form)

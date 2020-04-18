@@ -6,6 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.db import get_db
+from app.forms import AddUserForm, DeleteUserForm
 
 admin = Blueprint('admins', __name__, template_folder='templates/admins', static_folder='static')
 
@@ -38,6 +39,8 @@ def dashboard():
     Will get more functionality soon.
     :return: The admin.html view
     """
+    add_form = AddUserForm()
+    delete_form = DeleteUserForm()
     db = get_db()
     if request.method == 'POST':
         selected_users = request.form.getlist("users")
@@ -48,7 +51,7 @@ def dashboard():
         db.commit()
         return redirect(url_for('admins.dashboard'))
     rows = db.execute('SELECT * FROM user').fetchall()
-    return render_template('admin.html', rows=rows)
+    return render_template('admin.html', rows=rows, add_form=add_form, delete_form=delete_form)
 
 
 @admin.route('/dashboard/add', methods=('GET', 'POST'))
@@ -58,10 +61,11 @@ def add_user():
     Add user or admin. Allows the admin to create a new user or admin
     :return: The add_user.html view
     """
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        role = request.form.get('role')
+    form = AddUserForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
+        role = form.role.data
         db = get_db()
         error = None
 
@@ -86,15 +90,16 @@ def add_user():
 
     return redirect(url_for('admins.dashboard'))
 
-@admin.route('/dashboard/delete_user', methods=('GET', 'POST'))
+@admin.route('/dashboard/delete', methods=('GET', 'POST'))
 @admin_required
 def delete_user():
     """
     Delete user. Allows the admin to delete a user
     :return: The delete_user.html view
     """
-    if request.method == 'POST':
-        username = request.form['username']
+    form = DeleteUserForm()
+    if form.validate_on_submit():
+        username = form.username.data
         db = get_db()
         error = None
 
@@ -111,5 +116,7 @@ def delete_user():
             )
             db.commit()
             return redirect(url_for('admins.dashboard'))
-    return render_template('delete_user.html')
+        flash(error)
+
+    return redirect(url_for('admins.dashboard'))
 
