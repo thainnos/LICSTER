@@ -20,6 +20,11 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, "app.sqlite"),
     )
 
+    @app.after_request
+    def prevent_embedding(response):
+        response.headers["X-Frame-Options"] = "DENY"
+        return response
+
     if test_config is None:
         # load instance config if exists
         app.config.from_pyfile('config.py', silent=True)
