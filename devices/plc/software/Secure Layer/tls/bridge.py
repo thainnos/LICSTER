@@ -1,11 +1,14 @@
 import socket
 import ssl
+import time
 from queue import Empty, Queue
-from threading import Thread
+from threading import Lock, Thread
 
 from context import Context
 
 MAX_PACKET_SIZE = 1024
+
+
 
 class Bridge(Thread):
     def __init__(self, context: Context):
@@ -19,6 +22,8 @@ class Bridge(Thread):
         self.ssock_io = None
         self.ssl_context = None
 
+        self.conn_start = None
+
         self.start()
         
         self._error_q = Queue()
@@ -26,50 +31,48 @@ class Bridge(Thread):
 
     def run(self):
         self._init_connections()
+        self._start_connection_handler()
         while True:
             message = self.ctx.q_manage_in.get()
             if message == 'END':
+                self._close_connections()
                 return
             elif message == '_Error':
                 self.ctx.q_manage_out.put(('Error', self))
+                self._close_connections()
                 return
 
-    def _start_connection_handlers(self):
-        # TODO: still awaits one connection after error?
-        # TODO: this is still wrong, need send_plc_message!
+    def _close_connections(self):
+        self.sock_plc.close()
+        self.sock_io.close()
+
+    @staticmethod
+    def _check_msg(msg: bytes):
+        if msg == b'':
+            raise Exception('connection closed')
+        return msg
+
+    def _start_connection_handler(self):
+        # TODO: run this as process so you can kill externally?
         def handle_plc_incoming():
             while True:
                 try:
-                    msg = self.conn_plc.recv(MAX_PACKET_SIZE)
-                    self.send_message(self._send_message(msg, 'remoteIO'))
-                except:
+                    # recv from plc and send to io
+                    msg = self._check_msg(self.conn_plc.recv(MAX_PACKET_SIZE))
+                    # print('PLC:', msg)
+                    self._send_message(msg, 'remoteIO')
+                    
+                    # recv from io and send to plc
+                    msg = self._check_msg(self.ssock_io.recv(MAX_PACKET_SIZE))
+                    # print('IO:', msg)
+                    self._send_message(msg, 'plc')
+                    
+                except Exception as e:
+                    print(e)
                     self.ctx.q_manage_in.put('_Error')
-                    self._error_q.put('Error')
                     return
-                try:
-                    msg = self._error_q.get_nowait()
-                    if msg == 'Error':
-                        return
-                except Empty:
-                    continue
-        def handle_io_incoming():
-            while True:
-                try:
-                    msg = self.ssock_io.recv(MAX_PACKET_SIZE)
-                    self.send_message(self._send_message(msg, 'plc'))
-                except:
-                    self.ctx.q_manage_in.put('_Error')
-                    self._error_q.put('Error')
-                    return
-                try:
-                    msg = self._error_q.get_nowait()
-                    if msg == 'Error':
-                        return
-                except Empty:
-                    continue
         
         Thread(target=handle_plc_incoming).start()
-        Thread(target=handle_io_incoming).start()
 
     def _init_connections(self):
         self._init_io_connection()
@@ -78,9 +81,18 @@ class Bridge(Thread):
     def _init_io_connection(self):
         self._init_ssl_context()
         self.sock_io = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # TODO: maybe change server_hostname
-        self.ssock_io = self.ssl_context.wrap_socket(
-            self.sock_io, server_side=False, server_hostname=self.ctx.io_name)
+        if self.ctx.secure:
+            # TODO: maybe change server_hostname
+            # TODO: handle bad handshake
+            self.ssock_io = self.ssl_context.wrap_socket(
+                self.sock_io, server_side=False, server_hostname=self.ctx.io_name)
+            self.ssock_io.connect((self.ctx.host_io, self.ctx.port_io))
+            print('Connected to remotIO in ssl')
+            print(self.ssock_io.version())
+        else:
+            self.ssock_io = self.sock_io
+            self.ssock_io.connect((self.ctx.host_io, self.ctx.port_io))
+            print('Connected to remotIO')
 
     def _init_plc_connection(self):
         # TODO: verify this
@@ -99,7 +111,8 @@ class Bridge(Thread):
             certfile=self.ctx.plc_cert, keyfile=self.ctx.plc_key)
 
     def _send_message(self, msg: bytes, dest: str):
-        if dest == 'remoteIO':
+        dest = dest.lower()
+        if dest == 'remoteio':
             self.ssock_io.send(msg)
         elif dest == 'plc':
             self.conn_plc.send(msg)

@@ -18,6 +18,8 @@ class Context:
         self.host_io = None
         self.port_io = None
 
+        self.secure = False
+
         self.q_manage_in = Queue()
         self.q_manage_out = Queue()
 
@@ -43,6 +45,7 @@ class Context:
             context.host_io = config.get(section, 'remote_address')
             context.io_cert = config.get(section, 'io_cert')
             context.io_name = config.get(section, 'io_name')
+            context.secure = True if config.get(section, 'secure').lower() == 'true' else False
             contexts.append(context)
         
         return contexts
