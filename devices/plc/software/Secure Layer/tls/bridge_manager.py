@@ -6,6 +6,7 @@ from time import sleep
 from bridge import Bridge
 from context import Context
 
+
 class BridgeManager:
 
     def __init__(self):
@@ -27,6 +28,7 @@ class BridgeManager:
                     print(f'Restarted {name}!')
             except Empty:
                 pass
+        
         current_thread().name = 'Check-Bridge-Status-Thread'
         while True:
             self.bridge_lock.acquire()
@@ -43,7 +45,6 @@ class BridgeManager:
     def add_bridges(self, contexts: list):
         for context in contexts:
             self.add_bridge(context)
-
 
 def _main():
     contexts = Context.load_from_config('config.ini')
