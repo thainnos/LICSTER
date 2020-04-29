@@ -1,26 +1,29 @@
 <!doctype html>
 <html lang="en">
+  <head>
   <title>{% block title %}{% endblock %} LICSTER</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <nav>
-    <ul>
-      {% if g.user %}
-        <li><span>{{ g.user['username'] }}</span>
-        <li><a href="{{ url_for('auths.logout') }}">Log Out</a>
-      {% else %}
-        <li><a href="{{ url_for('auths.login') }}">Log In</a>
-      {% endif %}
-        <li><a href="{{ url_for('admins.dashboard') }}">Dashboard</a></li>
-        <li><a href="{{ url_for('admins.delete_user') }}">Delete User</a></li>
-    </ul>
-  </nav>
-  <section class="content">
-    <header>
-      {% block header %}{% endblock %}
-    </header>
-    {% for message in get_flashed_messages() %}
-      <div class="flash">{{ message }}</div>
-    {% endfor %}
-    {% block content %}{% endblock %}
-  </section>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+  </head>
+  <body>
+    <nav>
+      <ul>
+        {% if g.user %}
+          <li><span>{{ g.user['username'] }}</span>
+          <li> Admin Dashboard</li>
+          <li><a href="{{ url_for('auths.logout') }}"><button>Log Out</button></a>
+        {% else %}
+          <li><a href="{{ url_for('auths.login') }}"><button>Log In</button></a>
+        {% endif %}
+      </ul>
+    </nav>
+    <section class="content">
+      <header>
+        {% block header %}{% endblock %}
+      </header>
+      {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+      {% block content %}{% endblock %}
+    </section>
+  </body>
 </html>

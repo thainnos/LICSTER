@@ -1,15 +1,22 @@
 {% extends 'auth_base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Log In{% endblock %}</h1>
+        <h1>{% block title %}Log In{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-    <form action="" method="POST" novalidate>
-      {{ form.csrf_token }}
-      {{ form.username() }}
-      {{ form.password() }}
-      {{ form.remember_me() }}
-      {{ form.submit() }}
-    </form>
+        <form action="" method="POST" novalidate>
+          {{ form.csrf_token }}
+          <div class="contact">
+          {{ form.username(placeholder="Username") }}
+          {{ form.password(placeholder="********") }}
+          </div>
+          <br>
+          <div id=fillout>
+            <label for="remember_me">
+            {{ form.remember_me() }}Remember me
+            </label>
+          </div>
+          {{ form.submit() }}
+        </form>
 {% endblock %}

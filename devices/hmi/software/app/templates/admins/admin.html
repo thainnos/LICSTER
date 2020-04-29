@@ -1,12 +1,8 @@
 {% extends "base_admin.html" %}
 
-{% block header %}
-  <h1>{% block title %}Admin Dashboard{% endblock %}</h1>
-{% endblock %}
-
 {% block content %}
     <h2>Users</h2>
-    <table>
+    <table class="content-table">
         <thead>
             <tr>
                 <th>Username</th>
@@ -26,20 +22,32 @@
     </table>
     <br>
 
-    <h2>Add User</h2>
-    <form action="/dashboard/add" method="post">
-        {{ add_form.csrf_token }}
-        {{ add_form.username() }}
-        {{ add_form.password() }}
-        {{ add_form.role() }}
-        {{ add_form.submit() }}
-    </form>
+    <div class="flex-container">
+        <div class="flex1">
+            <h3>Add User</h3>
+            <div class="add-user">
+                <form action="/dashboard/add" method="post">
+                    {{ add_form.csrf_token }}
+                    {{ add_form.username.label }}
+                    {{ add_form.username(class="username-input") }}
+                    {{ add_form.password.label }}
+                    {{ add_form.password(class="password-input") }}
+                    <label for="role">Role</label>
+                    {{ add_form.role() }}
+                    {{ add_form.submit() }}
+                </form>
+            </div>
+        </div>
     <br>
-
-    <h2>Delete User</h2>
-    <form action="/dashboard/delete" method="post">
-        {{ delete_form.csrf_token }}
-        {{ delete_form.username() }}
-        {{ delete_form.submit() }}
-    </form>
+        <div class="flex2">
+            <h3>Delete User</h3>
+            <div class="delete-user">
+            <form action="/dashboard/delete" method="post">
+                {{ delete_form.csrf_token }}
+                {{ delete_form.username() }}
+                {{ delete_form.submit() }}
+            </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
