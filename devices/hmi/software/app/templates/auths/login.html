@@ -1,22 +1,30 @@
-{% extends 'auth_base.html' %}
-
-{% block header %}
-        <h1>{% block title %}Login{% endblock %}</h1>
-{% endblock %}
-
-{% block content %}
-        <form action="" method="POST" novalidate>
-          {{ form.csrf_token }}
-          <div class="contact">
-            {{ form.username(placeholder="Username") }} <br>
-            {{ form.password(placeholder="********") }}
-          </div>
-          <br>
-          <div id=fillout>
-            <label for="remember_me">
+<!doctype html>
+<html lang="en">
+  <head>
+  <title>Login | LICSTER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+  </head>
+  <body>
+    <div class="form responsive">
+      <h1>Login</h1>
+      {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+      <form action="" method="POST" novalidate>
+        {{ form.csrf_token }}
+        <div class="contact">
+          {{ form.username(placeholder="Username") }} <br>
+          {{ form.password(placeholder="********") }}
+        </div>
+        <br>
+        <div id=fillout>
+          <label for="remember_me">
             {{ form.remember_me() }}Remember me
-            </label>
-          </div>
-          {{ form.submit() }}
-        </form>
-{% endblock %}
+          </label>
+        </div>
+        {{ form.submit() }}
+      </form>
+    </div>
+  </body>
+</html>
