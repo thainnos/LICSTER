@@ -1,15 +1,15 @@
 {% extends 'auth_base.html' %}
 
 {% block header %}
-        <h1>{% block title %}Log In{% endblock %}</h1>
+        <h1>{% block title %}Login{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
         <form action="" method="POST" novalidate>
           {{ form.csrf_token }}
           <div class="contact">
-          {{ form.username(placeholder="Username") }}
-          {{ form.password(placeholder="********") }}
+            {{ form.username(placeholder="Username") }} <br>
+            {{ form.password(placeholder="********") }}
           </div>
           <br>
           <div id=fillout>
