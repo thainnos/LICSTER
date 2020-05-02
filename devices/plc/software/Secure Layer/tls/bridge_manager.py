@@ -23,7 +23,7 @@ class BridgeManager:
                 if msg_type == 'Error':
                     ctx = bridge.ctx
                     name = ctx.name
-                    print(f'Error in {name}, restarting...', )
+                    print(f'Error in {name}, restarting...')
                     bridge = Bridge(bridge.ctx)
                     print(f'Restarted {name}!')
             except Empty:

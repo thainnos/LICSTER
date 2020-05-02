@@ -58,13 +58,15 @@ class Bridge(Thread):
             while True:
                 try:
                     # recv from plc and send to io
-                    msg = self._check_msg(self.conn_plc.recv(MAX_PACKET_SIZE))
-                    # print('PLC:', msg)
+                    msg = self.conn_plc.recv(MAX_PACKET_SIZE)
+                    print('PLC:', msg)
+                    msg = self._check_msg(msg)
                     self._send_message(msg, 'remoteIO')
                     
                     # recv from io and send to plc
-                    msg = self._check_msg(self.ssock_io.recv(MAX_PACKET_SIZE))
-                    # print('IO:', msg)
+                    msg = self.ssock_io.recv(MAX_PACKET_SIZE)
+                    print('IO:', msg)
+                    msg = self._check_msg(msg)
                     self._send_message(msg, 'plc')
                     
                 except Exception as e:
@@ -86,9 +88,9 @@ class Bridge(Thread):
             # TODO: handle bad handshake
             self.ssock_io = self.ssl_context.wrap_socket(
                 self.sock_io, server_side=False, server_hostname=self.ctx.io_name)
+            print(f'Connecting to remoteIO {self.ctx.name}')
             self.ssock_io.connect((self.ctx.host_io, self.ctx.port_io))
-            print('Connected to remotIO in ssl')
-            print(self.ssock_io.version())
+            print('Connected to remotIO in ssl,', self.ssock_io.version(), self.ssock_io.getpeercert())
         else:
             self.ssock_io = self.sock_io
             self.ssock_io.connect((self.ctx.host_io, self.ctx.port_io))
@@ -96,10 +98,12 @@ class Bridge(Thread):
 
     def _init_plc_connection(self):
         # TODO: verify this
-        socket_type = getattr(socket, 'AF_UNIX' if hasattr(socket, 'AF_UNIX') else 'AF_INET')
+        # socket_type = getattr(socket, 'AF_UNIX' if hasattr(socket, 'AF_UNIX') else 'AF_INET')
+        socket_type = socket.AF_INET
         self.sock_plc = socket.socket(socket_type, socket.SOCK_STREAM)
         self.sock_plc.bind(('', self.ctx.port_plc))
         self.sock_plc.listen()
+        print(f'waiting for plc to connect to {self.ctx.name}')
         self.conn_plc, _addr = self.sock_plc.accept()
         print('plc connected')
         print(f'connected {_addr[0]}:{_addr[1]} to localhost:{self.ctx.port_plc}')
@@ -113,6 +117,7 @@ class Bridge(Thread):
     def _send_message(self, msg: bytes, dest: str):
         dest = dest.lower()
         if dest == 'remoteio':
+            print(f'sending bytes to io: {msg}')
             self.ssock_io.send(msg)
         elif dest == 'plc':
             self.conn_plc.send(msg)
