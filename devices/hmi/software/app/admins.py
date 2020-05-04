@@ -51,7 +51,17 @@ def dashboard():
         db.commit()
         return redirect(url_for('admins.dashboard'))
     rows = db.execute('SELECT * FROM user').fetchall()
-    return render_template('admin.html', rows=rows, add_form=add_form, delete_form=delete_form)
+    clients = []    
+    for row in rows:
+        ipadresses = db.execute(
+            'SELECT ipaddress FROM ipaddr WHERE userid = ?', (row['id'],)
+        ).fetchall()
+        client = {}
+        client['username'] = row['username']
+        client['user_role'] = row['user_role']
+        client['ipadresses'] = ipadresses
+        clients.append(client)
+    return render_template('admin.html', clients=clients, add_form=add_form, delete_form=delete_form)
 
 
 @admin.route('/dashboard/add', methods=('GET', 'POST'))
@@ -111,6 +121,13 @@ def delete_user():
             error = "The user {} doesn't exist.".format(username)
         
         if error is None:
+            # All ip addresses connected to the user need to get deleted first
+            userid = db.execute(
+                'SELECT id FROM user WHERE username = ?', (username,)
+            ).fetchone()
+            db.execute(
+                'DELETE FROM ipaddr WHERE userid = ?', (userid,)
+            )
             db.execute(
                 'DELETE FROM user WHERE username = ?', (username,)
             )

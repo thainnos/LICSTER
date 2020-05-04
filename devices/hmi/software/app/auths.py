@@ -82,6 +82,23 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
+            ipaddr = db.execute(
+                'SELECT * FROM ipaddr WHERE userid = ?', (session['user_id'],)
+            ).fetchall()
+            ipnotset = True
+            if ipaddr:
+                # The user already has an Ip Adress in the database
+                for ip in ipaddr:
+                    if ip['ipaddress'] == request.remote_addr:
+                        ipnotset = False
+            if ipnotset:
+                # The current Ip adress is not in the database
+                db.execute(
+                    'INSERT INTO ipaddr (userid, ipaddress) VALUES (?, ?)',
+                    (session['user_id'], request.remote_addr)
+                )
+                db.commit()
+
             if user['first_login'] == 1:
                 return redirect(url_for('auths.set_password'))
             session['user_role'] = user['user_role']

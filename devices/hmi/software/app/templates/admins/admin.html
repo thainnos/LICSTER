@@ -11,11 +11,19 @@
             </tr>
         </thead>
         <tbody>
-        {% for row in rows %}
+        {% for client in clients %}
             <tr>
-                <th>{{ row.username }}</th>
-                <th>{{ row.user_role }}</th>
-                <th></th>
+                <th>{{ client.username }}</th>
+                <th>{{ client.user_role }}</th>
+                {% if client.ipadresses %}
+                    <th>
+                        {% for ipadress in client.ipadresses %}
+                            {{ ipadress.ipaddress }} <br>
+                        {% endfor %}
+                    </th>
+                {% else %}
+                    <th>No ip adress for this user.</th>
+                {% endif %}
             </tr>
         {% endfor %}
         </tbody>
