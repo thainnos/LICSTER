@@ -9,6 +9,9 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField("Remember me")
     submit = SubmitField("Log in")
 
+class HmiLoginForm(FlaskForm):
+    password = PasswordField("password", validators=[Required()])
+
 class AddUserForm(FlaskForm):
     username = StringField("username", validators=[Required()])
     password = PasswordField("password", validators=[Required()])

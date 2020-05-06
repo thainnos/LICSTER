@@ -6,7 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.db import get_db
-from app.forms import LoginForm, SetPasswordForm
+from app.forms import LoginForm, SetPasswordForm, HmiLoginForm
 
 auth = Blueprint('auths', __name__, template_folder='templates/auths', static_folder='static')
 
@@ -65,6 +65,32 @@ def login():
     :return after form validation and if user role is admin: the admin dashboard
     """
     form = LoginForm()
+    hmiForm = HmiLoginForm()
+    if hmiForm.validate_on_submit() and request.remote_addr == "127.0.0.1":
+        db = get_db()
+        username = "hmilocal"
+        password = hmiForm.password.data
+        user = db.execute(
+            'SELECT * FROM user WHERE username = ?', (username,)
+        ).fetchone()
+        if check_password_hash(user['password'], password):
+            session.clear()
+            session['user_id'] = user['id']
+            ipaddr = db.execute(
+                'SELECT * FROM ipaddr WHERE userid = ?', (session['user_id'],)
+            ).fetchall()
+            if ipaddr:
+                # The user already has an Ip Adress in the database
+                pass
+            else:
+                # The current Ip adress is not in the database
+                db.execute(
+                    'INSERT INTO ipaddr (userid, ipaddress) VALUES (?, ?)',
+                    (session['user_id'], request.remote_addr)
+                )
+                db.commit()
+            session['user_role'] = user['user_role']
+            return redirect(url_for('views.index'))
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
@@ -108,7 +134,10 @@ def login():
 
         flash(error)
     
-    return render_template('login.html', form=form)
+    if request.remote_addr == "127.0.0.1":
+        return render_template('loginhmi.html', form=hmiForm)
+    else:
+        return render_template('login.html', form=form)
 
 
 @auth.route('/logout')
