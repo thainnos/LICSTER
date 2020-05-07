@@ -38,8 +38,10 @@ def init_db_command():
     db = get_db()
     db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
     ('admin', generate_password_hash('admin'), 'admin', 1))
+    db.commit()
     db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
     ('hmilocal', generate_password_hash('7255'), 'user', 1))
+    db.commit()
     click.echo('Created a new admin user with the password "admin".')
 
 def init_app(app):
