@@ -126,7 +126,7 @@ def delete_user():
                 'SELECT id FROM user WHERE username = ?', (username,)
             ).fetchone()
             db.execute(
-                'DELETE FROM ipaddr WHERE userid = ?', (userid,)
+                'DELETE FROM ipaddr WHERE userid = ?', (userid['id'],)
             )
             db.execute(
                 'DELETE FROM user WHERE username = ?', (username,)

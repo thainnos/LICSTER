@@ -42,7 +42,7 @@ def init_db_command():
     db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
     ('hmilocal', generate_password_hash('7255'), 'user', 1))
     db.commit()
-    click.echo('Created a new admin user with the password "admin".')
+    click.echo('Created a new admin user with the password "admin". The hmi password is 7255.')
 
 def init_app(app):
     app.teardown_appcontext(close_db)
