@@ -34,6 +34,7 @@ def login_required(view):
     return wrapped_view
 
 
+@login_required
 @bp.route('/orders/<count>', methods=['GET'])
 def set_order(count):
     """
@@ -45,6 +46,7 @@ def set_order(count):
     return "", 200
 
 
+@login_required
 @bp.route('/orders', methods=['GET'])
 def get_order():
     """
@@ -54,6 +56,7 @@ def get_order():
     return json.dumps(plc.get_orders())
 
 
+@login_required
 @bp.route('/set-motor/<motor>/<motor_state>', methods=['GET'])
 def set_motor_manual(motor, motor_state):
     """
@@ -66,6 +69,7 @@ def set_motor_manual(motor, motor_state):
     return "", 200
 
 
+@login_required
 @bp.route('/process/values', methods=['GET'])
 def get_values():
     """
@@ -75,6 +79,7 @@ def get_values():
     return jsonify(plc.get_process_values())
 
 
+@login_required
 @bp.route('/application/state', methods=['GET'])
 def get_application_state():
     """
@@ -84,6 +89,7 @@ def get_application_state():
     return json.dumps(plc.get_application_state())
 
 
+@login_required
 @bp.route("/process/state", methods=['GET'])
 def get_process_state():
     """
@@ -93,6 +99,7 @@ def get_process_state():
     return json.dumps(plc.get_process_state())
 
 
+@login_required
 @bp.route('/application/state/<new_state>', methods=['GET'])
 def set_application_state(new_state):
     """
@@ -104,6 +111,7 @@ def set_application_state(new_state):
     return json.dumps(plc.get_application_state())
 
 
+@login_required
 @bp.route('/application/reset', methods=['GET'])
 def set_reset():
     """
@@ -113,7 +121,7 @@ def set_reset():
     plc.set_reset()
     return json.dumps(plc.get_application_state())
 
-
+@login_required
 @bp.route('/order')
 def order():
     """
@@ -124,7 +132,7 @@ def order():
     process_state = plc.get_process_state()
     return render_template('order.html', process_state=process_state, application_state=application_state, order=True)
 
-
+@login_required
 @bp.route('/manual')
 def manual():
     """
