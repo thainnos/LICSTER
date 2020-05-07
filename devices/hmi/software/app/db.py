@@ -3,7 +3,7 @@ import sqlite3
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
-
+from werkzeug.security import generate_password_hash
 
 def get_db():
     if 'db' not in g:
@@ -35,6 +35,12 @@ def init_db_command():
     """Clear the existing data and create new tables."""
     init_db()
     click.echo('Initialized the database.')
+    db = get_db()
+    db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
+    ('admin', generate_password_hash('admin'), 'admin', 1))
+    db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
+    ('hmilocal', generate_password_hash('7255'), 'user', 1))
+    click.echo('Created a new admin user with the password "admin".')
 
 def init_app(app):
     app.teardown_appcontext(close_db)
