@@ -9,18 +9,22 @@ from app.db import get_db
 
 from plcconnectors.plc import Plc
 from plcconnectors.modbusTCP.connector import ModbusTCPPlcConnector
-
+import sys
 bp = Blueprint('views', __name__, template_folder='templates/views', static_folder='static')
 
 plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
 
 @bp.before_request
 def is_plc_connected():
-    if request.endpoint and request.endpoint != "static" and not plc.is_connected():
-        endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
-        plc.plc_connector.modbus_client.connect()
-        application_state = plc.get_application_state()
-        return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
+    if request.endpoint not in ['views.view', 'views.index'] and g.user is None:
+        print(request.endpoint, file=sys.stderr)
+        return redirect(url_for('auths.login'))
+    else:
+        if request.endpoint and request.endpoint != "static" and not plc.is_connected():
+            endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
+            plc.plc_connector.modbus_client.connect()
+            application_state = plc.get_application_state()
+            return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
 
 
 def login_required(view):
