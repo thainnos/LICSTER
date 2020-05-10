@@ -17,7 +17,6 @@ plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
 @bp.before_request
 def is_plc_connected():
     if request.endpoint not in ['views.view', 'views.index'] and g.user is None:
-        print(request.endpoint, file=sys.stderr)
         return redirect(url_for('auths.login'))
     else:
         if request.endpoint and request.endpoint != "static" and not plc.is_connected():
