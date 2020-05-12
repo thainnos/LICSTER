@@ -32,7 +32,6 @@ class Bridge(Thread):
 
         self._error_q = Queue()
 
-
     def run(self):
         self._init_connections()
         self._start_connection_handler()
@@ -80,11 +79,11 @@ class Bridge(Thread):
                     msg = self._check_msg(msg)
                     self._send_message(msg, 'plc')
 
-            except socket.timeout as exception:
+            except socket.timeout:
                 print("Socket timed out!")
                 self.cfg.q_manage_in.put('_Error')
 
-            except exception:
+            except Exception as exception:
                 print(exception)
                 self.cfg.q_manage_in.put('_Error')
 
