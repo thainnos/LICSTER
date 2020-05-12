@@ -2,11 +2,12 @@ from configparser import ConfigParser
 from queue import Queue
 
 
-class Context:
+class Config:
     def __init__(self):
         self.name = 'Unnamed'
 
         # self.io_hostname = 'Invalid'
+        self.timeout = None
 
         self.io_cert = None
         self.plc_cert = None
@@ -29,23 +30,24 @@ class Context:
         config = ConfigParser()
         config.read(filename)
         contexts = []
-        
+
         plc_cert = config.get('general', 'plc_cert')
         plc_key = config.get('general', 'plc_key')
 
         for section in config.sections():
-            if 'bridge' != section[:6]:
+            if section[:6] != 'bridge':
                 continue
-            context = Context()
+            context = Config()
             context.plc_cert = plc_cert
             context.plc_key = plc_key
             context.name = section
+            context.timeout = config.getfloat(section, 'timeout')
             context.port_plc = config.getint(section, 'local_port')
             context.port_io = config.getint(section, 'remote_port')
             context.host_io = config.get(section, 'remote_address')
             context.io_cert = config.get(section, 'io_cert')
             context.io_name = config.get(section, 'io_name')
-            context.secure = True if config.get(section, 'secure').lower() == 'true' else False
+            context.secure = (config.get(section, 'secure').lower() == 'true')
             contexts.append(context)
-        
+
         return contexts
