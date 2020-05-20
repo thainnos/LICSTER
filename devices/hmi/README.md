@@ -9,7 +9,11 @@ sudo apt install unclutter npm
 Install dependencies for LICSTER/python3.
 
 ```zsh
+<<<<<<< HEAD
 sudo python3 -m pip install pymodbus WTForms Flask-WTF gunicorn
+=======
+sudo python3 -m pip install pymodbus WTForms Flask-WTF gunicorn 
+>>>>>>> 40dba583ad68c141f564884fd779b59ee8cccddc
 ```
 
 Create the folder "gits" in the home path and switch to it.
@@ -29,6 +33,14 @@ Change into the correct folder.
 
 ```zsh
 cd ~/gits/LICSTER/devices/hmi
+```
+
+Initialize the database. This will create:
+	An admin user with the name and password admin
+	The default user for the hmi with the password 7255
+```zsh
+cd ~/gits/LICSTER/devices/hmi/software
+flask init-db
 ```
 
 Copy the autostart file to its correct place.

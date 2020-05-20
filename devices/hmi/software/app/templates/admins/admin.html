@@ -1,0 +1,61 @@
+{% extends "base_admin.html" %}
+
+{% block content %}
+    <h2>Users</h2>
+    <table class="content-table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>User role</th>
+                <th>Ip adress</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for client in clients %}
+            <tr>
+                <th>{{ client.username }}</th>
+                <th>{{ client.user_role }}</th>
+                {% if client.ipadresses %}
+                    <th>
+                        {% for ipadress in client.ipadresses %}
+                            {{ ipadress.ipaddress }} <br>
+                        {% endfor %}
+                    </th>
+                {% else %}
+                    <th>No ip adress for this user.</th>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+
+    <div class="flex-container">
+        <div class="flex1">
+            <h3>Add User</h3>
+            <div class="add-user">
+                <form action="/dashboard/add" method="post">
+                    {{ add_form.csrf_token }}
+                    {{ add_form.username.label }}
+                    {{ add_form.username(class="username-input") }}
+                    {{ add_form.password.label }}
+                    {{ add_form.password(class="password-input") }}
+                    <label for="role">Role</label>
+                    {{ add_form.role() }}
+                    {{ add_form.submit() }}
+                </form>
+            </div>
+        </div>
+    <br>
+        <div class="flex2">
+            <h3>Delete User</h3>
+            <div class="delete-user">
+            <form action="/dashboard/delete" method="post">
+                {{ delete_form.csrf_token }}
+                {{ delete_form.username() }}
+                {{ delete_form.submit() }}
+            </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
