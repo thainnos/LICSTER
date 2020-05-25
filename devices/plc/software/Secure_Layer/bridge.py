@@ -5,6 +5,7 @@ import socket
 import ssl
 from queue import Queue
 from threading import  Thread
+from struct import unpack
 
 from config import Config
 
@@ -74,7 +75,11 @@ class Bridge(Thread):
                     self._send_message(msg, 'remoteIO')
 
                     # recv from io and send to plc
-                    msg = self.ssock_io.recv(MAX_PACKET_SIZE)
+                    if self.cfg.secure:
+                        msg = self.ssock_io.recv(MAX_PACKET_SIZE)
+                    else:
+                        length = int.from_bytes(unpack('!c', self.ssock_io.recv(1))[0], 'big')
+                        msg = self.ssock_io.recv(length)
                     print('IO :', msg)
                     msg = self._check_msg(msg)
                     self._send_message(msg, 'plc')
