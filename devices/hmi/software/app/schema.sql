@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS ipaddr;
+DROP TABLE IF EXISTS snort;
 
 CREATE TABLE user(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -14,3 +15,10 @@ CREATE TABLE ipaddr(
   userid INTEGER NOT NULL,
   FOREIGN KEY(userid) REFERENCES user(id)
 );
+CREATE TABLE snort(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  snort_type TEXT NOT NULL,
+  snort_classification TEXT NOT NULL,
+  snort_priority INTEGER NOT NULL,
+  snort_datetime TEXT NOT NULL
+)
