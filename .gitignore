@@ -84,3 +84,4 @@ thumbs.db
 ################
 *.key
 *.crt
+devices/remote_io/software/tls_certs.mk

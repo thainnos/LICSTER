@@ -1,14 +1,14 @@
 /* USER CODE BEGIN Header */
 /** 
   ******************************************************************************
-  * File Name       : net_sockets.c.h
+  * File Name       : App/net_sockets.c.h
   * Description     : TCP/IP or UDP/IP networking functions implementation based
                     on LwIP API see the file "mbedTLS/library/net_socket_template.c"
                     for the standard implmentation
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -94,12 +94,20 @@ struct sockaddr_storage client_addr;
 
 /* Within 'USER CODE' section, code will be kept by default at each generation */
 /* USER CODE BEGIN INCLUDE */
-
+#include "mbedtls.h"
+#include "cmsis_os.h"
+#include "logging.h"
 /* USER CODE END INCLUDE */
 
 static int net_would_block( const mbedtls_net_context *ctx );
 /* USER CODE BEGIN VARIABLES */
+#define ALTERNATE_LWIP_INIT
 
+char socks[MEMP_NUM_NETCONN] = {0};
+char lwip_initialized = 0;
+
+extern SemaphoreHandle_t net_mutex;
+extern unsigned int deviceID;
 /* USER CODE END VARIABLES */
 /*
  * Initialize LwIP stack
@@ -107,11 +115,25 @@ static int net_would_block( const mbedtls_net_context *ctx );
 void mbedtls_net_init( mbedtls_net_context *ctx )
 {
 /* USER CODE BEGIN 0 */
-
+	while (xSemaphoreTake(net_mutex, 10) != pdTRUE);
+	if(!lwip_initialized)
+	{
 /* USER CODE END 0 */
   MX_LWIP_Init();
 /* USER CODE BEGIN 1 */
-
+  	  	lwip_initialized = 1;
+	}
+	ctx->fd = -1;
+	for(int i = 0; i < MEMP_NUM_NETCONN; i++)
+	{
+		if(socks[i] == 0)
+		{
+			ctx->fd = i;
+			socks[i] = 1;
+			break;
+		}
+	}
+	xSemaphoreGive(net_mutex);
 /* USER CODE END 1 */
 }
 
@@ -591,7 +613,9 @@ void mbedtls_net_free( mbedtls_net_context *ctx )
   if( ctx->fd == -1 )
     return;
 /* USER CODE BEGIN 18 */
-
+  while (xSemaphoreTake(net_mutex, 10) != pdTRUE);
+  socks[ctx->fd] = 0;
+  xSemaphoreGive(net_mutex);
 /* USER CODE END 18 */
   shutdown( ctx->fd, 2 );
   close( ctx->fd );

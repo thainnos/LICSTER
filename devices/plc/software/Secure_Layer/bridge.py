@@ -7,12 +7,14 @@ from queue import Queue
 from threading import  Thread
 from struct import unpack
 
+from multiprocessing import Process
 from config import Config
 
 MAX_PACKET_SIZE = 1024
 
 
-class Bridge(Thread):
+# class Bridge(Thread):
+class Bridge(Process):
     """
     A single bridge that manages the connection between 2 devices.
     """
@@ -34,6 +36,7 @@ class Bridge(Thread):
         self._error_q = Queue()
 
     def run(self):
+        print('Starting', self.name)
         self._init_connections()
         self._start_connection_handler()
         while True:
@@ -47,7 +50,7 @@ class Bridge(Thread):
                 print('send error signal to manager')
                 return
 
-            print(f'Unknown message: {message}')
+            print('Unknown message:',  message)
 
     def _close_connections(self):
         self.conn_plc.close()
@@ -70,7 +73,7 @@ class Bridge(Thread):
                 while True:
                     # recv from plc and send to io
                     msg = self.conn_plc.recv(MAX_PACKET_SIZE)
-                    print('PLC:', msg)
+                    # print('PLC:', msg)
                     msg = self._check_msg(msg)
                     self._send_message(msg, 'remoteIO')
 
@@ -80,12 +83,12 @@ class Bridge(Thread):
                     else:
                         length = int.from_bytes(unpack('!c', self.ssock_io.recv(1))[0], 'big')
                         msg = self.ssock_io.recv(length)
-                    print('IO :', msg)
+                    # print('IO :', msg)
                     msg = self._check_msg(msg)
                     self._send_message(msg, 'plc')
 
             except socket.timeout:
-                print("Socket timed out!")
+                print('Socket timed out!')
                 self.cfg.q_manage_in.put('_Error')
 
             except Exception as exception:
@@ -103,28 +106,27 @@ class Bridge(Thread):
         self.sock_io = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock_io.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         if self.cfg.secure:
-            # TODO: maybe change server_hostname
             # TODO: handle bad handshake
             self.ssock_io = self.ssl_context.wrap_socket(
                 self.sock_io, server_side=False, server_hostname=self.cfg.io_name)
-            print(f'Connecting to remoteIO {self.cfg.name}')
+            print('Connecting to remoteIO', self.cfg.name)
             self.ssock_io.connect((self.cfg.host_io, self.cfg.port_io))
-            print('Connected to remotIO in ssl,',
-                  self.ssock_io.version(), self.ssock_io.getpeercert())
+            print('Connected to remotIO in ssl using', self.ssock_io.version())
         else:
             self.ssock_io = self.sock_io
+            print('Connecting to remoteIO', self.cfg.name)
             self.ssock_io.connect((self.cfg.host_io, self.cfg.port_io))
-            print('Connected to remotIO')
+            print('Connected to remoteIO')
 
     def _init_plc_connection(self):
         self.sock_plc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock_plc.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock_plc.bind(('', self.cfg.port_plc))
         self.sock_plc.listen()
-        print(f'waiting for plc to connect to {self.cfg.name}')
+        print('waiting for plc to connect to', self.cfg.name)
         self.conn_plc, _addr = self.sock_plc.accept()
         print('plc connected')
-        print(f'connected {_addr[0]}:{_addr[1]} to localhost:{self.cfg.port_plc}')
+        print('connected {0}:{1} to localhost:{2}'.format(_addr[0], _addr[1], self.cfg.port_plc))
 
     def _init_ssl_context(self):
         self.ssl_context = ssl.create_default_context(

@@ -22,6 +22,7 @@ class BridgeManager:
         self.check_bridge_status_thread = Thread(target=self._check_bridge_status)
         self.check_bridge_status_thread.start()
 
+
     def _check_bridge_status(self):
         def restart_bridge_on_error(bridge):
             try:
@@ -30,9 +31,9 @@ class BridgeManager:
                 if msg_type == 'Error':
                     cfg = bridge.cfg
                     name = cfg.name
-                    print(f'Error in {name}, restarting...')
+                    print('Error in {0}, restarting...'.format(name))
                     bridge = Bridge(bridge.cfg)
-                    print(f'Restarted {name}!')
+                    print('Restarted {0}!'.format(name))
             except Empty:
                 pass
 
@@ -56,8 +57,10 @@ class BridgeManager:
         """
         Adds new bridges based on the settings supplied in the list of Config objects in *cfgs*.
         """
+        self.bridge_lock.acquire()
         for cfg in cfgs:
-            self.add_bridge(cfg)
+            self.bridges.append(Bridge(cfg))
+        self.bridge_lock.release()
 
 def __main():
     """

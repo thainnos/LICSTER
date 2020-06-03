@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-
+#define LOGLEN 196    // Characters of Log Messages
 
 #define logger(a, b, args...) logging(a, b, "%s(%s:%d) %s",  __func__,__FILE__, __LINE__, ##args)
 void logging(unsigned char logLevel, unsigned int waitTicks, const char *fmt, ...);

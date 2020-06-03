@@ -22,8 +22,8 @@ TARGET = stm32f767
 # debug build?
 DEBUG = 1
 # optimization
-OPT = -O3
-
+# OPT = -O3
+OPT = #-Og
 
 #######################################
 # paths
@@ -36,7 +36,6 @@ BUILD_DIR = build
 ######################################
 # C sources
 C_SOURCES =  \
-Src/ping.c \
 Src/main.c \
 Src/freertos.c \
 Src/lwip.c \
@@ -216,8 +215,8 @@ Middlewares/Third_Party/mbedTLS/library/x509_csr.c \
 Middlewares/Third_Party/mbedTLS/library/xtea.c \
 Src/logging.c \
 Src/http.c \
-Src/iperf.c \
 Src/modbus_handler.c \
+Src/heap_mem.c \
 Src/hardware_rng.c \
 Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rng.c \
 Src/u8x8_stm32_HAL.c \
@@ -316,12 +315,17 @@ Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c \
 Middlewares/Third_Party/mbedTLS/library/aria.c \
 Middlewares/Third_Party/mbedTLS/library/hkdf.c \
 Middlewares/Third_Party/mbedTLS/library/platform_util.c \
-Middlewares/Third_Party/mbedTLS/library/rsa_internal.c
+Middlewares/Third_Party/mbedTLS/library/rsa_internal.c \
+Middlewares/Third_Party/mbedTLS/library/chacha20.c \
+Middlewares/Third_Party/mbedTLS/library/chachapoly.c \
+Middlewares/Third_Party/mbedTLS/library/poly1305.c \
+
 
 # ASM sources
+# ASM_SOURCES =  \
+# startup_stm32f767xx.s
 ASM_SOURCES =  \
-startup_stm32f767xx.s
-
+Startup/startup_stm32f767zitx.s
 
 #######################################
 # binaries
@@ -368,7 +372,6 @@ C_DEFS =  \
 -DUSE_HAL_DRIVER \
 -DSTM32F767xx
 
-
 # AS includes
 AS_INCLUDES =  \
 -I/Inc
@@ -414,11 +417,17 @@ endif
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 
 
+# Configurations
+ifeq ($(config), tls)
+	include tls_certs.mk
+	C_DEFS += -DUSE_TLS
+endif
+
 #######################################
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = STM32F767ZITx_FLASH.ld
+LDSCRIPT = STM32F767ZITX_FLASH.ld
 
 # libraries
 LIBS = -lc -lm -lnosys 
@@ -463,7 +472,7 @@ $(BUILD_DIR):
 #######################################
 clean:
 	-rm -fR $(BUILD_DIR)
-  
+
 #######################################
 # dependencies
 #######################################
