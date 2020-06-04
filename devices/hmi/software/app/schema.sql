@@ -22,3 +22,7 @@ CREATE TABLE snort(
   snort_priority INTEGER NOT NULL,
   snort_datetime TEXT NOT NULL
 )
+CREATE TABLE admin_mail(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT NOT NULL,
+)

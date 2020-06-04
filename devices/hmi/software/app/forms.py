@@ -25,3 +25,6 @@ class DeleteUserForm(FlaskForm):
 class SetPasswordForm(FlaskForm):
     password = PasswordField("password", validators=[Required()])
     submit = SubmitField("Set password")
+
+class ResetLogForm(FlaskForm):
+    submit = SubmitField("Reset logs")

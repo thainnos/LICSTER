@@ -6,7 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.db import get_db
-from app.forms import AddUserForm, DeleteUserForm
+from app.forms import AddUserForm, DeleteUserForm, ResetLogForm
 
 admin = Blueprint('admins', __name__, template_folder='templates/admins', static_folder='static')
 
@@ -41,6 +41,7 @@ def dashboard():
     """
     add_form = AddUserForm()
     delete_form = DeleteUserForm()
+    reset_form = ResetLogForm()
     db = get_db()
     if request.method == 'POST':
         selected_users = request.form.getlist("users")
@@ -50,6 +51,7 @@ def dashboard():
             )
         db.commit()
         return redirect(url_for('admins.dashboard'))
+    
     rows = db.execute('SELECT * FROM user').fetchall()
     clients = []    
     for row in rows:
@@ -61,7 +63,18 @@ def dashboard():
         client['user_role'] = row['user_role']
         client['ipadresses'] = ipadresses
         clients.append(client)
-    return render_template('admin.html', clients=clients, add_form=add_form, delete_form=delete_form)
+    
+    snort_rows = db.execute('SELECT * FROM snort').fetchall()
+    snort_outer_row = []
+    for snort_row in snort_rows:
+        snort_inner_dict = {}
+        snort_inner_dict['type'] = snort_row[1]
+        snort_inner_dict['classification'] = snort_row[2]
+        snort_inner_dict['priority'] = snort_row[3]
+        snort_inner_dict['datetime'] = snort_row[4]
+        snort_outer_row.append(snort_inner_dict)
+
+    return render_template('admin.html', clients=clients, logs=snort_outer_row, add_form=add_form, delete_form=delete_form, reset_form=reset_form)
 
 
 @admin.route('/dashboard/add', methods=('GET', 'POST'))
@@ -137,3 +150,18 @@ def delete_user():
 
     return redirect(url_for('admins.dashboard'))
 
+@admin.route('/dashboard/reset_logs', methods=('GET', 'POST'))
+@admin_required
+def reset_logs():
+    """
+    Reset the Snort log table
+    """
+    form = ResetLogForm()
+    if form.validate_on_submit():
+        db = get_db()
+        db.execute('DROP TABLE IF EXISTS snort')
+        db.commit()
+        db.execute("CREATE TABLE IF NOT EXISTS snort(id INTEGER PRIMARY KEY AUTOINCREMENT, snort_type TEXT NOT NULL, snort_classification TEXT NOT NULL, snort_priority INTEGER NOT NULL, snort_datetime TEXT NOT NULL)")
+        db.commit()
+        return redirect(url_for('admins.dashboard'))
+    return redirect(url_for('admins.dashboard'))
