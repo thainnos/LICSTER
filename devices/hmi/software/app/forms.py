@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms import SelectField
-from wtforms.validators import Length, Required
+from wtforms.validators import Length, Required, Email
 
 class LoginForm(FlaskForm):
     username = StringField("username", validators=[Required()])
@@ -16,6 +16,7 @@ class AddUserForm(FlaskForm):
     username = StringField("username", validators=[Required()])
     password = PasswordField("password", validators=[Required()])
     role = SelectField(u'user role', choices=[('user', 'user'), ('admin', 'admin')])
+    email = StringField("email")
     submit = SubmitField("Add user")
 
 class DeleteUserForm(FlaskForm):

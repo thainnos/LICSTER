@@ -62,6 +62,8 @@ def dashboard():
         client['username'] = row['username']
         client['user_role'] = row['user_role']
         client['ipadresses'] = ipadresses
+        if row['email'] is not None:
+            client['email'] = row['email']
         clients.append(client)
     
     snort_rows = db.execute('SELECT * FROM snort').fetchall()
@@ -89,6 +91,7 @@ def add_user():
         username = form.username.data
         password = form.password.data
         role = form.role.data
+        email = form.email.data
         db = get_db()
         error = None
 
@@ -100,13 +103,21 @@ def add_user():
             'SELECT id FROM user WHERE username = ?', (username,)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(username)
-
+        elif email and (role != 'admin'):
+            error = 'Only admins can have an email adress.'
         if error is None:
-            db.execute(
-                'INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)',
-                (username, generate_password_hash(password), role, 1)
-            )
-            db.commit()
+            if not email:
+                db.execute(
+                    'INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)',
+                    (username, generate_password_hash(password), role, 1)
+                )
+                db.commit()
+            else:
+                db.execute(
+                    'INSERT INTO user (username, password, user_role, first_login, email) VALUES (?, ?, ?, ?, ?)',
+                    (username, generate_password_hash(password), role, 1, email)
+                )
+                db.commit()
             return redirect(url_for('admins.dashboard'))
 
         flash(error)

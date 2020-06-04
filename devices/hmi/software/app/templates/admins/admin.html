@@ -5,7 +5,8 @@
     <tr>
       <th>Username</th>
       <th>User role</th>
-      <th>Ip adress</th>
+      <th>Ip Adress</th>
+      <th>Email Adress</th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +21,10 @@
       </th>
       {% else %}
       <th>No ip adress for this user.</th>
+      {% endif %} {% if client.email %}
+      <th>{{ client.email }}</th>
+      {% else %}
+      <th>-</th>
       {% endif %}
     </tr>
     {% endfor %}
@@ -34,7 +39,8 @@
       <form action="/dashboard/add" method="post">
         {{ add_form.csrf_token }} {{ add_form.username.label }} {{
         add_form.username(class="username-input") }} {{ add_form.password.label
-        }} {{ add_form.password(class="password-input") }}
+        }} {{ add_form.password(class="password-input") }} {{
+        add_form.email.label }} {{ add_form.email() }}
         <label for="role">Role</label>
         {{ add_form.role() }} {{ add_form.submit() }}
       </form>

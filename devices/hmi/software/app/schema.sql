@@ -7,7 +7,8 @@ CREATE TABLE user(
   username TEXT UNIQUE NOT NULL,
   password TEXT NOT NULL,
   user_role TEXT NOT NULL,
-  first_login INTEGER NOT NULL
+  first_login INTEGER NOT NULL,
+  email TEXT
 );
 CREATE TABLE ipaddr(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,8 +22,4 @@ CREATE TABLE snort(
   snort_classification TEXT NOT NULL,
   snort_priority INTEGER NOT NULL,
   snort_datetime TEXT NOT NULL
-)
-CREATE TABLE admin_mail(
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  email TEXT NOT NULL,
 )
