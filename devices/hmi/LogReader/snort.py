@@ -1,6 +1,8 @@
 import os
 from db import get_db
 from pathlib import Path
+from breachmail import breach_mail
+
 
 filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "snort-datei")
 
@@ -18,5 +20,11 @@ Priority = singleline_array[1][5].replace("]" , '')
 Datetime = singleline_array[2][0].split(".")[0]
 
 db = get_db()
-db.execute('INSERT INTO snort (snort_type, snort_classification, snort_priority, snort_datetime) VALUES (?,?,?,?)', (Type, Classification, Priority, Datetime))
-db.commit()
+last_row = db.execute('SELECT * FROM snort WHERE   id = (SELECT MAX(id) FROM snort)').fetchone()
+
+if (last_row is None) or (last_row[1] != Type and last_row[2] != Classification and last_row[3] != Priority):
+    db.execute('INSERT INTO snort (snort_type, snort_classification, snort_priority, snort_datetime) VALUES (?,?,?,?)', (Type, Classification, Priority, Datetime))
+    db.commit()
+    breach_mail(Type, Classification, Priority, Datetime)
+
+    
