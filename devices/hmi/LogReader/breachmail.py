@@ -1,18 +1,19 @@
 import smtplib
 
-def breach_mail(Type, Classification, Priority, Datetime):
+def breach_mail(Type, Classification, Priority, Datetime, email_list):
     with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
         smtp.ehlo()
-        smtp.starttls()         #TLS for security
+        smtp.starttls()
         smtp.ehlo()
 
-        smtp.login('licster.breach@gmail.com', 'Lic#v77zX')             # can also be replaced by environment variables in the future of this project to ensure security 
-        
+        smtp.login('licster.breach@gmail.com', 'Lic#v77zX')             
+
         subject = 'A breach has been detected by the Intrusion Detection System!'
         body = 'A '+ Type +' was detected at '+ Datetime +'.'
         msg = f'Subject: {subject}\n\n{body}'
         
-        smtp.sendmail('licster.breach@gmail.com', 'licster.breach@gmail.com', msg)
+        for email in email_list:
+            smtp.sendmail('licster.breach@gmail.com', email, msg)
 
 
 
