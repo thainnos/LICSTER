@@ -47,6 +47,23 @@ def init_db_command():
     admin_name = input(">>> ")
     click.echo(admin_name)
 
+    click.echo('Do you want to add an email address for this user?\nIf the IDS detects anything, it will be sent to all saved email addresses.')
+    not_skipping = True
+    while not_skipping:
+        click.echo('If you dont want to add an email address you can simply type "no".')
+        email = input(">>>")
+        if email == 'no':
+            break
+        else:
+            email2 = input('Please enter the email address again or skip this step by typing "no"')
+            if email2 == 'no':
+                not_skipping = False
+                break
+            elif email != email2:
+                click.echo("The email addresses don't match.")
+            else:
+                admin_email = email
+
     click.echo("Please enter the password for the admin user:")
     while True:
         admin_password = input(">>> ")
@@ -71,8 +88,12 @@ def init_db_command():
         except:
             click.echo("This password must only contain numbers. Please type in a password containing only numbers.")
     
-    db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
-    (admin_name, generate_password_hash(admin_password), 'admin', 1))
+    if not admin_email:
+        db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
+        (admin_name, generate_password_hash(admin_password), 'admin', 1))
+    else:
+        db.execute('INSERT INTO user (username, password, user_role, first_login, email) VALUES (?, ?, ?, ?)', 
+        (admin_name, generate_password_hash(admin_password), 'admin', 1, admin_email))
     db.commit()
     db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
     ('hmilocal', generate_password_hash(hmi_password), 'user', 1))
