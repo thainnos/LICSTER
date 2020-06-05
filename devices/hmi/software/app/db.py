@@ -63,7 +63,7 @@ def add_email():
         if email == 'no':
             break
         else:
-            email2 = input('Please enter the email address again or skip this step by typing "no"')
+            email2 = input('Please enter the email address again or skip this step by typing "no".\n>>> ')
             if email2 == 'no' or email2 == 'No':
                 not_skipping = False
                 break
@@ -71,6 +71,8 @@ def add_email():
                 click.echo("The email addresses don't match.")
             else:
                 admin_email = email
+                not_skipping = False
+                break
     return admin_email
 
 def add_admin_password():
@@ -130,7 +132,7 @@ def init_db_command():
         db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
         (admin_name, generate_password_hash(admin_password), 'admin', 1))
     else:
-        db.execute('INSERT INTO user (username, password, user_role, first_login, email) VALUES (?, ?, ?, ?)', 
+        db.execute('INSERT INTO user (username, password, user_role, first_login, email) VALUES (?, ?, ?, ?, ?)', 
         (admin_name, generate_password_hash(admin_password), 'admin', 1, admin_email))
     db.commit()
     db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
