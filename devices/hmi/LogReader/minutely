@@ -1,0 +1,9 @@
+#!/bin/bash
+
+SYSTEMTIME=`date "+%s"`
+FILETIME=`date -r snort-datei "+%s"`
+
+if (( $SYSTEMTIME - 60 < $FILETIME ))
+then
+	python3 snort.py
+fi

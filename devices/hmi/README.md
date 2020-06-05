@@ -1,18 +1,8 @@
 # Low-cost ICS Testbed - HMI
 
-## Initialization of the HMI
+## Installation
 
-Install unclutter to disable mouse pointer on the HMI.
-
-```
-sudo apt install unclutter npm
-```
-
-Install the python dependencies.
-
-```
-sudo python3 -m pip install pymodbus WTForms Flask-WTF gunicorn
-```
+### Clone the repository
 
 Create the folder "gits" in the home path and switch to it.
 
@@ -33,6 +23,33 @@ Change into the correct folder.
 cd ~/gits/LICSTER/devices/hmi
 ```
 
+
+### Install all dependencies
+
+
+#### Install unclutter to disable the mouse pointer on the HMI.
+
+```
+sudo apt install unclutter npm
+```
+
+#### Install the python dependencies.
+
+```
+sudo python3 -m pip install pymodbus WTForms Flask-WTF gunicorn
+```
+
+#### Install bootstrap and jQuery.
+
+```
+cd ~/gits/LICSTER/devices/hmi/software/static
+npm install package.json
+```
+
+## Setup
+
+#### Initialize the Web Application
+
 Initialize the database.
 
 ```
@@ -43,6 +60,7 @@ flask init-db
 Copy the autostart file to its correct place.
 
 ```
+cd ~/gits/LICSTER/devices/hmi/
 mkdir -p ~/.config/lxsession/lxde-pi/
 cp autostart ~/.config/lxsession/lxde-pi/autostart
 ```
@@ -50,17 +68,28 @@ cp autostart ~/.config/lxsession/lxde-pi/autostart
 Make the startscript executable.
 
 ```
+cd ~/gits/LICSTER/devices/hmi/
 chmod +x startscript.sh
 ```
 
-Install bootstrap and jQuery.
+#### Enable Emails if the Intrusion Detection System finds something
+
+Open the crontab file as root:
 
 ```
-cd ~/gits/LICSTER/devices/hmi/software/static
-npm install package.json
+sudo nano /etc/crontab
 ```
 
-Configure the IP Adress of the HMI.
+Add the following lines at the end of the file.
+
+```
+* * * * *   root cd /home/pi/gits/LICSTER/devices/hmi/LogReader && ./minutely
+#
+```
+
+Press __Strg__ + __O__ to save the file. Then press __Strg__ + __X__ to leave the editor. 
+
+#### Configure the IP Adress of the HMI.
 
 ```
 sudo nano /etc/network/interfaces
@@ -88,9 +117,10 @@ iface eth0:0 inet static
 
 ```
 
+
 ## How can I?
 
-### Change my HMI password?
+#### Change my HMI password
 
 ```
 cd ~/gits/LICSTER/devices/hmi/software/
