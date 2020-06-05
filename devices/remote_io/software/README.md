@@ -62,7 +62,7 @@ This is used to get the firmware on the remote IO boards:
 ```sh
 sudo apt-get install git build-essential libusb-1.0.0-dev cmake
 cd $HOME
-git clone git@github.com:texane/stlink.git
+git clone https://github.com/stlink-org/stlink.git
 cd stlink
 make release
 cd build/Release && make install DESTDIR=_install
