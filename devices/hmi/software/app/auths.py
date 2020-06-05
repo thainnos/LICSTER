@@ -1,25 +1,12 @@
 import functools
-
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify, json
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from app.db import get_db
 from app.forms import LoginForm, SetPasswordForm, HmiLoginForm
 
 auth = Blueprint('auths', __name__, template_folder='templates/auths', static_folder='static')
-
-"""
- This file handles user authentification.
- Methods
-    login_required: Decorator to check if user is logged in
-    logout_required: Decorator to check if user is logged out
-    load_logged_in_user: Loads the current user if he exists
- Routes
-    login: login for user
-    logout: Logout for user
-"""
 
 def login_required(view):
     @functools.wraps(view)
@@ -43,9 +30,8 @@ def logout_required(view):
 
 @auth.before_app_request
 def load_logged_in_user():
-    """
-    Checks if client was logged in with every request
-    """
+    ''' Checks if client was logged in with every request
+    '''
     user_id = session.get('user_id')
 
     if user_id is None:
@@ -58,12 +44,11 @@ def load_logged_in_user():
 @auth.route('/login', methods=['GET', 'POST'])
 @logout_required
 def login():
-    """
-    Login view.
-    :return: The login.html view
-    :return after form validation: the index.html
-    :return after form validation and if user role is admin: the admin dashboard
-    """
+    ''' Login view. Returns a view for the local HMI and another for any remote connection.
+
+    :return: Before validation: login.html - After: index.html or admin dashboard
+    :rtype: HTML / redirect
+    '''
     form = LoginForm()
     hmiForm = HmiLoginForm()
     if hmiForm.validate_on_submit() and request.remote_addr == "127.0.0.1":
@@ -144,12 +129,10 @@ def login():
 @auth.route('/loginnonlocal', methods=['GET', 'POST'])
 @logout_required
 def login_local():
-    """
-    Login view.
-    :return: The login.html view
-    :return after form validation: the index.html
-    :return after form validation and if user role is admin: the admin dashboard
-    """
+    ''' Remote login view. Returns the remote view on the local machine.
+    :return: The login.html view, after validation the index.html/admin dashboard
+    :rtype: HTML / redirect
+    '''
     form = LoginForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -200,10 +183,10 @@ def login_local():
 @auth.route('/logout')
 @login_required
 def logout():
-    """
-    Logout view.
-    :return: The index.html
-    """
+    ''' Logout view.
+    :return: Redirect to index.html
+    :rtype: Redirect
+    '''
     session.clear()
     return redirect(url_for('views.index'))
 
@@ -211,13 +194,10 @@ def logout():
 @auth.route('/set_password', methods=('GET', 'POST'))
 @login_required
 def set_password():
-    """
-    Password set view.
-    :return: The set_password.html view
-    :return: The views.index view
-    A user accesses this route at his first login.
-    He is prompted to set a password.
-    """
+    ''' View for setting the password on the first login.
+    :return: set_password.html or redirect to views.index
+    :rtype: HTML / Redirect
+    '''
     form = SetPasswordForm()
     if form.validate_on_submit():
         password = form.password.data

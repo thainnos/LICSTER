@@ -1,25 +1,12 @@
 import functools
-
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify, json
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-
 from app.db import get_db
 from app.forms import AddUserForm, DeleteUserForm, ResetLogForm
 
 admin = Blueprint('admins', __name__, template_folder='templates/admins', static_folder='static')
-
-"""
- This file handles user authentification.
- Methods
-    admin_required: Decorator to check if user is logged in and admin
- Routes
-    dashboard: Shows all users and allows to delete users
-    dashboard/add_user: Inserts a new user/admin in the database
-    dashboard/delete_user: Deletes a user/admin
-    dashboard/reset_password: Will get moved to auth blueprint.
-"""
 
 def admin_required(view):
     @functools.wraps(view)
@@ -34,11 +21,11 @@ def admin_required(view):
 @admin.route('/dashboard', methods=('GET', 'POST'))
 @admin_required
 def dashboard():
-    """
-    Dashboard. Shows all users and allows to delete users.
-    Will get more functionality soon.
+    ''' Admin Dashboard. Shows all users and snort logs. Allows adding/deleting users and resetting the logs.
+    
     :return: The admin.html view
-    """
+    :rtype: HTML
+    '''
     add_form = AddUserForm()
     delete_form = DeleteUserForm()
     reset_form = ResetLogForm()
@@ -82,10 +69,11 @@ def dashboard():
 @admin.route('/dashboard/add', methods=('GET', 'POST'))
 @admin_required
 def add_user():
-    """
-    Add user or admin. Allows the admin to create a new user or admin
-    :return: The add_user.html view
-    """
+    ''' Add a user or an admin.
+    
+    :return: Redirect to the admin dashboard method
+    :rtype: redirect
+    '''
     form = AddUserForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -127,10 +115,11 @@ def add_user():
 @admin.route('/dashboard/delete', methods=('GET', 'POST'))
 @admin_required
 def delete_user():
-    """
-    Delete user. Allows the admin to delete a user
-    :return: The delete_user.html view
-    """
+    ''' Delete a user or an admin.
+    
+    :return: Redirect to the admin dashboard method
+    :rtype: redirect
+    '''
     form = DeleteUserForm()
     if form.validate_on_submit():
         username = form.username.data
@@ -164,9 +153,11 @@ def delete_user():
 @admin.route('/dashboard/reset_logs', methods=('GET', 'POST'))
 @admin_required
 def reset_logs():
-    """
-    Reset the Snort log table
-    """
+    ''' Reset the Snort log table.
+
+    :return: Redirect to the admin dashboard method
+    :rtype: redirect
+    '''
     form = ResetLogForm()
     if form.validate_on_submit():
         db = get_db()

@@ -87,3 +87,12 @@ iface eth0:0 inet static
     netmask 255.255.255.0
 
 ```
+
+## How can I?
+
+### Change my HMI password?
+
+```
+cd ~/gits/LICSTER/devices/hmi/software/
+flask change-hmi-password
+```
