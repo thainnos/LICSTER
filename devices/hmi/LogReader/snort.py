@@ -26,10 +26,10 @@ if (last_row is None) or (last_row[1] != Type and last_row[2] != Classification 
     db.execute('INSERT INTO snort (snort_type, snort_classification, snort_priority, snort_datetime) VALUES (?,?,?,?)', (Type, Classification, Priority, Datetime))
     db.commit()
 
-email_dict = db.execute('SELECT email FROM user WHERE email IS NOT NULL').fetchall()
-email_list = []
-for email in email_dict:
-    email_list.append(email[0])
-breach_mail(Type, Classification, Priority, Datetime, email_list)
+    email_dict = db.execute('SELECT email FROM user WHERE email IS NOT NULL').fetchall()
+    email_list = []
+    for email in email_dict:
+        email_list.append(email[0])
+    breach_mail(Type, Classification, Priority, Datetime, email_list)
 
     
