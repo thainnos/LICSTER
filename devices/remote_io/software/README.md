@@ -94,7 +94,7 @@ mv release build
 
 With the "flashall" script, every connected STM32 board gets the LICSTER firmware:
 ```sh
-udo ./flashall.sh 
+sudo ./flashall.sh 
 ++++++++++++++++++++++++++++++++++++++++++++++++
 + Automatic ST-FLASHER by Matthias Niedermaier +
 + Flashing all devices detected by probe       +
