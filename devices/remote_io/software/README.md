@@ -60,7 +60,7 @@ arm-none-eabi-objcopy -O binary -S build/stm32f767.elf build/stm32f767.bin
 There is a github project for the stm32 discovery line to program under linux.
 This is used to get the cd firmware on the remote IO boards:
 ```sh
-sudo apt-get install git build-essential libusb-1.0.0-dev cmake stlink-tools
+sudo apt-getlibusb-1.0.0-dev stlink-tools
 ```
 
 After this, connect the STM32 boards over USB to your computer and check the communication with:
@@ -78,7 +78,7 @@ openocd: "\x30\x36\x36\x44\x46\x46\x35\x33\x35\x31\x35\x35\x38\x37\x38"
 ```
 
 ### Flash the LICSTER Firmware
-If you have build the firmware by yourself you can directly executed the "flashall" script.
+If you have build the firmware by yourself you can directly execute the "flashall" script.
 Otherwise you have to rename the folder "release" into "build" bevore running the script:
 ```sh
 mv release build
