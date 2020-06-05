@@ -58,17 +58,9 @@ arm-none-eabi-objcopy -O binary -S build/stm32f767.elf build/stm32f767.bin
 ### Installing Flash Tool 
 
 There is a github project for the stm32 discovery line to program under linux.
-This is used to get the firmware on the remote IO boards:
+This is used to get the cd firmware on the remote IO boards:
 ```sh
-sudo apt-get install git build-essential libusb-1.0.0-dev cmake
-cd $HOME
-git clone https://github.com/stlink-org/stlink.git
-cd stlink
-make release
-cd build/Release && make install DESTDIR=_install
-echo "export PATH=\$PATH:$HOME/stlink/build/Release/_install/usr/local/bin" >> $HOME/.bashrc
-echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$HOME/stlink/build/Release/_install/usr/local/lib" >> $HOME/.bashrc
-source $HOME/.bashrc
+sudo apt-get install git build-essential libusb-1.0.0-dev cmake stlink-tools
 ```
 
 After this, connect the STM32 boards over USB to your computer and check the communication with:
