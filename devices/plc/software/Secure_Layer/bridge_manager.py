@@ -9,8 +9,6 @@ from typing import List
 from bridge import Bridge
 from config import Config
 
-Configs = List[Config]
-
 class BridgeManager:
     """
     This class manages several Bridges.
@@ -23,12 +21,11 @@ class BridgeManager:
         self.check_bridge_status_thread.start()
 
 
-    def _check_bridge_status(self):
-        def restart_bridge_on_error(bridge):
+    def _check_bridge_status(self) -> None:
+        def restart_bridge_on_error(bridge) -> None:
             try:
                 message = bridge.cfg.q_manage_out.get_nowait()
-                msg_type = message[0]
-                if msg_type == 'Error':
+                if message == 'Error':
                     cfg = bridge.cfg
                     name = cfg.name
                     print('Error in {0}, restarting...'.format(name))
@@ -45,7 +42,7 @@ class BridgeManager:
             self.bridge_lock.release()
             sleep(0.5)
 
-    def add_bridge(self, cfg: Config):
+    def add_bridge(self, cfg: Config) -> None:
         """
         Adds a new bridge based on the settings specified in the Config *cfg*.
         """
@@ -53,7 +50,7 @@ class BridgeManager:
         self.bridges.append(Bridge(cfg))
         self.bridge_lock.release()
 
-    def add_bridges(self, cfgs: Configs):
+    def add_bridges(self, cfgs: List[Config]) -> None:
         """
         Adds new bridges based on the settings supplied in the list of Config objects in *cfgs*.
         """
@@ -64,7 +61,7 @@ class BridgeManager:
 
 def __main():
     """
-    Main function. (This is to prevent linting complains)
+    Main function. (This is to prevent linting complaints)
     """
     cfgs = Config.load_from_config('config.ini')
     manager = BridgeManager()

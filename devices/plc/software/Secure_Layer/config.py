@@ -1,5 +1,5 @@
 from configparser import ConfigParser
-from queue import Queue
+from multiprocessing import Queue
 
 
 class Config:

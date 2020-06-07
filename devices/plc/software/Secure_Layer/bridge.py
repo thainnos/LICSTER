@@ -3,16 +3,17 @@ This module contains the Bridge class.
 """
 import socket
 import ssl
-from multiprocessing import Process
-from queue import Queue
+from multiprocessing import Process, Queue
 from struct import unpack
 from threading import Thread
+from time import sleep
 from typing import Tuple
 
 from config import Config
 
-MAX_PACKET_SIZE = 1024
+CONNECTION_TIMEOUT = 15
 HEADER_SIZE = 6
+MAX_PACKET_SIZE = 1024
 
 
 class Bridge(Process):
@@ -34,10 +35,8 @@ class Bridge(Process):
 
         self.start()
 
-        self._error_q = Queue()
-
-    def run(self):
-        print('Starting', self.name)
+    def run(self) -> None:
+        print('[{}] Starting... '.format(self.name))
         self._init_connections()
         self._start_connection_handler()
         while True:
@@ -45,52 +44,54 @@ class Bridge(Process):
             if message == 'END':
                 self._close_connections()
                 return
-            if message == '_Error':
-                self._close_connections()
-                self.cfg.q_manage_out.put(('Error', self))
-                print('send error signal to manager')
-                return
+            else:
+                print('[{}] Unknown message: {}'.format(self.name, message))
 
-            print('Unknown message:', message)
+    def _close_connections(self) -> None:
+        if self.conn_plc is not None:
+            self.conn_plc.close()
+        if self.sock_plc is not None:
+            self.sock_plc.close()
+        if self.sock_io is not None:
+            self.sock_io.close()
+        print('[{}] connections closed!'.format(self.name))
 
-    def _close_connections(self):
-        self.conn_plc.close()
-        self.sock_plc.close()
-        self.sock_io.close()
-        print('connections closed!')
+    def _error(self) -> None:
+        self._close_connections()
+        self.cfg.q_manage_out.put('Error')
+        exit(1)
 
     @staticmethod
-    def _check_msg(msg: bytes):
+    def _check_msg(msg: bytes) -> None:
         if msg == b'':
             raise Exception('connection closed')
         return msg
 
-    def _start_connection_handler(self):
-        # TODO: run this as process so you can kill externally?
-        def handle_plc_incoming():
+    def _start_connection_handler(self) -> None:
+        def handle_plc_incoming() -> None:
             self.ssock_io.settimeout(self.cfg.timeout)
             self.conn_plc.settimeout(self.cfg.timeout)
             try:
                 while True:
                     # recv from plc and send to io
                     msg = Bridge._get_message(self.conn_plc)
-                    print('PLC:', msg)
+                    # print('PLC:', msg)
                     msg = self._check_msg(msg)
                     self._send_message(msg, 'remoteIO')
 
                     # recv from io and send to plc
                     msg = Bridge._get_message(self.ssock_io)
-                    print('IO :', msg)
+                    # print('IO :', msg)
                     msg = self._check_msg(msg)
                     self._send_message(msg, 'plc')
 
             except socket.timeout:
-                print('Socket timed out!')
-                self.cfg.q_manage_in.put('_Error')
+                print('[{}] Socket timed out!'.format(self.name))
+                self._error()
 
             except Exception as exception:
                 print(exception)
-                self.cfg.q_manage_in.put('_Error')
+                self._error()
 
         Thread(target=handle_plc_incoming).start()
 
@@ -115,49 +116,65 @@ class Bridge(Process):
         payload = Bridge._get_payload(sock, length)
         return header + payload
 
-    def _init_connections(self):
+    def _init_connections(self) -> None:
         self._init_io_connection()
         self._init_plc_connection()
 
-    def _init_io_connection(self):
+    def _init_io_connection(self) -> None:
         self.sock_io = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock_io.settimeout(CONNECTION_TIMEOUT)
         self.sock_io.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try:
             if self.cfg.secure:
                 self._init_ssl_context()
                 self.ssock_io = self.ssl_context.wrap_socket(
                     self.sock_io, server_side=False, server_hostname=self.cfg.io_name)
-                print('Connecting to remoteIO {0} ({1}:{2})'.format(
-                    self.cfg.name, self.cfg.host_io, self.cfg.port_io))
+                print('[{}] Connecting to remoteIO ({}:{})'.format(
+                    self.name, self.cfg.host_io, self.cfg.port_io))
                 self.ssock_io.connect((self.cfg.host_io, self.cfg.port_io))
-                print('Connected to remotIO in ssl using', self.ssock_io.version())
+                print('[{}] Connected to remoteIO in ssl using {}'.format(
+                    self.name, self.ssock_io.version()))
             else:
                 self.ssock_io = self.sock_io
-                print('Connecting to remoteIO', self.cfg.name)
+                print('[{}] Connecting to remoteIO'.format(self.name))
                 self.ssock_io.connect((self.cfg.host_io, self.cfg.port_io))
-                print('Connected to remoteIO')
+                print('[{}] Connected to remoteIO'.format(self.name))
+        
+        except socket.timeout:
+            print('[{}] socket timed out during connection establishment!'.format(self.name))
+            self._error()
         except Exception as exc:
-            print('Exception during connection establishment:')
+            print('[{}] Exception during connection establishment:'.format(self.name))
             print(exc)
-            self.cfg.q_manage_in.put('_Error')
+            self._error()
 
-    def _init_plc_connection(self):
-        self.sock_plc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock_plc.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.sock_plc.bind(('', self.cfg.port_plc))
-        self.sock_plc.listen()
-        print('waiting for plc to connect to', self.cfg.name)
-        self.conn_plc, _addr = self.sock_plc.accept()
-        print('plc connected')
-        print('connected {0}:{1} to localhost:{2}'.format(_addr[0], _addr[1], self.cfg.port_plc))
+    def _init_plc_connection(self) -> None:
+        try:
+            self.sock_plc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.sock_plc.settimeout(CONNECTION_TIMEOUT)
+            self.sock_plc.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            self.sock_plc.bind(('', self.cfg.port_plc))
+            self.sock_plc.listen()
+            print('[{}] waiting for plc to connect'.format(self.name))
+            self.conn_plc, _addr = self.sock_plc.accept()
+            print('[{}] plc connected'.format(self.name))
+            print('[{}] connected {}:{} to localhost:{}'.format(
+                self.name, _addr[0], _addr[1], self.cfg.port_plc))
+        except socket.timeout:
+            print('[{}] socket timed out during connection establishment!'.format(self.name))
+            self._error()
+        except Exception as exc:
+            print('[{}] Exception during connection establishment:')
+            print(exc)
+            self._error()
 
-    def _init_ssl_context(self):
+    def _init_ssl_context(self) -> None:
         self.ssl_context = ssl.create_default_context(
             ssl.Purpose.SERVER_AUTH, cafile=self.cfg.io_cert)
         self.ssl_context.load_cert_chain(
             certfile=self.cfg.plc_cert, keyfile=self.cfg.plc_key)
 
-    def _send_message(self, msg: bytes, dest: str):
+    def _send_message(self, msg: bytes, dest: str) -> None:
         dest = dest.lower()
         if dest == 'remoteio':
             self.ssock_io.send(msg)
