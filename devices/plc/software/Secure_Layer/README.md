@@ -31,6 +31,7 @@ To create a new CA together with all the signed certificates do the following:
 
 ```sh
 cd $HOME/LICSTER/tools
+chmod +x cert_write create_new_certs_with_ca.sh gen_key
 ./create_new_certs_with_ca.sh
 ```
 
