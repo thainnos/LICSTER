@@ -46,7 +46,7 @@
 #define IFNAME1 't'
 
 /* USER CODE BEGIN 1 */
-
+extern unsigned int deviceID;
 /* USER CODE END 1 */
 
 /* Private variables ---------------------------------------------------------*/
@@ -233,7 +233,22 @@ static void low_level_init(struct netif *netif)
   heth.Init.MediaInterface = ETH_MEDIA_INTERFACE_RMII;
 
   /* USER CODE BEGIN MACADDRESS */
-    
+  MACAddr[0] = 0x00;
+  MACAddr[1] = 0x80;
+  MACAddr[2] = 0xE1;
+  MACAddr[3] = 0x00;
+  MACAddr[4] = 0x00;
+  MACAddr[5] = 0x00;
+
+  MACAddr[5] += deviceID;
+
+  printf("\rMAC Address: %02x:%02x:%02x:%02x:%02x:%02x \n", MACAddr[0], MACAddr[1], MACAddr[2],
+    MACAddr[3], MACAddr[4], MACAddr[5]);
+
+  heth.Init.MACAddr = &MACAddr[0];
+  heth.Init.RxMode = ETH_RXINTERRUPT_MODE;
+  heth.Init.ChecksumMode = ETH_CHECKSUM_BY_HARDWARE;
+  heth.Init.MediaInterface = ETH_MEDIA_INTERFACE_RMII;
   /* USER CODE END MACADDRESS */
 
   hal_eth_init_status = HAL_ETH_Init(&heth);
