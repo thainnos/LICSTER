@@ -234,6 +234,7 @@ void modbus_serve_connection(mbedtls_net_context *client_fd)
 		crt 	= IO2_CRT;
 		break;
 	default:
+		logger(LOG_WAR, 1, "USING DEFAULT CERT/KEY, THIS SHOULD NOT HAPPEN!");
 		prv_key = PRV_KEY;
 		crt 	= CRT;
 		break;
@@ -243,7 +244,7 @@ void modbus_serve_connection(mbedtls_net_context *client_fd)
 	 * 1. Load the certificates and private RSA key
 	 */
 	ret =  mbedtls_pk_parse_key( &pkey, (const unsigned char *) prv_key,
-			strlen(PRV_KEY) + 1, NULL, 0 );
+			strlen(prv_key) + 1, NULL, 0 );
 
 	if( ret != 0 )
 	{
@@ -408,12 +409,12 @@ static void modbus_serve(struct mbedtls_net_context *ctx)
 				logger(LOG_ERR, 1, "Error mbedtls_ssl_write.");
 			}
 #else
-            // TODO: Message Framing breaks direct connection with PLC
+			// TODO: Message Framing breaks direct connection with PLC
 			// frame the message
-			logger(LOG_DEB, 1, "Framing response");
-			memmove(sendbuffer + 1, sendbuffer, senddatalen);
-			sendbuffer[0] = ++senddatalen;
-			logger(LOG_DEB, 1, "Framed response");
+			//logger(LOG_DEB, 1, "Framing response");
+			//memmove(sendbuffer + 1, sendbuffer, senddatalen);
+			//sendbuffer[0] = ++senddatalen;
+			//logger(LOG_DEB, 1, "Framed response");
 			if(mbedtls_net_send(ctx, (unsigned char*) sendbuffer, senddatalen) != senddatalen)
 			{
 				logger(LOG_ERR, 1, "Error mbedtls_net_send.");
