@@ -256,7 +256,7 @@ static void low_level_init(struct netif *netif)
   
   /* set MAC hardware address */
   netif->hwaddr[0] =  heth.Init.MACAddr[0];
-  netif->hwaddr[1] =  heth.Init.  [1];
+  netif->hwaddr[1] =  heth.Init.MACAddr[1];
   netif->hwaddr[2] =  heth.Init.MACAddr[2];
   netif->hwaddr[3] =  heth.Init.MACAddr[3];
   netif->hwaddr[4] =  heth.Init.MACAddr[4];
