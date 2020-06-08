@@ -2,6 +2,8 @@
 """
 This module contains the BridgeManager class.
 """
+import os
+import signal
 from queue import Empty
 from threading import Lock, Thread, current_thread
 from time import sleep
@@ -9,6 +11,7 @@ from typing import List
 
 from bridge import Bridge
 from config import Config
+
 
 class BridgeManager:
     """
@@ -60,10 +63,19 @@ class BridgeManager:
             self.bridges.append(Bridge(cfg))
         self.bridge_lock.release()
 
+def _sigterm_handler(signum, frame):
+    print('Signal handler called with signal', signum)
+    pid = os.getpid()
+    os.kill(-pid, signal.SIGKILL)
+
+def _set_signals() -> None:
+    signal.signal(signal.SIGTERM, _sigterm_handler)
+
 def __main():
     """
     Main function. (This is to prevent linting complaints)
     """
+    _set_signals()
     cfgs = Config.load_from_config('config.ini')
     manager = BridgeManager()
     manager.add_bridges(cfgs)
