@@ -351,8 +351,7 @@ int main(void)
     printf("\rLOGLEVEL set to: %i!\n", showLogLevel);
     printf("\r%sInit done!\n", CRST);
     printf("\rWaiting for network switch...\n");
-    // TODO: set this to 30 for production
-    verbose_wait(5); // necessary for the network switch
+    verbose_wait(30); // necessary for the network switch
     if (HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_5)) {
         printf("\rGPIO_PIN_A05 is high\n");
         deviceID += 1;
