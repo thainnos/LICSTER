@@ -11,7 +11,8 @@ This software component manages modbus connections wrapped in TLS.
 3. [Bridge Manager](#bridge-manager)
    1. [What is the Bridge Manager?](#what-is-the-bridge-manager)
    2. [Running the Bridge Manager](#running-the-bridge-manager)
-   3. [Additional configuration (Optional)](#additional-configuration-optional)
+   3. [Removing the Bridge Manager](#removing-the-bridge-manager)
+   4. [Additional configuration (Optional)](#additional-configuration-optional)
 
 ## TLS
 ### What is TLS?
@@ -43,7 +44,7 @@ chmod +x cert_write create_new_certs_with_ca.sh gen_key
 
 ## Bridge Manager
 ### What is the Bridge Manager
-The Bridge Manager is the the creates, manages and restarts these TLS wrapped modbus connections. It is written in Python.
+The Bridge Manager is the application that creates, manages and restarts these TLS wrapped modbus connections. It is written in Python.
 
 ### Running the Bridge Manager
 Change into the Secure_Layer folder of the software section inside the PLC:
@@ -51,10 +52,24 @@ Change into the Secure_Layer folder of the software section inside the PLC:
 cd $HOME/LICSTER/devices/plc/software/Secure_Layer
 ```
 
-Start the Bridge Manager using python3:
+Start the Bridge Manager on boot:
 ```sh
-python3 bridge_manager.py
+chmod +x add_to_autostart.sh
+sudo ./add_to_autostart.sh
 ```
+
+### Removing the Bridge Manager
+Change into the Secure_Layer folder of the software section inside the PLC:
+```sh
+cd $HOME/LICSTER/devices/plc/software/Secure_Layer
+```
+
+Disable and remove the Bridge Manager from the boot procedure:
+```sh
+chmod +x remove_from_autostart.sh
+sudo ./remove_from_autostart.sh
+```
+
 
 ### Additional configuration (Optional)
 The Bridge Manager has a few options that can be configured. For more inforation check out its [configuration file](config.ini)
