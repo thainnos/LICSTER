@@ -24,6 +24,8 @@
 #include "mbedtls.h"
 
 /* USER CODE BEGIN 0 */
+#include "mbedtls/platform.h"
+#include "heap_mem.h"
 /* USER CODE END 0 */
 
 /* USER CODE BEGIN 1 */
@@ -40,6 +42,7 @@ void MX_MBEDTLS_Init(void)
    /**
   */
   /* USER CODE BEGIN 3 */
+	mbedtls_platform_set_calloc_free(rcalloc, rfree);
   /* USER CODE END 3 */
 
 }

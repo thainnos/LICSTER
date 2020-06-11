@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -28,6 +28,7 @@
 #include "ethernetif.h"
 #include <string.h>
 #include "cmsis_os.h"
+#include "lwip/tcpip.h"
 /* Within 'USER CODE' section, code will be kept by default at each generation */
 /* USER CODE BEGIN 0 */
 
@@ -36,8 +37,10 @@
 /* Private define ------------------------------------------------------------*/
 /* The time to block waiting for input. */
 #define TIME_WAITING_FOR_INPUT ( portMAX_DELAY )
+/* USER CODE BEGIN OS_THREAD_STACK_SIZE_WITH_RTOS */
 /* Stack size of the interface thread */
 #define INTERFACE_THREAD_STACK_SIZE ( 350 )
+/* USER CODE END OS_THREAD_STACK_SIZE_WITH_RTOS */
 /* Network interface name */
 #define IFNAME0 's'
 #define IFNAME1 't'
@@ -68,57 +71,7 @@ __ALIGN_BEGIN uint8_t Rx_Buff[ETH_RXBUFNB][ETH_RX_BUF_SIZE] __ALIGN_END; /* Ethe
 __ALIGN_BEGIN uint8_t Tx_Buff[ETH_TXBUFNB][ETH_TX_BUF_SIZE] __ALIGN_END; /* Ethernet Transmit Buffer */
 
 /* USER CODE BEGIN 2 */
-/*
-@Note: The DMARxDscrTab and DMATxDscrTab must be declared in a non cacheable memory region
-In this example they are declared in the first 256 Byte of SRAM1 memory, so this
-memory region is configured by MPU as a device memory (please refer to MPU_Config() in main.c).
 
-In this example the ETH buffers are located in the SRAM2 memory,
-since the data cache is enabled, so cache maintenance operations are mandatory.
-*/
-#if defined ( __CC_ARM )
-ETH_DMADescTypeDef DMARxDscrTab[ETH_RXBUFNB] __attribute__((at(0x20010000)));/* Ethernet Rx MA
-Descriptor */
-
-ETH_DMADescTypeDef DMATxDscrTab[ETH_TXBUFNB] __attribute__((at(0x20010080)));/* Ethernet Tx DMA
-Descriptor */
-
-uint8_t Rx_Buff[ETH_RXBUFNB][ETH_RX_BUF_SIZE] __attribute__((at(0x2004C000))); /* Ethernet Receive
-Buffer */
-
-uint8_t Tx_Buff[ETH_TXBUFNB][ETH_TX_BUF_SIZE] __attribute__((at(0x2004D7D0))); /* Ethernet Transmit
-Buffer */
-
-#elif defined ( __ICCARM__ ) /*!< IAR Compiler */
-#pragma data_alignment=4
-
-#pragma location=0x20010000
-__no_init ETH_DMADescTypeDef DMARxDscrTab[ETH_RXBUFNB];/* Ethernet Rx MA Descriptor */
-
-#pragma location=0x20010080
-__no_init ETH_DMADescTypeDef DMATxDscrTab[ETH_TXBUFNB];/* Ethernet Tx DMA Descriptor */
-
-#pragma location=0x2004C000
-__no_init uint8_t Rx_Buff[ETH_RXBUFNB][ETH_RX_BUF_SIZE]; /* Ethernet Receive Buffer */
-
-#pragma location=0x2004D7D0
-__no_init uint8_t Tx_Buff[ETH_TXBUFNB][ETH_TX_BUF_SIZE]; /* Ethernet Transmit Buffer */
-
-#elif defined ( __GNUC__ ) /*!< GNU Compiler */
-
-ETH_DMADescTypeDef DMARxDscrTab[ETH_RXBUFNB] __attribute__((section(".RxDecripSection")));/*
-Ethernet Rx MA Descriptor */
-
-ETH_DMADescTypeDef DMATxDscrTab[ETH_TXBUFNB] __attribute__((section(".TxDescripSection")));/*
-Ethernet Tx DMA Descriptor */
-
-uint8_t Rx_Buff[ETH_RXBUFNB][ETH_RX_BUF_SIZE] __attribute__((section(".RxarraySection"))); /*
-Ethernet Receive Buffer */
-
-uint8_t Tx_Buff[ETH_TXBUFNB][ETH_TX_BUF_SIZE] __attribute__((section(".TxarraySection"))); /*
-Ethernet Transmit Buffer */
-
-#endif
 /* USER CODE END 2 */
 
 /* Semaphore to signal incoming packets */
@@ -134,7 +87,7 @@ ETH_HandleTypeDef heth;
 
 void HAL_ETH_MspInit(ETH_HandleTypeDef* ethHandle)
 {
-  GPIO_InitTypeDef GPIO_InitStruct;
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
   if(ethHandle->Instance==ETH)
   {
   /* USER CODE BEGIN ETH_MspInit 0 */
@@ -280,23 +233,7 @@ static void low_level_init(struct netif *netif)
   heth.Init.MediaInterface = ETH_MEDIA_INTERFACE_RMII;
 
   /* USER CODE BEGIN MACADDRESS */
-  MACAddr[0] = 0x00;
-  MACAddr[1] = 0x80;
-  MACAddr[2] = 0xE1;
-  MACAddr[3] = 0x00;
-  MACAddr[4] = 0x00;
-  MACAddr[5] = 0x00;
-
-  MACAddr[5] += deviceID;
-
-  printf("\rMAC Address: %02x:%02x:%02x:%02x:%02x:%02x \n", MACAddr[0], MACAddr[1], MACAddr[2],
-    MACAddr[3], MACAddr[4], MACAddr[5]);
-
-  heth.Init.MACAddr = &MACAddr[0];
-  heth.Init.RxMode = ETH_RXINTERRUPT_MODE;
-  heth.Init.ChecksumMode = ETH_CHECKSUM_BY_HARDWARE;
-  heth.Init.MediaInterface = ETH_MEDIA_INTERFACE_RMII;
-    
+  ((uint8_t*) heth.Init.MACAddr)[5] += deviceID;
   /* USER CODE END MACADDRESS */
 
   hal_eth_init_status = HAL_ETH_Init(&heth);
@@ -338,11 +275,13 @@ static void low_level_init(struct netif *netif)
   
 /* create a binary semaphore used for informing ethernetif of frame reception */
   osSemaphoreDef(SEM);
-  s_xSemaphore = osSemaphoreCreate(osSemaphore(SEM) , 1 );
+  s_xSemaphore = osSemaphoreCreate(osSemaphore(SEM), 1);
 
 /* create the task that handles the ETH_MAC */
+/* USER CODE BEGIN OS_THREAD_DEF_CREATE_CMSIS_RTOS_V1 */
   osThreadDef(EthIf, ethernetif_input, osPriorityRealtime, 0, INTERFACE_THREAD_STACK_SIZE);
   osThreadCreate (osThread(EthIf), netif);
+/* USER CODE END OS_THREAD_DEF_CREATE_CMSIS_RTOS_V1 */  
   /* Enable MAC and DMA transmission and reception */
   HAL_ETH_Start(&heth);
 
@@ -487,6 +426,7 @@ static struct pbuf * low_level_input(struct netif *netif)
 
   /* get received frame */
   if (HAL_ETH_GetReceivedFrame_IT(&heth) != HAL_OK)
+  
     return NULL;
   
   /* Obtain the size of the packet and put it into the "len" variable. */
@@ -561,17 +501,18 @@ static struct pbuf * low_level_input(struct netif *netif)
  *
  * @param netif the lwip network interface structure for this ethernetif
  */
-void ethernetif_input( void const * argument ) 
+void ethernetif_input(void const * argument)
 {
   struct pbuf *p;
   struct netif *netif = (struct netif *) argument;
   
   for( ;; )
   {
-    if (osSemaphoreWait( s_xSemaphore, TIME_WAITING_FOR_INPUT)==osOK)
+    if (osSemaphoreWait(s_xSemaphore, TIME_WAITING_FOR_INPUT) == osOK)
     {
       do
       {   
+        LOCK_TCPIP_CORE();
         p = low_level_input( netif );
         if   (p != NULL)
         {
@@ -580,6 +521,7 @@ void ethernetif_input( void const * argument )
             pbuf_free(p);
           }
         }
+        UNLOCK_TCPIP_CORE();
       } while(p!=NULL);
     }
   }
@@ -687,8 +629,9 @@ u32_t sys_now(void)
   * @brief  This function sets the netif link status.
   * @param  netif: the network interface
   * @retval None
-  */  
+  */
 void ethernetif_set_link(void const *argument)
+
 {
   uint32_t regvalue = 0;
   struct link_str *link_arg = (struct link_str *)argument;

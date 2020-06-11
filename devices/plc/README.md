@@ -7,7 +7,9 @@ the setup of the Soft-PLC used for this testbed and the program that it executes
     2. [What is a Soft-PLC?](#what-is-a-soft-plc?)
 2. [The PLC as the heart of our testbed](#the-plc-as-the-heart-of-our-testbed)
     1. [Setup](#setup)
-    2. [Program](#program)
+    2. [Running the OpenPLC](#running-the-openplc)
+    3. [Running the OpenPLC in TLS mode (Optional)](#running-the-openplc-in-tls-mode-optional)
+    4. [Structure](#structure)
 
 ## PLC Basics
 As the successor of traditional relay circuits, which are basically switches that can be toggled electrically, the PLC
@@ -176,6 +178,17 @@ Start the PLC and check if status properly switches to *running*. Again, skim th
 </td></tr></table>
 
 Now your OpenPLC is up and running!
+
+### Running the OpenPLC in TLS mode (Optional)
+Follow the same instructions as in [Running the OpenPLC](#running-the-openplc), but use the following configuration for the Slave Devices:
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/slave_device01_tls.png" width=70%></img>
+</td></tr></table>
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/slave_device02_tls.png" width=70%></img>
+</td></tr></table>
 
 ### Structure
 <table align="center"><tr><td align="center" width="9999">

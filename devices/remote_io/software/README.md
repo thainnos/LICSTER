@@ -22,7 +22,29 @@ cd $HOME/LICSTER/devices/remote_io/software
 
 Build the firmware:
 ```sh
-make
+make -j$(nproc)
+```
+
+At the end, there must be an output like this:
+```sh
+   text    data     bss     dec     hex filename
+ 125588   12588  283172  421348   66de4 build/stm32f767.elf
+arm-none-eabi-objcopy -O ihex build/stm32f767.elf build/stm32f767.hex
+arm-none-eabi-objcopy -O binary -S build/stm32f767.elf build/stm32f767.bin
+```
+
+### Building TLS (Optional)
+
+**Important:** In order to build in TLS mode you need to first create corresponding certificates! More information [here](/devices/plc/software/Secure_Layer/README.md).
+
+Change into the software folder of the LICSTER remote IO:
+```sh
+cd $HOME/LICSTER/devices/remote_io/software
+```
+
+Build the firmware:
+```sh
+make -j$(nproc) config=tls
 ```
 
 At the end, there must be an output like this:
@@ -36,17 +58,9 @@ arm-none-eabi-objcopy -O binary -S build/stm32f767.elf build/stm32f767.bin
 ### Installing Flash Tool 
 
 There is a github project for the stm32 discovery line to program under linux.
-This is used to get the firmware on the remote IO boards:
+This is used to get the cd firmware on the remote IO boards:
 ```sh
-sudo apt-get install git build-essential libusb-1.0.0-dev cmake
-cd $HOME
-git clone git@github.com:texane/stlink.git
-cd stlink
-make release
-cd build/Release && make install DESTDIR=_install
-echo "export PATH=\$PATH:$HOME/stlink/build/Release/_install/usr/local/bin" >> $HOME/.bashrc
-echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:$HOME/stlink/build/Release/_install/usr/local/lib" >> $HOME/.bashrc
-source $HOME/.bashrc
+sudo apt-getlibusb-1.0.0-dev stlink-tools
 ```
 
 After this, connect the STM32 boards over USB to your computer and check the communication with:
@@ -64,7 +78,7 @@ openocd: "\x30\x36\x36\x44\x46\x46\x35\x33\x35\x31\x35\x35\x38\x37\x38"
 ```
 
 ### Flash the LICSTER Firmware
-If you have build the firmware by yourself you can directly executed the "flashall" script.
+If you have build the firmware by yourself you can directly execute the "flashall" script.
 Otherwise you have to rename the folder "release" into "build" bevore running the script:
 ```sh
 mv release build
@@ -72,7 +86,7 @@ mv release build
 
 With the "flashall" script, every connected STM32 board gets the LICSTER firmware:
 ```sh
-udo ./flashall.sh 
+sudo ./flashall.sh 
 ++++++++++++++++++++++++++++++++++++++++++++++++
 + Automatic ST-FLASHER by Matthias Niedermaier +
 + Flashing all devices detected by probe       +

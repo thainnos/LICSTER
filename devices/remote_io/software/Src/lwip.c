@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -27,14 +27,12 @@
 #include "ethernetif.h"
 
 /* USER CODE BEGIN 0 */
-#include "stm32f7xx_hal.h"
 /* USER CODE END 0 */
 /* Private function prototypes -----------------------------------------------*/
 /* ETH Variables initialization ----------------------------------------------*/
 void Error_Handler(void);
 
 /* USER CODE BEGIN 1 */
-
 /* USER CODE END 1 */
 /* Semaphore to signal Ethernet Link state update */
 osSemaphoreId Netif_LinkSemaphore = NULL;
@@ -51,7 +49,6 @@ uint8_t NETMASK_ADDRESS[4];
 uint8_t GATEWAY_ADDRESS[4];
 
 /* USER CODE BEGIN 2 */
-
 /* USER CODE END 2 */
 
 /**
@@ -108,11 +105,12 @@ void MX_LWIP_Init(void)
   link_arg.netif = &gnetif;
   link_arg.semaphore = Netif_LinkSemaphore;
   /* Create the Ethernet link handler thread */
-  osThreadDef(LinkThr, ethernetif_set_link, osPriorityNormal, 0, configMINIMAL_STACK_SIZE * 2);
+/* USER CODE BEGIN OS_THREAD_DEF_CREATE_CMSIS_RTOS_V1 */
+  osThreadDef(LinkThr, ethernetif_set_link, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE * 2);
   osThreadCreate (osThread(LinkThr), &link_arg);
+/* USER CODE END OS_THREAD_DEF_CREATE_CMSIS_RTOS_V1 */
 
 /* USER CODE BEGIN 3 */
-  
 /* USER CODE END 3 */
 }
 

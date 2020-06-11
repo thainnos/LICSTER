@@ -145,13 +145,46 @@ def index():
     return redirect('/view')
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """
+    Login view.
+    :return: The login.html view
+    Note: Has no functionality yet
+    """
+    return render_template('login.html')
+
+
+@app.route('/reset_password')
+def reset_password():
+    """
+    Password reset view.
+    :return: The password_reset.html view
+    Note: Has no functionality yet
+    """
+    return render_template('reset_password.html')
+
+
+@app.route('/admin')
+def admin():
+    """
+    Admin view.
+    :return: The admin.html view
+    Note: Has no functionality yet
+    """
+    return render_template('admin.html')
+
+
 @app.before_request
 def is_plc_connected():
-    if request.endpoint and request.endpoint != "static" and not plc.is_connected():
-        endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
-        plc.plc_connector.modbus_client.connect()
-        application_state = plc.get_application_state()
-        return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
+    if request.endpoint in ["login", "reset_password", "admin"]:
+        pass
+    else:
+        if request.endpoint and request.endpoint != "static" and not plc.is_connected():
+            endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
+            plc.plc_connector.modbus_client.connect()
+            application_state = plc.get_application_state()
+            return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
 
 
 # Starting point.
