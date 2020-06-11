@@ -36,6 +36,6 @@ you can print a 3d case like introduced [here](remote_io/README.md).
 | STM32F767                   |  31 Euro             |  2        |  62 Euro | [Amazon](https://amzn.to/2ULvPgr)       |
 | Colours 0.14 Copper Wires   |  12 Euro             |  1        |  12 Euro | [Amazon](https://amzn.to/37hDE4H)       |
 | PCBs (5 Pack)               |   7 Euro             |  1        |   7 Euro | [JLCPCB](https://jlcpcb.com/)           |
-| PCB components              |  10 Euro             |  1        |  10 Euro | see [remote_io]{remote_io/README.md}    |
+| PCB components              |  10 Euro             |  1        |  10 Euro | see [remote_io](remote_io/README.md)    |
 | 3d case                     |  40 Euro             |  1        |  40 Euro | [Treatstock](https://www.treatstock.com)|
 
