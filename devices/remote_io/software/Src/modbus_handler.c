@@ -409,12 +409,6 @@ static void modbus_serve(struct mbedtls_net_context *ctx)
 				logger(LOG_ERR, 1, "Error mbedtls_ssl_write.");
 			}
 #else
-			// TODO: Message Framing breaks direct connection with PLC
-			// frame the message
-			//logger(LOG_DEB, 1, "Framing response");
-			//memmove(sendbuffer + 1, sendbuffer, senddatalen);
-			//sendbuffer[0] = ++senddatalen;
-			//logger(LOG_DEB, 1, "Framed response");
 			if(mbedtls_net_send(ctx, (unsigned char*) sendbuffer, senddatalen) != senddatalen)
 			{
 				logger(LOG_ERR, 1, "Error mbedtls_net_send.");
