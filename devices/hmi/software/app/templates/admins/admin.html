@@ -1,35 +1,38 @@
 {% extends "base_admin.html" %} {% block content %}
 <h2>Users</h2>
-<table class="content-table">
-  <thead>
-    <tr>
-      <th>Username</th>
-      <th>User role</th>
-      <th>Ip Adress</th>
-      <th>Email Adress</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for client in clients %}
-    <tr>
-      <th>{{ client.username }}</th>
-      <th>{{ client.user_role }}</th>
-      {% if client.ipadresses %}
-      <th>
-        {% for ipadress in client.ipadresses %} {{ ipadress.ipaddress }} <br />
-        {% endfor %}
-      </th>
-      {% else %}
-      <th>No ip adress for this user.</th>
-      {% endif %} {% if client.email %}
-      <th>{{ client.email }}</th>
-      {% else %}
-      <th>-</th>
-      {% endif %}
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div style="overflow-x: auto;">
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>User role</th>
+        <th>Ip Adress</th>
+        <th>Email Adress</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for client in clients %}
+      <tr>
+        <th>{{ client.username }}</th>
+        <th>{{ client.user_role }}</th>
+        {% if client.ipadresses %}
+        <th>
+          {% for ipadress in client.ipadresses %} {{ ipadress.ipaddress }}
+          <br />
+          {% endfor %}
+        </th>
+        {% else %}
+        <th>No ip adress for this user.</th>
+        {% endif %} {% if client.email %}
+        <th>{{ client.email }}</th>
+        {% else %}
+        <th>-</th>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 <br />
 
 <div class="flex-container">
@@ -59,26 +62,28 @@
 </div>
 
 <h2>Snort Logs</h2>
-<table class="content-table">
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Classification</th>
-      <th>Priority</th>
-      <th>Date and Time</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for log in logs %}
-    <tr>
-      <th>{{ log.type }}</th>
-      <th>{{ log.classification }}</th>
-      <th>{{ log.priority }}</th>
-      <th>{{ log.datetime }}</th>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div style="overflow-x: auto;">
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Classification</th>
+        <th>Priority</th>
+        <th>Date and Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in logs %}
+      <tr>
+        <th>{{ log.type }}</th>
+        <th>{{ log.classification }}</th>
+        <th>{{ log.priority }}</th>
+        <th>{{ log.datetime }}</th>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 <br />
 <form action="/dashboard/reset_logs" method="post">
   {{ reset_form.csrf_token }} {{ reset_form.submit() }}
