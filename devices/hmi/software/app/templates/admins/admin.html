@@ -86,6 +86,9 @@
 </div>
 <br />
 <form action="/dashboard/reset_logs" method="post">
-  {{ reset_form.csrf_token }} {{ reset_form.submit() }}
+  {{ reset_form.csrf_token }}
+  <div style="margin: auto; width: 80px;">
+    {{ reset_form.submit() }}
+  </div>
 </form>
 {% endblock %}
