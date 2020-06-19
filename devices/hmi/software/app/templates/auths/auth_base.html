@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <title>{% block title %}{% endblock %} LICSTER</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+  </head>
+  <body>
+    <div class="form responsive">
+      {% block header %}{% endblock %}
+      {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

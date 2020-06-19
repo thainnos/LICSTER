@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-A">
+    <title>Low Cost Testbed HMI</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
+    {% if view %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/view.css') }}">
+    {% elif order %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/order.css') }}">
+    {% elif manual %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/order.css') }}">
+    {% elif disconnected %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/disconnected.css') }}">
+    {% endif %}
+</head>
+
+<body>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <span class="navbar-brand">LICSTER</span>
+    <div class="mr-auto">
+        <div class="navbar-nav">
+            {% if disconnected %}
+            <a class="nav-item nav-link active" href="{{ endpoint }}">Refresh</a>
+            {% else %}
+            <a class="nav-item nav-link {% if view %}active{% endif %}" href="{{ url_for('views.view') }}">View</a>
+            <a class="nav-item nav-link {% if order %}active{% endif %}" href="{{ url_for('views.order') }}">Orders</a>
+            <a class="nav-item nav-link {% if manual %}active{% endif %}" href="{{ url_for('views.manual') }}">Manual</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="{{ application_state.classes|join(' ') }}" id="application-state"> {{ application_state.text }}</div>
+    {% if not disconnected %}
+    <div class="{{ process_state.classes|join(' ') }}" id="process-state"> {{ process_state.text }}</div>
+    <div class="btn btn-danger" id="stop-button"> STOP</div>
+    {% endif %}
+</nav>
+
+{% if not disconnected %}
+<div id="content" class="container-fluid text-center">
+    {% block body %}{% endblock %}
+</div>
+{% endif %}
+
+<script type="text/javascript" src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
+{% if view %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/view.js') }}"></script>
+{% endif %}
+{% if order %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/order.js') }}"></script>
+{% endif %}
+{% if manual %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/manual.js') }}"></script>
+{% endif %}
+</body>
+
+</html>

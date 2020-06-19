@@ -1,0 +1,94 @@
+{% extends "base_admin.html" %} {% block content %}
+<h2>Users</h2>
+<div style="overflow-x: auto;">
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>User role</th>
+        <th>Ip Adress</th>
+        <th>Email Adress</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for client in clients %}
+      <tr>
+        <th>{{ client.username }}</th>
+        <th>{{ client.user_role }}</th>
+        {% if client.ipadresses %}
+        <th>
+          {% for ipadress in client.ipadresses %} {{ ipadress.ipaddress }}
+          <br />
+          {% endfor %}
+        </th>
+        {% else %}
+        <th>No ip adress for this user.</th>
+        {% endif %} {% if client.email %}
+        <th>{{ client.email }}</th>
+        {% else %}
+        <th>-</th>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br />
+
+<div class="flex-container">
+  <div class="flex1">
+    <h3>Add User</h3>
+    <div class="add-user">
+      <form action="/dashboard/add" method="post">
+        {{ add_form.csrf_token }} {{ add_form.username.label }} {{
+        add_form.username(class="username-input") }} {{ add_form.password.label
+        }} {{ add_form.password(class="password-input") }} {{
+        add_form.email.label }} {{ add_form.email() }}
+        <label for="role">Role</label>
+        {{ add_form.role() }} {{ add_form.submit() }}
+      </form>
+    </div>
+  </div>
+  <br />
+  <div class="flex2">
+    <h3>Delete User</h3>
+    <div class="delete-user">
+      <form action="/dashboard/delete" method="post">
+        {{ delete_form.csrf_token }} {{ delete_form.username() }} {{
+        delete_form.submit() }}
+      </form>
+    </div>
+  </div>
+</div>
+
+<h2>Snort Logs</h2>
+<div style="overflow-x: auto;">
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Classification</th>
+        <th>Priority</th>
+        <th>Date and Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in logs %}
+      <tr>
+        <th>{{ log.type }}</th>
+        <th>{{ log.classification }}</th>
+        <th>{{ log.priority }}</th>
+        <th>{{ log.datetime }}</th>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br />
+<form action="/dashboard/reset_logs" method="post">
+  {{ reset_form.csrf_token }}
+  <div style="margin: auto; width: 80px;">
+    {{ reset_form.submit() }}
+  </div>
+</form>
+{% endblock %}

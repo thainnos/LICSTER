@@ -1,50 +1,102 @@
 # Low-cost ICS Testbed - HMI
 
-Install unclutter to disable mouse pointer on the HMI.
-```zsh
-sudo apt install unclutter npm
-```
+## Installation
 
-Install dependencies for LICSTER/python3.
-```zsh
-sudo python3 -m pip install pymodbus
-```
+### Clone the repository
 
 Create the folder "gits" in the home path and switch to it.
-```zsh
+
+```
 mkdir gits
 cd gits
 ```
 
 Clone the git of the low cost testbed.
-```zsh
+
+```
 git clone https://github.com/hsainnos/LICSTER.git
 ```
 
 Change into the correct folder.
-```zsh
+
+```
 cd ~/gits/LICSTER/devices/hmi
 ```
 
-Copy the autostart file to its correct place.
-```zsh
-mkdir -p ~/.config/lxsession/lxde-pi/
-cp autostart ~/.config/lxsession/lxde-pi/autostart
+
+### Install all dependencies
+
+
+#### Install unclutter to disable the mouse pointer on the HMI.
+
+```
+sudo apt install unclutter npm
 ```
 
-Install bootstrap and jQuerry.
-```zsh
+#### Install the python dependencies.
+
+```
+sudo python3 -m pip install pymodbus WTForms Flask-WTF gunicorn
+```
+
+#### Install bootstrap and jQuery.
+
+```
 cd ~/gits/LICSTER/devices/hmi/software/static
 npm install package.json
 ```
 
-Configure IP Adress of the HMI.
-```zsh
+## Setup
+
+#### Initialize the Web Application
+
+Initialize the database.
+
+```
+cd ~/gits/LICSTER/devices/hmi/software
+flask init-db
+```
+
+Copy the autostart file to its correct place.
+
+```
+cd ~/gits/LICSTER/devices/hmi/
+mkdir -p ~/.config/lxsession/lxde-pi/
+cp autostart ~/.config/lxsession/lxde-pi/autostart
+```
+
+Make the startscript executable.
+
+```
+cd ~/gits/LICSTER/devices/hmi/
+chmod +x startscript.sh
+```
+
+#### Enable Emails if the Intrusion Detection System finds something
+
+Open the crontab file as root:
+
+```
+sudo nano /etc/crontab
+```
+
+Add the following lines at the end of the file.
+
+```
+* * * * *   root cd /home/pi/gits/LICSTER/devices/hmi/LogReader && ./minutely
+#
+```
+
+Press __Strg__ + __O__ to save the file. Then press __Strg__ + __X__ to leave the editor. 
+
+#### Configure the IP Adress of the HMI.
+
+```
 sudo nano /etc/network/interfaces
 ```
 
-The file should look like this at the end.
-With this, you will have a static IP and if possible also one from DHCP. 
+The file should look like this at the end. With this, you will have a static IP and if possible also one from DHCP.
+
 ```
 # interfaces(5) file used by ifup(8) and ifdown(8)
 
@@ -63,4 +115,14 @@ iface eth0:0 inet static
     address 192.168.0.20
     netmask 255.255.255.0
 
+```
+
+
+## How can I?
+
+#### Change my HMI password
+
+```
+cd ~/gits/LICSTER/devices/hmi/software/
+flask change-hmi-password
 ```
