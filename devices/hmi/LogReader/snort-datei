@@ -1,0 +1,252 @@
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:41:57.832239 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:47808 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371146  Ack: 0x3E915  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:41:58.728815 192.168.0.80:34813 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0xF67882C7  Ack: 0x42699C  Win: 0xFAE4  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:41:59.732223 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:47908 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x143713D0  Ack: 0x3EB3B  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:00.784874 192.168.0.80:47581 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x62F694C6  Ack: 0x43E2DD  Win: 0xFAE4  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:01.732170 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48012 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371674  Ack: 0x3ED77  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:02.752265 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48066 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x143717D2  Ack: 0x3EE9F  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:03.722220 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48116 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371918  Ack: 0x3EFB3  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:04.706995 192.168.0.80:44333 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x1FE78FD6  Ack: 0x46F8C6  Win: 0xFAE4  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:05.738450 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48222 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371BC8  Ack: 0x3F1F9  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:06.712122 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48272 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371D0E  Ack: 0x3F30D  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:07.737142 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48326 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371E6C  Ack: 0x3F435  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:08.722723 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48377 IpLen:20 DgmLen:52 DF
+***AP*** Seq: 0x14371FB2  Ack: 0x3F549  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:09.732159 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48430 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14372110  Ack: 0x3F671  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:10.719758 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48481 IpLen:20 DgmLen:52 DF
+***AP*** Seq: 0x14372256  Ack: 0x3F785  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:11.705315 192.168.0.80:48159 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x48812977  Ack: 0x4C69D8  Win: 0xFAE4  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:12.717306 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48587 IpLen:20 DgmLen:54 DF
+***AP*** Seq: 0x14372506  Ack: 0x3F9CB  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:13.710869 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48637 IpLen:20 DgmLen:52 DF
+***AP*** Seq: 0x1437264C  Ack: 0x3FADF  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:14.712323 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48691 IpLen:20 DgmLen:54 DF
+***AP*** Seq: 0x143727AA  Ack: 0x3FC07  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:15.702347 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48743 IpLen:20 DgmLen:54 DF
+***AP*** Seq: 0x143728FC  Ack: 0x3FD25  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:16.778227 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48798 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14372A68  Ack: 0x3FE59  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Attempted Denial of Service] [Priority: 2]
+05/05-13:42:17.743921 192.168.0.80:56337 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0xADABDDF1  Ack: 0x50E349  Win: 0xFAE4  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:41:57.832239 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:47808 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371146  Ack: 0x3E915  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:41:58.728815 192.168.0.80:34813 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0xF67882C7  Ack: 0x42699C  Win: 0xFAE4  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:41:59.732223 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:47908 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x143713D0  Ack: 0x3EB3B  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:00.784874 192.168.0.80:47581 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x62F694C6  Ack: 0x43E2DD  Win: 0xFAE4  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:01.732170 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48012 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371674  Ack: 0x3ED77  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:02.752265 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48066 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x143717D2  Ack: 0x3EE9F  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:03.722220 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48116 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371918  Ack: 0x3EFB3  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:04.706995 192.168.0.80:44333 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x1FE78FD6  Ack: 0x46F8C6  Win: 0xFAE4  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:05.738450 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48222 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371BC8  Ack: 0x3F1F9  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:06.712122 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48272 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371D0E  Ack: 0x3F30D  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:07.737142 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48326 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14371E6C  Ack: 0x3F435  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:08.722723 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48377 IpLen:20 DgmLen:52 DF
+***AP*** Seq: 0x14371FB2  Ack: 0x3F549  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:09.732159 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48430 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14372110  Ack: 0x3F671  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:10.719758 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48481 IpLen:20 DgmLen:52 DF
+***AP*** Seq: 0x14372256  Ack: 0x3F785  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:11.705315 192.168.0.80:48159 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x48812977  Ack: 0x4C69D8  Win: 0xFAE4  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:12.717306 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48587 IpLen:20 DgmLen:54 DF
+***AP*** Seq: 0x14372506  Ack: 0x3F9CB  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:13.710869 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48637 IpLen:20 DgmLen:52 DF
+***AP*** Seq: 0x1437264C  Ack: 0x3FADF  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:14.712323 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48691 IpLen:20 DgmLen:54 DF
+***AP*** Seq: 0x143727AA  Ack: 0x3FC07  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:15.702347 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48743 IpLen:20 DgmLen:54 DF
+***AP*** Seq: 0x143728FC  Ack: 0x3FD25  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:16.778227 192.168.0.30:46084 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x10 ID:48798 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0x14372A68  Ack: 0x3FE59  Win: 0x7210  TcpLen: 20
+
+[**] [1:1001005:0] Modbus threshold violation 52 [**]
+[Classification: Denial of Service] [Priority: 2]
+05/05-13:42:17.743921 192.168.0.80:56337 -> 192.168.0.52:502
+TCP TTL:64 TOS:0x0 ID:0 IpLen:20 DgmLen:40 DF
+***A**** Seq: 0xADABDDF1  Ack: 0x50E349  Win: 0xFAE4  TcpLen: 20
+

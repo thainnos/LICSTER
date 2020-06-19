@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+  <title>PIN Verification</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/loginhmi.css') }}">
+
+</head>
+
+
+<body>
+  
+  <div class="wrapper">
+    <div class="pin-login " id="mainPinLogin">
+        <form id="myForm" action="" method="POST" novalidate>
+            {{ form.csrf_token() }}
+            {{ form.password(class_="pin-login__text") }}
+        </form>
+      <div class="pin-login__numpad">
+        <!--
+        <div class="pin-login__key">0</div>
+        <div class="pin-login__key material-icons">done</div> -->
+
+        </div>
+      </div>
+      <script src="{{ url_for('static', filename='js/hmi.js') }}"></script>
+      <script>
+        new PinLogin({
+          el: document.getElementById("mainPinLogin"),
+        });
+
+      </script>
+    </div>
+</body>
