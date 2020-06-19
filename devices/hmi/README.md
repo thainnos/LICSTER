@@ -72,23 +72,6 @@ cd ~/gits/LICSTER/devices/hmi/
 chmod +x startscript.sh
 ```
 
-#### Enable Emails if the Intrusion Detection System finds something
-
-Open the crontab file as root:
-
-```
-sudo nano /etc/crontab
-```
-
-Add the following lines at the end of the file.
-
-```
-* * * * *   root cd /home/pi/gits/LICSTER/devices/hmi/LogReader && ./minutely
-#
-```
-
-Press __Strg__ + __O__ to save the file. Then press __Strg__ + __X__ to leave the editor. 
-
 #### Configure the IP Adress of the HMI.
 
 ```
@@ -126,3 +109,20 @@ iface eth0:0 inet static
 cd ~/gits/LICSTER/devices/hmi/software/
 flask change-hmi-password
 ```
+
+#### Enable Emails if the Intrusion Detection System finds something
+
+Open the crontab file as root:
+
+```
+sudo nano /etc/crontab
+```
+
+Add the following lines at the end of the file.
+
+```
+* * * * *   root cd /home/pi/gits/LICSTER/devices/hmi/LogReader && ./minutely
+#
+```
+
+Press __Strg__ + __O__ to save the file. Then press __Strg__ + __X__ to leave the editor. 
