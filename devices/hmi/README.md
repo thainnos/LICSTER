@@ -42,7 +42,7 @@ sudo python3 -m pip install pymodbus WTForms Flask-WTF gunicorn
 #### Install bootstrap and jQuery.
 
 ```
-cd ~/gits/LICSTER/devices/hmi/software/static
+cd ~/gits/LICSTER/devices/hmi/software/app/static
 npm install package.json
 ```
 
