@@ -18,14 +18,11 @@ def is_plc_connected():
     :return: Renders base.html Template
     :rtype: HTML
     '''
-    if request.endpoint not in ['views.view', 'views.index'] and g.user is None:
-        return redirect(url_for('auths.login'))
-    else:
-        if request.endpoint and request.endpoint != "static" and not plc.is_connected():
-            endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
-            plc.plc_connector.modbus_client.connect()
-            application_state = plc.get_application_state()
-            return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
+    if request.endpoint and request.endpoint != "static" and not plc.is_connected():
+        endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
+        plc.plc_connector.modbus_client.connect()
+        application_state = plc.get_application_state()
+        return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
 
 
 def login_required(view):
