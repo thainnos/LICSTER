@@ -132,13 +132,6 @@ If you use the 3d printed case, we suggest to directly solder wires to the remot
 | 18             | 2           | nc          | nc    |
 
 
-## Alternatives
-
-Should you, for any reason whatsoever, do not want to use the open remote IO solution provided here, you can easily exchange
-it with most any other remote IO component on the market that is able to communicate via Modbus/TCP, such as [Remote IO][3.0].
-
-[3.0]: https://amzn.to/2B4KCLH
-
 ## Remote IO Software
 * [Software](software/README.md)
 

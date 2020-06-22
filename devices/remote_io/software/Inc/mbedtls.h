@@ -8,7 +8,7 @@
   ******************************************************************************
    * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2019 STMicroelectronics.
+  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
   * All rights reserved.</center></h2>
   *
   * This software component is licensed by ST under Ultimate Liberty license
@@ -30,17 +30,20 @@
 /* Includes ------------------------------------------------------------------*/
 #include "mbedtls_config.h"
 /* USER CODE BEGIN 0 */
+
 /* USER CODE END 0 */
 
 /* Global variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN 1 */
+
 /* USER CODE END 1 */
 
 /* MBEDTLS init function */
 void MX_MBEDTLS_Init(void);
 
 /* USER CODE BEGIN 2 */
+
 /* USER CODE END 2 */
 
 #ifdef __cplusplus

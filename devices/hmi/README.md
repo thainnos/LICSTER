@@ -61,8 +61,8 @@ Copy the autostart file to its correct place.
 
 ```
 cd ~/gits/LICSTER/devices/hmi/
-mkdir -p ~/.config/lxsession/lxde-pi/
-cp autostart ~/.config/lxsession/lxde-pi/autostart
+mkdir -p ~/.config/lxsession/LXDE-pi/
+cp autostart ~/.config/lxsession/LXDE-pi/autostart
 ```
 
 Make the startscript executable.
@@ -71,23 +71,6 @@ Make the startscript executable.
 cd ~/gits/LICSTER/devices/hmi/
 chmod +x startscript.sh
 ```
-
-#### Enable Emails if the Intrusion Detection System finds something
-
-Open the crontab file as root:
-
-```
-sudo nano /etc/crontab
-```
-
-Add the following lines at the end of the file.
-
-```
-* * * * *   root cd /home/pi/gits/LICSTER/devices/hmi/LogReader && ./minutely
-#
-```
-
-Press __Strg__ + __O__ to save the file. Then press __Strg__ + __X__ to leave the editor. 
 
 #### Configure the IP Adress of the HMI.
 
@@ -127,6 +110,23 @@ cd ~/gits/LICSTER/devices/hmi/software/
 flask change-hmi-password
 ```
 
+#### Enable Emails if the Intrusion Detection System finds something
+
+Open the crontab file as root:
+
+```
+sudo nano /etc/crontab
+```
+
+Add the following lines at the end of the file.
+
+```
+* * * * *   root cd /home/pi/gits/LICSTER/devices/hmi/LogReader && ./minutely
+#
+```
+
+Press __Strg__ + __O__ to save the file. Then press __Strg__ + __X__ to leave the editor. 
+
 ## Troubleshooting
 
 #### Disconnected
@@ -134,3 +134,4 @@ flask change-hmi-password
 The HMI shows, that it is disconnected even though everything is connected as it should be. This is not a problem of the HMI, but of the PLC. 
 
 To fix this problem you can either flash the SD card of the PLC again or remove the gits repository from the PLC and follow the installation instructions for the PLC.
+
