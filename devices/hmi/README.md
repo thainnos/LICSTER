@@ -126,3 +126,11 @@ iface eth0:0 inet static
 cd ~/gits/LICSTER/devices/hmi/software/
 flask change-hmi-password
 ```
+
+## Troubleshooting
+
+#### Disconnected
+
+The HMI shows, that it is disconnected even though everything is connected as it should be. This is not a problem of the HMI, but of the PLC. 
+
+To fix this problem you can either flash the SD card of the PLC again or remove the gits repository from the PLC and follow the installation instructions for the PLC.
