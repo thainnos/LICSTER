@@ -5,9 +5,11 @@ the setup of the Soft-PLC used for this testbed and the program that it executes
 1. [PLC Basics](#plc-basics)
     1. [What is a PLC?](#what-is-a-plc?)
     2. [What is a Soft-PLC?](#what-is-a-soft-plc?)
-2. [The PLC as the heart of our testbed](#the-plc-as-the-heart-of-our-testbed)
+2. [The PLC as heart of the testbed](#the-plc-as-heart-of-the-testbed)
     1. [Setup](#setup)
-    2. [Program](#program)
+    2. [Running the OpenPLC](#running-the-openplc)
+    3. [Running the OpenPLC in TLS mode (Optional)](#running-the-openplc-in-tls-mode-optional)
+    4. [Structure](#structure)
 
 ## PLC Basics
 As the successor of traditional relay circuits, which are basically switches that can be toggled electrically, the PLC
@@ -68,7 +70,7 @@ iface eth0:0 inet static
 
 ```
 
-It will set up two interfaces. The `eth0:0` as the device needed for the communication within the testbed and the `eth0` as your default connection to the internet. Should you have a WiFi interface and intend to configure that as the internet connection change the folloing two lines in the `/etc/network/interfaces` configuration.
+It will set up two interfaces. The `eth0:0` as the device needed for the communication within the testbed and the `eth0` as your default connection to the internet with dhcp. Should you have a WiFi interface and intend to configure that as the internet connection change the folloing two lines in the `/etc/network/interfaces` configuration.
 
 ```
 # interfaces(5) file used by ifup(8) and ifdown(8)
@@ -94,6 +96,11 @@ This assumes that your WiFi interface is called `wifi0`. You can validate that w
 
 
 ### Fetching Dependencies
+Installing necessary dependencies.
+```zsh
+sudo apt install git gcc-arm-none-eabi stlink-tools
+```
+
 For the sake of simplicity, create a folder called gits in your home directory and change your working directory into it.
 ```zsh
 cd $HOME
@@ -116,6 +123,12 @@ To install OpenPLCv3 for Linux, simply type the command:
 ```zsh
 ./install.sh linux
 ```
+
+After the installation, restart the Raspberry Pi:
+```zsh
+sudo reboot
+```
+
 ### Running the OpenPLC
 Open your browser and go to http://192.168.0.30:8080/ and log in with the default credentials *username*: openplc *password*: openplc.
 
@@ -176,6 +189,17 @@ Start the PLC and check if status properly switches to *running*. Again, skim th
 </td></tr></table>
 
 Now your OpenPLC is up and running!
+
+### Running the OpenPLC in TLS mode (Optional)
+Follow the same instructions as in [Running the OpenPLC](#running-the-openplc), but use the following configuration for the Slave Devices:
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/slave_device01_tls.png" width=70%></img>
+</td></tr></table>
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/slave_device02_tls.png" width=70%></img>
+</td></tr></table>
 
 ### Structure
 <table align="center"><tr><td align="center" width="9999">
