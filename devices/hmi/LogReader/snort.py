@@ -4,7 +4,7 @@ from pathlib import Path
 from breachmail import breach_mail
 
 
-filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "snort-datei")
+filepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "alert")
 
 with open(filepath, 'r') as f:
     line_array = f.readlines()

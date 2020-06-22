@@ -42,7 +42,7 @@ sudo python3 -m pip install pymodbus WTForms Flask-WTF gunicorn
 #### Install bootstrap and jQuery.
 
 ```
-cd ~/gits/LICSTER/devices/hmi/software/static
+cd ~/gits/LICSTER/devices/hmi/software/app/static
 npm install package.json
 ```
 
@@ -126,3 +126,12 @@ Add the following lines at the end of the file.
 ```
 
 Press __Strg__ + __O__ to save the file. Then press __Strg__ + __X__ to leave the editor. 
+
+## Troubleshooting
+
+#### Disconnected
+
+The HMI shows, that it is disconnected even though everything is connected as it should be. This is not a problem of the HMI, but of the PLC. 
+
+To fix this problem you can either flash the SD card of the PLC again or remove the gits repository from the PLC and follow the installation instructions for the PLC.
+
