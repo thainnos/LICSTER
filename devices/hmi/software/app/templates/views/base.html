@@ -29,6 +29,11 @@
             <a class="nav-item nav-link {% if order %}active{% endif %}" href="{{ url_for('views.order') }}">Orders</a>
             <a class="nav-item nav-link {% if manual %}active{% endif %}" href="{{ url_for('views.manual') }}">Manual</a>
             {% endif %}
+            {% if user %}
+            <a class="nav-item nav-link" href="{{ url_for('auths.login') }}">Log out</a>
+            {% else %}
+            <a class="nav-item nav-link" href="{{ url_for('auths.logout') }}">Log in</a>
+            {% endif %}
         </div>
     </div>
     <div class="{{ application_state.classes|join(' ') }}" id="application-state"> {{ application_state.text }}</div>
