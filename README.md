@@ -1,5 +1,7 @@
 # Low-cost ICS Testbed
 
+RemoteIO: ![C/C++ CI](https://github.com/hsainnos/LICSTER/workflows/C/C++%20CI/badge.svg)
+
 The project aims to help setup a minimal, low-cost *Industrial Control System (ICS)* testbest for students,
 researchers, or anyone with an interest in industrial security.
 The project contains a list of affordable hardware to build the minimalistic ICS with, instructions,
