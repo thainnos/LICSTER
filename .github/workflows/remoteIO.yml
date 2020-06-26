@@ -13,7 +13,8 @@ jobs:
 
     steps:
     - name: arm-none-eabi-gcc
-    - uses: fiam/arm-none-eabi-gcc@v1
+      uses: fiam/arm-none-eabi-gcc@v1
       with:
-        release: '9-2019-q4' # The arm-none-eabi-gcc release to use.
-    - run: make -C devices/remote_io/software
+        release: '9-2019-q4' # The arm-none-eabi-gcc release to use.       
+    - name: make
+      run: make -C devices/remote_io/software
