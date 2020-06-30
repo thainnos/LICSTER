@@ -1,0 +1,30 @@
+#ssh rules
+#1000000-1001000
+alert icmp any any -> any any (msg:"PING detected, Rule working";itype:8; sid:111111)
+
+
+#Strange Traffic 100
+alert tcp !$HOME_NET any -> 192.168.0.10 22 (msg:"SSH Request from EXTERNAL NET to 192.168.0.10"; content:"SSH"; nocase; offset:0; depth:4; classtype: attempted-user; sid:1000101; rev:1;)
+alert tcp !$HOME_NET any -> 192.168.0.20 22 (msg:"SSH Request from EXTERNAL NET to 192.168.0.20"; content:"SSH"; nocase; offset:0; depth:4; classtype: attempted-user; sid:1000102; rev:1;)
+alert tcp !$HOME_NET any -> 192.168.0.30 22 (msg:"SSH Request from EXTERNAL NET to 192.168.0.30"; content:"SSH"; nocase; offset:0; depth:4; classtype: attempted-user; sid:1000103; rev:1;)
+alert tcp !$HOME_NET any -> 192.168.0.51 22 (msg:"SSH Request from EXTERNAL NET to 192.168.0.51"; content:"SSH"; nocase; offset:0; depth:4; classtype: attempted-user; sid:1000104; rev:1;)
+alert tcp !$HOME_NET any -> 192.168.0.52 22 (msg:"SSH Request from EXTERNAL NET to 192.168.0.52"; content:"SSH"; nocase; offset:0; depth:4; classtype: attempted-user; sid:1000105; rev:1;)
+
+
+# Brute Force 200
+alert tcp any any -> any 22 (msg:"SSH Brute Force Attempt"; flow:established, to_server; content:"SSH"; nocase; offset:0; depth:4; detection_filter:track by_src, count 30, seconds 1; classtype: attempted-user; sid:1000201; rev:1;)
+
+
+# DOS 300
+alert tcp any any -> 192.168.0.10 22 (msg:"SSH DOS against 192.168.0.10"; detection_filter:track by_src, count 50, seconds 1; classtype: denial-of-service; sid:1000301; rev:1;)
+alert tcp any any -> 192.168.0.20 22 (msg:"SSH DOS against 192.168.0.20"; detection_filter:track by_src, count 50, seconds 1; classtype: denial-of-service; sid:1000302; rev:1;)
+alert tcp any any -> 192.168.0.30 22 (msg:"SSH DOS against 192.168.0.30"; detection_filter:track by_src, count 50, seconds 1; classtype: denial-of-service; sid:1000303; rev:1;)
+alert tcp any any -> 192.168.0.51 22 (msg:"SSH DOS against 192.168.0.51"; detection_filter:track by_src, count 50, seconds 1; classtype: denial-of-service; sid:1000304; rev:1;)
+alert tcp any any -> 192.168.0.52 22 (msg:"SSH DOS against 192.168.0.52"; detection_filter:track by_src, count 50, seconds 1; classtype: denial-of-service; sid:1000305; rev:1;)
+
+alert tcp any any -> 192.168.0.10 22 (msg:"SSH DDOS against 192.168.0.10"; detection_filter:track by_dst, count 500, seconds 1; classtype: denial-of-service; sid:1000306; rev:1;)
+alert tcp any any -> 192.168.0.20 22 (msg:"SSH DDOS against 192.168.0.20"; detection_filter:track by_dst, count 500, seconds 1; classtype: denial-of-service; sid:1000307; rev:1;)
+alert tcp any any -> 192.168.0.30 22 (msg:"SSH DDOS against 192.168.0.30"; detection_filter:track by_dst, count 500, seconds 1; classtype: denial-of-service; sid:1000308; rev:1;)
+alert tcp any any -> 192.168.0.51 22 (msg:"SSH DDOS against 192.168.0.51"; detection_filter:track by_dst, count 500, seconds 1; classtype: denial-of-service; sid:1000309; rev:1;)
+alert tcp any any -> 192.168.0.52 22 (msg:"SSH DDOS against 192.168.0.52"; detection_filter:track by_dst, count 500, seconds 1; classtype: denial-of-service; sid:1000310; rev:1;)
+
