@@ -98,3 +98,16 @@ cite the work you can use the official bibtex entry:
     doi = {10.14236/ewic/icscsr19.1}\
 }
 </pre>
+
+# Contributers
+
+|Name                   |Contribution                                  |
+|-----------------------|----------------------------------------------|
+|Fabian Klemm           |Secure Webapplication for HMI                 |
+|Eric Hoffmann          |Intrusion Detection System                    |
+|Raphael Hausmanninger  |Secure Communication between PLC and Remote-IO|
+|Michael Janzer         |Intrusion Detection System                    |
+|Muhammet Bilbey        |Secure Communication between PLC and Remote-IO|
+|Athanasios Luludis     |Secure Webapplication for HMI                 |
+|Janis Schickram        |Intrusion Detection System                    |
+
