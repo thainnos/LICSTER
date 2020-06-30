@@ -82,6 +82,23 @@ However, the assembly is not as difficult as expected.
 4. Testing LICSTER
 5. Have fun and make the world more secure 
 
+
+# Contributers
+
+|Name                   |Contribution                                  | 
+|-----------------------|----------------------------------------------|
+|Matthias Niedermaier   |Maintainer                                    |
+|Felix Sauer            |Developer                                     |
+|Susanne Kießling       |Learning concepts                             |
+|Dominik Merli          |Coordinator                                   |
+|Fabian Klemm           |Secure webapplication for HMI                 |
+|Eric Hoffmann          |Intrusion detection system                    |
+|Raphael Hausmanninger  |Secure communication between PLC and Remote-IO|
+|Michael Janzer         |Intrusion detection system                    |
+|Muhammet Bilbey        |Secure communication between PLC and Remote-IO|
+|Athanasios Luludis     |Secure webapplication for HMI                 |
+|Janis Schickram        |Intrusion detection system                    |
+
 # Paper
 You find the research paper [here](https://www.scienceopen.com/document?vid=4fa78131-80f5-4fca-b45a-bfd6a04ae2cc). To
 cite the work you can use the official bibtex entry:
@@ -99,15 +116,4 @@ cite the work you can use the official bibtex entry:
 }
 </pre>
 
-# Contributers
-
-|Name                   |Contribution                                  |
-|-----------------------|----------------------------------------------|
-|Fabian Klemm           |Secure Webapplication for HMI                 |
-|Eric Hoffmann          |Intrusion Detection System                    |
-|Raphael Hausmanninger  |Secure Communication between PLC and Remote-IO|
-|Michael Janzer         |Intrusion Detection System                    |
-|Muhammet Bilbey        |Secure Communication between PLC and Remote-IO|
-|Athanasios Luludis     |Secure Webapplication for HMI                 |
-|Janis Schickram        |Intrusion Detection System                    |
 
