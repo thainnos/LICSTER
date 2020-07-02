@@ -1,5 +1,43 @@
 # Low-cost ICS Testbed - ScadaLTS
 
+The standard set-up is to use the release images of each Raspberry Pi.
+
+## Usage of SCADA ScadaLTS
+
+ScadaLTS is not designed to run on a Raspberry Pi.
+Because of this, it takes some minutes to boot.
+After this, it is accesible on http.
+
+http://192.168.0.10:8080/ScadaBR
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/login.png" width=70%></img>
+</td></tr></table>
+
+The login is the default login of ScadaLTS admin:admin.
+
+After the login, you can see the current values of the sensors and actuators.
+Furthermore, the order count is displayed.
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/default.png" width=70%></img>
+</td></tr></table>
+
+With the historian features of ScadaLTS you can view the historic data.
+For example how the order count changes over time.
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/historyorder.png" width=70%></img>
+</td></tr></table>
+
+
+## Set-up ScadaLTS by your own (optional)
+
+The set-up of ScadaLTS is difficult on a Raspberry Pi.
+The recommended procedure is to use the release image!
+
+### Configure the network interface
+
 Configure IP Adress of the Scada Raspberry Pi.
 ```zsh
 sudo nano /etc/network/interfaces
@@ -27,7 +65,7 @@ iface eth0:0 inet static
 
 ```
 
-## Install tomcat7 (SCADA-LTS)
+### Install tomcat7
 
 Create tomcat directory:
 ```zsh

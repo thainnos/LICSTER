@@ -1,0 +1,37 @@
+#icmp rules
+#sid range: 1003000-1003999
+
+#Portscan
+alert icmp any any -> 192.168.0.10 any (msg:"Ping nmap Portscan 192.168.0.10"; dsize:0; itype:8; classtype: network-scan; sid:1003000; rev:1;)
+alert icmp any any -> 192.168.0.20 any (msg:"Ping nmap Portscan 192.168.0.20"; dsize:0; itype:8; classtype: network-scan; sid:1003001; rev:1;)
+alert icmp any any -> 192.168.0.30 any (msg:"Ping nmap Portscan 192.168.0.30"; dsize:0; itype:8; classtype: network-scan; sid:1003002; rev:1;)
+alert icmp any any -> 192.168.0.51 any (msg:"Ping nmap Portscan 192.168.0.51"; dsize:0; itype:8; classtype: network-scan; sid:1003003; rev:1;)
+alert icmp any any -> 192.168.0.52 any (msg:"Ping nmap Portscan 192.168.0.52"; dsize:0; itype:8; classtype: network-scan; sid:1003004; rev:1;)
+
+#DoS
+alert icmp any any -> 192.168.0.10 any (msg:"Ping flood detected 192.168.0.10"; itype:8; count 20, seconds 1; classtype: denial-of-service; sid:1003010; rev:1;)
+alert icmp any any -> 192.168.0.20 any (msg:"Ping flood detected 192.168.0.20"; itype:8; count 20, seconds 1; classtype: denial-of-service; sid:1003011; rev:1;)
+alert icmp any any -> 192.168.0.30 any (msg:"Ping flood detected 192.168.0.30"; itype:8; count 20, seconds 1; classtype: denial-of-service; sid:1003012; rev:1;)
+alert icmp any any -> 192.168.0.51 any (msg:"Ping flood detected 192.168.0.51"; itype:8; count 20, seconds 1; classtype: denial-of-service; sid:1003013; rev:1;)
+alert icmp any any -> 192.168.0.52 any (msg:"Ping flood detected 192.168.0.52"; itype:8; count 20, seconds 1; classtype: denial-of-service; sid:1003014; rev:1;)
+
+#DoS Teardrop
+alert icmp any any -> 192.168.0.10 any (msg:"ICMP Teardrop attack 192.168.0.10"; fragbits:M; classtype: denial-of-service; sid:1003020;rev:1;)
+alert icmp any any -> 192.168.0.20 any (msg:"ICMP Teardrop attack 192.168.0.20"; fragbits:M; classtype: denial-of-service; sid:1003021;rev:1;)
+alert icmp any any -> 192.168.0.30 any (msg:"ICMP Teardrop attack 192.168.0.30"; fragbits:M; classtype: denial-of-service; sid:1003022;rev:1;)
+alert icmp any any -> 192.168.0.51 any (msg:"ICMP Teardrop attack 192.168.0.51"; fragbits:M; classtype: denial-of-service; sid:1003023;rev:1;)
+alert icmp any any -> 192.168.0.52 any (msg:"ICMP Teardrop attack 192.168.0.52"; fragbits:M; classtype: denial-of-service; sid:1003024;rev:1;)
+
+#IMCP Router Discovery
+alert icmp any any -> 192.168.0.10 any (msg:"ICMP Router Discovery 192.168.0.10"; icode:0; itype:9; classtype: network-scan; sid:1003030; rev:1;)
+alert icmp any any -> 192.168.0.20 any (msg:"ICMP Router Discovery 192.168.0.20"; icode:0; itype:9; classtype: network-scan; sid:1003031; rev:1;)
+alert icmp any any -> 192.168.0.30 any (msg:"ICMP Router Discovery 192.168.0.30"; icode:0; itype:9; classtype: network-scan; sid:1003032; rev:1;)
+alert icmp any any -> 192.168.0.51 any (msg:"ICMP Router Discovery 192.168.0.51"; icode:0; itype:9; classtype: network-scan; sid:1003033; rev:1;)
+alert icmp any any -> 192.168.0.52 any (msg:"ICMP Router Discovery 192.168.0.52"; icode:0; itype:9; classtype: network-scan; sid:1003034; rev:1;)
+
+#ICMP Too large packet
+alert icmp any any -> 192.168.0.10 any (msg:"Large ICMP Packet 192.168.0.10"; dsize:>1500; classtype: denial-of-service; sid:1003040; rev:1;)
+alert icmp any any -> 192.168.0.20 any (msg:"Large ICMP Packet 192.168.0.20"; dsize:>1500; classtype: denial-of-service; sid:1003041; rev:1;)
+alert icmp any any -> 192.168.0.30 any (msg:"Large ICMP Packet 192.168.0.30"; dsize:>1500; classtype: denial-of-service; sid:1003042; rev:1;)
+alert icmp any any -> 192.168.0.51 any (msg:"Large ICMP Packet 192.168.0.51"; dsize:>1500; classtype: denial-of-service; sid:1003043; rev:1;)
+alert icmp any any -> 192.168.0.52 any (msg:"Large ICMP Packet 192.168.0.52"; dsize:>1500; classtype: denial-of-service; sid:1003044; rev:1;)
