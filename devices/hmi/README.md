@@ -28,8 +28,8 @@ cd ~/gits/LICSTER/devices/hmi
 
 Copy the autostart file to its correct place.
 ```zsh
-mkdir -p ~/.config/lxsession/lxde-pi/
-cp autostart ~/.config/lxsession/lxde-pi/autostart
+mkdir -p ~/.config/lxsession/LXDE-pi/
+cp autostart ~/.config/lxsession/LXDE-pi/autostart
 ```
 
 Install bootstrap and jQuerry.
