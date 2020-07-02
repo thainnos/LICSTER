@@ -6,7 +6,7 @@ echo "+          by Raphael Hausmanninger          +"
 echo "++++++++++++++++++++++++++++++++++++++++++++++"
 
 
-BASE="../devices/plc/software/Secure_Layer/certs"
+BASE="../projects/Secure_Layer/certs"
 MAKE_FILE="../devices/remote_io/software/tls_certs.mk"
 
 declare -a NAMES=("io1" "io2" "plc")
