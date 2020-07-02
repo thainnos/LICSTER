@@ -23,7 +23,6 @@ Change into the correct folder.
 cd ~/gits/LICSTER/devices/hmi
 ```
 
-
 ### Install all dependencies
 
 
