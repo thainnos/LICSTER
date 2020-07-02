@@ -24,7 +24,7 @@ should be enough, we used a Raspberry Pi 4).
 | What                        | Price        | Link                                                                                                   |
 | --------------------------- | ------------ | ------------------------------------------------------------------------------------------------------ |
 | Raspberry Pi 3              |  34 Euro     | [Amazon](https://amzn.to/2UMnFUS)                                                                      |
-| Raspberry Pi 4    4GB RAM   |  77,90 Euro  | [berrybase](https://www.berrybase.de/neu/raspberry-pi-4-computer-modell-b-4gb-light-starter-set?c=2383)|
+| Raspberry Pi 4    4GB RAM   |  60 Euro     | [Amazon](https://amz.run/3MOL)|
 
 For the operating system you can use most of the well-known Linux distributions. 
 We recommend [Raspbian](https://www.raspberrypi.org/downloads/raspbian/) for the 
@@ -74,13 +74,6 @@ Decoding Ethernet
 ```
 If this appears, you know everything is alright. You have to pay attention that 
 snort is run as root.
-
-**Snort 3**
-
-This Version of snort is the newer one but it's more complicated to install. For 
-this Installation  the easiest way is to go to 
-[snort](https://www.snort.org/documents) and chose under Snort Setup Guides the 
-installation guide for the OS you need.
 
 **Snort 3**
 

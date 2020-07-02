@@ -17,7 +17,7 @@ This software component manages modbus connections wrapped in TLS.
 
 ## Requirements   
 
-A running and functional LICTSTER Testbed.
+A running and functional LICTSTER Testbed. <br/>
 RemoteIOs connected to the OpenPLC Raspberry Pi over USB/Power.
    
 ## TLS
@@ -85,6 +85,8 @@ sudo ./flashall.sh
 #### Running the OpenPLC in TLS mode (Optional)
 Follow the same instructions as in [Running the OpenPLC](#running-the-openplc), but use the following configuration for the Slave Devices.
 
+**Note:** In contrast to the standard configuration, the IP and port of the slave devices must be changed.
+
 <table align="center"><tr><td align="center" width="9999">
 <img src="images/slave_device01_tls.png" width=70%></img>
 </td></tr></table>
@@ -93,11 +95,11 @@ Follow the same instructions as in [Running the OpenPLC](#running-the-openplc), 
 <img src="images/slave_device02_tls.png" width=70%></img>
 </td></tr></table>
 
-## Bridge Manager
-### What is the Bridge Manager
+### Bridge Manager
+#### What is the Bridge Manager
 The Bridge Manager is the application that creates, manages and restarts these TLS wrapped modbus connections. It is written in Python.
 
-### Running the Bridge Manager
+#### Running the Bridge Manager
 Change into the Secure_Layer folder of the software section inside the PLC:
 ```sh
 cd $HOME/gits/LICSTER/projects/Secure_Layer
@@ -108,6 +110,15 @@ Start the Bridge Manager on boot:
 chmod +x add_to_autostart.sh
 sudo ./add_to_autostart.sh
 ```
+
+### Mirror port view
+
+By using the mirror port on the network switch, the TLS traffic can be viewed.
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/tlscapture.png" width=70%></img>
+</td></tr></table>
+
 
 ## Disable/Remove TLS 
 
