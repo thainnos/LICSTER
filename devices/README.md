@@ -26,6 +26,8 @@ you can print a 3d case like introduced [here](remote_io/README.md).
 | Raspberry Pi                |  34 Euro             |  3        | 102 Euro | [Amazon](https://amzn.to/2UMnFUS)       |
 | Aussel M3 Nylon Black Screw |  13 Euro             |  1        |  13 Euro | [Amazon](https://amzn.to/2NQNpin)       |
 | Anker 36W 5V/7.2A 4-Port USB|  15 Euro             |  1        |  15 Euro | [Amazon](https://amzn.to/36khjBY)       |
+| Signcomplex Driver 24V 1A   |  13 Euro             |  1        |  13 Euro | [Amazon](https://amz.run/3M4d)          |
+| 1.3 Inch OLED Display       |   8 Euro             |  2        |  16 Euro | [Amazon](https://amz.run/3M4g)          |
 | 90 Degree Micro USB         |   9 Euro             |  1        |   9 Euro | [Amazon](https://amzn.to/38tM5K9)       |
 | Micro USB Cable, 4 Pack 1M  |  10 Euro             |  1        |  10 EUro | [Amazon](https://amzn.to/2TN4FsP)       |
 | SD Card                     |   5 Euro             |  3        |  15 Euro | [Amazon](https://amzn.to/2UNYC3U)       |
@@ -35,6 +37,7 @@ you can print a 3d case like introduced [here](remote_io/README.md).
 | Network cables 0.5m 10pc    |  13 Euro             |  1        |  13 Euro | [Amazon](https://amzn.to/2ULyLJR)       |
 | STM32F767                   |  31 Euro             |  2        |  62 Euro | [Amazon](https://amzn.to/2ULvPgr)       |
 | Colours 0.14 Copper Wires   |  12 Euro             |  1        |  12 Euro | [Amazon](https://amzn.to/37hDE4H)       |
+| Wago clamps (61 pieces)     |  25 Euro             |  1        |  25 Euro | [Amazon](https://amz.run/3MAX)          |
 | PCBs (5 Pack)               |   7 Euro             |  1        |   7 Euro | [JLCPCB](https://jlcpcb.com/)           |
 | PCB components              |  10 Euro             |  1        |  10 Euro | see [remote_io](remote_io/README.md)    |
 | 3d case                     |  40 Euro             |  1        |  40 Euro | [Treatstock](https://www.treatstock.com)|

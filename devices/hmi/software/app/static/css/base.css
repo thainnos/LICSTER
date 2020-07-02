@@ -1,0 +1,20 @@
+html {
+    width: 800px;
+    height: 460px;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    background: #86989B;
+}
+
+nav.navbar {
+    height:10%;
+    margin-bottom: 0.5rem;
+}
+
+#content {
+    height: 90%;
+}
+
