@@ -110,9 +110,9 @@ def login():
                 )
                 db.commit()
 
+            session['user_role'] = user['user_role']
             if user['first_login'] == 1:
                 return redirect(url_for('auths.set_password'))
-            session['user_role'] = user['user_role']
             if session['user_role'] == 'admin':
                 return redirect(url_for('admins.dashboard'))
             return redirect(url_for('views.index'))

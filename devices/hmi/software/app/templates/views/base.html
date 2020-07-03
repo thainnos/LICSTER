@@ -29,6 +29,15 @@
             <a class="nav-item nav-link {% if order %}active{% endif %}" href="{{ url_for('views.order') }}">Orders</a>
             <a class="nav-item nav-link {% if manual %}active{% endif %}" href="{{ url_for('views.manual') }}">Manual</a>
             {% endif %}
+            {% if user %}
+            <a class="nav-item nav-link" href="{{ url_for('auths.logout') }}">Log out</a>
+            {% else %}
+            <a class="nav-item nav-link" href="{{ url_for('auths.login') }}">Log in</a>
+            {% endif %}
+
+            {% if admin %}
+            <a class="nav-item nav-link" href="{{ url_for('admins.dashboard') }}">Dashboard</a>
+            {% endif %}
         </div>
     </div>
     <div class="{{ application_state.classes|join(' ') }}" id="application-state"> {{ application_state.text }}</div>
@@ -44,8 +53,8 @@
 </div>
 {% endif %}
 
-<script type="text/javascript" src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='js/base.js') }}"></script>
 {% if view %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/view.js') }}"></script>

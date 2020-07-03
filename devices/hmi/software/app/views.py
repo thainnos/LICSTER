@@ -24,7 +24,7 @@ def is_plc_connected():
         application_state = plc.get_application_state()
         return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
     else:
-        if request.endpoint not in ["views.view", "views.index"] and g.user is None:
+        if request.endpoint not in ['views.view', 'views.index', 'views.get_values', 'views.get_application_state', 'views.get_process_state'] and g.user is None:
             return redirect(url_for('auths.login'))
 
 
@@ -77,7 +77,6 @@ def set_motor_manual(motor, motor_state):
     return "", 200
 
 
-@login_required
 @bp.route('/process/values', methods=['GET'])
 def get_values():
     """
@@ -88,7 +87,6 @@ def get_values():
     return jsonify(plc.get_process_values())
 
 
-@login_required
 @bp.route('/application/state', methods=['GET'])
 def get_application_state():
     """
@@ -99,7 +97,6 @@ def get_application_state():
     return json.dumps(plc.get_application_state())
 
 
-@login_required
 @bp.route("/process/state", methods=['GET'])
 def get_process_state():
     """
@@ -142,9 +139,15 @@ def order():
     :return: The order.html view.
     :rtype: HTML
     """
+    user = True
+    admin = False
+    if session.get('user_id') is None:
+        user = False
+    if session.get('user_role') == 'admin':
+        admin = True
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
-    return render_template('order.html', process_state=process_state, application_state=application_state, order=True)
+    return render_template('order.html', process_state=process_state, application_state=application_state, order=True, user=user, admin=admin)
 
 @login_required
 @bp.route('/manual')
@@ -154,9 +157,15 @@ def manual():
     :return: The manual.html view.
     :rtype: HTML
     """
+    user = True
+    admin = False
+    if session.get('user_id') is None:
+        user = False
+    if session.get('user_role') == 'admin':
+        admin = True
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
-    return render_template('manual.html', process_state=process_state, application_state=application_state, manual=True)
+    return render_template('manual.html', process_state=process_state, application_state=application_state, manual=True, user=user, admin=admin)
 
 
 @bp.route('/view')
@@ -166,9 +175,15 @@ def view():
     :return: The view.html view
     :rtype: HTML
     """
+    user = True
+    admin = False
+    if session.get('user_id') is None:
+        user = False
+    if session.get('user_role') == 'admin':
+        admin = True
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
-    return render_template('view.html', process_state=process_state, application_state=application_state, view=True)
+    return render_template('view.html', process_state=process_state, application_state=application_state, view=True, user=user, admin=admin)
 
 
 @bp.route('/')
