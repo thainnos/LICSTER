@@ -1,5 +1,10 @@
 # Low-cost ICS Testbed
 
+|                     | Build status                                                                                                      |
+|---------------------|-------------------------------------------------------------------------------------------------------------------|
+| RemoteIO:           | ![C/C++ CI](https://github.com/hsainnos/LICSTER/workflows/C/C++%20CI/badge.svg)                                   |
+| Python Integration: | ![.github/workflows/HMI.yml](https://github.com/hsainnos/LICSTER/workflows/.github/workflows/HMI.yml/badge.svg)   |
+
 The project aims to help setup a minimal, low-cost *Industrial Control System (ICS)* testbest for students,
 researchers, or anyone with an interest in industrial security.
 The project contains a list of affordable hardware to build the minimalistic ICS with, instructions,
@@ -77,6 +82,23 @@ However, the assembly is not as difficult as expected.
 4. Testing LICSTER
 5. Have fun and make the world more secure 
 
+
+# Contributers
+
+|Name                   |Contribution                                  | 
+|-----------------------|----------------------------------------------|
+|Matthias Niedermaier   |Maintainer                                    |
+|Felix Sauer            |Developer                                     |
+|Susanne Kießling       |Learning concepts                             |
+|Dominik Merli          |Coordinator                                   |
+|Fabian Klemm           |Secure webapplication for HMI                 |
+|Eric Hoffmann          |Intrusion detection system                    |
+|Raphael Hausmanninger  |Secure communication between PLC and Remote-IO|
+|Michael Janzer         |Intrusion detection system                    |
+|Muhammet Bilbey        |Secure communication between PLC and Remote-IO|
+|Athanasios Luludis     |Secure webapplication for HMI                 |
+|Janis Schickram        |Intrusion detection system                    |
+
 # Paper
 You find the research paper [here](https://www.scienceopen.com/document?vid=4fa78131-80f5-4fca-b45a-bfd6a04ae2cc). To
 cite the work you can use the official bibtex entry:
@@ -93,3 +115,5 @@ cite the work you can use the official bibtex entry:
     doi = {10.14236/ewic/icscsr19.1}\
 }
 </pre>
+
+

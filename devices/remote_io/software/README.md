@@ -33,28 +33,6 @@ arm-none-eabi-objcopy -O ihex build/stm32f767.elf build/stm32f767.hex
 arm-none-eabi-objcopy -O binary -S build/stm32f767.elf build/stm32f767.bin
 ```
 
-### Building TLS (Optional)
-
-**Important:** In order to build in TLS mode you need to first create corresponding certificates! More information [here](/devices/plc/software/Secure_Layer/README.md).
-
-Change into the software folder of the LICSTER remote IO:
-```sh
-cd $HOME/LICSTER/devices/remote_io/software
-```
-
-Build the firmware:
-```sh
-make -j$(nproc) config=tls
-```
-
-At the end, there must be an output like this:
-```sh
-   text    data     bss     dec     hex filename
- 125588   12588  283172  421348   66de4 build/stm32f767.elf
-arm-none-eabi-objcopy -O ihex build/stm32f767.elf build/stm32f767.hex
-arm-none-eabi-objcopy -O binary -S build/stm32f767.elf build/stm32f767.bin
-```
-
 ### Installing Flash Tool 
 
 There is a github project for the stm32 discovery line to program under linux.

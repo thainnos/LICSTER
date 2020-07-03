@@ -190,17 +190,6 @@ Start the PLC and check if status properly switches to *running*. Again, skim th
 
 Now your OpenPLC is up and running!
 
-### Running the OpenPLC in TLS mode (Optional)
-Follow the same instructions as in [Running the OpenPLC](#running-the-openplc), but use the following configuration for the Slave Devices:
-
-<table align="center"><tr><td align="center" width="9999">
-<img src="images/slave_device01_tls.png" width=70%></img>
-</td></tr></table>
-
-<table align="center"><tr><td align="center" width="9999">
-<img src="images/slave_device02_tls.png" width=70%></img>
-</td></tr></table>
-
 ### Structure
 <table align="center"><tr><td align="center" width="9999">
 <img src="images/list-network.png" width=70%></img>
