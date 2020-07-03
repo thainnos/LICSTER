@@ -24,7 +24,7 @@ def is_plc_connected():
         application_state = plc.get_application_state()
         return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
     else:
-        if request.endpoint not in ["views.view", "views.index"] and g.user is None:
+        if request.endpoint not in ['views.view', 'views.index', 'views.get_values', 'views.get_application_state', 'views.get_process_state'] and g.user is None:
             return redirect(url_for('auths.login'))
 
 
@@ -77,7 +77,6 @@ def set_motor_manual(motor, motor_state):
     return "", 200
 
 
-@login_required
 @bp.route('/process/values', methods=['GET'])
 def get_values():
     """
@@ -88,7 +87,6 @@ def get_values():
     return jsonify(plc.get_process_values())
 
 
-@login_required
 @bp.route('/application/state', methods=['GET'])
 def get_application_state():
     """
@@ -99,7 +97,6 @@ def get_application_state():
     return json.dumps(plc.get_application_state())
 
 
-@login_required
 @bp.route("/process/state", methods=['GET'])
 def get_process_state():
     """

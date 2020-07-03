@@ -30,9 +30,9 @@
             <a class="nav-item nav-link {% if manual %}active{% endif %}" href="{{ url_for('views.manual') }}">Manual</a>
             {% endif %}
             {% if user %}
-            <a class="nav-item nav-link" href="{{ url_for('auths.login') }}">Log out</a>
+            <a class="nav-item nav-link" href="{{ url_for('auths.logout') }}">Log out</a>
             {% else %}
-            <a class="nav-item nav-link" href="{{ url_for('auths.logout') }}">Log in</a>
+            <a class="nav-item nav-link" href="{{ url_for('auths.login') }}">Log in</a>
             {% endif %}
         </div>
     </div>
