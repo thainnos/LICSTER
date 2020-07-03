@@ -140,11 +140,14 @@ def order():
     :rtype: HTML
     """
     user = True
+    admin = False
     if session.get('user_id') is None:
         user = False
+    if session.get('user_role') == 'admin':
+        admin = True
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
-    return render_template('order.html', process_state=process_state, application_state=application_state, order=True, user=user)
+    return render_template('order.html', process_state=process_state, application_state=application_state, order=True, user=user, admin=admin)
 
 @login_required
 @bp.route('/manual')
@@ -155,11 +158,14 @@ def manual():
     :rtype: HTML
     """
     user = True
+    admin = False
     if session.get('user_id') is None:
         user = False
+    if session.get('user_role') == 'admin':
+        admin = True
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
-    return render_template('manual.html', process_state=process_state, application_state=application_state, manual=True, user=user)
+    return render_template('manual.html', process_state=process_state, application_state=application_state, manual=True, user=user, admin=admin)
 
 
 @bp.route('/view')
@@ -170,11 +176,14 @@ def view():
     :rtype: HTML
     """
     user = True
+    admin = False
     if session.get('user_id') is None:
         user = False
+    if session.get('user_role') == 'admin':
+        admin = True
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
-    return render_template('view.html', process_state=process_state, application_state=application_state, view=True, user=user)
+    return render_template('view.html', process_state=process_state, application_state=application_state, view=True, user=user, admin=admin)
 
 
 @bp.route('/')

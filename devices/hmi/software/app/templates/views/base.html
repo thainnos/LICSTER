@@ -34,6 +34,10 @@
             {% else %}
             <a class="nav-item nav-link" href="{{ url_for('auths.login') }}">Log in</a>
             {% endif %}
+
+            {% if admin %}
+            <a class="nav-item nav-link" href="{{ url_for('admins.dashboard') }}">Dashboard</a>
+            {% endif %}
         </div>
     </div>
     <div class="{{ application_state.classes|join(' ') }}" id="application-state"> {{ application_state.text }}</div>
