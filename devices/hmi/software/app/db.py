@@ -4,6 +4,7 @@ from flask import current_app, g
 from flask.cli import with_appcontext
 from werkzeug.security import generate_password_hash
 
+
 def get_db():
     ''' Return a database connection.
     '''
@@ -16,6 +17,7 @@ def get_db():
 
     return g.db
 
+
 def close_db(e=None):
     ''' Close the database connection.
     '''
@@ -24,6 +26,7 @@ def close_db(e=None):
     if db is not None:
         db.close()
 
+
 def init_db():
     ''' (Re-)Make the database table. Caution: Using this method will delete everything in the database.
     '''
@@ -31,9 +34,10 @@ def init_db():
     with current_app.open_resource('schema.sql') as f:
         db.executescript(f.read().decode('utf8'))
 
+
 def check_pw(pw1, valueType):
     ''' Are pw1 and an input the same?
-    
+
     :param pw1: Password, defaults to empty String
     :type pw1: String
     :param valueType: String containing the type that is getting checked, defaults to empty String
@@ -48,9 +52,10 @@ def check_pw(pw1, valueType):
     else:
         return False
 
+
 def add_email():
     ''' Prompts for an Email Address. Can be stopped by typing no.
-    
+
     :return: Email Address
     :rtype: String
     '''
@@ -58,12 +63,14 @@ def add_email():
     not_skipping = True
     admin_email = ""
     while not_skipping:
-        click.echo('If you dont want to add an email address you can simply type "no".')
+        click.echo(
+            'If you dont want to add an email address you can simply type "no".')
         email = input(">>> ")
         if email == 'no':
             break
         else:
-            email2 = input('Please enter the email address again or skip this step by typing "no".\n>>> ')
+            email2 = input(
+                'Please enter the email address again or skip this step by typing "no".\n>>> ')
             if email2 == 'no' or email2 == 'No':
                 not_skipping = False
                 break
@@ -75,9 +82,10 @@ def add_email():
                 break
     return admin_email
 
+
 def add_admin_password():
     ''' Prompts for admin password.
-    
+
     :return: The admin Password.
     :rtype: String
     '''
@@ -92,13 +100,15 @@ def add_admin_password():
             click.echo("The passwords don't match. Please try again.")
     return admin_password
 
+
 def add_hmi_password():
     ''' Prompts for HMI password.
 
     :return: The HMI Password.
     :rtype: Integer
     '''
-    click.echo("Please enter the password for the hmi. This password must only contain numbers.")
+    click.echo(
+        "Please enter the password for the hmi. This password must only contain numbers.")
     while True:
         hmi_password = input(">>> ")
         try:
@@ -109,9 +119,11 @@ def add_hmi_password():
                 break
             else:
                 click.echo("The passwords don't match. Please try again.")
-        except:
-            click.echo("This password must only contain numbers. Please type in a password containing only numbers.")
+        except BaseException:
+            click.echo(
+                "This password must only contain numbers. Please type in a password containing only numbers.")
     return hmi_password
+
 
 @click.command('init-db')
 @with_appcontext
@@ -123,23 +135,24 @@ def init_db_command():
     click.echo("Please enter the name for the admin user:")
     admin_name = input(">>> ")
     click.echo(admin_name)
-    
+
     admin_email = add_email()
     admin_password = add_admin_password()
     hmi_password = add_hmi_password()
-        
+
     if not admin_email:
-        db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
-        (admin_name, generate_password_hash(admin_password), 'admin', 1))
+        db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)',
+                   (admin_name, generate_password_hash(admin_password), 'admin', 1))
     else:
-        db.execute('INSERT INTO user (username, password, user_role, first_login, email) VALUES (?, ?, ?, ?, ?)', 
-        (admin_name, generate_password_hash(admin_password), 'admin', 1, admin_email))
+        db.execute('INSERT INTO user (username, password, user_role, first_login, email) VALUES (?, ?, ?, ?, ?)',
+                   (admin_name, generate_password_hash(admin_password), 'admin', 1, admin_email))
     db.commit()
-    db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)', 
-    ('hmilocal', generate_password_hash(hmi_password), 'user', 1))
+    db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)',
+               ('hmilocal', generate_password_hash(hmi_password), 'user', 1))
     db.commit()
     click.echo("A new admin - " + admin_name + " - was created.")
     click.echo("The password for the hmi is set.")
+
 
 @click.command('change-hmi-password')
 @with_appcontext
@@ -147,8 +160,10 @@ def change_hmi_password_command():
     ''' Change the password for the hmi '''
     hmi_password = add_hmi_password()
     db = get_db()
-    db.execute('UPDATE user SET password = ? WHERE username = ?', (generate_password_hash(hmi_password), "hmilocal"))
+    db.execute('UPDATE user SET password = ? WHERE username = ?',
+               (generate_password_hash(hmi_password), "hmilocal"))
     db.commit()
+
 
 def init_app(app):
     app.teardown_appcontext(close_db)

@@ -8,6 +8,7 @@ class PendingState(metaclass=Singleton):
     """
     The state in between the production state.
     """
+
     def __init__(self):
         self.name = "pending"
         self.text = "Pending"
@@ -19,6 +20,7 @@ class TowardsPunchingMachineState(metaclass=Singleton):
     """
     The process step where the conveyor belt moves the goods towards the punching machine.
     """
+
     def __init__(self):
         self.name = "to-punch"
         self.text = "Move Right"
@@ -30,6 +32,7 @@ class PunchingMachineDownState(metaclass=Singleton):
     """
     The process step where the punching machine moves down to punch on the goods.
     """
+
     def __init__(self):
         self.name = "punch-down"
         self.text = "Move Down"
@@ -41,6 +44,7 @@ class PunchingMachineUpState(metaclass=Singleton):
     """
     The process step where the punching machine moves up.
     """
+
     def __init__(self):
         self.name = "punch-up"
         self.text = "Move Up"
@@ -52,6 +56,7 @@ class FromPunchingMachineState(metaclass=Singleton):
     """
     The process step where the conveyor belt moves the goods towards the punching machine.
     """
+
     def __init__(self):
         self.name = "from-punch"
         self.text = "Move Left"
@@ -63,6 +68,7 @@ class ProcessStateMap(metaclass=Singleton):
     """
     A simple helper class to navigate the states.
     """
+
     def __init__(self):
         self.states = {
             PendingState().name: PendingState(),
