@@ -24,7 +24,7 @@ def is_plc_connected():
         application_state = plc.get_application_state()
         return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
     else:
-        if request.endpoint not in ['views.view', 'views.index', 'views.get_values', 'views.get_application_state', 'views.get_process_state'] and g.user is None:
+        if request.endpoint not in ['views.view', 'views.index', 'views.get_values', 'views.get_application_state', 'views.get_process_state', 'views.set_application_state'] and g.user is None:
             return redirect(url_for('auths.login'))
 
 
