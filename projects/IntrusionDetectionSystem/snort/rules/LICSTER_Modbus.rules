@@ -6,15 +6,15 @@
 #alert tcp any any -> any 502 (msg:"Modbus Write Multiply Coils";modbus_func:write_multiple_coils; sid:1001002;)
 
 #Dos
-alert tcp any any -> 192.168.0.51 502 (msg:"Modbus threshold violation 51"; threshold: type both, track by_dst, count 60, seconds 1; classtype: successful-dos; sid:1001004;)
+alert tcp any any -> 192.168.0.51 502 (msg:"Modbus threshold violation 51"; detection_filter: track by_dst, count 60, seconds 1; classtype: successful-dos; sid:1001004;)
 
-alert tcp any any -> 192.168.0.52 502 (msg:"Modbus threshold violation 52"; threshold: type both, track by_dst, count 60, seconds 1; classtype: successful-dos; sid:1001005;)
+alert tcp any any -> 192.168.0.52 502 (msg:"Modbus threshold violation 52"; detection_filter: track by_dst, count 60, seconds 1; classtype: successful-dos; sid:1001005;)
 
-alert tcp any any -> 192.168.0.10 502 (msg:"Modbus threshold violation 10"; threshold: type both, track by_dst, count 25, seconds 1; classtype: attempted-dos; sid:1001006;)
+alert tcp any any -> 192.168.0.10 502 (msg:"Modbus threshold violation 10"; detection_filter: track by_dst, count 25, seconds 1; classtype: attempted-dos; sid:1001006;)
 
-alert tcp any any -> 192.168.0.20 502 (msg:"Modbus threshold violation 20"; threshold: type both, track by_dst, count 10, seconds 1; classtype: attempted-dos; sid:1001007;)
+alert tcp any any -> 192.168.0.20 502 (msg:"Modbus threshold violation 20"; detection_filter: track by_dst, count 10, seconds 1; classtype: attempted-dos; sid:1001007;)
 
-alert tcp any any -> 192.168.0.30 502 (msg:"Modbus threshold violation 30"; threshold: type both, track by_dst, count 120, seconds 1; classtype: attempted-dos; sid:1001008;)
+alert tcp any any -> 192.168.0.30 502 (msg:"Modbus threshold violation 30"; detection_filter: track by_dst, count 120, seconds 1; classtype: attempted-dos; sid:1001008;)
 
 
 
