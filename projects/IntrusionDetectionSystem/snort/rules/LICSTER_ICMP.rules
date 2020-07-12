@@ -15,11 +15,11 @@ alert icmp any any -> 192.168.0.30 any (msg:"Ping flood detected 192.168.0.30"; 
 alert icmp any any -> 192.168.0.51 any (msg:"Ping flood detected 192.168.0.51"; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003013; rev:1;)
 alert icmp any any -> 192.168.0.52 any (msg:"Ping flood detected 192.168.0.52"; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003014; rev:1;)
 
-alert tcp any any -> 192.168.0.10 0 (msg:"Ping flood detected 192.168.0.10"; window:64; flags:0; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003050; rev:1;)
-alert tcp any any -> 192.168.0.20 0 (msg:"Ping flood detected 192.168.0.20"; window:64; flags:0; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003051; rev:1;)
-alert tcp any any -> 192.168.0.30 0 (msg:"Ping flood detected 192.168.0.30"; window:64; flags:0; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003052; rev:1;)
-alert tcp any any -> 192.168.0.51 0 (msg:"Ping flood detected 192.168.0.51"; window:64; flags:0; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003053; rev:1;)
-alert tcp any any -> 192.168.0.52 0 (msg:"Ping flood detected 192.168.0.52"; window:64; flags:0; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003054; rev:1;)
+alert tcp any any -> 192.168.0.10 0 (msg:"Ping flood detected 192.168.0.10"; window:64; flags:0; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003050; rev:1;)
+alert tcp any any -> 192.168.0.20 0 (msg:"Ping flood detected 192.168.0.20"; window:64; flags:0; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003051; rev:1;)
+alert tcp any any -> 192.168.0.30 0 (msg:"Ping flood detected 192.168.0.30"; window:64; flags:0; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003052; rev:1;)
+alert tcp any any -> 192.168.0.51 0 (msg:"Ping flood detected 192.168.0.51"; window:64; flags:0; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003053; rev:1;)
+alert tcp any any -> 192.168.0.52 0 (msg:"Ping flood detected 192.168.0.52"; window:64; flags:0; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003054; rev:1;)
 
 #DoS Teardrop
 alert icmp any any -> 192.168.0.10 any (msg:"ICMP Teardrop attack 192.168.0.10"; fragbits:M; classtype: denial-of-service; sid:1003020;rev:1;)
