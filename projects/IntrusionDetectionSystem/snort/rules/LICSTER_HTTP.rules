@@ -2,12 +2,12 @@
 #sid range: 1002000-1002999
 
 #connections
-alert tcp !$HOME_NET any -> 192.168.0.10 $HTTP_PORTS (msg:"HTTP Get from EXTERNAL to 192.168.0.10; classtype: bad-unknown; content: "HTTP"; sid 1002000; rev: 1;)
-alert tcp !$HOME_NET any -> 192.168.0.20 $HTTP_PORTS (msg:"HTTP Get from EXTERNAL to 192.168.0.20; classtype: bad-unknown; content: "HTTP"; sid 1002001; rev: 1;)
-alert tcp !$HOME_NET any -> 192.168.0.30 $HTTP_PORTS (msg:"HTTP Get from EXTERNAL to 192.168.0.30; classtype: bad-unknown; content: "HTTP"; sid 1002002; rev: 1;)
-alert tcp !$HOME_NET any -> 192.168.0.51 $HTTP_PORTS (msg:"HTTP Get from EXTERNAL to 192.168.0.51; classtype: bad-unknown; content: "HTTP"; sid 1002003; rev: 1;)
-alert tcp !$HOME_NET any -> 192.168.0.52 $HTTP_PORTS (msg:"HTTP Get from EXTERNAL to 192.168.0.52; classtype: bad-unknown; content: "HTTP"; sid 1002004; rev: 1;)
+alert tcp !$HOME_NET any -> 192.168.0.10 $HTTP_PORTS (msg:"HTTP Get from EXTERNAL to 192.168.0.10"; classtype: unknown; content: "HTTP"; sid 1002000; rev: 1;)
+alert tcp !$HOME_NET any -> 192.168.0.20 $HTTP_PORTS (msg:"HTTP Get from EXTERNAL to 192.168.0.20"; classtype: unknown; content: "HTTP"; sid 1002001; rev: 1;)
+alert tcp !$HOME_NET any -> 192.168.0.30 $HTTP_PORTS (msg:"HTTP Get from EXTERNAL to 192.168.0.30"; classtype: unknown; content: "HTTP"; sid 1002002; rev: 1;)
+alert tcp !$HOME_NET any -> 192.168.0.51 $HTTP_PORTS (msg:"HTTP Get from EXTERNAL to 192.168.0.51"; classtype: unknown; content: "HTTP"; sid 1002003; rev: 1;)
+alert tcp !$HOME_NET any -> 192.168.0.52 $HTTP_PORTS (msg:"HTTP Get from EXTERNAL to 192.168.0.52"; classtype: unknown; content: "HTTP"; sid 1002004; rev: 1;)
 
-alert tcp !192.168.20 any -> 192.168.30 $HTTP_PORTS (msg:"HTTP Get not from 192.168.0.20 to 192.168.0.30; classtype: bad-unknown; content: "HTTP"; sid 1002005; rev: 1;)
-alert tcp !192.168.30 any -> 192.168.51 $HTTP_PORTS (msg:"HTTP Get not from 192.168.0.30 to 192.168.0.51; classtype: bad-unknown; content: "HTTP"; sid 1002006; rev: 1;)
-alert tcp !192.168.30 any -> 192.168.52 $HTTP_PORTS (msg:"HTTP Get not from 192.168.0.30 to 192.168.0.52; classtype: bad-unknown; content: "HTTP"; sid 1002007; rev: 1;)
+alert tcp !192.168.20 any -> 192.168.30 $HTTP_PORTS (msg:"HTTP Get not from 192.168.0.20 to 192.168.0.30"; classtype: unknown; content: "HTTP"; sid 1002005; rev: 1;)
+alert tcp !192.168.30 any -> 192.168.51 $HTTP_PORTS (msg:"HTTP Get not from 192.168.0.30 to 192.168.0.51"; classtype: unknown; content: "HTTP"; sid 1002006; rev: 1;)
+alert tcp !192.168.30 any -> 192.168.52 $HTTP_PORTS (msg:"HTTP Get not from 192.168.0.30 to 192.168.0.52"; classtype: unknown; content: "HTTP"; sid 1002007; rev: 1;)

@@ -9,11 +9,11 @@ alert icmp any any -> 192.168.0.51 any (msg:"Ping nmap Portscan 192.168.0.51"; d
 alert icmp any any -> 192.168.0.52 any (msg:"Ping nmap Portscan 192.168.0.52"; dsize:0; itype:8; classtype: network-scan; sid:1003004; rev:1;)
 
 #DoS
-alert icmp any any -> 192.168.0.10 any (msg:"Ping flood detected 192.168.0.10"; itype:8; count 20, seconds 1; classtype: denial-of-service; sid:1003010; rev:1;)
-alert icmp any any -> 192.168.0.20 any (msg:"Ping flood detected 192.168.0.20"; itype:8; count 20, seconds 1; classtype: denial-of-service; sid:1003011; rev:1;)
-alert icmp any any -> 192.168.0.30 any (msg:"Ping flood detected 192.168.0.30"; itype:8; count 20, seconds 1; classtype: denial-of-service; sid:1003012; rev:1;)
-alert icmp any any -> 192.168.0.51 any (msg:"Ping flood detected 192.168.0.51"; itype:8; count 20, seconds 1; classtype: denial-of-service; sid:1003013; rev:1;)
-alert icmp any any -> 192.168.0.52 any (msg:"Ping flood detected 192.168.0.52"; itype:8; count 20, seconds 1; classtype: denial-of-service; sid:1003014; rev:1;)
+alert icmp any any -> 192.168.0.10 any (msg:"Ping flood detected 192.168.0.10"; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003010; rev:1;)
+alert icmp any any -> 192.168.0.20 any (msg:"Ping flood detected 192.168.0.20"; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003011; rev:1;)
+alert icmp any any -> 192.168.0.30 any (msg:"Ping flood detected 192.168.0.30"; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003012; rev:1;)
+alert icmp any any -> 192.168.0.51 any (msg:"Ping flood detected 192.168.0.51"; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003013; rev:1;)
+alert icmp any any -> 192.168.0.52 any (msg:"Ping flood detected 192.168.0.52"; itype:8; detection_filter: track by_src, count 20, seconds 1; classtype: denial-of-service; sid:1003014; rev:1;)
 
 #DoS Teardrop
 alert icmp any any -> 192.168.0.10 any (msg:"ICMP Teardrop attack 192.168.0.10"; fragbits:M; classtype: denial-of-service; sid:1003020;rev:1;)
