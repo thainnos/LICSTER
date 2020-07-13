@@ -24,12 +24,15 @@
   
   }
   .wrapper{
-    height: 100vh;
     padding-top: 5%;
     display: block;
     text-align: center;           /*centers form into middle of page */
   }
   
+  #back {
+    position: absolute;
+  }
+
   .pin-login__text{
     vertical-align: middle;
     padding: 10px 3% 10px 3%;
@@ -88,13 +91,12 @@
   
       margin: auto;
     }
-    wrapper{
-      height: 100%;
+    .wrapper{
       justify-content: center;
     }
   }
   
   .pin-login__numpad{
-    padding-top: 30%;
+    padding-top: 10%;
   }
   
