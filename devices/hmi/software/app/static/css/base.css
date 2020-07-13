@@ -1,6 +1,6 @@
 html {
-    width: 800px;
-    height: 460px;
+    width: 100vw;
+    height: 100vh;
 }
 
 body {
@@ -10,11 +10,15 @@ body {
 }
 
 nav.navbar {
-    height:10%;
-    margin-bottom: 0.5rem;
+    height:46px;
+    margin-bottom: 8px;
 }
 
 #content {
-    height: 90%;
+    position: absolute;
+    top: 54px;
+    left: 0px;
+    width: 800px;
+    height: 414px;
 }
 
