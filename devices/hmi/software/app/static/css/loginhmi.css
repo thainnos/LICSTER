@@ -4,6 +4,9 @@
     background-color:  #131419;
   }
   
+  a {
+    text-decoration: none;
+  }
   
   .pin-login {
   
@@ -34,7 +37,6 @@
   }
 
   .pin-login__text{
-    vertical-align: middle;
     padding: 10px 3% 10px 3%;
     display: block;
     width: 94%;
