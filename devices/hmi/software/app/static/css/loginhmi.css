@@ -27,7 +27,8 @@
   
   }
   .wrapper{
-    padding-top: 5%;
+    height: 99vh;
+    padding-top: 2%;
     display: block;
     text-align: center;           /*centers form into middle of page */
   }
@@ -93,7 +94,8 @@
   
       margin: auto;
     }
-    .wrapper{
+    wrapper{
+      height: 99%;
       justify-content: center;
     }
   }

@@ -8,8 +8,13 @@ from plcconnectors.plc import Plc
 from plcconnectors.modbusTCP.connector import ModbusTCPPlcConnector
 import sys
 
-bp = Blueprint('views', __name__, template_folder='templates/views', static_folder='static')
+bp = Blueprint(
+    'views',
+    __name__,
+    template_folder='templates/views',
+    static_folder='static')
 plc = Plc(ModbusTCPPlcConnector, '192.168.0.30', timeout=1)
+
 
 @bp.before_request
 def is_plc_connected():
@@ -19,12 +24,16 @@ def is_plc_connected():
     :rtype: HTML
     '''
     if request.endpoint and request.endpoint != "static" and not plc.is_connected():
-        endpoint = "/" + request.endpoint if request.endpoint in ["view", "manual", "order"] else "/view"
+        endpoint = "/" + \
+            request.endpoint if request.endpoint in [
+                "view", "manual", "order"] else "/view"
         plc.plc_connector.modbus_client.connect()
         application_state = plc.get_application_state()
-        return render_template('base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
+        return render_template(
+            'base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
     else:
-        if request.endpoint not in ['views.view', 'views.index', 'views.get_values', 'views.get_application_state', 'views.get_process_state'] and g.user is None:
+        if request.endpoint not in ['views.view', 'views.index', 'views.get_values', 'views.get_application_state',
+                                    'views.get_process_state', 'views.set_application_state'] and g.user is None:
             return redirect(url_for('auths.login'))
 
 
@@ -131,6 +140,7 @@ def set_reset():
     plc.set_reset()
     return json.dumps(plc.get_application_state())
 
+
 @login_required
 @bp.route('/order')
 def order():
@@ -147,7 +157,9 @@ def order():
         admin = True
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
-    return render_template('order.html', process_state=process_state, application_state=application_state, order=True, user=user, admin=admin)
+    return render_template('order.html', process_state=process_state,
+                           application_state=application_state, order=True, user=user, admin=admin)
+
 
 @login_required
 @bp.route('/manual')
@@ -165,7 +177,8 @@ def manual():
         admin = True
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
-    return render_template('manual.html', process_state=process_state, application_state=application_state, manual=True, user=user, admin=admin)
+    return render_template('manual.html', process_state=process_state,
+                           application_state=application_state, manual=True, user=user, admin=admin)
 
 
 @bp.route('/view')
@@ -183,7 +196,8 @@ def view():
         admin = True
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
-    return render_template('view.html', process_state=process_state, application_state=application_state, view=True, user=user, admin=admin)
+    return render_template('view.html', process_state=process_state,
+                           application_state=application_state, view=True, user=user, admin=admin)
 
 
 @bp.route('/')
@@ -194,4 +208,3 @@ def index():
     :rtype: Redirect
     """
     return redirect(url_for('views.view'))
-

@@ -18,4 +18,3 @@ class ModbusTCPRegisters(IntEnum):
     ProcessState = 1035,
     Orders = 1036,
     Reset = 1037
-

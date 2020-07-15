@@ -1,17 +1,16 @@
 # Rule system of snort
 
-The rule are what snort is using to check the traffic. They are written in a text language which snort is reading and processing.
+The rules are what snort is using to check the traffic. They are written in a text language which snort is reading and processing.
 The rule syntax we use is mostly used with snort 2 but works without problems in snort 3. You can also
-convert the snort.conf file 
+convert the snort.conf file to a snort.lua file, which is used in snort3, with
 ````
 snort2lua -c snort.conf
 ````
-to a snort.lua file which is used in snort 3.
 
 ## Rule Writing
 
-Before we begin to write a rule we have to tell snort where the rule lies. For that we are opening
-the snort.conf file with the text editor you like. Scroll down in the file till you see (under step 7):
+Before you begin to write a rule, you have to tell snort where the rule file is. For that open
+the snort.conf file with the text editor of your choice. Scroll down till you see (under step 7):
 
 ````
 include $RULE_PATH/LICSTER_SSH.rules
@@ -21,20 +20,17 @@ include $RULE_PATH/LICSTER_HTTP.rules
 ````
 
 These rules are custom rules which work with the LICESTER-Testbed.
-Now you can chose to use rules.files which are already there or create a new rule file.
+Now you can choose to use the .rules files which are already there or create a new rule file.
 To create a new rule file type in
 ````
 include $RULE_PATH/Name-of-file.rules
 ````
-now we have to go under path/to/ids-for-licster/snort/rules and create
-````
-vim Name-of-file.rules
-````
-a new rule file. Now you can create your first rules.
+Now you have to go under path/to/ids-for-licster/snort/rules and create a Name-of-file.rules file.
+Now you can create your first rules.
 
 ### Rule Syntax
 
-The syntax which snort youses is not as difficult as it first seems.
+The syntax which snort uses is not as difficult as it at first seems.
 ````
 alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"What the rule does", ... , sid=1000000, ref=1)
 ```` 
