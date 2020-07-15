@@ -17,7 +17,8 @@ class Plc:
         :param plc_connector_class: A concrete PLC connector.
         :param plc_ip_address: The IP address of the PLC.
         """
-        self.plc_connector = plc_connector_class(plc_ip_address, timeout=timeout)
+        self.plc_connector = plc_connector_class(
+            plc_ip_address, timeout=timeout)
 
     def is_connected(self):
         """

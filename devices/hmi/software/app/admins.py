@@ -6,7 +6,12 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app.db import get_db
 from app.forms import AddUserForm, DeleteUserForm, ResetLogForm
 
-admin = Blueprint('admins', __name__, template_folder='templates/admins', static_folder='static')
+admin = Blueprint(
+    'admins',
+    __name__,
+    template_folder='templates/admins',
+    static_folder='static')
+
 
 def admin_required(view):
     @functools.wraps(view)
@@ -18,11 +23,12 @@ def admin_required(view):
 
     return wrapped_view
 
+
 @admin.route('/dashboard', methods=('GET', 'POST'))
 @admin_required
 def dashboard():
     ''' Admin Dashboard. Shows all users and snort logs. Allows adding/deleting users and resetting the logs.
-    
+
     :return: The admin.html view
     :rtype: HTML
     '''
@@ -38,9 +44,9 @@ def dashboard():
             )
         db.commit()
         return redirect(url_for('admins.dashboard'))
-    
+
     rows = db.execute('SELECT * FROM user').fetchall()
-    clients = []    
+    clients = []
     for row in rows:
         ipadresses = db.execute(
             'SELECT ipaddress FROM ipaddr WHERE userid = ?', (row['id'],)
@@ -52,7 +58,7 @@ def dashboard():
         if row['email'] is not None:
             client['email'] = row['email']
         clients.append(client)
-    
+
     snort_rows = db.execute('SELECT * FROM snort').fetchall()
     snort_outer_row = []
     for snort_row in snort_rows:
@@ -63,14 +69,15 @@ def dashboard():
         snort_inner_dict['datetime'] = snort_row[4]
         snort_outer_row.append(snort_inner_dict)
 
-    return render_template('admin.html', clients=clients, logs=snort_outer_row, add_form=add_form, delete_form=delete_form, reset_form=reset_form)
+    return render_template('admin.html', clients=clients, logs=snort_outer_row,
+                           add_form=add_form, delete_form=delete_form, reset_form=reset_form)
 
 
 @admin.route('/dashboard/add', methods=('GET', 'POST'))
 @admin_required
 def add_user():
     ''' Add a user or an admin.
-    
+
     :return: Redirect to the admin dashboard method
     :rtype: redirect
     '''
@@ -112,11 +119,12 @@ def add_user():
 
     return redirect(url_for('admins.dashboard'))
 
+
 @admin.route('/dashboard/delete', methods=('GET', 'POST'))
 @admin_required
 def delete_user():
     ''' Delete a user or an admin.
-    
+
     :return: Redirect to the admin dashboard method
     :rtype: redirect
     '''
@@ -132,7 +140,7 @@ def delete_user():
             'SELECT id FROM user WHERE username = ?', (username,)
         ).fetchone() is None:
             error = "The user {} doesn't exist.".format(username)
-        
+
         if error is None:
             # All ip addresses connected to the user need to get deleted first
             userid = db.execute(
@@ -149,6 +157,7 @@ def delete_user():
         flash(error)
 
     return redirect(url_for('admins.dashboard'))
+
 
 @admin.route('/dashboard/reset_logs', methods=('GET', 'POST'))
 @admin_required

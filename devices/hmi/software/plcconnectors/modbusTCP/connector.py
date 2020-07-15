@@ -29,7 +29,11 @@ class ModbusTCPPlcConnector:
         self.motor_names = ["motorUp", "motorDown", "motorLeft", "motorRight"]
 
         # The proper names for the sensors.
-        self.sensor_names = ["topSensor", "bottomSensor", "leftSensor", "rightSensor"]
+        self.sensor_names = [
+            "topSensor",
+            "bottomSensor",
+            "leftSensor",
+            "rightSensor"]
 
     def is_connected(self):
         """
@@ -46,46 +50,59 @@ class ModbusTCPPlcConnector:
 
         # Should the HMI not be connected to the PLC return all values as false so that while being in the disconnected
         # state, all sensors and motors are shown as off
-        sensors = dict(zip(self.sensor_names, ["true"] * len(self.sensor_names)))
+        sensors = dict(zip(self.sensor_names,
+                           ["true"] * len(self.sensor_names)))
         motors = dict(zip(self.motor_names, ["true"] * len(self.motor_names)))
 
         if self.is_connected():
 
             try:
-                # Read the four bits of motor state from the PLC over modbus/TCP.
-                motor_values = self.modbus_client.read_coils(int(ModbusTCPRegisters.PLCInputs), 4).bits[:4]
+                # Read the four bits of motor state from the PLC over
+                # modbus/TCP.
+                motor_values = self.modbus_client.read_coils(
+                    int(ModbusTCPRegisters.PLCInputs), 4).bits[:4]
 
-                # Read the four bits of sensors state from the PLC over modbus/TCP.
-                sensor_values = self.modbus_client.read_discrete_inputs(int(ModbusTCPRegisters.PLCInputs)).bits[:4]
+                # Read the four bits of sensors state from the PLC over
+                # modbus/TCP.
+                sensor_values = self.modbus_client.read_discrete_inputs(
+                    int(ModbusTCPRegisters.PLCInputs)).bits[:4]
 
-                # Separate the limit switches of the punching arm from the light switches
+                # Separate the limit switches of the punching arm from the
+                # light switches
                 limit_switches = sensor_values[:2]
 
-                # Separate the light switches from the limit switches of the punching arm.
+                # Separate the light switches from the limit switches of the
+                # punching arm.
                 light_sensors = sensor_values[2:4]
 
                 # The values of the motor manual values must be inverted to fit our logic.
                 # The values are converted to strings.
-                corrected_motor_values = [str(not value).lower() for value in motor_values]
+                corrected_motor_values = [
+                    str(not value).lower() for value in motor_values]
 
                 # The values are converted to strings.
-                light_sensor_values = [str(value).lower() for value in light_sensors]
+                light_sensor_values = [str(value).lower()
+                                       for value in light_sensors]
 
                 # The values are converted to strings.
-                limit_switch_values = [str(value).lower() for value in limit_switches]
+                limit_switch_values = [str(value).lower()
+                                       for value in limit_switches]
 
                 # Join the sensor values again.
                 joined_sensor_values = limit_switch_values + light_sensor_values
 
-                # Join the proper sensor names as keys with the corresponding sensor values into a dictionary.
+                # Join the proper sensor names as keys with the corresponding
+                # sensor values into a dictionary.
                 sensors = dict(zip(self.sensor_names, joined_sensor_values))
 
-                # Join the proper motor manual names as keys with the corresponding motor manual values into a dictionary.
+                # Join the proper motor manual names as keys with the
+                # corresponding motor manual values into a dictionary.
                 motors = dict(zip(self.motor_names, corrected_motor_values))
-            except:
+            except BaseException:
                 pass
 
-        # Return the dictionary that contains the current motor manual values as well as sensor values.
+        # Return the dictionary that contains the current motor manual values
+        # as well as sensor values.
         return {**sensors, **motors}
 
     def set_order(self, count):
@@ -96,8 +113,9 @@ class ModbusTCPPlcConnector:
         """
         if self.is_connected():
             try:
-                self.modbus_client.write_register(int(ModbusTCPRegisters.Orders), count)
-            except:
+                self.modbus_client.write_register(
+                    int(ModbusTCPRegisters.Orders), count)
+            except BaseException:
                 pass
 
     def set_application_state(self, state):
@@ -111,7 +129,7 @@ class ModbusTCPPlcConnector:
             try:
                 state_value = self.modbus_client.write_register(int(ModbusTCPRegisters.HmiApplicationState),
                                                                 state.modbus_value)
-            except:
+            except BaseException:
                 pass
         return state_value
 
@@ -126,8 +144,9 @@ class ModbusTCPPlcConnector:
         state_value = application.Disconnected().modbus_value
         if self.is_connected():
             try:
-                state_value = self.modbus_client.write_register(register, int(motor_state))
-            except:
+                state_value = self.modbus_client.write_register(
+                    register, int(motor_state))
+            except BaseException:
                 pass
         return state_value
 
@@ -139,8 +158,9 @@ class ModbusTCPPlcConnector:
         state_value = application.Disconnected().modbus_value
         if self.is_connected():
             try:
-                state_value = self.modbus_client.write_register(int(ModbusTCPRegisters.Reset), 1)
-            except:
+                state_value = self.modbus_client.write_register(
+                    int(ModbusTCPRegisters.Reset), 1)
+            except BaseException:
                 pass
         return state_value
 
@@ -152,8 +172,9 @@ class ModbusTCPPlcConnector:
         state_value = application.Disconnected().modbus_value
         if self.is_connected():
             try:
-                state_value = self.modbus_client.read_holding_registers(int(ModbusTCPRegisters.Orders), 1).registers[0]
-            except:
+                state_value = self.modbus_client.read_holding_registers(
+                    int(ModbusTCPRegisters.Orders), 1).registers[0]
+            except BaseException:
                 pass
         return state_value
 
@@ -166,8 +187,9 @@ class ModbusTCPPlcConnector:
         if self.is_connected():
             try:
                 state_value = \
-                    self.modbus_client.read_holding_registers(int(ModbusTCPRegisters.ProcessState), 2).registers[0]
-            except:
+                    self.modbus_client.read_holding_registers(
+                        int(ModbusTCPRegisters.ProcessState), 2).registers[0]
+            except BaseException:
                 pass
         return state_value
 
@@ -182,6 +204,6 @@ class ModbusTCPPlcConnector:
                 state_value = \
                     self.modbus_client.read_holding_registers(int(ModbusTCPRegisters.PlcApplicationState), 1).registers[
                         0]
-            except:
+            except BaseException:
                 pass
         return state_value

@@ -6,7 +6,12 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app.db import get_db
 from app.forms import LoginForm, SetPasswordForm, HmiLoginForm
 
-auth = Blueprint('auths', __name__, template_folder='templates/auths', static_folder='static')
+auth = Blueprint(
+    'auths',
+    __name__,
+    template_folder='templates/auths',
+    static_folder='static')
+
 
 def login_required(view):
     @functools.wraps(view)
@@ -18,6 +23,7 @@ def login_required(view):
 
     return wrapped_view
 
+
 def logout_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
@@ -27,6 +33,7 @@ def logout_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
 
 @auth.before_app_request
 def load_logged_in_user():
@@ -40,6 +47,7 @@ def load_logged_in_user():
         g.user = get_db().execute(
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
+
 
 @auth.route('/login', methods=['GET', 'POST'])
 @logout_required
@@ -110,15 +118,15 @@ def login():
                 )
                 db.commit()
 
+            session['user_role'] = user['user_role']
             if user['first_login'] == 1:
                 return redirect(url_for('auths.set_password'))
-            session['user_role'] = user['user_role']
             if session['user_role'] == 'admin':
                 return redirect(url_for('admins.dashboard'))
             return redirect(url_for('views.index'))
 
         flash(error)
-    
+
     if request.remote_addr == "127.0.0.1":
         return render_template('loginhmi.html', form=hmiForm)
     else:
@@ -126,6 +134,8 @@ def login():
 
 # DELETE ME!!!
 # Seriously, don't use me!!
+
+
 @auth.route('/loginnonlocal', methods=['GET', 'POST'])
 @logout_required
 def login_local():
@@ -176,7 +186,7 @@ def login_local():
             return redirect(url_for('views.index'))
 
         flash(error)
-    
+
     return render_template('login.html', form=form)
 
 
@@ -214,5 +224,5 @@ def set_password():
             db.commit()
             return redirect(url_for('views.index'))
         flash(error)
-        
+
     return render_template('set_password.html', form=form)

@@ -56,6 +56,7 @@ class ApplicationStateMap(metaclass=Singleton):
     """
     A simple helper class to navigate the states.
     """
+
     def __init__(self):
         self.states = {
             AutomaticState().name: AutomaticState(),

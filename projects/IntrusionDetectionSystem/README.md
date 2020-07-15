@@ -84,9 +84,10 @@ their git project [snort](https://github.com/snort3/snort3) and folow the instru
 
 ## Running snort
 
+
 The snort.conf file, which you are mostly going to work with, can be found in 
 the snort folder. The snort.conf is already configured to use the custom rules 
-for the LICSTER test bed and the Home-Net 192.168.0.0/24.
+for the LICSTER and the Home-Net 192.168.0.0/24.
 
 There are many different modes with which you can run snort, we will only
 explain the most helpful modes. (For more information read the 
@@ -97,6 +98,7 @@ explain the most helpful modes. (For more information read the
 Using a custom snort.conf
 ````
 sudo snort -c /path/to/LICSTER/projects/IntrusionDetectectionSystem/snort/snort.conf
+
 ````
 Running snort so that it logs to a directory.
 ````
@@ -108,11 +110,13 @@ sudo snort -A console
 ````
 Telling snort to use a pcap
 ````
+
 sudo snort -r /path/to/LICSTER/projects/IntrusionDetectectionSystem/Blue/pcaps/file
 ````
 Normally you use a combination of different modes
 ````
 sudo snort -l ./path/to/log/file -b -A console -c /path/to/LICSTER/projects/IntrusionDetectectionSystem/snort/snort.conf -r /path/to/LICSTER/projects/IntrusionDetectectionSystem/Blue/pcaps/file
+
 ````
 ## Rules system
 

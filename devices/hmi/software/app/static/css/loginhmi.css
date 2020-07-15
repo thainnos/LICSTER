@@ -4,6 +4,9 @@
     background-color:  #131419;
   }
   
+  a {
+    text-decoration: none;
+  }
   
   .pin-login {
   
@@ -24,14 +27,17 @@
   
   }
   .wrapper{
-    height: 100vh;
-    padding-top: 5%;
+    height: 99vh;
+    padding-top: 2%;
     display: block;
     text-align: center;           /*centers form into middle of page */
   }
   
+  #back {
+    position: absolute;
+  }
+
   .pin-login__text{
-    vertical-align: middle;
     padding: 10px 3% 10px 3%;
     display: block;
     width: 94%;
@@ -89,12 +95,12 @@
       margin: auto;
     }
     wrapper{
-      height: 100%;
+      height: 99%;
       justify-content: center;
     }
   }
   
   .pin-login__numpad{
-    padding-top: 30%;
+    padding-top: 10%;
   }
   

@@ -22,7 +22,7 @@ Datetime = singleline_array[2][0].split(".")[0]
 db = get_db()
 last_row = db.execute('SELECT * FROM snort WHERE   id = (SELECT MAX(id) FROM snort)').fetchone()
 
-if (last_row is None) or (last_row[1] != Type and last_row[2] != Classification and last_row[3] != Priority):
+if (last_row is None) or (last_row[1] != Type or last_row[2] != Classification or last_row[3] != Priority):
     db.execute('INSERT INTO snort (snort_type, snort_classification, snort_priority, snort_datetime) VALUES (?,?,?,?)', (Type, Classification, Priority, Datetime))
     db.commit()
 

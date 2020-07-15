@@ -17,7 +17,7 @@ This software component manages modbus connections wrapped in TLS.
 
 ## Requirements   
 
-A running and functional LICTSTER Testbed. <br/>
+A running and functional LICTSTER Testbed.  
 RemoteIOs connected to the OpenPLC Raspberry Pi over USB/Power.
    
 ## TLS
@@ -32,7 +32,7 @@ In order to make use of the TLS protocol we have to set up all our modbus compon
 
 ### SSH to the OpenPLC Raspberry Pi
 
-Login to the Raspberry Pi over SSh with pi:raspberry.
+Login to the Raspberry Pi over SSH with pi:raspberry.
 
 ```sh
 ssh pi@192.168.0.30
@@ -83,7 +83,7 @@ sudo ./flashall.sh
 [Read this](/devices/plc/README.md) for information on how to set up the OpenPLC.
 
 #### Running the OpenPLC in TLS mode (Optional)
-Follow the same instructions as in [Running the OpenPLC](#running-the-openplc), but use the following configuration for the Slave Devices.
+Follow the same instructions as in [Running the OpenPLC](/devices/plc/README.md#running-the-openplc), but use the following configuration for the Slave Devices.
 
 **Note:** In contrast to the standard configuration, the IP and port of the slave devices must be changed.
 
@@ -160,6 +160,5 @@ chmod +x remove_from_autostart.sh
 sudo ./remove_from_autostart.sh
 ```
 
-
 ### Additional configuration (Optional)
-The Bridge Manager has a few options that can be configured. For more inforation check out its [configuration file](config.ini)
+The Bridge Manager has a few options that can be configured. For more information check out its [configuration file](config.ini)
