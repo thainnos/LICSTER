@@ -82,12 +82,64 @@ Installation  the easiest way is to go to [snort](https://www.snort.org/document
 and chose under Snort Setup Guides the installation guide you need. You can also go to 
 their git project [snort](https://github.com/snort3/snort3) and folow the instructions which are writen their.
 
+## Running snort
+
+The snort.conf file, which you are mostly going to work with, can be found in 
+the snort folder. The snort.conf is already configured to use the custom rules 
+for the LICSTER test bed and the Home-Net 192.168.0.0/24.
+
+There are many different modes with which you can run snort, we will only
+explain the most helpful modes. (For more information read the 
+[snort Docommentation](https://snort-org-site.s3.amazonaws.com/production/document_files/files/000/000/249/original/snort_manual.pdf))
+
+### Different Modes
+
+Using a custom snort.conf
+````
+sudo snort -c /path/to/LICSTER/projects/IntrusionDetectectionSystem/snort/snort.conf
+````
+Running snort so that it logs to a directory.
+````
+sudo snort -l ./path/to/log/file -b
+````
+Running snort so it shows the command in the terminal
+````
+sudo snort -A console
+````
+Telling snort to use a pcap
+````
+sudo snort -r /path/to/LICSTER/projects/IntrusionDetectectionSystem/Blue/pcaps/file
+````
+Normally you use a combination of different modes
+````
+sudo snort -l ./path/to/log/file -b -A console -c /path/to/LICSTER/projects/IntrusionDetectectionSystem/snort/snort.conf -r /path/to/LICSTER/projects/IntrusionDetectectionSystem/Blue/pcaps/file
+````
+## Rules system
+
+Our custom rules for snort are already included in the snort.conf, so you don't have to change anything.
+If you want to write your own rules see [here](snort/rules/README.md).
+
+## Integrating Snort to the WEB HMI
+
+To integrate snort to the HMI, so that the HMI shows alerts if snort throws one, you have to create a cronjob,
+which sends the logs to the HMI. We made two bash-scripts, the [licster-sharesshkey.sh](Blue/scripts/licster-sharesshkey.sh)
+and the [cronjob-scp.sh](Blue/scripts/cronjob-scp.sh), which make it easier to setup. The [licster-sharesshkey.sh](Blue/scripts/licster-sharesshkey.sh)
+script creates an ssh-key and shares the public key with the HMI. The [cronjob-scp.sh](Blue/scripts/cronjob-scp.sh) script creates a cronjob, so that every minute the logs
+are transferred, using scp, to the HMI. You should run the ssh-key script first and then the cronjob script.
+To run them type:
+````
+$ ./licster-sharesshkey.sh
+````
+and
+````
+$ ./cronjob-scp.sh
+````
+
 ## Content
 
-* [How to work with snort](snort/README.md)
 * [Rules](snort/rules/README.md)
 * [Pcap](Blue/README.md)
-* [Integration WEB HMI]()
+* [Integration WEB HMI](Blue/scripts/README.md)
 
 ## Authors
 

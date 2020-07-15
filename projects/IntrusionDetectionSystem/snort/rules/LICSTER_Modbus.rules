@@ -6,15 +6,89 @@
 #alert tcp any any -> any 502 (msg:"Modbus Write Multiply Coils";modbus_func:write_multiple_coils; sid:1001002;)
 
 #Dos
-alert tcp any any -> 192.168.0.51 502 (msg:"Modbus threshold violation 51"; threshold: type both, track by_dst, count 60, seconds 1; classtype: successful-dos; sid:1001004;)
+#The fundamental behind the following rules is to monitor packets for a certain time  period and generate an alert if the specific event reaches the specified time threshold.
 
-alert tcp any any -> 192.168.0.52 502 (msg:"Modbus threshold violation 52"; threshold: type both, track by_dst, count 60, seconds 1; classtype: successful-dos; sid:1001005;)
+alert tcp any any -> 192.168.0.51 502 (msg:"Modbus threshold violation 51"; threshold: type both, track by_dst, count 60, seconds 1; classtype: successful-dos; sid:1001004; rev:1;)
 
-alert tcp any any -> 192.168.0.10 502 (msg:"Modbus threshold violation 10"; threshold: type both, track by_dst, count 25, seconds 1; classtype: attempted-dos; sid:1001006;)
+alert tcp any any -> 192.168.0.52 502 (msg:"Modbus threshold violation 52"; threshold: type both, track by_dst, count 60, seconds 1; classtype: successful-dos; sid:1001005; rev:1;)
 
-alert tcp any any -> 192.168.0.20 502 (msg:"Modbus threshold violation 20"; threshold: type both, track by_dst, count 10, seconds 1; classtype: attempted-dos; sid:1001007;)
+alert tcp any any -> 192.168.0.10 502 (msg:"Modbus threshold violation 10"; threshold: type both, track by_dst, count 25, seconds 1; classtype: attempted-dos; sid:1001006; rev:1;)
 
-alert tcp any any -> 192.168.0.30 502 (msg:"Modbus threshold violation 30"; threshold: type both, track by_dst, count 120, seconds 1; classtype: attempted-dos; sid:1001008;)
+alert tcp any any -> 192.168.0.20 502 (msg:"Modbus threshold violation 20"; threshold: type both, track by_dst, count 10, seconds 1; classtype: attempted-dos; sid:1001007; rev:1;)
+
+alert tcp any any -> 192.168.0.30 502 (msg:"Modbus threshold violation 30"; threshold: type both, track by_dst, count 120, seconds 1; classtype: attempted-dos; sid:1001008; rev:1;)
+
+
+#Application Layer Rules
+
+#The Following rules specifically look for packets that don’t correspond to value |00 00| in the application layer in the third- and fourth-byte position
+
+alert tcp any any -> 192.168.0.51 502 (msg: "Non Modbus Communication on port 502 and 10 ip 192.168.0.51"; flow:from_client,established; content: "!|00 00|"; offset: 2; classtype:misc-attack; sid:1001009; rev:1;)
+
+alert tcp any any -> 192.168.0.52 502 (msg: "Non Modbus Communication on port 502 and 10 ip 192.168.0.52"; flow:from_client,established; content: "!|00 00|"; offset: 2; classtype:misc-attack; sid:1001010; rev:1;)
+
+alert tcp any any -> 192.168.0.10 502 (msg: "Non Modbus Communication on port 502 and 10 ip 192.168.0.10"; flow:from_client,established; content: "!|00 00|"; offset: 2; classtype:misc-attack; sid:1001011; rev:1;)
+
+alert tcp any any -> 192.168.0.20 502 (msg: "Non Modbus Communication on port 502 and 10 ip 192.168.0.20"; flow:from_client,established; content: "!|00 00|"; offset: 2; classtype:misc-attack; sid:1001012; rev:1;)
+
+alert tcp any any -> 192.168.0.30  502 (msg: "Non Modbus Communication on port 502 and 10 ip 192.168.0.30"; flow:from_client,established; content: "!|00 00|"; offset: 2; classtype:misc-attack; sid:1001013; rev:1;)
+
+#The Following rules look for the exception codes |85 02| and |86 02| that are reserved for the illegal function (85, 86) and illegal data address (02) for coil and register respectively.
+
+#|85 02|
+
+alert tcp any any -> 192.168.0.51 any (msg: "DOS attack on Modbus PLC - Illegal Data Address for Coil on ip 192.168.0.51"; flow:to_client,established; content:"|00 00|"; offset:2; depth:2; content:"|85 02|"; distance:3; classtype:attempted-dos; sid:1001014; rev:1;)
+
+alert tcp any any -> 192.168.0.52 any (msg: "DOS attack on Modbus PLC - Illegal Data Address for Coil on ip 192.168.0.52"; flow:to_client,established; content:"|00 00|"; offset:2; depth:2; content:"|85 02|"; distance:3; classtype:attempted-dos; sid:1001015; rev:1;)
+
+alert tcp any any -> 192.168.0.10 any (msg: "DOS attack on Modbus PLC - Illegal Data Address for Coil on ip 192.168.0.10"; flow:to_client,established; content:"|00 00|"; offset:2; depth:2; content:"|85 02|"; distance:3; classtype:attempted-dos; sid:1001016; rev:1;)
+
+alert tcp any any -> 192.168.0.20 any (msg: "DOS attack on Modbus PLC - Illegal Data Address for Coil on ip 192.168.0.20"; flow:to_client,established; content:"|00 00|"; offset:2; depth:2; content:"|85 02|"; distance:3; classtype:attempted-dos; sid:1001017; rev:1;)
+
+alert tcp any any -> 192.168.0.30 any (msg: "DOS attack on Modbus PLC - Illegal Data Address for Coil on ip 192.168.0.30"; flow:to_client,established; content:"|00 00|"; offset:2; depth:2; content:"|85 02|"; distance:3; classtype:attempted-dos; sid:1001018; rev:1;)
+
+#|86 02|
+
+alert tcp any any -> 192.168.0.51 any (msg: "DOS attack on Modbus PLC - Illegal Data Address for Coil on ip 192.168.0.51"; flow:to_client,established; content:"|00 00|"; offset:2; depth:2; content:"|86 02|"; distance:3; classtype:attempted-dos; sid:1001019; rev:1;)
+
+alert tcp any any -> 192.168.0.52 any (msg: "DOS attack on Modbus PLC - Illegal Data Address for Coil on ip 192.168.0.52"; flow:to_client,established; content:"|00 00|"; offset:2; depth:2; content:"|86 02|"; distance:3; classtype:attempted-dos; sid:1001020; rev:1;)
+
+alert tcp any any -> 192.168.0.10 any (msg: "DOS attack on Modbus PLC - Illegal Data Address for Coil on ip 192.168.0.10"; flow:to_client,established; content:"|00 00|"; offset:2; depth:2; content:"|86 02|"; distance:3; classtype:attempted-dos; sid:1001021; rev:1;)
+
+alert tcp any any -> 192.168.0.20 any (msg: "DOS attack on Modbus PLC - Illegal Data Address for Coil on ip 192.168.0.20"; flow:to_client,established; content:"|00 00|"; offset:2; depth:2; content:"|86 02|"; distance:3; classtype:attempted-dos; sid:1001022; rev:1;)
+
+alert tcp any any -> 192.168.0.30 any (msg: "DOS attack on Modbus PLC - Illegal Data Address for Coil on ip 192.168.0.30"; flow:to_client,established; content:"|00 00|"; offset:2; depth:2; content:"|86 02|"; distance:3; classtype:attempted-dos; sid:1001023; rev:1;)
+
+#The following rules  are used to identify all the read and write functionality of Modbus communication coming to the Testbed from any other source than the Testbed itself
+
+#read
+
+alert tcp !$HOME_NET any -> 192.168.0.51 502 (msg: "Modbus - Unauthorized Read Request to ip 192.168.0.51"; flow:from_client,established; content:"|00 00|"; offset:2; depth:2; pcre:"/[\S\s]{3}(\x01|\x02|\x03|\x04|\x11|\x14|\x17|\x18|\x2B)/i"; classtype:misc-attack; sid:1001024; rev:1;)
+
+alert tcp !$HOME_NET any -> 192.168.0.52 502 (msg: "Modbus - Unauthorized Read Request to ip 192.168.0.52"; flow:from_client,established; content:"|00 00|"; offset:2; depth:2; pcre:"/[\S\s]{3}(\x01|\x02|\x03|\x04|\x11|\x14|\x17|\x18|\x2B)/i"; classtype:misc-attack; sid:1001025; rev:1;)
+
+alert tcp !$HOME_NET any -> 192.168.0.10 502 (msg: "Modbus - Unauthorized Read Request to ip 192.168.0.10"; flow:from_client,established; content:"|00 00|"; offset:2; depth:2; pcre:"/[\S\s]{3}(\x01|\x02|\x03|\x04|\x11|\x14|\x17|\x18|\x2B)/i"; classtype:misc-attack; sid:1001026; rev:1;)
+
+alert tcp !$HOME_NET any -> 192.168.0.20 502 (msg: "Modbus - Unauthorized Read Request to ip 192.168.0.20"; flow:from_client,established; content:"|00 00|"; offset:2; depth:2; pcre:"/[\S\s]{3}(\x01|\x02|\x03|\x04|\x11|\x14|\x17|\x18|\x2B)/i"; classtype:misc-attack; sid:1001027; rev:1;)
+
+alert tcp !$HOME_NET any -> 192.168.0.30 502 (msg: "Modbus - Unauthorized Read Request to ip 192.168.0.30"; flow:from_client,established; content:"|00 00|"; offset:2; depth:2; pcre:"/[\S\s]{3}(\x01|\x02|\x03|\x04|\x11|\x14|\x17|\x18|\x2B)/i"; classtype:misc-attack; sid:1001028; rev:1;)
+
+#write
+
+alert tcp !$HOME_NET any -> 192.168.0.51 502 (msg: "Modbus - Unauthorized Write Request to ip 192.168.0.51"; flow:from_client,established; content:"|00 00|"; offset:2; depth:2; pcre:"/[\S\s]{3}(\x05|\x06|\x0F|\x10|\x15|\x16)/i"; classtype:misc-attack; sid:1001029; rev:1;)
+
+alert tcp !$HOME_NET any -> 192.168.0.52 502 (msg: "Modbus - Unauthorized Write Request to ip 192.168.0.52"; flow:from_client,established; content:"|00 00|"; offset:2; depth:2; pcre:"/[\S\s]{3}(\x05|\x06|\x0F|\x10|\x15|\x16)/i"; classtype:misc-attack; sid:1001030; rev:1;)
+
+alert tcp !$HOME_NET any -> 192.168.0.10 502 (msg: "Modbus - Unauthorized Write Request to ip 192.168.0.10"; flow:from_client,established; content:"|00 00|"; offset:2; depth:2; pcre:"/[\S\s]{3}(\x05|\x06|\x0F|\x10|\x15|\x16)/i"; classtype:misc-attack; sid:1001031; rev:1;)
+
+alert tcp !$HOME_NET any -> 192.168.0.20 502 (msg: "Modbus - Unauthorized Write Request to ip 192.168.0.20"; flow:from_client,established; content:"|00 00|"; offset:2; depth:2; pcre:"/[\S\s]{3}(\x05|\x06|\x0F|\x10|\x15|\x16)/i"; classtype:misc-attack; sid:1001032; rev:1;)
+
+alert tcp !$HOME_NET any -> 192.168.0.30 502 (msg: "Modbus - Unauthorized Write Request to ip 192.168.0.30"; flow:from_client,established; content:"|00 00|"; offset:2; depth:2; pcre:"/[\S\s]{3}(\x05|\x06|\x0F|\x10|\x15|\x16)/i"; classtype:misc-attack; sid:1001033; rev:1;)
+
+
+
+
+
 
 
 
