@@ -4,6 +4,9 @@
     background-color:  #131419;
   }
   
+  a {
+    text-decoration: none;
+  }
   
   .pin-login {
   
@@ -30,8 +33,11 @@
     text-align: center;           /*centers form into middle of page */
   }
   
+  #back {
+    position: absolute;
+  }
+
   .pin-login__text{
-    vertical-align: middle;
     padding: 10px 3% 10px 3%;
     display: block;
     width: 94%;
@@ -95,6 +101,6 @@
   }
   
   .pin-login__numpad{
-    padding-top: 30%;
+    padding-top: 10%;
   }
   

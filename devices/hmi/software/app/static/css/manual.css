@@ -14,3 +14,12 @@
 #control-table > tbody > tr > th {
     background: #454d55;
 }
+
+#content {
+    height: 400px;
+}
+
+
+th.table-default{
+    height: 200px;
+}
