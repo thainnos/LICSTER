@@ -11,10 +11,10 @@
   <a href="{{ url_for('views.view') }}" class="material-icons button_style" id="back"><img src="/static/img/back.svg"></a>
   <div class="wrapperklasse">
     <div class="pin-form " id="pin-main">
-        <form id="myForm" action="manual" method="POST" novalidate>
-            <input id="csrf_token" name="csrf_token" type="hidden" value="IjQxMWFjNGNjYWI4NjIxYmM3NmM0NGZkZThhNmQ2MmU4NTdiMjFjMmMi.Ee4Tig.huEDDIJgLvNPANSgWnAoo1H6pr0">
-            <input class="pin-feldtext" id="password" name="password" required type="password" value="">
-        </form>
+      <form id="myForm" action="" method="POST" novalidate>
+        {{ form.csrf_token() }}
+        {{ form.password(class_="pin-login__text") }}
+      </form>
       <div class="pin-numpad" id="numpad">
         <button class="button_style" onclick="KonsoleAusgabe(1)">1</button>
         <button class="button_style" onclick="KonsoleAusgabe(2)">2</button>
