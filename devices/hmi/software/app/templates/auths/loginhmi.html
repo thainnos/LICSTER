@@ -3,33 +3,41 @@
   <title>PIN Verification</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/loginhmi.css') }}">
 
 </head>
 
-
 <body>
-  <a href="{{ url_for('views.view') }}" class="material-icons pin-login__key" id="back">keyboard_backspace</a>
-  <div class="wrapper">
-    <div class="pin-login " id="mainPinLogin">
-        <form id="myForm" action="" method="POST" novalidate>
-            {{ form.csrf_token() }}
-            {{ form.password(class_="pin-login__text") }}
+  <a href="{{ url_for('views.view') }}" class="material-icons button_style" id="back"><img src="/app/static/img/back.svg"></a>
+  <div class="wrapperklasse">
+    <div class="pin-form " id="pin-main">
+        <form id="myForm" action="manual" method="POST" novalidate>
+            <input id="csrf_token" name="csrf_token" type="hidden" value="IjQxMWFjNGNjYWI4NjIxYmM3NmM0NGZkZThhNmQ2MmU4NTdiMjFjMmMi.Ee4Tig.huEDDIJgLvNPANSgWnAoo1H6pr0">
+            <input class="pin-feldtext" id="password" name="password" required type="password" value="">
         </form>
-      <div class="pin-login__numpad">
-        <!--
-        <div class="pin-login__key">0</div>
-        <div class="pin-login__key material-icons">done</div> -->
+      <div class="pin-numpad" id="numpad">
+        <button class="button_style" onclick="KonsoleAusgabe(1)">1</button>
+        <button class="button_style" onclick="KonsoleAusgabe(2)">2</button>
+        <button class="button_style" onclick="KonsoleAusgabe(3)">3</button>
+        <br>
+        <button class="button_style" onclick="KonsoleAusgabe(4)">4</button>
+        <button class="button_style" onclick="KonsoleAusgabe(5)">5</button>
+        <button class="button_style" onclick="KonsoleAusgabe(6)">6</button>
+        <br>
+        <button class="button_style" onclick="KonsoleAusgabe(7)">7</button>
+        <button class="button_style" onclick="KonsoleAusgabe(8)">8</button>
+        <button class="button_style" onclick="KonsoleAusgabe(9)">9</button>
+        <br>
+        <button class="button_style" onclick="KonsoleAusgabe(10)"><img src="/app/static/img/done.svg"></button>
+        <button class="button_style" onclick="KonsoleAusgabe(0)">0</button>
+        <button class="button_style" onclick="KonsoleAusgabe(12)"><img src="/app/static/img/backspace.svg"></button>
+        
 
         </div>
       </div>
-      <script src="{{ url_for('static', filename='js/hmi.js') }}"></script>
-      <script>
-        new PinLogin({
-          el: document.getElementById("mainPinLogin"),
-        });
-
+      <script src="{{ url_for('static', filename='js/hmi.js') }}">                  
       </script>
+      
+    
     </div>
 </body>
