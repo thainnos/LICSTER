@@ -14,7 +14,6 @@
   -webkit-user-select: none;
 
   font-family: "Roboto", sans-serif;
-  padding: 5%;
   display: inline-block;
   font-size: 28px;
   border-radius: 10px;
@@ -85,4 +84,28 @@ img{
   img{
     padding-left:10px;
   }
-} 
+}
+@media screen and (max-width: 1000px){
+  .pin-form{
+    padding-top: 0;
+    transform: scale(0.8);
+  }
+  .wrapperklasse{
+    padding-top: 0;
+  }
+  .pin-numpad{
+    padding-top: 10%;
+  }
+}
+@media screen and (max-height: 450px){
+  .pin-form{
+    position: relative;
+    top: -3em;
+    padding: 0;
+    transform: scale(0.6);
+  }
+  .wrapperklasse{
+    padding-top: 0;
+  }
+  
+}
