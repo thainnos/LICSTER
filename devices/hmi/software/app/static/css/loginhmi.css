@@ -22,7 +22,7 @@
 }
 .wrapperklasse{
  
-  padding-top: 5%;
+  padding-top: 1%;
   display: block;
   text-align: center;        
 }
@@ -69,12 +69,12 @@
     margin: auto;
   }
   wrapper{
-    height: 100%;
+    height: 90%;
     justify-content: center;
   }
 }
 .pin-numpad{
-  padding-top: 30%;
+  padding-top: 1%;
 }
 img{
   background: white !important;

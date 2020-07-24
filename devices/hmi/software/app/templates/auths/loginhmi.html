@@ -8,8 +8,13 @@
 </head>
 
 <body>
-  <a href="{{ url_for('views.view') }}" class="material-icons button_style" id="back"><img src="/static/img/back.svg"></a>
-  <div class="wrapperklasse">
+<div style="width: 100%; overflow: hidden;">
+    <div style="width: 100px%; float: left;">
+        <a href="{{ url_for('views.view') }}" class="material-icons button_style" id="back"><img src="/static/img/back.svg"></a>
+    </div>
+    <div style="margin-left: 600px%;"> 
+    
+    <div class="wrapperklasse">
     <div class="pin-form " id="pin-main">
       <form id="myForm" action="" method="POST" novalidate>
         {{ form.csrf_token() }}
@@ -37,7 +42,8 @@
       </div>
       <script src="{{ url_for('static', filename='js/hmi.js') }}">                  
       </script>
-      
     
     </div>
+    </div>
+</div>
 </body>
