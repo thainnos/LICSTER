@@ -6,7 +6,7 @@ def breach_mail(Type, Classification, Priority, Datetime, email_list):
         smtp.starttls()
         smtp.ehlo()
 
-        smtp.login('licster.breach@gmail.com', 'Lic#v77zX')             
+        smtp.login('email@address.com', 'pwplaceholder')             
 
         subject = 'A breach has been detected by the Intrusion Detection System!'
         body = 'A '+ Type +' was detected at '+ Datetime +'.'
