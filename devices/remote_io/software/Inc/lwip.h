@@ -14,7 +14,7 @@
   * the License. You may obtain a copy of the License at:
   *                             www.st.com/SLA0044
   *
-  *************************************************************************  
+  *************************************************************************
 
   */
 /* Define to prevent recursive inclusion -------------------------------------*/
@@ -45,7 +45,7 @@
 /* Global Variables ----------------------------------------------------------*/
 extern ETH_HandleTypeDef heth;
 
-/* LWIP init function */	
+/* LWIP init function */
 void MX_LWIP_Init(void);
 
 #if !WITH_RTOS

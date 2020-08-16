@@ -2130,7 +2130,7 @@
  *
  * This module provides debugging functions.
  */
-// #define MBEDTLS_DEBUG_C
+//#define MBEDTLS_DEBUG_C
 
 /**
  * \def MBEDTLS_DES_C
@@ -3274,10 +3274,6 @@
 /* Target and application specific configurations */
 //#define YOTTA_CFG_MBEDTLS_TARGET_CONFIG_FILE "mbedtls/target_config.h"
 
-#if defined(TARGET_LIKE_MBED) && defined(YOTTA_CFG_MBEDTLS_TARGET_CONFIG_FILE)
-    #include YOTTA_CFG_MBEDTLS_TARGET_CONFIG_FILE
-#endif
-
 /* USER CODE BEGIN 1 */
 
 /*
@@ -3297,6 +3293,6 @@
 
 #include "mbedtls/check_config.h"
 
-/* USER CODE END 1 */ 
+/* USER CODE END 1 */
 
 #endif /* MBEDTLS_CONFIG_H */

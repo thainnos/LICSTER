@@ -32,6 +32,11 @@
 /* USER CODE END 1 */
 
 /* Global variables ---------------------------------------------------------*/
+mbedtls_ssl_context ssl;
+mbedtls_ssl_config conf;
+mbedtls_x509_crt cert;
+mbedtls_ctr_drbg_context ctr_drbg;
+mbedtls_entropy_context entropy;
 
 /* USER CODE BEGIN 2 */
 /* USER CODE END 2 */
@@ -41,6 +46,11 @@ void MX_MBEDTLS_Init(void)
 {
    /**
   */
+  mbedtls_ssl_init(&ssl);
+  mbedtls_ssl_config_init(&conf);
+  mbedtls_x509_crt_init(&cert);
+  mbedtls_ctr_drbg_init(&ctr_drbg);
+  mbedtls_entropy_init( &entropy );
   /* USER CODE BEGIN 3 */
 	mbedtls_platform_set_calloc_free(rcalloc, rfree);
   /* USER CODE END 3 */
@@ -53,7 +63,7 @@ void MX_MBEDTLS_Init(void)
 /**
   * @}
   */
- 
+
 /**
   * @}
   */

@@ -53,7 +53,7 @@
  * LWIP_COMPAT_SOCKETS==1 : Enable BSD-style sockets functions
  * SO_REUSE==1            : Enable SO_REUSEADDR option
  */
- 
+
 #include "lwip.h"
 #include "lwip/dhcp.h"
 #include "lwip/tcpip.h"
@@ -88,8 +88,6 @@
 #define DHCP_TIMEOUT 10000
 #endif /* LWIP_DHCP == 0 */
 
-static struct netif netif;
-static int initialized = 0;
 struct sockaddr_storage client_addr;
 
 /* Within 'USER CODE' section, code will be kept by default at each generation */

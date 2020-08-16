@@ -17,7 +17,7 @@
   *
   ******************************************************************************
   */
- 
+
 /* Define to prevent recursive inclusion --------------------------------------*/
 #ifndef __LWIPOPTS__H__
 #define __LWIPOPTS__H__
@@ -43,8 +43,8 @@
 #define WITH_RTOS 1
 /*----- WITH_MBEDTLS enabled (Since MBEDTLS and FREERTOS are set) -----*/
 #define WITH_MBEDTLS 1
-/*----- CHECKSUM_BY_HARDWARE disabled -----*/
-#define CHECKSUM_BY_HARDWARE 0
+/*----- CHECKSUM_BY_HARDWARE enabled -----*/
+#define CHECKSUM_BY_HARDWARE 1
 /*-----------------------------------------------------------------------------*/
 
 /* LwIP Stack Parameters (modified compared to initialization value in opt.h) -*/
@@ -77,7 +77,7 @@
 #define TCP_WND_UPDATE_THRESHOLD 536
 /*----- Default Value for LWIP_NETIF_STATUS_CALLBACK: 0 ---*/
 #define LWIP_NETIF_STATUS_CALLBACK 1
-/*----- Default Value for LWIP_NETIF_LINK_CALLBACK: 0 ---*/
+/*----- Value in opt.h for LWIP_NETIF_LINK_CALLBACK: 0 -----*/
 #define LWIP_NETIF_LINK_CALLBACK 1
 /*----- Value in opt.h for TCPIP_THREAD_STACKSIZE: 0 -----*/
 #define TCPIP_THREAD_STACKSIZE 4096
@@ -107,8 +107,26 @@
 #define LWIP_USE_EXTERNAL_MBEDTLS 1
 /*----- Value in opt.h for LWIP_STATS: 1 -----*/
 #define LWIP_STATS 0
-/*----- Default Value for LWIP_CHECKSUM_CTRL_PER_NETIF: 0 ---*/
-#define LWIP_CHECKSUM_CTRL_PER_NETIF 1
+/*----- Value in opt.h for CHECKSUM_GEN_IP: 1 -----*/
+#define CHECKSUM_GEN_IP 0
+/*----- Value in opt.h for CHECKSUM_GEN_UDP: 1 -----*/
+#define CHECKSUM_GEN_UDP 0
+/*----- Value in opt.h for CHECKSUM_GEN_TCP: 1 -----*/
+#define CHECKSUM_GEN_TCP 0
+/*----- Value in opt.h for CHECKSUM_GEN_ICMP: 1 -----*/
+#define CHECKSUM_GEN_ICMP 0
+/*----- Value in opt.h for CHECKSUM_GEN_ICMP6: 1 -----*/
+#define CHECKSUM_GEN_ICMP6 0
+/*----- Value in opt.h for CHECKSUM_CHECK_IP: 1 -----*/
+#define CHECKSUM_CHECK_IP 0
+/*----- Value in opt.h for CHECKSUM_CHECK_UDP: 1 -----*/
+#define CHECKSUM_CHECK_UDP 0
+/*----- Value in opt.h for CHECKSUM_CHECK_TCP: 1 -----*/
+#define CHECKSUM_CHECK_TCP 0
+/*----- Value in opt.h for CHECKSUM_CHECK_ICMP: 1 -----*/
+#define CHECKSUM_CHECK_ICMP 0
+/*----- Value in opt.h for CHECKSUM_CHECK_ICMP6: 1 -----*/
+#define CHECKSUM_CHECK_ICMP6 0
 /*----- Default Value for LWIP_DBG_MIN_LEVEL: LWIP_DBG_LEVEL_ALL ---*/
 #define LWIP_DBG_MIN_LEVEL LWIP_DBG_LEVEL_WARNING
 /*-----------------------------------------------------------------------------*/
