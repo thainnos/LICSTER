@@ -1,6 +1,6 @@
 import functools
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify, json
+    Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 from app.db import get_db
@@ -52,9 +52,12 @@ def load_logged_in_user():
 @auth.route('/login', methods=['GET', 'POST'])
 @logout_required
 def login():
-    ''' Login view. Returns a view for the local HMI and another for any remote connection.
+    ''' Login view. Returns a view for the local HMI
+    and another for any remote connection.
 
-    :return: Before validation: login.html - After: index.html or admin dashboard
+    :return:
+    Before validation: login.html
+    After validation: index.html or admin dashboard
     :rtype: HTML / redirect
     '''
     form = LoginForm()
@@ -140,7 +143,9 @@ def login():
 @logout_required
 def login_local():
     ''' Remote login view. Returns the remote view on the local machine.
-    :return: The login.html view, after validation the index.html/admin dashboard
+    :return:
+    Before validation the login.html view,
+    after validation the index.html/admin dashboard
     :rtype: HTML / redirect
     '''
     form = LoginForm()

@@ -18,7 +18,8 @@ class PendingState(metaclass=Singleton):
 
 class TowardsPunchingMachineState(metaclass=Singleton):
     """
-    The process step where the conveyor belt moves the goods towards the punching machine.
+    The process step where the conveyor belt moves the goods towards the
+    punching machine.
     """
 
     def __init__(self):
@@ -30,7 +31,8 @@ class TowardsPunchingMachineState(metaclass=Singleton):
 
 class PunchingMachineDownState(metaclass=Singleton):
     """
-    The process step where the punching machine moves down to punch on the goods.
+    The process step where the punching machine moves down to punch on the
+    goods.
     """
 
     def __init__(self):
@@ -54,7 +56,8 @@ class PunchingMachineUpState(metaclass=Singleton):
 
 class FromPunchingMachineState(metaclass=Singleton):
     """
-    The process step where the conveyor belt moves the goods towards the punching machine.
+    The process step where the conveyor belt moves the goods towards the
+    punching machine.
     """
 
     def __init__(self):
@@ -74,9 +77,11 @@ class ProcessStateMap(metaclass=Singleton):
             PendingState().name: PendingState(),
             PendingState().modbus_value: PendingState(),
             TowardsPunchingMachineState().name: TowardsPunchingMachineState(),
-            TowardsPunchingMachineState().modbus_value: TowardsPunchingMachineState(),
+            TowardsPunchingMachineState().modbus_value:
+                TowardsPunchingMachineState(),
             PunchingMachineDownState().name: PunchingMachineDownState(),
-            PunchingMachineDownState().modbus_value: PunchingMachineDownState(),
+            PunchingMachineDownState().modbus_value:
+                PunchingMachineDownState(),
             PunchingMachineUpState().name: PunchingMachineUpState(),
             PunchingMachineUpState().modbus_value: PunchingMachineUpState(),
             FromPunchingMachineState().name: FromPunchingMachineState(),

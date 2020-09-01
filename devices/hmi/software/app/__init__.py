@@ -1,13 +1,14 @@
 """
-This is the starting point of the flask web application. It defines the routes that available to the HMI.
+This is the starting point of the flask web application.
+It defines the routes that available to the HMI.
 """
 import os
-from flask import Flask, jsonify, render_template, redirect, json, request, render_template
+from flask import Flask, jsonify
 
 
 def page_not_found(e):
     """
-    # The default error handler route for when a site is called that has no route provided for.
+    The default error handler route for when a non-existant site is called.
     :param e: The error message
     :return: The text that will be displayed in the browser on an error.
     """
