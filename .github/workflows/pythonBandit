@@ -1,0 +1,30 @@
+# This workflow will test the python with bandit to find common security issues
+
+name: 
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+
+
+# or specify a path!
+
+
+steps:
+    - uses: jpetrucciani/bandit-check@master
+    - uses: actions/checkout@v2
+    - uses: jpetrucciani/bandit-check@master
+      with:
+          path: '.'
