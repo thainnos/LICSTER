@@ -20,17 +20,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: Security check - Bandit
-      uses: ./
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
       with:
-        python_version: ${{ matrix.python-version }}
-        project_path: .
-        ignore_failure: true
-
-    - name: Security check report artifacts
-      uses: actions/upload-artifact@v1
-      # if: failure()
-      with:
-        name: Security report
-        path: output/security_report.txt
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Run python bandit
+      run: |
+        bandit -r ./
