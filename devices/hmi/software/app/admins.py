@@ -1,8 +1,8 @@
 import functools
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify, json
+    Blueprint, flash, g, redirect, render_template, request, url_for
 )
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import generate_password_hash
 from app.db import get_db
 from app.forms import AddUserForm, DeleteUserForm, ResetLogForm
 
@@ -27,7 +27,8 @@ def admin_required(view):
 @admin.route('/dashboard', methods=('GET', 'POST'))
 @admin_required
 def dashboard():
-    ''' Admin Dashboard. Shows all users and snort logs. Allows adding/deleting users and resetting the logs.
+    ''' Admin Dashboard. Shows all users and snort logs.
+    Allows adding/deleting users and resetting the logs.
 
     :return: The admin.html view
     :rtype: HTML
@@ -70,7 +71,8 @@ def dashboard():
         snort_outer_row.append(snort_inner_dict)
 
     return render_template('admin.html', clients=clients, logs=snort_outer_row,
-                           add_form=add_form, delete_form=delete_form, reset_form=reset_form)
+                           add_form=add_form, delete_form=delete_form,
+                           reset_form=reset_form)
 
 
 @admin.route('/dashboard/add', methods=('GET', 'POST'))
@@ -103,14 +105,17 @@ def add_user():
         if error is None:
             if not email:
                 db.execute(
-                    'INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)',
+                    'INSERT INTO user (username, password, user_role,'
+                    ' first_login) VALUES (?, ?, ?, ?)',
                     (username, generate_password_hash(password), role, 1)
                 )
                 db.commit()
             else:
                 db.execute(
-                    'INSERT INTO user (username, password, user_role, first_login, email) VALUES (?, ?, ?, ?, ?)',
-                    (username, generate_password_hash(password), role, 1, email)
+                    'INSERT INTO user (username, password, user_role, '
+                    'first_login, email) VALUES (?, ?, ?, ?, ?)',
+                    (username, generate_password_hash(password), role, 1,
+                     email)
                 )
                 db.commit()
             return redirect(url_for('admins.dashboard'))
@@ -172,7 +177,11 @@ def reset_logs():
         db = get_db()
         db.execute('DROP TABLE IF EXISTS snort')
         db.commit()
-        db.execute("CREATE TABLE IF NOT EXISTS snort(id INTEGER PRIMARY KEY AUTOINCREMENT, snort_type TEXT NOT NULL, snort_classification TEXT NOT NULL, snort_priority INTEGER NOT NULL, snort_datetime TEXT NOT NULL)")
+        db.execute("CREATE TABLE IF NOT EXISTS snort(id INTEGER "
+                   "PRIMARY KEY AUTOINCREMENT, snort_type TEXT NOT"
+                   " NULL, snort_classification TEXT NOT NULL, "
+                   "snort_priority INTEGER NOT NULL, snort_datetime"
+                   " TEXT NOT NULL)")
         db.commit()
         return redirect(url_for('admins.dashboard'))
     return redirect(url_for('admins.dashboard'))
