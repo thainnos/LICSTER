@@ -19,7 +19,7 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.register_error_handler(404, page_not_found)
     app.config.from_mapping(
-        SECRET_KEY="dev",
+        SECRET_KEY=os.getenv('SECRET_KEY'),
         DATABASE=os.path.join(app.instance_path, "app.sqlite"),
     )
 
