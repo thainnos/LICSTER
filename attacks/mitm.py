@@ -22,7 +22,7 @@ except KeyboardInterrupt:
     logging.info("[*] Exiting...")
     sys.exit(1)
 
-os.system("echo 0 > /proc/sys/net/ipv4/ip_forward")
+os.system("/bin/echo 0 > /proc/sys/net/ipv4/ip_forward")
 
 
 ########################
