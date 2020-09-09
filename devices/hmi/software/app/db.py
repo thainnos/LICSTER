@@ -28,7 +28,8 @@ def close_db(e=None):
 
 
 def init_db():
-    ''' (Re-)Make the database table. Caution: Using this method will delete everything in the database.
+    ''' (Re-)Make the database table.
+    Caution: Using this method will delete everything in the database.
     '''
     db = get_db()
     with current_app.open_resource('schema.sql') as f:
@@ -40,7 +41,8 @@ def check_pw(pw1, valueType):
 
     :param pw1: Password, defaults to empty String
     :type pw1: String
-    :param valueType: String containing the type that is getting checked, defaults to empty String
+    :param valueType: String containing the type that is getting checked,
+    defaults to empty String
     :type valueType: String
     :return: Are pw1 and the input the same?
     :rtype: boolean
@@ -59,18 +61,22 @@ def add_email():
     :return: Email Address
     :rtype: String
     '''
-    click.echo('Do you want to add an email address for this user?\nIf the IDS detects anything, it will be sent to all saved email addresses.')
+    click.echo('Do you want to add an email address for this user?\n'
+               'If the IDS detects anything, it will be sent to all '
+               'saved email addresses.')
     not_skipping = True
     admin_email = ""
     while not_skipping:
         click.echo(
-            'If you dont want to add an email address you can simply type "no".')
+            'If you dont want to add an email address you can simply '
+            'type "no".')
         email = input(">>> ")
         if email == 'no':
             break
         else:
             email2 = input(
-                'Please enter the email address again or skip this step by typing "no".\n>>> ')
+                'Please enter the email address again or skip this step'
+                ' by typing "no".\n>>> ')
             if email2 == 'no' or email2 == 'No':
                 not_skipping = False
                 break
@@ -108,11 +114,12 @@ def add_hmi_password():
     :rtype: Integer
     '''
     click.echo(
-        "Please enter the password for the hmi. This password must only contain numbers.")
+        "Please enter the password for the hmi. "
+        "This password must only contain numbers.")
     while True:
         hmi_password = input(">>> ")
         try:
-            isint = int(hmi_password)
+            hmi_password = str(int(hmi_password))
             breakNow = check_pw(hmi_password, "password of the hmi")
             if breakNow:
                 click.echo("The password was set.")
@@ -121,7 +128,8 @@ def add_hmi_password():
                 click.echo("The passwords don't match. Please try again.")
         except BaseException:
             click.echo(
-                "This password must only contain numbers. Please type in a password containing only numbers.")
+                "This password must only contain numbers. "
+                "Please type in a password containing only numbers.")
     return hmi_password
 
 
@@ -141,13 +149,18 @@ def init_db_command():
     hmi_password = add_hmi_password()
 
     if not admin_email:
-        db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)',
-                   (admin_name, generate_password_hash(admin_password), 'admin', 1))
+        db.execute('INSERT INTO user (username, password, user_role, '
+                   'first_login) VALUES (?, ?, ?, ?)',
+                   (admin_name, generate_password_hash(admin_password),
+                    'admin', 1))
     else:
-        db.execute('INSERT INTO user (username, password, user_role, first_login, email) VALUES (?, ?, ?, ?, ?)',
-                   (admin_name, generate_password_hash(admin_password), 'admin', 1, admin_email))
+        db.execute('INSERT INTO user (username, password, user_role, '
+                   'first_login, email) VALUES (?, ?, ?, ?, ?)',
+                   (admin_name, generate_password_hash(admin_password),
+                    'admin', 1, admin_email))
     db.commit()
-    db.execute('INSERT INTO user (username, password, user_role, first_login) VALUES (?, ?, ?, ?)',
+    db.execute('INSERT INTO user (username, password, user_role, first_login)'
+               ' VALUES (?, ?, ?, ?)',
                ('hmilocal', generate_password_hash(hmi_password), 'user', 1))
     db.commit()
     click.echo("A new admin - " + admin_name + " - was created.")

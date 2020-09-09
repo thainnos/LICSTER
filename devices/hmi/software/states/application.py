@@ -18,7 +18,8 @@ class AutomaticState(metaclass=Singleton):
 
 class ManualState(metaclass=Singleton):
     """
-    The manual state does not allow for automatic process execution, yet manual control.
+    The manual state does not allow for automatic process execution,
+    yet manual control.
     """
 
     def __init__(self):
@@ -30,7 +31,8 @@ class ManualState(metaclass=Singleton):
 
 class StopState(metaclass=Singleton):
     """
-    The stop state is an emergency state which can only be reverted by the reset trigger.
+    The stop state is an emergency state which can only be reverted by the
+    reset trigger.
     """
 
     def __init__(self):
@@ -42,7 +44,8 @@ class StopState(metaclass=Singleton):
 
 class Disconnected(metaclass=Singleton):
     """
-    The stop state is an emergency state which can only be reverted by the reset trigger.
+    The stop state is an emergency state which can only be reverted by the
+    reset trigger.
     """
 
     def __init__(self):

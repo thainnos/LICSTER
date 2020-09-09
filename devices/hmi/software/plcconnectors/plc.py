@@ -1,6 +1,7 @@
 """
-The programmable logic controller (PLC) is the interface to the actual PLC. Its main purpose is to instantiate the
-plc_connector_class and forward its own function invocations to it as well as return its results. It serves as a
+The programmable logic controller (PLC) is the interface to the actual PLC.
+Its main purpose is to instantiate the plc_connector_class and forward its own
+function invocations to it as well as return its results. It serves as a
 generic layer to the web application.
 """
 from states.application import ApplicationStateMap
@@ -23,7 +24,8 @@ class Plc:
     def is_connected(self):
         """
         Is the plc connected with the actual plc?
-        :return: True if the underlying plc connector claims that it is connected
+        :return: True if the underlying plc connector claims
+        that it is connected
         """
         return self.plc_connector.is_connected()
 
@@ -38,7 +40,8 @@ class Plc:
 
     def set_order(self, count):
         """
-        Set an positive numeric value as amount of times the process is to be executed.
+        Set an positive numeric value as amount of times the process
+        is to be executed.
         :param count: Positive integer.
         :return: The PLC connectors response, so it can be use if of interest.
         """
@@ -55,7 +58,8 @@ class Plc:
 
     def set_reset(self):
         """
-        Initiate the reset signal to get the PLC out of the emergency stop state.
+        Initiate the reset signal to get the PLC out of the emergency stop
+        state.
         :return: The PLC connectors response, so it can be use if of interest.
         """
         return self.plc_connector.set_reset()

@@ -45,10 +45,12 @@ class ModbusTCPPlcConnector:
     def get_values(self):
         """
         This function queries the state of the sensors and motor controls.
-        :return: A dictionary of the state of the motor controls and the state of the sensors.
+        :return: A dictionary of the state of the motor controls
+        and the state of the sensors.
         """
 
-        # Should the HMI not be connected to the PLC return all values as false so that while being in the disconnected
+        # Should the HMI not be connected to the PLC return all values as
+        # false so that while being in the disconnected
         # state, all sensors and motors are shown as off
         sensors = dict(zip(self.sensor_names,
                            ["true"] * len(self.sensor_names)))
@@ -75,7 +77,8 @@ class ModbusTCPPlcConnector:
                 # punching arm.
                 light_sensors = sensor_values[2:4]
 
-                # The values of the motor manual values must be inverted to fit our logic.
+                # The values of the motor manual values must be inverted to
+                # fit our logic.
                 # The values are converted to strings.
                 corrected_motor_values = [
                     str(not value).lower() for value in motor_values]
@@ -89,7 +92,8 @@ class ModbusTCPPlcConnector:
                                        for value in limit_switches]
 
                 # Join the sensor values again.
-                joined_sensor_values = limit_switch_values + light_sensor_values
+                joined_sensor_values = limit_switch_values +  \
+                    light_sensor_values
 
                 # Join the proper sensor names as keys with the corresponding
                 # sensor values into a dictionary.
@@ -107,7 +111,8 @@ class ModbusTCPPlcConnector:
 
     def set_order(self, count):
         """
-        Set an positive numeric value as amount of times the process is to be executed.
+        Set an positive numeric value as amount of times the process is to be
+        executed.
         :param count: Positive integer.
         :return: The PLC connectors response, so it can be use if of interest.
         """
@@ -127,8 +132,9 @@ class ModbusTCPPlcConnector:
         state_value = application.Disconnected().modbus_value
         if self.is_connected():
             try:
-                state_value = self.modbus_client.write_register(int(ModbusTCPRegisters.HmiApplicationState),
-                                                                state.modbus_value)
+                state_value = self.modbus_client.write_register(
+                    int(ModbusTCPRegisters.HmiApplicationState),
+                    state.modbus_value)
             except BaseException:
                 pass
         return state_value
@@ -152,7 +158,8 @@ class ModbusTCPPlcConnector:
 
     def set_reset(self):
         """
-        Initiate the reset signal to get the PLC out of the emergency stop state.
+        Initiate the reset signal to get the PLC out of the emergency stop
+        state.
         :return: The PLC connectors response, so it can be use if of interest.
         """
         state_value = application.Disconnected().modbus_value
@@ -202,8 +209,9 @@ class ModbusTCPPlcConnector:
         if self.is_connected():
             try:
                 state_value = \
-                    self.modbus_client.read_holding_registers(int(ModbusTCPRegisters.PlcApplicationState), 1).registers[
-                        0]
+                    self.modbus_client.read_holding_registers(
+                        int(ModbusTCPRegisters.PlcApplicationState),
+                        1).registers[0]
             except BaseException:
                 pass
         return state_value

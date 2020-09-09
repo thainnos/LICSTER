@@ -6,7 +6,8 @@ from enum import IntEnum
 
 class ModbusTCPRegisters(IntEnum):
     """
-    A simple enumeration of the modbus addresses used by the PLC with modbus/TCP.
+    A simple enumeration of the modbus addresses used by the PLC with
+    modbus/TCP.
     """
     PLCInputs = 800,
     ControlMotorUp = 1024,

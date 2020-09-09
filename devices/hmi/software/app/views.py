@@ -1,12 +1,10 @@
 import functools
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify, json
+    Blueprint, g, redirect, render_template, request, session, url_for,
+    jsonify, json
 )
-from werkzeug.security import check_password_hash, generate_password_hash
-from app.db import get_db
 from plcconnectors.plc import Plc
 from plcconnectors.modbusTCP.connector import ModbusTCPPlcConnector
-import sys
 
 bp = Blueprint(
     'views',
@@ -23,17 +21,23 @@ def is_plc_connected():
     :return: Renders base.html Template
     :rtype: HTML
     '''
-    if request.endpoint and request.endpoint != "static" and not plc.is_connected():
+    if request.endpoint and request.endpoint != "static" and not \
+            plc.is_connected():
         endpoint = "/" + \
             request.endpoint if request.endpoint in [
                 "view", "manual", "order"] else "/view"
         plc.plc_connector.modbus_client.connect()
         application_state = plc.get_application_state()
         return render_template(
-            'base.html', application_state=application_state, endpoint=endpoint, disconnected=True)
+            'base.html', application_state=application_state,
+            endpoint=endpoint, disconnected=True)
     else:
-        if request.endpoint not in ['views.view', 'views.index', 'views.get_values', 'views.get_application_state',
-                                    'views.get_process_state', 'views.set_application_state'] and g.user is None:
+        if request.endpoint not in ['views.view', 'views.index',
+                                    'views.get_values',
+                                    'views.get_application_state',
+                                    'views.get_process_state',
+                                    'views.set_application_state'] and \
+                                        g.user is None:
             return redirect(url_for('auths.login'))
 
 
@@ -78,7 +82,8 @@ def set_motor_manual(motor, motor_state):
     """
     Turn a motor, defined by <motor>, on or off, according to <motor_state>.
     :param motor_state: On (1) or off (0).
-    :param motor: The string that identifies one of the four motors on the process.
+    :param motor: The string that identifies
+    one of the four motors on the process.
     :return: Empty HTTP 200 response
     :rtype: HTTP response
     """
@@ -90,7 +95,8 @@ def set_motor_manual(motor, motor_state):
 def get_values():
     """
     Query the current state of the motor controls and the sensors.
-    :return: A dictionary of the state of the motor controls and the state of the sensors.
+    :return: A dictionary of the state of the motor controls
+    and the state of the sensors.
     :rtype: JSON
     """
     return jsonify(plc.get_process_values())
@@ -158,7 +164,8 @@ def order():
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
     return render_template('order.html', process_state=process_state,
-                           application_state=application_state, order=True, user=user, admin=admin)
+                           application_state=application_state, order=True,
+                           user=user, admin=admin)
 
 
 @login_required
@@ -178,7 +185,8 @@ def manual():
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
     return render_template('manual.html', process_state=process_state,
-                           application_state=application_state, manual=True, user=user, admin=admin)
+                           application_state=application_state, manual=True,
+                           user=user, admin=admin)
 
 
 @bp.route('/view')
@@ -197,7 +205,8 @@ def view():
     application_state = plc.get_application_state()
     process_state = plc.get_process_state()
     return render_template('view.html', process_state=process_state,
-                           application_state=application_state, view=True, user=user, admin=admin)
+                           application_state=application_state, view=True,
+                           user=user, admin=admin)
 
 
 @bp.route('/')
