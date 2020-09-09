@@ -48,7 +48,7 @@ def check_pw(pw1, valueType):
     :rtype: boolean
     '''
     print("Please repeat the " + valueType + ".")
-    pw2 = input(">>> ")
+    pw2 = input(">>> ")  # nosec
     if pw1 == pw2:
         return True
     else:
@@ -70,13 +70,13 @@ def add_email():
         click.echo(
             'If you dont want to add an email address you can simply '
             'type "no".')
-        email = input(">>> ")
+        email = input(">>> ")  # nosec
         if email == 'no':
             break
         else:
-            email2 = input(
-                'Please enter the email address again or skip this step'
-                ' by typing "no".\n>>> ')
+            email2 = input(  # nosec
+                'Please enter the email address again or skip this'  # nosec
+                ' step by typing "no".\n>>> ')  # nosec
             if email2 == 'no' or email2 == 'No':
                 not_skipping = False
                 break
@@ -97,7 +97,7 @@ def add_admin_password():
     '''
     click.echo("Please enter the password for the admin user:")
     while True:
-        admin_password = input(">>> ")
+        admin_password = input(">>> ")  # nosec
         breakNow = check_pw(admin_password, "password of the admin user")
         if breakNow:
             click.echo("The password was set.")
@@ -117,7 +117,7 @@ def add_hmi_password():
         "Please enter the password for the hmi. "
         "This password must only contain numbers.")
     while True:
-        hmi_password = input(">>> ")
+        hmi_password = input(">>> ")  # nosec
         try:
             hmi_password = str(int(hmi_password))
             breakNow = check_pw(hmi_password, "password of the hmi")
@@ -141,7 +141,7 @@ def init_db_command():
     click.echo('Initialized the database.')
     db = get_db()
     click.echo("Please enter the name for the admin user:")
-    admin_name = input(">>> ")
+    admin_name = input(">>> ")  # nosec
     click.echo(admin_name)
 
     admin_email = add_email()
