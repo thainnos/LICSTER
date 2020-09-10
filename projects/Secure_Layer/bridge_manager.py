@@ -21,9 +21,9 @@ class BridgeManager:
     def __init__(self):
         self.bridges = []
         self.bridge_lock = Lock()
-        self.check_bridge_status_thread = Thread(target=self._check_bridge_status)
+        self.check_bridge_status_thread = Thread(
+            target=self._check_bridge_status)
         self.check_bridge_status_thread.start()
-
 
     def _check_bridge_status(self) -> None:
         def restart_bridge_on_error(bridge) -> None:
@@ -56,20 +56,24 @@ class BridgeManager:
 
     def add_bridges(self, cfgs: List[Config]) -> None:
         """
-        Adds new bridges based on the settings supplied in the list of Config objects in *cfgs*.
+        Adds new bridges based on the settings supplied in the list of Config
+        objects in *cfgs*.
         """
         self.bridge_lock.acquire()
         for cfg in cfgs:
             self.bridges.append(Bridge(cfg))
         self.bridge_lock.release()
 
+
 def _sigterm_handler(signum, frame):
     print('Signal handler called with signal', signum)
     pid = os.getpid()
     os.kill(-pid, signal.SIGKILL)
 
+
 def _set_signals() -> None:
     signal.signal(signal.SIGTERM, _sigterm_handler)
+
 
 def __main():
     """
@@ -79,6 +83,7 @@ def __main():
     cfgs = Config.load_from_config('config.ini')
     manager = BridgeManager()
     manager.add_bridges(cfgs)
+
 
 if __name__ == "__main__":
     __main()

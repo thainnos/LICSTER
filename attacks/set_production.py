@@ -23,13 +23,13 @@ try:
         except KeyboardInterrupt:
             client.close() 
             logging.error('interrupted!')
-            sys.exit();
+            sys.exit()
 
         except Exception as e:
             logging.error('Exception: ' + str(e))
-            client.close();
+            client.close()
 
 except KeyboardInterrupt:
         client.close() 
         logging.error('interrupted!')
-        sys.exit();
+        sys.exit()
