@@ -3,9 +3,9 @@
 # python -m pip install pymodbus
 # python3 -m pip install pymodbus
 
-import coloredlogs, logging
+import coloredlogs
+import logging
 from pymodbus.client.sync import ModbusTcpClient
-import time
 import sys
 
 # Starting logger
@@ -17,19 +17,20 @@ try:
     while True:
         try:
             client.write_register(1024, 2, unit=1)
-            response = client.read_holding_registers(1024,1,unit=1).registers[0]
-            #logging.info("Register: " + str(response.registers))
+            response = client.read_holding_registers(1024,
+                                                     1, unit=1).registers[0]
+            # logging.info("Register: " + str(response.registers))
 
         except KeyboardInterrupt:
-            client.close() 
+            client.close()
             logging.error('interrupted!')
-            sys.exit();
+            sys.exit()
 
         except Exception as e:
             logging.error('Exception: ' + str(e))
-            client.close();
+            client.close()
 
 except KeyboardInterrupt:
-        client.close() 
-        logging.error('interrupted!')
-        sys.exit();
+    client.close()
+    logging.error('interrupted!')
+    sys.exit()

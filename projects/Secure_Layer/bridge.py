@@ -3,10 +3,9 @@ This module contains the Bridge class.
 """
 import socket
 import ssl
-from multiprocessing import Process, Queue
+from multiprocessing import Process
 from struct import unpack
 from threading import Thread
-from time import sleep
 from typing import Tuple
 
 from config import Config
@@ -128,7 +127,8 @@ class Bridge(Process):
             if self.cfg.secure:
                 self._init_ssl_context()
                 self.ssock_io = self.ssl_context.wrap_socket(
-                    self.sock_io, server_side=False, server_hostname=self.cfg.io_name)
+                    self.sock_io, server_side=False,
+                    server_hostname=self.cfg.io_name)
                 print('[{}] Connecting to remoteIO ({}:{})'.format(
                     self.name, self.cfg.host_io, self.cfg.port_io))
                 self.ssock_io.connect((self.cfg.host_io, self.cfg.port_io))
@@ -139,12 +139,14 @@ class Bridge(Process):
                 print('[{}] Connecting to remoteIO'.format(self.name))
                 self.ssock_io.connect((self.cfg.host_io, self.cfg.port_io))
                 print('[{}] Connected to remoteIO'.format(self.name))
-        
+
         except socket.timeout:
-            print('[{}] socket timed out during connection establishment!'.format(self.name))
+            print('[{}] socket timed out during connection '
+                  'establishment!'.format(self.name))
             self._error()
         except Exception as exc:
-            print('[{}] Exception during connection establishment:'.format(self.name))
+            print('[{}] Exception during connection '
+                  'establishment:'.format(self.name))
             print(exc)
             self._error()
 
@@ -161,7 +163,8 @@ class Bridge(Process):
             print('[{}] connected {}:{} to localhost:{}'.format(
                 self.name, _addr[0], _addr[1], self.cfg.port_plc))
         except socket.timeout:
-            print('[{}] socket timed out during connection establishment!'.format(self.name))
+            print('[{}] socket timed out during connection '
+                  'establishment!'.format(self.name))
             self._error()
         except Exception as exc:
             print('[{}] Exception during connection establishment:')
