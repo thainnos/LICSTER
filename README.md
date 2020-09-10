@@ -1,9 +1,9 @@
 # Low-cost ICS Testbed
 
-|                     | Build status                                                                                                      |
-|---------------------|-------------------------------------------------------------------------------------------------------------------|
-| RemoteIO:           | ![C/C++ CI](https://github.com/hsainnos/LICSTER/workflows/C/C++%20CI/badge.svg)                                   |
-| Python Integration: | ![.github/workflows/HMI.yml](https://github.com/hsainnos/LICSTER/workflows/.github/workflows/HMI.yml/badge.svg)   |
+![C/C++ CI](https://github.com/hsainnos/LICSTER/workflows/C/C++%20CI/badge.svg)
+![Python Integration](https://github.com/hsainnos/LICSTER/workflows/pythonBuild%20and%20Lint/badge.svg)
+![Python Bandit](https://github.com/hsainnos/LICSTER/workflows/pythonBandit/badge.svg)
+
 
 The project aims to help setup a minimal, low-cost *Industrial Control System (ICS)* testbest for students,
 researchers, or anyone with an interest in industrial security.
