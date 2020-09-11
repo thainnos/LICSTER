@@ -3,8 +3,10 @@ import time
 
 client = ModbusTcpClient("192.168.0.30")
 
+
 def setOrder(order=0):
     client.write_register(1036, order)
+
 
 def manual():
     client.write_register(1034, 1)
