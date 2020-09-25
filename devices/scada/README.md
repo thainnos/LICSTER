@@ -216,3 +216,12 @@ db.password=scadalts
 db.pool.maxActive=10
 db.pool.maxIdle=10
 ```
+
+### Importing Data Points and Watch List within SCADA-LTS
+Go to the webpage http://192.168.0.10:8080/ScadaBR and select import/export:
+
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/import.png" width=70%></img>
+</td></tr></table>
+
+Copty the content of the file under config/scadalts.json into the window and select import.
