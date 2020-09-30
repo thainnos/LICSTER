@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
         stage('Python 3.6 Linting') {
             agent {
                 dockerfile { 
@@ -16,11 +11,24 @@ pipeline {
                 }
             }
             steps {
-                echo '##### Start Test 1 #####'
+                echo '##### Start Linting 3.6 #####'
                 sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
                 sh 'flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics'
+                echo '##### End Linting 3.6 #####'
+            }
+        }
+        stage('Python 3.6 Bandit') {
+            agent {
+                dockerfile { 
+                    filename 'Python_3_6_on_Ubuntu.build'
+                    dir 'Dockerfiles'
+                    args '--volume jenkins-data:/var/jenkins_home'
+                }
+            }
+            steps {
+                echo '##### Start Bandit 3.6 #####'
                 sh 'bandit -r ./'
-                echo '##### End Test 1 #####'
+                echo '##### End Bandit 3.6 #####'
             }
         }
         stage('Python 3.7 Linting') {
@@ -32,11 +40,24 @@ pipeline {
                 }
             }
             steps {
-                echo '##### Start Test 2 #####'
+                echo '##### Start Linting 3.7 #####'
                 sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
                 sh 'flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics'
+                echo '##### End Linting 3.7 #####'
+            }
+        }
+        stage('Python 3.7 Bandit') {
+            agent {
+                dockerfile { 
+                    filename 'Python_3_7_on_Ubuntu.build'
+                    dir 'Dockerfiles'
+                    args '--volume jenkins-data:/var/jenkins_home'
+                }
+            }
+            steps {
+                echo '##### Start Bandit 3.7 #####'
                 sh 'bandit -r ./'
-                echo '##### End Test 2 #####'
+                echo '##### End Bandit 3.7 #####'
             }
         }
         stage('Python 3.8 Linting') {
@@ -48,21 +69,24 @@ pipeline {
                 }
             }
             steps {
-                echo '##### Start Test 3 #####'
+                echo '##### Start Linting 3.8 #####'
                 sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
                 sh 'flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics'
+                echo '##### End Linting 3.8 #####'
+            }
+        }
+        stage('Python 3.8 Bandit') {
+            agent {
+                dockerfile { 
+                    filename 'Python_3_8_on_Ubuntu.build'
+                    dir 'Dockerfiles'
+                    args '--volume jenkins-data:/var/jenkins_home'
+                }
+            }
+            steps {
+                echo '##### Start Bandit 3.8 #####'
                 sh 'bandit -r ./'
-                echo '##### End Test 3 #####'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                echo '##### End Bandit 3.8 #####'
             }
         }
     }
