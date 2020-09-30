@@ -67,20 +67,21 @@ iface eth0:0 inet static
 
 ### Install tomcat7
 
+Connect to the Raspberry Pi for the SCADA.
+Download tomcat in version 7:
+```zsh
+wget https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.96/bin/apache-tomcat-7.0.96.tar.gz
+```
+
+Extract the tar.gz archive:
+```
+sudo tar xvzf apache-tomcat-7.0.96.tar.gz
+```
+
 Create tomcat directory:
 ```zsh
-sudo mkdir /opt/tomcat
-cd /opt/tomcat
-```
-
-Download tomcat7 with wget:
-```zsh
-sudo wget http://apache.lauf-forum.at/tomcat/tomcat-7/v7.0.96/bin/apache-tomcat-7.0.96.tar.gz
-```
-
-Extract tomcat7:
-```zsh
-sudo tar xvzf apache-tomcat-7.0.96.tar.gz
+sudo mkdir -p /opt/tomcat
+sudo mv apache-tomcat-7.0.96 /opt/tomcat/
 ```
 
 Install Java:
@@ -93,19 +94,75 @@ Set environment variables:
 vim ~/.bashrc
 ```
 
+Add the export to the bashrc:
 ```zsh
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-armhf
 export CATALINA_HOME=/opt/tomcat/apache-tomcat-7.0.96
 ```
 
+Export the bashrc:
 ```zsh
 . ~/.bashrc
 ```
 
+Edit a init.d file to start and stop the tomcat server:
+```
+sudo nano /etc/init.d/tomcat
+```
 
-## Install mysql-server
+Copy the following to the init.d tomcat file:
+```
+#!/bin/sh
+# /etc/init.d/tomcat
+# starts the Apache Tomcat service
+### BEGIN INIT INFO
+# Provides:          tomcat
+# Required-Start:
+# Required-Stop:
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/stop tomcat application server
+### END INIT INFO
+ 
+export CATALINA_HOME="/opt/tomcat/apache-tomcat-7.0.96"
+case "$1" in
+start)
+  if [ -f $CATALINA_HOME/bin/startup.sh ];
+  then
+    echo $"Starting Tomcat"
+    /bin/su root $CATALINA_HOME/bin/startup.sh
+  fi
+  ;;
+stop)
+  if [ -f $CATALINA_HOME/bin/shutdown.sh ];
+  then
+    echo $"Stopping Tomcat"
+    /bin/su root $CATALINA_HOME/bin/shutdown.sh
+  fi
+  ;;
+*)
+  echo $"Usage: $0 {start|stop}"
+  exit 1
+  ;;
+esac
+```
+
+Make the init.d script executable:
+```
+sudo chmod +x /etc/init.d/tomcat
+```
+
+Add the tomcat script to default startup:
+```
+sudo update-rc.d tomcat defaults
+```
+
+
+### Install mysql-server and configure it
+Install mariadb as sql server:
 ```zsh
-sudo apt install mariadb-server-10.0
+sudo apt install mariadb-server
 ```
 
 ```zsh
@@ -133,10 +190,24 @@ Exit sql.
 quit; 
 ```
 
+### Install the SCADA-LTS WAR App
+Change into the directory of the tomcat webapps installation:
 ```zsh
-sudo vim /opt/scadalts/apache-tomcat-7.0.81/webapps/ScadaBR/WEB-INF/classes/env.properties
+cd /opt/tomcat/apache-tomcat-7.0.96/webapps
 ```
 
+Get t he current version of SCADA-LTS (do not know, why it is named ScadaBR...):
+```zsh
+sudo wget https://github.com/SCADA-LTS/Scada-LTS/releases/download/v2.3.2/ScadaBR.war
+```
+
+### Changing configuration of the SCADA-LTS webapp
+Edit the environment properties of the SCADA-LTS webapp:
+```zsh
+sudo vim /opt/tomcat/apache-tomcat-7.0.96/webapps/ScadaBR/WEB-INF/classes/env.properties
+```
+
+There is already a section, which looks similar to this, delete these elemnts and replace it with the following:
 ```vim
 db.type=mysql
 db.url=jdbc:mysql://localhost:3306/scadalts
@@ -146,48 +217,11 @@ db.pool.maxActive=10
 db.pool.maxIdle=10
 ```
 
-```zsh
-sudo nano /etc/init.d/tomcat
-```
+### Importing Data Points and Watch List within SCADA-LTS
+Go to the webpage http://192.168.0.10:8080/ScadaBR and select import/export:
 
-```bash
-#!/bin/sh
-# /etc/init.d/tomcat
-# starts the Apache Tomcat service
-### BEGIN INIT INFO
-# Provides:          tomcat
-# Required-Start:
-# Required-Stop:
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# X-Interactive:     true
-# Short-Description: Start/stop tomcat application server
-### END INIT INFO
- 
-export CATALINA_HOME="/opt/scadalts/apache-tomcat-7.0.81"
-case "$1" in
-start)
-  if [ -f $CATALINA_HOME/bin/startup.sh ];
-  then
-    echo $"Starting Tomcat"
-    /bin/su root $CATALINA_HOME/bin/startup.sh
-  fi
-  ;;
-stop)
-  if [ -f $CATALINA_HOME/bin/shutdown.sh ];
-  then
-    echo $"Stopping Tomcat"
-    /bin/su root $CATALINA_HOME/bin/shutdown.sh
-  fi
-  ;;
-*)
-  echo $"Usage: $0 {start|stop}"
-  exit 1
-  ;;
-esac
+<table align="center"><tr><td align="center" width="9999">
+<img src="images/import.png" width=70%></img>
+</td></tr></table>
 
-```
-
-
-
-
+Copty the content of the file under config/scadalts.json into the window and select import.

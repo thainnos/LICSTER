@@ -31,6 +31,10 @@ The picture shows the setup of the testbed with the HMI and the physical process
 <img src="images/licster.png" width=30%></img>
 </td></tr></table>
 
+## LICSTER video series
+[![Introduction Video](https://img.youtube.com/vi/wZqrw1U2nro/0.jpg)](https://www.youtube.com/watch?v=wZqrw1U2nro)
+[![LICSTER Denial-of-Service Attack](https://img.youtube.com/vi/VWx_6HSnyto/0.jpg)](https://www.youtube.com/watch?v=VWx_6HSnyto)
+
 ## Testbed parameters
 This project was set up with the following requirements in mind:
 * Testbed components for about 500 Euro, 
