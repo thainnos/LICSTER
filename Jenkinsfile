@@ -89,5 +89,19 @@ pipeline {
                 echo '##### End Bandit 3.8 #####'
             }
         }
+        stage('Flawfinder') {
+            agent {
+                dockerfile {
+                    filename 'Flawfinder.build'
+                    dir 'Dockerfiles'
+                    args '--volume jenkins-data:/var/jenkins_home'
+                }
+            }
+            steps {
+                echo '##### Start Flawfinder #####'
+                sh 'flawfinder devices/remote_io/software/'
+                echo '##### End Flawfinder #####'
+            }
+        }
     }
 }
