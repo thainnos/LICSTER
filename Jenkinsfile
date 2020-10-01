@@ -99,8 +99,22 @@ pipeline {
             }
             steps {
                 echo '##### Start Flawfinder #####'
-                sh 'flawfinder devices/remote_io/software/'
+                // sh 'flawfinder devices/remote_io/software/'
                 echo '##### End Flawfinder #####'
+            }
+        }
+        stage('RATS') {
+            agent {
+                dockerfile {
+                    filename 'RATS.build'
+                    dir 'Dockerfiles'
+                    args '--volume jenkins-data:/var/jenkins_home'
+                }
+            }
+            steps {
+                echo '##### Start RATS #####'
+                sh 'rats --resultsonly devices/remote_io/software/'
+                echo '##### End RATS #####'
             }
         }
     }
