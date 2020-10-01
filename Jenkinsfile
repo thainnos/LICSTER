@@ -113,7 +113,7 @@ pipeline {
             }
             steps {
                 echo '##### Start RATS #####'
-                sh 'rats --resultsonly devices/remote_io/software/'
+                sh 'rats --resultsonly -w 3 devices/remote_io/software/Src/'
                 echo '##### End RATS #####'
             }
         }
