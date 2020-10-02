@@ -6,7 +6,7 @@ pipeline {
             agent {
                 dockerfile { 
                     filename 'Python_3_6_on_Ubuntu.build'
-                    dir 'Dockerfiles'
+                    dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
             }
@@ -21,7 +21,7 @@ pipeline {
             agent {
                 dockerfile { 
                     filename 'Python_3_6_on_Ubuntu.build'
-                    dir 'Dockerfiles'
+                    dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
             agent {
                 dockerfile { 
                     filename 'Python_3_7_on_Ubuntu.build'
-                    dir 'Dockerfiles'
+                    dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
             }
@@ -50,7 +50,7 @@ pipeline {
             agent {
                 dockerfile { 
                     filename 'Python_3_7_on_Ubuntu.build'
-                    dir 'Dockerfiles'
+                    dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
             }
@@ -64,7 +64,7 @@ pipeline {
             agent {
                 dockerfile { 
                     filename 'Python_3_8_on_Ubuntu.build'
-                    dir 'Dockerfiles'
+                    dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
             }
@@ -79,7 +79,7 @@ pipeline {
             agent {
                 dockerfile { 
                     filename 'Python_3_8_on_Ubuntu.build'
-                    dir 'Dockerfiles'
+                    dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
             }
@@ -93,7 +93,7 @@ pipeline {
             agent {
                 dockerfile {
                     filename 'Flawfinder.build'
-                    dir 'Dockerfiles'
+                    dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
             }
@@ -107,7 +107,7 @@ pipeline {
             agent {
                 dockerfile {
                     filename 'RATS.build'
-                    dir 'Dockerfiles'
+                    dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
             }
