@@ -1,119 +1,70 @@
 # Jenkins Pipeline
+- [Installation](Installation)
+    - [Install Linux](Linux-Installation)
+    - [Windows Installation](Windows-Installation)
+- [Initialisation](Jenkins-Initialisation)
+    - [Pipeline Setup](Pipeline-Setup)
+    - [Adding a Github Webhook](Adding-a-Github-Webhook)
+- [UI](UI)
+## Installation
+### Linux Installation
 
-## Docker Installation von Jenkins
-Zum Erstellen von Jenkins in einem Docker Container müssen die folgenden Schritte durchgeführt werden:
-
-1. Erstellung einer Netzwerkbrücke in Docker  
-
+To install Jenkins you need to execute the following two commands:
 ```
-docker network create jenkins
+# Navigate in the console to the folder containing this readme (cd 
+# .../LICSTER/projects/JenkinsPipeline)
+chmod +x docker_setup.sh
+./docker_setup.sh
 ```
+To continue you need to copy the last string/line the script printed,
+visit http://localhost:8080 and past it into the Admin password field.
 
-2. Erstellen eines Volumes zum Speichern der Docker client TLS Zertifikate
+A manual for installing Jenkins can be found in the [Jenkins Docs](https://www.jenkins.io/doc/book/installing/#setup-wizard).
 
-```
-docker volume create jenkins-docker-certs
-```
+### Windows Installation
 
-3. Erstellen eines Volumes zum persistenten Speichern der Jenkins Daten 
+Will come soon.
 
-```
-docker volume create jenkins-data
-```
+## Jenkins Initialisation
 
-4. Downloaden und Starten des Docker:Dind image zum Ausführen von Kommandos in Nodes/Agents
+### Pipeline Setup
+After the setup of jenkins and the initialisation of the administrator the following steps need to be done to setup the Pipeline of LICSTER:
+1. Click on New Item
+2. Enter a name (e.g. LICSTER-Pipeline), select Multibranch Pipelione and click on OK.
+3. Click on the tab Branch Sources, then click on the button Add source and on GitHub in the opened dropdown.
+4. Enter https://github.com/hsainnos/LICSTER.git or the URL of your fork into the field Repository HTTPS URL.
+5. Choose All branches in the Dropdown at Behaviours > Discover Branches > Strategy.
+6. Click on save.
 
-```
-docker container run --name jenkins-docker --rm --detach \
---privileged --network jenkins --network-alias docker \
---env DOCKER_TLS_CERTDIR=/certs \
---volume jenkins-docker-certs:/certs/client \
---volume jenkins-data:/var/jenkins_home \
---publish 2376:2376 docker:dind 
-```
+The Pipeline for LICSTER is now set up, but Jenkins won't be notified of changes to the Github repository. To use Jenkins without notifications of Github you have to click on "Scan repository now" everytime you want to start a Pipeline. 
 
-5. Downloaden und Starten des jenkinsci/blueocean image     
-```
-docker container run --name jenkins-blueocean --rm --detach \
---network jenkins --env DOCKER_HOST=tcp://docker:2376 \
---env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 \
---volume jenkins-data:/var/jenkins_home \
---volume jenkins-docker-certs:/certs/client:ro \
---publish 8080:8080 --publish 50000:50000 jenkinsci/blueocean
-```
-6.  Mit dem nachfolgenden Kommando den Jenkins Log ausgeben lassen und dann nach dem zufällig generierten Passwort suchen.
-```
-sudo docker exec ${CONTAINER_ID or CONTAINER_NAME} cat /var/jenkins_home/secrets/initialAdminPassword
-```
-7. Auf http://localhost:8080 gehen und das Passwort aus Schritt 6 eingeben.
+If this is fine to you, you can proceed to the Section UI. Otherwise you can setup a webhook in Github to notify Jenkins. You will either need to have a valid URL or use ngrok (which is free to use). Ngrok forwards a port on your machine to make it publically accessible. Ngrok will provide you a different URL each time you start it, so you will have to change the Webhook URL in Github everytime you restart ngrok/your Jenkins server.
 
-Eine detailliertere Beschreibung der Installation ist auf [in den Jenkins Docs](https://www.jenkins.io/doc/book/installing/#setup-wizard). Außerdem sind hier auch andere Installationsarten als die Installation eines Docker Containers vorhanden.
+If you don't plan on running a dedicated (virtual) machine for your Jenkins server 24/7, using Webhook most likely won't benefit you.
 
-## Jenkins initialisieren
-Nachdem das Aufsetzen von Jenkins abgeschlossen ist und der Benutzer angelegt wurde, müssen die folgenden Schritte durchgeführt werden, um das LICSTER git Verzeichnis in Jenkins zu haben:
-1. In der linken Leiste auf Element anlegen klicken.
-2. Einen Element-Namen angeben wie z.B LICSTER-Pipeline und Multibranch Pipeline auswählen, danach auf OK klicken.
-3. Den Tab Branch Sources anklicken, auf den Butten Add source klicken und Github auswählen.
-4. Der Punkt Credentials hinzufügen fehlt derzeit noch!
-5. Beim Punkt Repository HTTPS URL https://github.com/hsainnos/LICSTER.git einfügen.
-6. Beim Punkt Behaviours > Discover Branches > Strategy im Dropdown All branches auswählen.
-7. Auf Save drücken.
-8. Falls This Folder is empty nach dem Auswählen der erstellten Pipeline angezeigt wird, so fehlt im angegebenen Repository noch ein Jenkinsfile.
-Hinzufügen des Github Webhooks
+### Adding a Github Webhook
 
-Zum Hinzufügen eines Webhooks müssen zuerst die folgenden Schritte in Github durchgeführt werden:
-1. Auf die Github Seite des Repositories gehen.
-2. Auf den Tab Settings klicken.
-3. In der linken Seitenleiste Webhooks auswählen.
-4. Auf  Add Webhook klicken.
-5. Bei Payload URL eine URL eingeben. Eine URL kann mit [ngrok](https://ngrok.com/) wie folgt kostenlos erhalten werden
-6. Im Dropdown Content Type application/json auswählen.
-7. Bei Which events would you like to trigger this webhook? - Just the push event auswählen.
-8. Auf Add Webhook klicken.
+To add a Webhook, you will first need to complete the following steps in Github:
+1. Visit the Github website of the repository.
+2. Click on the tab Settings (of the repository).
+3. Click on Webhooks on the left side. You will be prompted to enter your password.
+4. Click on "Add Webhook".
+5. If you have a URL, you can skip this step. To get a URL visit [ngrok](https://ngrok.com/). Their website will tell you what you'll have to do.
+6. Enter your URL in the field Payload URL in the format http://youraddress.com/github-webhook/
+7. Select application/json in the Dropdown Content Type.
+8. Select "Just the push event".
+9. Click on Add Webhook.
 
-Bei Jenkins müssen danach für das Hinzufügen des Webhooks die folgenden Schritte durchgeführt werden:
-1. Auf Jenkins verwalten im linken Seitenmenü klicken.
-2. Auf System konfigurieren klicken.
-3. Bis zum Punkt Github nach unten scrollen.
-4. Auf den Button Add Github Server klicken, danach Github Server im Dropdown auswählen.
-5. Einen beliebigen Namen eingeben.
-6. Bei API URL https://api.github.com eingeben.
-7. Auf Manage Hooks klicken (Checkbox muss blau sein).
-8. Nun auf Speichern klicken.
+Now you will need to complete the following steps in Jenkins:
+1. Click on "Manage Jenkins" in the left menu.
+2. Click on "Configure System".
+3. Scroll down until you see the caption "GitHub".
+4. Click on "Add Github Server" and choose "GitHub Server" in the dropdown.
+5. Enter any name for the Github Server.
+6. Click on the checkbox "Manage hooks".
+7. Click on "Save".
+
+You have successfully added a webhook. To test you webhook, you can simply make some changes in your git repository and push them to your Github Server. Remember to change the URL in Github on every restart of ngrok.
 
 ## UI
-Durch das Auswählen von Blueocean im Menü auf der linken Seite werden Teile von Jenkins in einer moderneren Art dargestellt. Zum Beenden der Blueocean Ansicht muss man auf das Symbol links von dem Ausloggen Knopf drücken.
-
-## Jenkins
-Jenkins ist ein Server, welcher auf verschiedenen Betriebssystemen installiert werden kann. Des Weiteren kann Jenkins auch als Docker Container installiert werden. Dies ermöglicht eine praktische Kapselung und erhöhte Portabilität. Zum Testen von Jenkins und um die beim Testen verwendete Instanz von Jenkins später direkt einsetzen zu können, wurde Jenkins als Docker Container installiert.
-### CI/CD Pipelines
-Jenkins hat verschiedene Möglichkeiten zur Entwicklung von CI/CD Pipelines. So kann man eine Pipeline mit Blueocean, welches den Fokus auf eine leicht bedienbare und überischtliche Oberfläche setzt, mit der UI von Jenkins oder in einem Jenkinsfile, welches dem SCM hizugefügt wird entwickeln. Es kann nur eine Entwicklungsoption gewählt werden. Im Falle der CI/CD Pipeline für LICSTER war dies das Jenkinsfile.
-
-Jenkins ermöglicht die Erstellung von Multibranch Pipelines. Jeder Branch, welcher ein Jenkinsfiile enthält, hat eine Pipeline basierend auf dem Jenkinsfile. Dies ermöglicht das Ändern  der Pipeline eines Branches ohne die Pipelines anderer Branches zu verändern. Derzeit ist in der LICSTER Jenkins Instanz nur auf dem master Branch eine Pipeline realisiert.
-### Agents/Runner
-Zum Durchführen der Pipeline können von Jenkins bereitgestellte Agents (,welche Runner in Gitlab entsprechen) verwendet werden oder eigene Agents erstellt werden. Zum Erstellen von Agents muss ein Dockerfile für den gewünschten Docker Container geschrieben werden und in der Jenkins Pipeline aus dem Dockerfile erstellt werden. Im Beispiel LICSTER wurde für jede Python Version ein eigener Agent erstellt und für Flawfinder ein weiterer Agent. 
-
-### Github Einbindung
-Jenkins ermöglicht die Einbindung von Github. Durch das Hinzufügen eines Webhooks auf Github wird Jenkins bei Änderungen am Repositories benachrichtigt. Was bei Änderungen am Repository durchgeführt werden soll, kann eingestellt werden. Bei der LICSTER Jenkins Instanz wird derzeit bei Veränderungen am Repository (push, pull request) die CI Pipeline gestartet.
-### Stand der Pipeline
-In der Jenkins Pipeline sind bisher die Bandit und Linting Test für die Python Versionen 3.6, 3.7 und 3.8 enthalten. Außerdem wurden Flawfinder und RATS der Jenkins Pipeline für C Security Tests hinzugefügt. Die Jenkins Pipeline ist eine deklarative Pipeline.
-Jenkins aufsetzen
-
-## Jenkins Pipeline Aufbau
-### Stages
-Eine Stage ist eine Aktion in Jenkins, welche einen eigenen Agent hat. Die Jenkins Pipeline besteht zur Zeit aus den folgenden Stages:
-- Python 3.6 Linting: Der Python Quellcode wird mit flake 8 gelinted
-- Python 3.6 Bandit: Statisches Sicherheitstesting des Python Quellcode
-- Python 3.7 Linting: Der Python Quellcode wird mit flake 8 gelinted
-- Python 3.7 Bandit: Statisches Sicherheitstesting des Python Quellcode
-- Python 3.8 Linting: Der Python Quellcode wird mit flake 8 gelinted
-- Python 3.8 Bandit: Statisches Sicherheitstesting des Python Quellcode
-- Flawfinder: Statisches Sicherheitstesting des C Quellcode
-- RATS: Statisches Sicherheitstesting des C Quellcode
-### Agents
-Ein Agent spezifiziert, wo eine Stage oder die gesamte Pipeline ausgeführt wird. Die Jenkins Pipeline erstellt derzeit aus den folgenden Dockerfiles Agents:
-- Python_3_6_on_Ubuntu.build - Zuständig für die Python3.6 Stages
-- Python_3_6_on_Ubuntu.build - Zuständig für die Python3.7 Stages
-- Python_3_6_on_Ubuntu.build - Zuständig für die Python3.8 Stages
-- Flawfinder.build - Zuständig für Flawfinder
-- RATS.build - Zuständig für RATS
+Jenkins has two interfaces, Blue Ocean and the traditional interface. Blueocean can only be used for the pipeline itself. To start Blue Ocean you simply click on "Open Blue Ocean" in the left menu. To stop the Blue Ocean UI you need to click on the symbol to the left of the logout button.
