@@ -86,6 +86,10 @@ thumbs.db
 *.crt
 devices/remote_io/software/tls_certs.mk
 
+# 3d-Print     #
+################
+*.gcode
+
 # Visual Studio Code #
 ######################
 *.vscode
