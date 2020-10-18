@@ -132,6 +132,60 @@ def login():
     else:
         return render_template('login.html', form=form)
 
+@auth.route('/remote_test_login', methods=['GET', 'POST'])
+@logout_required
+# flake8: noqa: C901
+def remote_test_login():
+    isHmi = False
+    form = LoginForm()    
+
+    # Form validieren
+    if form.validate_on_submit():
+        # get username, password from form
+        # get user with db query
+        # check if user exists in db and password hash matches
+        if isHmi:
+            username = 'hmilocal'
+        else:
+            username = form.username.data
+        password = form.password.data
+        db = get_db()
+        user = db.execute(
+            'SELECT * FROM user WHERE username = ?', (username,)
+        ).fetchone()
+
+        error = None
+        if user is None:
+            error = 'Incorrect username.'
+        elif not check_password_hash(user['password'], password):
+            error = 'Incorrect password.'
+
+        if error is None:
+            # User exists in db and password hash matches
+            # User ID und Rolle der Session hinzufügen
+            session.clear()
+            session['user_id'] = user['id']
+            session['user_role'] = user['user_role']
+
+            save_ip_address_if_not_saved(user['id'])
+
+            if isHmi:
+                return redirect(url_for('views.index'))
+            # Nur für nicht HMI User:
+            # Falls nötig zum Passwort setzen weiterleiten
+            if user['first_login'] == 1:
+                return redirect(url_for('auths.set_password'))
+            # Falls Admin zum Dashboard weiterleiten
+            if session['user_role'] == 'admin':
+                return redirect(url_for('admins.dashboard'))          
+            return redirect(url_for('views.index'))
+
+    # Template rendern
+    if isHmi:
+        return render_template('loginhmi.html', form=form)
+    else:
+        return render_template('login.html', form=form)
+
 
 @auth.route('/logout')
 @login_required
