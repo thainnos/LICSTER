@@ -28,6 +28,7 @@ docker container run --name jenkins-blueocean --rm --detach \
 
 # Print the docker initialisation Command
 echo "The setup will take approximately 20 more seconds."
+chmod +x run_jenkins.sh
 sleep 20 # It takes time for docker to write the password to the file
 echo "Copy the following line, visit http://localhost:8080 and paste it into the field"
 sudo docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
