@@ -27,7 +27,7 @@ pipeline {
             }
             steps {
                 echo '##### Start Bandit 3.6 #####'
-                sh 'bandit -r ./'
+                sh 'bandit -r ./ -x ./devices/hmi/software/tests/'
                 echo '##### End Bandit 3.6 #####'
             }
         }
@@ -56,7 +56,7 @@ pipeline {
             }
             steps {
                 echo '##### Start Bandit 3.7 #####'
-                sh 'bandit -r ./'
+                sh 'bandit -r ./ -x ./devices/hmi/software/tests/'
                 echo '##### End Bandit 3.7 #####'
             }
         }
@@ -85,7 +85,7 @@ pipeline {
             }
             steps {
                 echo '##### Start Bandit 3.8 #####'
-                sh 'bandit -r ./'
+                sh 'bandit -r ./ -x ./devices/hmi/software/tests/'
                 echo '##### End Bandit 3.8 #####'
             }
         }
