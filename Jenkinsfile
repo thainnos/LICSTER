@@ -2,6 +2,18 @@ pipeline {
     agent any
 
     stages {
+        stage('Pytest on Python 3.6') {
+            agent {
+                dockerfile {
+                    filename 'Pytest_Python.build'
+                    dir 'projects/JenkinsPipeline/Dockerfiles'
+                    args '--volume jenkins-data:/var/jenkins_home'
+                }
+            }
+            steps {
+                sh 'pwd && ls -alF'
+            }
+        }
         stage('Python 3.6 Linting') {
             agent {
                 dockerfile { 
