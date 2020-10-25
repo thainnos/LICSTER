@@ -11,7 +11,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'pwd && ls -alF'
+                sh 'pytest devices/hmi/software/tests'
             }
         }
         stage('Python 3.6 Linting') {
