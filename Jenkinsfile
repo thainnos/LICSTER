@@ -19,7 +19,7 @@ pipeline {
         stage('Python 3.6 Linting') {
             agent {
                 dockerfile { 
-                    filename 'Python_3_6_on_Ubuntu.build'
+                    filename 'Python_3_6.build'
                     dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
@@ -36,7 +36,7 @@ pipeline {
         stage('Python 3.6 Bandit') {
             agent {
                 dockerfile { 
-                    filename 'Python_3_6_on_Ubuntu.build'
+                    filename 'Python_3_6.build'
                     dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
@@ -52,7 +52,7 @@ pipeline {
         stage('Python 3.7 Linting') {
             agent {
                 dockerfile { 
-                    filename 'Python_3_7_on_Ubuntu.build'
+                    filename 'Python_3_7.build'
                     dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
@@ -69,7 +69,7 @@ pipeline {
         stage('Python 3.7 Bandit') {
             agent {
                 dockerfile { 
-                    filename 'Python_3_7_on_Ubuntu.build'
+                    filename 'Python_3_7.build'
                     dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
@@ -85,7 +85,7 @@ pipeline {
         stage('Python 3.8 Linting') {
             agent {
                 dockerfile { 
-                    filename 'Python_3_8_on_Ubuntu.build'
+                    filename 'Python_3_8.build'
                     dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
@@ -102,7 +102,7 @@ pipeline {
         stage('Python 3.8 Bandit') {
             agent {
                 dockerfile { 
-                    filename 'Python_3_8_on_Ubuntu.build'
+                    filename 'Python_3_8.build'
                     dir 'projects/JenkinsPipeline/Dockerfiles'
                     args '--volume jenkins-data:/var/jenkins_home'
                 }
