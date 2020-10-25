@@ -11,7 +11,9 @@ pipeline {
                 }
             }
             steps {
-                sh 'pytest devices/hmi/software/tests'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh 'pytest devices/hmi/software/tests'
+                }
             }
         }
         stage('Python 3.6 Linting') {
@@ -23,10 +25,12 @@ pipeline {
                 }
             }
             steps {
-                echo '##### Start Linting 3.6 #####'
-                sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
-                sh 'flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics'
-                echo '##### End Linting 3.6 #####'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    echo '##### Start Linting 3.6 #####'
+                    sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
+                    sh 'flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics'
+                    echo '##### End Linting 3.6 #####'
+                }
             }
         }
         stage('Python 3.6 Bandit') {
@@ -38,9 +42,11 @@ pipeline {
                 }
             }
             steps {
-                echo '##### Start Bandit 3.6 #####'
-                sh 'bandit -r ./ -x ./devices/hmi/software/tests/'
-                echo '##### End Bandit 3.6 #####'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    echo '##### Start Bandit 3.6 #####'
+                    sh 'bandit -r ./ -x ./devices/hmi/software/tests/'
+                    echo '##### End Bandit 3.6 #####'
+                }
             }
         }
         stage('Python 3.7 Linting') {
@@ -52,10 +58,12 @@ pipeline {
                 }
             }
             steps {
-                echo '##### Start Linting 3.7 #####'
-                sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
-                sh 'flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics'
-                echo '##### End Linting 3.7 #####'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    echo '##### Start Linting 3.7 #####'
+                    sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
+                    sh 'flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics'
+                    echo '##### End Linting 3.7 #####'
+                }
             }
         }
         stage('Python 3.7 Bandit') {
@@ -67,9 +75,11 @@ pipeline {
                 }
             }
             steps {
-                echo '##### Start Bandit 3.7 #####'
-                sh 'bandit -r ./ -x ./devices/hmi/software/tests/'
-                echo '##### End Bandit 3.7 #####'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    echo '##### Start Bandit 3.7 #####'
+                    sh 'bandit -r ./ -x ./devices/hmi/software/tests/'
+                    echo '##### End Bandit 3.7 #####'
+                }
             }
         }
         stage('Python 3.8 Linting') {
@@ -81,10 +91,12 @@ pipeline {
                 }
             }
             steps {
-                echo '##### Start Linting 3.8 #####'
-                sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
-                sh 'flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics'
-                echo '##### End Linting 3.8 #####'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    echo '##### Start Linting 3.8 #####'
+                    sh 'flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics'
+                    sh 'flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics'
+                    echo '##### End Linting 3.8 #####'
+                }   
             }
         }
         stage('Python 3.8 Bandit') {
@@ -96,9 +108,11 @@ pipeline {
                 }
             }
             steps {
-                echo '##### Start Bandit 3.8 #####'
-                sh 'bandit -r ./ -x ./devices/hmi/software/tests/'
-                echo '##### End Bandit 3.8 #####'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    echo '##### Start Bandit 3.8 #####'
+                    sh 'bandit -r ./ -x ./devices/hmi/software/tests/'
+                    echo '##### End Bandit 3.8 #####'
+                }   
             }
         }
         stage('Flawfinder') {
@@ -110,9 +124,11 @@ pipeline {
                 }
             }
             steps {
-                echo '##### Start Flawfinder #####'
-                // sh 'flawfinder devices/remote_io/software/'
-                echo '##### End Flawfinder #####'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    echo '##### Start Flawfinder #####'
+                    // sh 'flawfinder devices/remote_io/software/'
+                    echo '##### End Flawfinder #####'
+                }
             }
         }
         stage('RATS') {
@@ -124,9 +140,11 @@ pipeline {
                 }
             }
             steps {
-                echo '##### Start RATS #####'
-                sh 'rats --resultsonly -w 3 devices/remote_io/software/Src/'
-                echo '##### End RATS #####'
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    echo '##### Start RATS #####'
+                    sh 'rats --resultsonly -w 3 devices/remote_io/software/Src/'
+                    echo '##### End RATS #####'
+                }
             }
         }
     }
