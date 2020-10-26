@@ -34,6 +34,8 @@ jobs:
         npm install package.json
         cd ../../
         flask init-db
+        mkdir instance
+        cp testing/app.sqlite instance/app.sqlite
         cd ..
         chmod +x startscript.sh        
     - name: start application
