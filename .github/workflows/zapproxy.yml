@@ -34,7 +34,7 @@ jobs:
         npm install package.json
         cd ../../
         mkdir instance
-        cp testing/app.sqlite instance/app.sqlite
+        cp test/app.sqlite instance/app.sqlite
         cd ..
         chmod +x startscript.sh        
     - name: start application
