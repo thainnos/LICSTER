@@ -39,8 +39,11 @@ jobs:
         chmod +x startscript.sh        
     - name: start application
       run: |
-        cd ./devices/hmi/
-        ./startscript.sh &
+        cd ./devices/hmi/software
+        SECRET=`cat /dev/urandom | tr -dc '(\&\_a-zA-Z0-9\^\*\@' | fold -w ${1:-32} | head -n 1`
+        export SECRET_KEY=$SECRET
+        echo $SECRET_KEY > secret.key
+        gunicorn -w 4 -b 0.0.0.0:8080 "app:create_app()" &
     - name: run zapproxy
       uses: zaproxy/action-baseline@v0.4.0
       with:
