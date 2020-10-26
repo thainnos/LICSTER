@@ -33,7 +33,6 @@ jobs:
         cd ./devices/hmi/software/app/static
         npm install package.json
         cd ../../
-        flask init-db
         mkdir instance
         cp testing/app.sqlite instance/app.sqlite
         cd ..
