@@ -30,17 +30,17 @@ jobs:
         python -m pip install pymodbus WTForms Flask-WTF gunicorn
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         sudo apt install unclutter npm python3-pip xinit lxde-core lxterminal lxappearance lightdm
-        cd ~/devices/hmi/software/app/static
+        cd ./devices/hmi/software/app/static
         npm install package.json
-        cd ~/devices/hmi/software
+        cd ../../
         flask init-db
-        cd ~/devices/hmi/
+        cd ..
         chmod +x startscript.sh        
     - name: start application
       run: |
-        cd ~/devices/hmi/
+        cd ./devices/hmi/
         ./startscript.sh
     - name: run zapproxy
       uses: zaproxy/action-baseline@v0.4.0
       with:
-          target: 'https//localhost:8080'
+          target: 'http//localhost:8080'
