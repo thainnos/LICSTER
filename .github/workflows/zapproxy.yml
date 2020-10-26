@@ -44,4 +44,4 @@ jobs:
     - name: run zapproxy
       uses: zaproxy/action-baseline@v0.4.0
       with:
-          target: 'http//localhost:8080'
+          target: 'http://localhost:8080'
