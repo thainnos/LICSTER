@@ -29,7 +29,7 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install pymodbus WTForms Flask-WTF gunicorn
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        apt install unclutter npm python3-pip xinit lxde-core lxterminal lxappearance lightdm
+        sudo apt install unclutter npm python3-pip xinit lxde-core lxterminal lxappearance lightdm
         cd ~/devices/hmi/software/app/static
         npm install package.json
         cd ~/devices/hmi/software
