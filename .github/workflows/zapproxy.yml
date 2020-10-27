@@ -44,7 +44,5 @@ jobs:
         export SECRET_KEY=$SECRET
         echo $SECRET_KEY > secret.key
         gunicorn -w 4 -b 0.0.0.0:8080 "app:create_app()" &
-    - name: run zapproxy
-      uses: zaproxy/action-baseline@v0.4.0
-      with:
-          target: 'http://localhost:8080'
+        docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8080
+        ps aux | grep 'unicorn' | awk '{print $2}' | xargs sudo kill -9
