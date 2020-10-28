@@ -1,0 +1,48 @@
+# This workflow will test the python webserver/HMI zapproxy
+
+name: zapproxy
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install pymodbus WTForms Flask-WTF gunicorn
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        sudo apt install unclutter npm python3-pip xinit lxde-core lxterminal lxappearance lightdm
+        cd ./devices/hmi/software/app/static
+        npm install package.json
+        cd ../../
+        mkdir instance
+        cp test/app.sqlite instance/app.sqlite
+        cd ..
+        chmod +x startscript.sh        
+    - name: start application
+      run: |
+        cd ./devices/hmi/software
+        SECRET=`cat /dev/urandom | tr -dc '(\&\_a-zA-Z0-9\^\*\@' | fold -w ${1:-32} | head -n 1`
+        export SECRET_KEY=$SECRET
+        echo $SECRET_KEY > secret.key
+        gunicorn -w 4 -b 0.0.0.0:8080 "app:create_app()" &
+        docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8080
+        ps aux | grep 'unicorn' | awk '{print $2}' | xargs sudo kill -9
