@@ -7,9 +7,9 @@ function is_docker_installed {
         exec < /dev/tty
 
         while true; do
-            read -p "Do you want to continue with testing? (yes/no)`echo $'\n> '`" yn
+            read -p "Do you want to continue testing? (yes/no)`echo $'\n> '`" yn
             case $yn in
-                [Yy]* ) echo "Starting the tests"; break;;
+                [Yy]* ) echo -e "\nStarting tests"; break;;
                 [Nn]* ) cd ../..; exit 0;;
                 * ) echo "Please answer yes or no.";;
             esac
@@ -30,7 +30,7 @@ function is_user_in_docker_group {
         echo "Please add yourself to the docker group. This is needed
         to execute docker commands in a script."
         cd ../..
-        exit        
+        exit 1       
     fi
 
 }
@@ -45,13 +45,13 @@ function docker_pytest {
     docker container run -a STDOUT -a STDERR pytest &> pytest.results # the testing part
     if [ $? -eq 0 ]
     then
-        echo "All pytest Unit Tests ran successfully."
+        echo -e "All pytest Unit Tests ran successfully.\n"
         rm pytest.results
     else
-        echo "A pytest Unit Test failed. Details can be found in the file pytest.results"
+        echo -e "A pytest Unit Test failed. Details can be found in the file pytest.results\n"
     fi
     # Remove docker containers
-    echo "Removing docker container..."
+    echo -e "Removing docker container...\n"
     docker container rm -f pytest &> /dev/null
     # Remove docker images
     docker image rm -f pytest &> /dev/null
@@ -67,22 +67,22 @@ function docker_python_3_7 {
     docker container run -a STDOUT -a STDERR python37 flake8 . &> flake8.results
     if [ $? -eq 0 ]
     then
-        echo "All flake8 tests ran successfully."
+        echo -e "All flake8 tests ran successfully.\n"
         rm flake8.results
     else
-        echo "A flake8 test failed. Details can be found in the file flake8.results"
+        echo -e "A flake8 test failed. Details can be found in the file flake8.results\n"
     fi
     # Run second test in docker container with host STDOUT&STDERR attached
     echo "Running bandit tests..."
     docker container run -a STDOUT -a STDERR python37 bandit -r . -x ./software/tests &> bandit.results
     if [ $? -eq 0 ]
     then
-        echo "All bandit tests ran successfully."
+        echo -e "All bandit tests ran successfully.\n"
         rm bandit.results
     else
-        echo "A bandit test failed. Details can be found in the file bandit.results"
+        echo -e "A bandit test failed. Details can be found in the file bandit.results\n"
     fi    # Remove docker containers
-    echo "Removing docker container..."
+    echo -e "Removing docker container...\n\n"
     docker container rm -f python37 &> /dev/null
     # Remove docker images
     docker image rm -f python37 &> /dev/null
