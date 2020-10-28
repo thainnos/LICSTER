@@ -1,7 +1,7 @@
 FROM python:3.7-slim-buster
 
 WORKDIR /code
-COPY LICSTER/devices/hmi ./code
+COPY LICSTER/devices/hmi .
 
 COPY LICSTER/projects/JenkinsPipeline/local_testing_Dockerfiles/requirements/python.txt .
 

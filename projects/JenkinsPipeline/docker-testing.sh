@@ -60,7 +60,7 @@ function docker_python_3_7 {
     docker build -f local_testing_Dockerfiles/Python_3_7.build ../../../ -t python37 &> /dev/null
     # Run first test in docker container with host STDOUT&STDERR attached
     echo "Running flake8 tests..."
-    docker container run -a STDOUT -a STDERR python37 flake8 hmi &> flake8.results
+    docker container run -a STDOUT -a STDERR python37 flake8 . &> flake8.results
     if [ $? -eq 0 ]
     then
         echo "All flake8 tests ran successfully."
@@ -70,13 +70,13 @@ function docker_python_3_7 {
     fi
     # Run second test in docker container with host STDOUT&STDERR attached
     echo "Running bandit tests..."
-    docker container run -a STDOUT -a STDERR python37 bandit hmi -r &> bandit.results
+    docker container run -a STDOUT -a STDERR python37 bandit -r . -x ./software/tests &> bandit.results
     if [ $? -eq 0 ]
     then
         echo "All bandit tests ran successfully."
         rm bandit.results
     else
-        echo "A bandit test failed. Details can be found in the file flake8.results"
+        echo "A bandit test failed. Details can be found in the file bandit.results"
     fi    # Remove docker containers
     echo "Removing docker container..."
     docker container rm -f python37 &> /dev/null
@@ -86,7 +86,6 @@ function docker_python_3_7 {
 
 is_docker_installed
 is_user_in_docker_group
-ls ../../../
 docker_pytest
 docker_python_3_7
 
