@@ -1,6 +1,8 @@
 #!/bin/bash
 # This script should only be used for linux based systems
 
+FAILURE_COUNTER=0
+
 function is_docker_installed {
     if [ $(which docker) ]; then
         # Assign stdin to keyboard to be able to read user input below
@@ -49,6 +51,7 @@ function docker_pytest {
         rm pytest.results
     else
         echo -e "A pytest Unit Test failed. Details can be found in the file pytest.results\n"
+        FAILURE_COUNTER=$((FAILURE_COUNTER+1))
     fi
     # Remove docker containers
     echo -e "Removing docker container...\n"
@@ -71,6 +74,7 @@ function docker_python_3_7 {
         rm flake8.results
     else
         echo -e "A flake8 test failed. Details can be found in the file flake8.results\n"
+        FAILURE_COUNTER=$((FAILURE_COUNTER+1))
     fi
     # Run second test in docker container with host STDOUT&STDERR attached
     echo "Running bandit tests..."
@@ -81,7 +85,8 @@ function docker_python_3_7 {
         rm bandit.results
     else
         echo -e "A bandit test failed. Details can be found in the file bandit.results\n"
-    fi    # Remove docker containers
+        FAILURE_COUNTER=$((FAILURE_COUNTER+1))
+    fi
     echo -e "Removing docker container...\n\n"
     docker container rm -f python37 &> /dev/null
     # Remove docker images
@@ -94,38 +99,4 @@ is_user_in_docker_group
 docker_pytest
 docker_python_3_7
 cd ../..
-
-# Build, run and check the status return code of the containers
-
-
-# Flawfinder oder RATS, je nachdem welches in Jenkins funktioniert
-
-
-# Check status code:
-
-
-# Get and print feedback
-
-# TODO: Testing in docker container:
-# 1. Create docker container
-# 2. move testing folders from host to docker container (docker cp?)
-# 3. run tests in the docker container, redirect sdout into a file, 
-#       remember return value
-# 4. give return value to host
-#       if return value == 0: print success message and go to 7. CLEANUP
-#       else:
-# 5. move the file from docker container to host (docker cp?)
-# 6. print the file (and error message)
-# 7. CLEANUP:
-# 8. Delete the file
-# 9. Remove the docker container
-# 10. Exit the program
-
-#while true; do
-#    read -p "Do you wish to install this program?" yn
-#    case $yn in
-#        [Yy]* ) make install; break;;
-#        [Nn]* ) exit;;
-#        * ) echo "Please answer yes or no.";;
-#    esac
-#done
+exit $FAILURE_COUNTER
