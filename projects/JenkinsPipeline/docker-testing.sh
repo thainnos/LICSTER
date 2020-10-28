@@ -3,12 +3,14 @@
 
 function is_docker_installed {
     if [ $(which docker) ]; then
-        # docker is installed
+        # Assign stdin to keyboard to be able to read user input below
+        exec < /dev/tty
+
         while true; do
             read -p "Do you want to continue with testing? (yes/no)`echo $'\n> '`" yn
             case $yn in
                 [Yy]* ) echo "Starting the tests"; break;;
-                [Nn]* ) exit 0;;
+                [Nn]* ) cd ../..; exit 0;;
                 * ) echo "Please answer yes or no.";;
             esac
         done
@@ -16,6 +18,7 @@ function is_docker_installed {
         echo "Please install docker to use this script."
         echo "A script for installing docker on linux based systems can be found at:"
         echo "https://github.com/docker/docker-install"
+        cd ../..
         exit 0
     fi
 }
@@ -23,9 +26,10 @@ function is_docker_installed {
 function is_user_in_docker_group {
     id -nG "$USER" | grep -qw "docker"
     if ! [ $? -eq 0 ]; then
-        # User is in docker group -> can use sudo commands
+        # User is in docker group -> can use docker without sudo commands
         echo "Please add yourself to the docker group. This is needed
         to execute docker commands in a script."
+        cd ../..
         exit        
     fi
 
@@ -84,10 +88,12 @@ function docker_python_3_7 {
     docker image rm -f python37 &> /dev/null
 }
 
+cd projects/JenkinsPipeline
 is_docker_installed
 is_user_in_docker_group
 docker_pytest
 docker_python_3_7
+cd ../..
 
 # Build, run and check the status return code of the containers
 
