@@ -1,0 +1,8 @@
+FROM python:3.7-slim-buster
+
+WORKDIR /code
+COPY LICSTER/devices/hmi .
+
+COPY LICSTER/projects/JenkinsPipeline/local_testing_Dockerfiles/requirements/python.txt .
+
+RUN pip install -r python.txt
