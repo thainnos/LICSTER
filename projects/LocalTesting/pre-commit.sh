@@ -1,6 +1,6 @@
 #!/bin/sh
 
-projects/JenkinsPipeline/docker-testing.sh
+projects/LocalTesting/docker-testing.sh
 if [ $? -eq 0 ]; then
     # tests passed, proceed to prepare commit message
     exit 0

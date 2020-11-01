@@ -41,7 +41,7 @@ function docker_pytest {
     echo "Starting pytest Unit Tests..."
     # Build docker image:
     echo "Building docker container..."
-    docker build -f local_testing_Dockerfiles/Pytest_Python.build ../../../ -t pytest &> /dev/null
+    docker build -f Dockerfiles/Pytest_Python.build ../../../ -t pytest &> /dev/null
     # Run tests in docker container with host STDOUT&STDERR attached
     echo "Running Unit Tests..."
     docker container run -a STDOUT -a STDERR pytest &> pytest.results # the testing part
@@ -64,7 +64,7 @@ function docker_python_3_7 {
     echo "Starting flake8 and bandit tests..."
     # Build docker image
     echo "Building docker container..."
-    docker build -f local_testing_Dockerfiles/Python_3_7.build ../../../ -t python37 &> /dev/null
+    docker build -f Dockerfiles/Python_3_7.build ../../../ -t python37 &> /dev/null
     # Run first test in docker container with host STDOUT&STDERR attached
     echo "Running flake8 tests..."
     docker container run -a STDOUT -a STDERR python37 flake8 . &> flake8.results
@@ -93,7 +93,7 @@ function docker_python_3_7 {
     docker image rm -f python37 &> /dev/null
 }
 
-cd projects/JenkinsPipeline
+cd projects/LocalTesting
 is_docker_installed
 is_user_in_docker_group
 docker_pytest
