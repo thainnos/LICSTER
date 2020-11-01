@@ -3,7 +3,8 @@
 ![C/C++ CI](https://github.com/hsainnos/LICSTER/workflows/C/C++%20CI/badge.svg)
 ![Python Integration](https://github.com/hsainnos/LICSTER/workflows/pythonBuild%20and%20Lint/badge.svg)
 ![Python Bandit](https://github.com/hsainnos/LICSTER/workflows/pythonBandit/badge.svg)
-
+![zapproxy](https://github.com/hsainnos/LICSTER/workflows/zapproxy/badge.svg)
+![Flawfinder C](https://github.com/hsainnos/LICSTER/workflows/flawFinder%20C/badge.svg)
 
 The project aims to help setup a minimal, low-cost *Industrial Control System (ICS)* testbest for students,
 researchers, or anyone with an interest in industrial security.
