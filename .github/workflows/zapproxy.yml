@@ -43,12 +43,12 @@ jobs:
         cd ./devices/hmi/software
         pwd
         SECRET=`cat /dev/urandom | tr -dc '(\&\_a-zA-Z0-9\^\*\@' | fold -w ${1:-32} | head -n 1`
-        echo "HI SECRET"
+        pwd
         export SECRET_KEY=$SECRET
-        echo "HI EXPORT"
+        pwd
         echo $SECRET_KEY > secret.key
-        echo "ECHO"
+        pwd
         gunicorn -w 4 -b 0.0.0.0:8080 "app:create_app()" &
-        echo "gunicorn running"
+        pwd
         docker run -t owasp/zap2docker-stable zap-baseline.py -t http://$(ip -f inet -o addr show docker0 | awk '{print $4}' | cut -d '/' -f 1):8080
         ps aux | grep 'unicorn' | awk '{print $2}' | xargs sudo kill -9
