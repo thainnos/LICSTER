@@ -126,7 +126,7 @@ while True:
                 orders = orders - 1
                 state = 1
         else: # "go into EMERGENCY STOP"
-            printf("error")
+            print("error")
 
 
 
