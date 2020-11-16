@@ -31,6 +31,7 @@ sudo python3 -m pip install opcua pymodbus
 ## Reconfigure openPLC
 
 Start your browswer and go to http://192.168.0.30:8080/ and login to openPLC.
+Delte the current program by clicking on it.
 Upload the new programm under (LICSTER/projects/OPC-UA/software/machine.st) to the PLC.
 
 ## Run the proxy
@@ -71,4 +72,3 @@ The connection URL is the following for remote IO 1: opc.tcp://admin:admin@192.1
 <table align="center"><tr><td align="center" width="9999">
 <img src="images/opcuaclient.png" width=70%></img>
 </td></tr></table>
-opc.tcp://admin:admin@192.168.0.51:4840
