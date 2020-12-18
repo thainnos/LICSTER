@@ -6,6 +6,7 @@
 ![zapproxy](https://github.com/hsainnos/LICSTER/workflows/zapproxy/badge.svg)
 ![Flawfinder C](https://github.com/hsainnos/LICSTER/workflows/flawFinder%20C/badge.svg)
 ![Codacy Security Scan](https://github.com/hsainnos/LICSTER/workflows/Codacy%20Security%20Scan/badge.svg)
+![CodeQL](https://github.com/hsainnos/LICSTER/workflows/CodeQL/badge.svg)
 
 The project aims to help setup a minimal, low-cost *Industrial Control System (ICS)* testbest for students,
 researchers, or anyone with an interest in industrial security.
