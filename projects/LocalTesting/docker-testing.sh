@@ -21,7 +21,7 @@ function is_docker_installed {
         echo "A script for installing docker on linux based systems can be found at:"
         echo "https://github.com/docker/docker-install"
         cd ../..
-        exit 0
+        exit 1
     fi
 }
 
