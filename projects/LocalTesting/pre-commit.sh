@@ -44,7 +44,7 @@ function docker_pytest {
     docker build -f Dockerfiles/Pytest_Python.build ../../../ -t pytest &> /dev/null
     # Run tests in docker container with host STDOUT&STDERR attached
     echo "Running Unit Tests..."
-    docker container run -a STDOUT -a STDERR pytest &> pytest.results # the testing part
+    docker container run -a STDOUT -a STDERR pytest /bin/bash -c "cd code; pytest" &> pytest.results # the testing part
     if [ $? -eq 0 ]
     then
         echo -e "All pytest Unit Tests ran successfully.\n"
