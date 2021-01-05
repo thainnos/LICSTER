@@ -7,13 +7,13 @@ pipeline {
                 dockerfile {
                     filename 'Pytest_Python.build'
                     dir 'projects/JenkinsPipeline/Dockerfiles'
-                    args '--volume jenkins-data:/var/jenkins_home'
+                    args '--user 0:0'
                 }
             }
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                    sh 'ls'
-                    sh 'pytest'
+                    sh 'pip install -e devices/hmi/software'
+                    sh 'cd devices/hmi/software; pytest'
                 }
             }
         }
