@@ -7,7 +7,7 @@ pipeline {
                 dockerfile {
                     filename 'Pytest_Python.build'
                     dir 'projects/JenkinsPipeline/Dockerfiles'
-                    args '--user 0:0'
+                    args '--volume jenkins-pytest:/var/jenkins_home --user 0:0'
                 }
             }
             steps {
@@ -24,7 +24,7 @@ pipeline {
                         dockerfile { 
                             filename 'Python_3_6.build'
                             dir 'projects/JenkinsPipeline/Dockerfiles'
-                            args '--volume jenkins-data:/var/jenkins_home'
+                            args '--volume jenkins-linting:/var/jenkins_home'
                         }
                     }
                     steps {
@@ -42,7 +42,7 @@ pipeline {
                         dockerfile { 
                             filename 'Python_3_7.build'
                             dir 'projects/JenkinsPipeline/Dockerfiles'
-                            args '--volume jenkins-data:/var/jenkins_home'
+                            args '--volume jenkins-linting:/var/jenkins_home'
                         }
                     }
                     steps {
@@ -60,7 +60,7 @@ pipeline {
                         dockerfile { 
                             filename 'Python_3_8.build'
                             dir 'projects/JenkinsPipeline/Dockerfiles'
-                            args '--volume jenkins-data:/var/jenkins_home'
+                            args '--volume jenkins-linting:/var/jenkins_home'
                         }
                     }
                     steps {
@@ -81,7 +81,7 @@ pipeline {
                         dockerfile { 
                             filename 'Python_3_6.build'
                             dir 'projects/JenkinsPipeline/Dockerfiles'
-                            args '--volume jenkins-data:/var/jenkins_home'
+                            args '--volume jenkins-bandit:/var/jenkins_home'
                         }
                     }
                     steps {
@@ -98,7 +98,7 @@ pipeline {
                         dockerfile { 
                             filename 'Python_3_7.build'
                             dir 'projects/JenkinsPipeline/Dockerfiles'
-                            args '--volume jenkins-data:/var/jenkins_home'
+                            args '--volume jenkins-bandit:/var/jenkins_home'
                         }
                     }
                     steps {
@@ -115,7 +115,7 @@ pipeline {
                         dockerfile { 
                             filename 'Python_3_8.build'
                             dir 'projects/JenkinsPipeline/Dockerfiles'
-                            args '--volume jenkins-data:/var/jenkins_home'
+                            args '--volume jenkins-bandit:/var/jenkins_home'
                         }
                     }
                     steps {
@@ -134,7 +134,7 @@ pipeline {
                 dockerfile {
                     filename 'Flawfinder.build'
                     dir 'projects/JenkinsPipeline/Dockerfiles'
-                    args '--volume jenkins-data:/var/jenkins_home'
+                    args '--volume jenkins-flawfinder:/var/jenkins_home'
                 }
             }
             steps {
@@ -150,7 +150,7 @@ pipeline {
                 dockerfile {
                     filename 'RATS.build'
                     dir 'projects/JenkinsPipeline/Dockerfiles'
-                    args '--volume jenkins-data:/var/jenkins_home'
+                    args '--volume jenkins-rats:/var/jenkins_home'
                 }
             }
             steps {
