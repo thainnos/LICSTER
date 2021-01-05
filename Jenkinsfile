@@ -12,7 +12,8 @@ pipeline {
             }
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                    sh 'pytest devices/hmi/software/tests'
+                    sh 'ls'
+                    sh 'pytest'
                 }
             }
         }
