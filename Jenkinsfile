@@ -14,6 +14,8 @@ pipeline {
                 catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                     sh 'pip install -e devices/hmi/software'
                     sh 'cd devices/hmi/software; pytest'
+                    sh 'pip uninstall LICSTERhmi -y'
+                    sh 'find . -user root -name \'*\' | xargs chmod ugo+rw'
                 }
             }
         }
