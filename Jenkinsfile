@@ -129,8 +129,8 @@ pipeline {
             }
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                    sh 'flawfinder < projects/JenkinsPipeline/normal_encoded_files'
-                    sh 'PYTHONUTF8=0 LC_ALL=C.ISO-8859-1 python3 flawfinder devices/remote_io/software/Src/u8x8_stm32_HAL.c'
+                    //sh 'flawfinder < projects/JenkinsPipeline/normal_encoded_files'
+                    sh 'PYTHONUTF8=0 LC_ALL=C.ISO-8859-1 flawfinder devices/remote_io/software/Src/u8x8_stm32_HAL.c'
                 }
             }
         }
