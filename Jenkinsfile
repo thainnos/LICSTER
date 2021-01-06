@@ -129,8 +129,8 @@ pipeline {
             }
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                    //sh 'flawfinder < projects/JenkinsPipeline/normal_encoded_files'
-                    sh 'PYTHONUTF8=0 LC_ALL=C.ISO-8859-1 flawfinder devices/remote_io/software/Src/u8x8_stm32_HAL.c'
+                    sh 'cd devices/remote_io/software/Src/; iconv -f ISO-8859-1 -t ASCII u8x8_stm32_HAL.c -o u8x8_stm32_HAL.c.out; mv u8x8_stm32_HAL.c.out u8x8_stm32_HAL.c;' // Convert encoding of u8x8_stm32_HAL.c
+                    sh 'flawfinder devices/remote_io/software/Src/'
                 }
             }
         }
