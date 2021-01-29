@@ -89,7 +89,8 @@ class TestProcessStates():
 
     def test_process_state_map(self):
         ProcStateMap = proc_states.ProcessStateMap()
-        keyList = ['pending', 0, 'to-punch', 1, 'punch-down', 2, 'punch-up', 3, 'from-punch', 4]
+        keyList = ['pending', 0, 'to-punch', 1, 'punch-down', 2, 'punch-up', 3,
+                   'from-punch', 4]
         for key in keyList:
             assert key in ProcStateMap.states
 
