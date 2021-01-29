@@ -38,3 +38,14 @@ def test_logout(client, auth):
 def test_redirect_first_login(client, auth):
     response = auth.login('new_test_user')
     assert response.headers['Location'] == 'http://localhost/set_password'
+
+
+def test_unauthorized_dashboard_access(client, auth):
+    response = auth.login('test_user')
+    assert response.headers['Location'] == 'http://localhost/'
+
+    with client:
+        client.get('/')
+        assert session['user_id'] == 2
+        assert g.user['username'] == 'test_user'
+        assert client.get('/dashboard').status_code != 200
