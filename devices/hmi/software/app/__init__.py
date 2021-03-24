@@ -26,6 +26,8 @@ def create_app(test_config=None):
     @app.after_request
     def prevent_embedding(response):
         response.headers["X-Frame-Options"] = "DENY"
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        response.headers["Server"] = "gunicorn"
         return response
 
     if test_config is None:

@@ -1,8 +1,0 @@
-FROM python:3.6-slim-buster
-
-WORKDIR /code
-
-COPY LICSTER/devices/hmi/software ./code
-COPY LICSTER/projects/JenkinsPipeline/local_testing_Dockerfiles/requirements/pytest.txt .
-
-RUN pip install --no-cache-dir -r pytest.txt

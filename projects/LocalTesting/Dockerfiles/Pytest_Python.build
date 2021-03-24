@@ -3,3 +3,7 @@ FROM python:3.7-slim-buster
 RUN pip install --upgrade pip
 RUN pip install flake8 pytest bandit pytest-cov
 RUN pip install flask
+
+COPY LICSTER/devices/hmi/software ./code
+
+RUN pip install -e code

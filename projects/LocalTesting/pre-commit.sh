@@ -21,7 +21,7 @@ function is_docker_installed {
         echo "A script for installing docker on linux based systems can be found at:"
         echo "https://github.com/docker/docker-install"
         cd ../..
-        exit 0
+        exit 1
     fi
 }
 
@@ -41,10 +41,10 @@ function docker_pytest {
     echo "Starting pytest Unit Tests..."
     # Build docker image:
     echo "Building docker container..."
-    docker build -f local_testing_Dockerfiles/Pytest_Python.build ../../../ -t pytest &> /dev/null
+    docker build -f Dockerfiles/Pytest_Python.build ../../../ -t pytest &> /dev/null
     # Run tests in docker container with host STDOUT&STDERR attached
     echo "Running Unit Tests..."
-    docker container run -a STDOUT -a STDERR pytest &> pytest.results # the testing part
+    docker container run -a STDOUT -a STDERR pytest /bin/bash -c "cd code; pytest" &> pytest.results # the testing part
     if [ $? -eq 0 ]
     then
         echo -e "All pytest Unit Tests ran successfully.\n"
@@ -64,7 +64,7 @@ function docker_python_3_7 {
     echo "Starting flake8 and bandit tests..."
     # Build docker image
     echo "Building docker container..."
-    docker build -f local_testing_Dockerfiles/Python_3_7.build ../../../ -t python37 &> /dev/null
+    docker build -f Dockerfiles/Python_3_7.build ../../../ -t python37 &> /dev/null
     # Run first test in docker container with host STDOUT&STDERR attached
     echo "Running flake8 tests..."
     docker container run -a STDOUT -a STDERR python37 flake8 . &> flake8.results
@@ -93,10 +93,18 @@ function docker_python_3_7 {
     docker image rm -f python37 &> /dev/null
 }
 
-cd projects/JenkinsPipeline
+cd projects/LocalTesting
 is_docker_installed
 is_user_in_docker_group
 docker_pytest
 docker_python_3_7
 cd ../..
-exit $FAILURE_COUNTER
+
+if [ ${FAILURE_COUNTER} -eq 0 ]; then
+    # tests passed, proceed to prepare commit message
+    exit 0
+else
+    # some tests failed, prevent from committing broken code on master
+    echo "The commit was aborted as some tests failed."
+    exit 1
+fi

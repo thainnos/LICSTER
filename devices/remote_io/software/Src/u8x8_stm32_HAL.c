@@ -3,7 +3,7 @@
   * File Name          : u8x8_stm32_HAL.c
   * Description        : Main program body
   ******************************************************************************
-  * µC-spezifische Anweisungen zw. u8g2/u8x8 und stm32
+  * C-spezifische Anweisungen zw. u8g2/u8x8 und stm32
   * Hal-Driver im Einsatz
   ******************************************************************************
 */

@@ -79,11 +79,11 @@ def login():
     isHmi = False
     if request.remote_addr == "127.0.0.1":
         isHmi = True
-    # Formen generieren
-    if isHmi:
         form = HmiLoginForm()
+        template = 'loginhmi.html'
     else:
-        form = LoginForm()    
+        form = LoginForm()
+        template = 'login.html'
 
     # Form validieren
     if form.validate_on_submit():
@@ -127,16 +127,12 @@ def login():
             return redirect(url_for('views.index'))
 
     # Template rendern
-    if isHmi:
-        return render_template('loginhmi.html', form=form)
-    else:
-        return render_template('login.html', form=form)
+    return render_template(template, form=form)
 
 @auth.route('/remote_test_login', methods=['GET', 'POST'])
 @logout_required
 # flake8: noqa: C901
 def remote_test_login():
-    isHmi = False
     form = LoginForm()    
 
     # Form validieren
@@ -144,10 +140,7 @@ def remote_test_login():
         # get username, password from form
         # get user with db query
         # check if user exists in db and password hash matches
-        if isHmi:
-            username = 'hmilocal'
-        else:
-            username = form.username.data
+        username = form.username.data
         password = form.password.data
         db = get_db()
         user = db.execute(
@@ -169,8 +162,6 @@ def remote_test_login():
 
             save_ip_address_if_not_saved(user['id'])
 
-            if isHmi:
-                return redirect(url_for('views.index'))
             # Nur für nicht HMI User:
             # Falls nötig zum Passwort setzen weiterleiten
             if user['first_login'] == 1:
@@ -180,11 +171,7 @@ def remote_test_login():
                 return redirect(url_for('admins.dashboard'))          
             return redirect(url_for('views.index'))
 
-    # Template rendern
-    if isHmi:
-        return render_template('loginhmi.html', form=form)
-    else:
-        return render_template('login.html', form=form)
+    return render_template('login.html', form=form)
 
 
 @auth.route('/logout')
