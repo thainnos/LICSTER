@@ -9,13 +9,52 @@
 <body>
 <h1>Flawfinder Results</h1>
 Here are the security scan results from
-<a href="https://dwheeler.com/flawfinder">Flawfinder version 2.0.15</a>,
+<a href="https://dwheeler.com/flawfinder">Flawfinder version 2.0.18</a>,
 (C) 2001-2019 <a href="https://dwheeler.com">David A. Wheeler</a>.
 Number of rules (primarily dangerous function names) in C/C++ ruleset: 222
 <p>
-Examining ./projects/OPC-UA/software/Core/Src/u8x8_stm32_HAL.c <br>
-Error: encoding error in ./projects/OPC-UA/software/Core/Src/u8x8_stm32_HAL.c
-'utf-8' codec can't decode byte 0xb5 in position 254: invalid start byte
+Examining ./devices/remote_io/software/Inc/u8x8_stm32_HAL.h <br>
+Examining ./devices/remote_io/software/Inc/colors.h <br>
+Examining ./devices/remote_io/software/Inc/ping.h <br>
+Examining ./devices/remote_io/software/Inc/stm32f7xx_hal_conf.h <br>
+Examining ./devices/remote_io/software/Inc/main.h <br>
+Examining ./devices/remote_io/software/Inc/FreeRTOSConfig.h <br>
+Examining ./devices/remote_io/software/Inc/mbedtls.h <br>
+Examining ./devices/remote_io/software/Inc/ethernetif.h <br>
+Examining ./devices/remote_io/software/Inc/stm32f7xx_it.h <br>
+Examining ./devices/remote_io/software/Inc/logging.h <br>
+Examining ./devices/remote_io/software/Inc/lwip.h <br>
+Examining ./devices/remote_io/software/Inc/heap_mem.h <br>
+Examining ./devices/remote_io/software/Inc/lwipopts.h <br>
+Examining ./devices/remote_io/software/Inc/mbedtls_config.h <br>
+Examining ./devices/remote_io/software/Inc/global.h <br>
+Examining ./devices/remote_io/software/Src/hardware_rng.c <br>
+Examining ./devices/remote_io/software/Src/stm32f7xx_hal_timebase_tim.c <br>
+Examining ./devices/remote_io/software/Src/net_sockets.c <br>
+Examining ./devices/remote_io/software/Src/logging.c <br>
+Examining ./devices/remote_io/software/Src/u8x8_stm32_HAL.c <br>
+Examining ./devices/remote_io/software/Src/ethernetif.c <br>
+Examining ./devices/remote_io/software/Src/lwip.c <br>
+Examining ./devices/remote_io/software/Src/syscalls.c <br>
+Examining ./devices/remote_io/software/Src/system_stm32f7xx.c <br>
+Examining ./devices/remote_io/software/Src/modbus_handler.c <br>
+Examining ./devices/remote_io/software/Src/ping.c <br>
+Examining ./devices/remote_io/software/Src/main.c <br>
+Examining ./devices/remote_io/software/Src/freertos.c <br>
+Examining ./devices/remote_io/software/Src/sysmem.c <br>
+Examining ./devices/remote_io/software/Src/mbedtls.c <br>
+Examining ./devices/remote_io/software/Src/stm32f7xx_hal_msp.c <br>
+Examining ./devices/remote_io/software/Src/stm32f7xx_it.c <br>
+Examining ./devices/remote_io/software/Src/heap_mem.c <br>
+Examining ./devices/remote_io/software/Src/http.c <br>
+Examining ./devices/remote_io/software/Middlewares/Third_Party/u8g2/Inc/u8g2.h <br>
+Examining ./devices/remote_io/software/Middlewares/Third_Party/u8g2/Inc/u8x8.h <br>
+Examining ./devices/remote_io/software/Middlewares/Third_Party/u8g2/Src/u8x8_d_ssd1329.c <br>
+Examining ./devices/remote_io/software/Middlewares/Third_Party/u8g2/Src/u8x8_cad.c <br>
+Examining ./devices/remote_io/software/Middlewares/Third_Party/u8g2/Src/u8x8_d_sed1330.c <br>
+Examining ./devices/remote_io/software/Middlewares/Third_Party/u8g2/Src/u8g2_fonts.c <br>
+Error: encoding error in ./devices/remote_io/software/Middlewares/Third_Party/u8g2/Src/u8g2_fonts.c
+'utf-8' codec can't decode byte 0xd1 in position 477: invalid continuation byte
 
 Python3 requires input character data to be perfectly encoded;
 it also requires perfectly correct system encoding settings.
@@ -33,7 +72,7 @@ Here are some options:
    (ISO-8859-1 encoders normally allow anything).
 4. Convert all your source code to the UTF-8 encoding.
    The system program "iconv" or Python program "cvt2utf" can
-   do this (for cvt2tuf, you can use "pip install cvt2utf").
+   do this (for cvt2utf, you can use "pip install cvt2utf").
 5. Run: python2 flawfinder
    (That is, use Python 2 instead of Python 3).
 Some of these options may not work depending on circumstance.
