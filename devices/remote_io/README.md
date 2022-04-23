@@ -12,25 +12,25 @@ way to do it. Yet there [alternatives][0.0], should that not appeal to you.
 
 # List of PCB Components
 
-| Label        | Name                                         | Amount | Description           |
-|--------------|----------------------------------------------|--------|-----------------------|
-C1             | 0603 100nF Capacitor                         | 1      | Optional<sup>[1](#myfootnote1)</sup>              |
-D1-D4          | 0603 LED                                     | 4      |                       |
-C1             | ATECC508A OIC-8_3.9x4.9mm_P1.27mm	          | 1      | Optional<sup>[1](#myfootnote1)</sup>              |
-J1             | PinHeader_1x04_P2.54mm_Horizontal            | 1      |                       |
-P1             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x08 | 1      |                       |
-P2             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x06 | 1      |                       |
-P3             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x10 | 1      |                       |
-P4             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x08 | 1      |                       |
-P9	       | Pin_Headers:Pin_Header_Straight_1x10 2.54mm  | 1      |                       |
-Q1, Q3         | BSS138 Package_TO_SOT_SMD:SOT-23             | 2      |                       |
-Q2, Q4         | BSS83P Package_TO_SOT_SMD:SOT-23             | 2      |                       |
-R1,R2,R7-R10   | 0R Resistor_SMD:R_0603_1608Metric            | 6      |                       |
-R3-R6          | 10k Resistor_SMD:R_0603_1608Metric           | 6      |                       |
-R25,R26,R43,R44| 1.5k Resistor_SMD:R_0603_1608Metric          | 4      |                       |
-R21-R24        | 1k Resistor_SMD:R_0603_1608Metric            | 4      |                       |
-R11-R14, R19, R20, R27-R42, R45, R46, R48-R50, R52 | 10 Resistor_SMD:R_0603_1608Metric | 28  | |
-R47, R51       | 2k2 Resistor_SMD:R_0603_1608Metric           | 2      |                       |
+| Label        | Name                                         | Amount single | Total | Description           |
+|--------------|----------------------------------------------|--------|-------|-----------------------|
+C1             | 0603 100nF Capacitor                         | 1      | 2     | Optional<sup>[1](#myfootnote1)</sup>              |
+D1-D4          | 0603 LED                                     | 4      | 8     |                       |
+C1             | ATECC508A OIC-8_3.9x4.9mm_P1.27mm	          | 1      | 2     |  Optional<sup>[1](#myfootnote1)</sup>              |
+J1             | PinHeader_1x04_P2.54mm_Horizontal            | 1      | 2     |                       |
+P1             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x08 | 1      | 2     |                       |
+P2             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x06 | 1      | 2     |                       |
+P3             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x10 | 1      | 2     |                       |
+P4             | Socket_Arduino_Uno:Socket_Strip_Arduino_1x08 | 1      | 2     |                       |
+P9	           | Pin_Headers:Pin_Header_Straight_1x10 2.54mm  | 1      | 2     |                       |
+Q1, Q3         | BSS138 Package_TO_SOT_SMD:SOT-23             | 2      | 4     |                       |
+Q2, Q4         | BSS83P Package_TO_SOT_SMD:SOT-23             | 2      | 4     |                       |
+R1,R2,R7-R10   | 0R Resistor_SMD:R_0603_1608Metric            | 6      | 12    |                       |
+R3-R6          | 10k Resistor_SMD:R_0603_1608Metric           | 6      | 12    |                       |
+R25,R26,R43,R44| 1.5k Resistor_SMD:R_0603_1608Metric          | 4      | 4     |                       |
+R21-R24        | 1k Resistor_SMD:R_0603_1608Metric            | 4      | 4     |                       |
+R11-R14, R19, R20, R27-R42, R45, R46, R48-R50, R52 | 10 Resistor_SMD:R_0603_1608Metric | 28  | 56   |  |
+R47, R51       | 2k2 Resistor_SMD:R_0603_1608Metric           | 2      | 4     |                       |
 
 ## Component Ordering
 
